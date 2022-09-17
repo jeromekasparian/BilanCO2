@@ -1,0 +1,22 @@
+Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt
+Informations générales;Effectif;;100;0;1;;;;1;;;;
+Informations générales;Durée;j;50;0;1;;;;1;;;Si le camp est plus long, les transports sont amortis sur plus de jours;
+Repas;Avec viande rouge (bœuf, agneau);;50;6.29;1;;;;1;;2;La viande rouge est très émettrice de gaz à effets de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. C'est sans doute le poste d'émission le plus facile à réduire sans toucher au projet global du camp.;Viande rouge
+Repas;Avec viande blanche (porc, volaille);;50;1.35;1;;;;1;;2;La viande blanche fait plus que doubler l'impact carbone par rapport à un repas végétarien;Viande blanche
+Repas;Végétarien;;50;0.51;1;;;;1;;2;La viande blanche fait plus que doubler l'impact carbone par rapport à un repas végétarien;Repas végé
+Repas;Cuisinés au gaz;;50;0.08;1;;;;1;;2;;Gaz
+Voyage vers le camp et retour;Distance Local - camp;km;9999;0;;;;1;;;;Un camp plus proche nécessite moins de déplacements, et permet de choisir des modes de transport moins polluants. Sauf si un camp tout proche se traduit par des allers-retours en voiture plus nombreux;
+Voyage vers le camp et retour;AR en train;pers.;50;0.002;;2;;;1;1;;Le train est de loin le mode de transport le moins polluant;Train
+Voyage vers le camp et retour;Trajets en car;AR;3;1.191666667;;2;;;1;;;Un car est intéressant s'il est bien rempli. Pour 10 personnes à bord, il pollue autant qu'une voiture individuelle. Attention également à prendre en compte les éventuels retours à vide;Car
+Voyage vers le camp et retour;AR voiture;;50;0.2;;2;;;1;2;;On peut réduire les trajets en louant sur place plutôt qu'au départ. Si les enfants sont déposés en voiture sur le camp, organisez le co-voiturage pour réduire le nombre de voitures;Voiture
+Voyage vers le camp et retour;AR voiture électrique;;50;0.1;;2;;;1;2;;La voiture électrique réduit les émissions de moitié par rapport à une voiture thermique. Ça reste beaucoup par rapport à un train ou un car bien rempli;Voiture électrique
+Voyage vers le camp et retour;AR en avion;pers.;50;0.2;;2;;;1;1;;L'avion est doublement polluant : parce qu'il émet beaucoup de CO2 par kilomètre, et parce qu'il rend possible des voyages lointains, avec des distances impossibles à réaliser avec un mode de transport moins polluant;Avion
+Voyage vers le camp et retour;AR en camion;;3;0.3;;2;;;1;;;Expédier le matériel et le faire livrer sur le camp est en général moins polluant que le transporter soi-même, surtout si le camion n'est pas plein;Camion
+Voyage vers le camp et retour;Matériel expédié;kg;500;0.000535333;;2;;;;;;Expédier le matériel à l'avance permet d'accepter des délais plus longs : moins cher et moins polluant;Expédition
+Déplacements sur place;Car;km;1000;1.191666667;;;;1;;;;Le car est efficace s'il est raisonnablement plein;Car
+Déplacements sur place;Voiture;km;2000;0.2;;;;1;;;;Faire les courses près du lieu de camp économise sur l'essence, et sur la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute;Voiture
+Déplacements sur place;Voiture électrique;km ;2000;0.1;;;;1;;;;Faire les courses près du lieu de camp économise sur l'essence, et sur la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute;Voiture électrique
+Hébergement;Tentes;;10;11.30555556;;;;;1;;;Entretenir ses tentes, c'est les renouveler moins souvent, donc moins polluer;Tentes
+Hébergement;Marabouts;;5;81.27777778;;;;;1;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Marabouts
+Hébergement;En dur;pers.;50;1.09;;;1;;1;1;;L'hébergement sous tente n'est pas seulement sympa, il est aussi nettement moins polluant;Couchage en dur
+Matériel;Achats de matériel;€;2000;0.366666667;;;;;;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Matériel
