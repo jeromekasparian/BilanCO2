@@ -10,11 +10,11 @@
 // Réduire la taille minimum de la fenêtre sur mac
 // Mac Layout portrait / Paysage : Problème de basculement intempestif
 // - Dégradé de couleur interne à chaque section
-// - Mettre en page le texte dans le popover // popover plus petit
-// - splitView, quand je change de taille vers un format étroit, les intitulés des lignes disparaissent.
-
+// - icone : alpha channel
+// - splitview écran étroit, le premier affichage du tableview est faux
 // *** Priorité 2 ***
 // INTERFACE
+// - Conseil : meilleure option que l'alerte ?
 // - Localisation, y compris les noms de types d'émission
 // - éviter les superposition de textes dans le camembert
 
@@ -136,7 +136,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
         // set the text from the data model
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             cell.delegate = self
             cell.choisitContraintes()
             cell.selectionStyle = .none
@@ -160,7 +160,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            if #available(iOS 13.0, macOS 11.0, *) {
             cell.boutonInfo.setTitle("", for: .normal)
 //        } else {cell.boutonInfo.setTitle("ℹ️", for: .normal)}
-        }
+//        }
         return cell
     }
     
@@ -225,79 +225,94 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    
+    
     @IBAction func afficheExplicationsFigure() {
-        let popoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "Conseil") as? Conseil
-        let taille = camembert.frame.size
-        let taillePreferee = min(300, taille.width * 0.75, taille.height * 0.75)
-        popoverViewController?.preferredContentSize = CGSize(width: taillePreferee, height: taillePreferee)
-        let frame = popoverViewController?.view.frame ?? CGRect(x: 20, y: 20, width: 300, height: 300)
-        let preferredSize = popoverViewController?.preferredContentSize ?? CGSize(width: 300, height: 300)
-        let label = UILabel(frame: CGRect(x: frame.minX + 50, y: frame.minY + 50, width: preferredSize.width, height: preferredSize.height - 50))
-        label.text = "Ce graphique représente la répartition des émisssions du camp. Le cercle vert permet de les comparer avec les émissions soutenables, soit l'équivalent de 2,5 tonnes équivalent CO2 par personne et par an, rapportées à la durée du camp."
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.preferredMaxLayoutWidth = frame.width - 100
-        label.sizeToFit()
-        popoverViewController?.view.addSubview(label)
-        let bouton = UIButton(type: .system)
-        bouton.setTitle("OK", for: .normal)
-        bouton.frame = CGRect(x: label.frame.maxX + 16, y: label.frame.minY, width: 30, height: 30)
-//        bouton.frame = CGRect(x: 100, y: 100, width: 30, height: 30)
-        bouton.addTarget(self, action: #selector(fermerPopover), for: .touchUpInside)
-        popoverViewController?.view.addSubview(bouton)
-//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(fermerPopover))
-//        tapRecognizer.delegate = self
-//        popoverViewController?.tabBarObservedScrollView?.addGestureRecognizer(tapRecognizer)
-        let popoverPresentationViewController = popoverViewController?.popoverPresentationController
-
-        popoverPresentationViewController?.permittedArrowDirections = UIPopoverArrowDirection.any
-        //        popoverPresentationViewController?.delegate = self
-        popoverPresentationViewController?.sourceView = boutonAideGraphique
-        popoverPresentationViewController?.sourceRect = boutonAideGraphique.frame // CGRectMake(RoutineLabel.frame.width / 2, RoutineLabel.frame.height,0,0)
-        DispatchQueue.main.async{
-            self.present(popoverViewController!, animated: true, completion: nil)
-        }
+        let message = "Ce graphique représente la répartition des émisssions du camp. Le cercle vert permet de les comparer avec les émissions soutenables, soit l'équivalent de 2,5 tonnes équivalent CO2 par personne et par an, rapportées à la durée du camp."
+        let alerte = UIAlertController(title: "Pour en savoir plus", message: message, preferredStyle: .alert)
+        alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
+        self.present(alerte, animated: true)
+//
+//        let popoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "Conseil") as? Conseil
+//        let taille = camembert.frame.size
+//        let taillePreferee = min(300, taille.width * 0.75, taille.height * 0.75)
+//        popoverViewController?.preferredContentSize = CGSize(width: taillePreferee, height: taillePreferee)
+//        let frame = popoverViewController?.view.frame ?? CGRect(x: 20, y: 20, width: 300, height: 300)
+//        let preferredSize = popoverViewController?.preferredContentSize ?? CGSize(width: 300, height: 300)
+//        let label = UILabel(frame: CGRect(x: frame.minX + 50, y: frame.minY + 50, width: preferredSize.width, height: preferredSize.height - 50))
+//        label.text = "Ce graphique représente la répartition des émisssions du camp. Le cercle vert permet de les comparer avec les émissions soutenables, soit l'équivalent de 2,5 tonnes équivalent CO2 par personne et par an, rapportées à la durée du camp."
+//        label.numberOfLines = 0
+//        label.lineBreakMode = .byWordWrapping
+//        label.preferredMaxLayoutWidth = frame.width - 100
+//        label.sizeToFit()
+//        popoverViewController?.view.addSubview(label)
+//        let bouton = UIButton(type: .system)
+//        bouton.setTitle("OK", for: .normal)
+//        bouton.frame = CGRect(x: label.frame.minX, y: label.frame.maxY + 16, width: 30, height: 30)
+////        bouton.frame = CGRect(x: 100, y: 100, width: 30, height: 30)
+//        bouton.addTarget(self, action: #selector(fermerPopover), for: .touchUpInside)
+//        popoverViewController?.view.addSubview(bouton)
+////        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(fermerPopover))
+////        tapRecognizer.delegate = self
+////        popoverViewController?.tabBarObservedScrollView?.addGestureRecognizer(tapRecognizer)
+//        let popoverPresentationViewController = popoverViewController?.popoverPresentationController
+//
+//        popoverPresentationViewController?.permittedArrowDirections = UIPopoverArrowDirection.any
+//        //        popoverPresentationViewController?.delegate = self
+//        popoverPresentationViewController?.sourceView = boutonAideGraphique
+//        popoverPresentationViewController?.sourceRect = boutonAideGraphique.frame // CGRectMake(RoutineLabel.frame.width / 2, RoutineLabel.frame.height,0,0)
+//        DispatchQueue.main.async{
+//            self.present(popoverViewController!, animated: true, completion: nil)
+//        }
     }
     
-    @objc func fermerPopover() {
-        if let popover = self.presentedViewController {
-            popover.dismiss(animated: false, completion: nil)
-        }
-    }
+//    @objc func fermerPopover() {
+//        if let popover = self.presentedViewController {
+//            popover.dismiss(animated: false, completion: nil)
+//        }
+//    }
     
     func afficheConseil(cell: CelluleEmission){
-        let popoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "Conseil") as? Conseil
-        let taille = self.view.frame.size
-        let taillePreferee = min(300, taille.width * 0.75, taille.height * 0.75)
-        popoverViewController?.preferredContentSize = CGSize(width: taillePreferee, height: taillePreferee)
-        let frame = popoverViewController?.view.frame ?? CGRect(x: 20, y: 20, width: 300, height: 300)
-        let preferredSize = popoverViewController?.preferredContentSize ?? CGSize(width: 300, height: 300)
-        let label = UILabel(frame: CGRect(x: frame.minX + 50, y: frame.minY + 50, width: preferredSize.width, height: preferredSize.height - 50))
+        var message = ""
         if let indexPathDeLaCellule = tableViewEmissions.indexPath(for: cell) {
-            label.text = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
-        } else {
-            label.text = ""
-        }
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.preferredMaxLayoutWidth = frame.width - 100
-        label.sizeToFit()
-        popoverViewController?.view.addSubview(label)
-        let bouton = UIButton(type: .system)
-        bouton.setTitle("OK", for: .normal)
-        bouton.frame = CGRect(x: label.frame.maxX + 16, y: label.frame.minY, width: 30, height: 30)
-//        bouton.frame = CGRect(x: 100, y: 100, width: 30, height: 30)
-        bouton.addTarget(self, action: #selector(fermerPopover), for: .touchUpInside)
-        popoverViewController?.view.addSubview(bouton)
+                    message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
+                }
+        let alerte = UIAlertController(title: "Un conseil", message: message, preferredStyle: .alert)
+        alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
+        self.present(alerte, animated: true)
 
-        let popoverPresentationViewController = popoverViewController?.popoverPresentationController
-        popoverPresentationViewController?.permittedArrowDirections = UIPopoverArrowDirection.any
-        //        popoverPresentationViewController?.delegate = self
-        popoverPresentationViewController?.sourceView = cell.boutonInfo
-        popoverPresentationViewController?.sourceRect = cell.boutonInfo.frame // CGRectMake(RoutineLabel.frame.width / 2, RoutineLabel.frame.height,0,0)
-        DispatchQueue.main.async{
-            self.present(popoverViewController!, animated: true, completion: nil)
-        }
+//        let popoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "Conseil") as? Conseil
+//        let taille = self.view.frame.size
+//        let taillePreferee = min(300, taille.width * 0.75, taille.height * 0.75)
+//        popoverViewController?.preferredContentSize = CGSize(width: taillePreferee, height: taillePreferee)
+//        let frame = popoverViewController?.view.frame ?? CGRect(x: 20, y: 20, width: 300, height: 300)
+//        let preferredSize = popoverViewController?.preferredContentSize ?? CGSize(width: 300, height: 300)
+//        let label = UILabel(frame: CGRect(x: frame.minX + 50, y: frame.minY + 50, width: preferredSize.width, height: preferredSize.height - 50))
+//        if let indexPathDeLaCellule = tableViewEmissions.indexPath(for: cell) {
+//            label.text = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
+//        } else {
+//            label.text = ""
+//        }
+//        label.numberOfLines = 0
+//        label.lineBreakMode = .byWordWrapping
+//        label.preferredMaxLayoutWidth = frame.width - 100
+//        label.sizeToFit()
+//        popoverViewController?.view.addSubview(label)
+//        let bouton = UIButton(type: .system)
+//        bouton.setTitle("OK", for: .normal)
+//        bouton.frame = CGRect(x: label.frame.maxX + 16, y: label.frame.minY, width: 30, height: 30)
+////        bouton.frame = CGRect(x: 100, y: 100, width: 30, height: 30)
+//        bouton.addTarget(self, action: #selector(fermerPopover), for: .touchUpInside)
+//        popoverViewController?.view.addSubview(bouton)
+//
+//        let popoverPresentationViewController = popoverViewController?.popoverPresentationController
+//        popoverPresentationViewController?.permittedArrowDirections = UIPopoverArrowDirection.any
+//        //        popoverPresentationViewController?.delegate = self
+//        popoverPresentationViewController?.sourceView = cell.boutonInfo
+//        popoverPresentationViewController?.sourceRect = cell.boutonInfo.frame // CGRectMake(RoutineLabel.frame.width / 2, RoutineLabel.frame.height,0,0)
+//        DispatchQueue.main.async{
+//            self.present(popoverViewController!, animated: true, completion: nil)
+//        }
         //        cell.labelConseil.isHidden.toggle()
     }
     
@@ -391,14 +406,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    @objc func choisitContraintesDepuisNotification() {
-        choisitContraintes(size: self.view.frame.size)
-    }
+//    @objc func choisitContraintesDepuisNotification() {
+//        choisitContraintes(size: self.view.frame.size)
+//    }
     
     func choisitContraintes(size: CGSize){
         let estModePortrait = size.width <= size.height
         print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
             self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
             self.contrainteCamembertHautPortrait.isActive = estModePortrait
@@ -416,12 +431,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.contrainteTableViewDroitePaysage.isActive = !estModePortrait
             self.contrainteVueResultatsBasPaysage.isActive = !estModePortrait
             self.contrainteVueResultatGauchePaysage.isActive = !estModePortrait
-        }
+//        }
     }
+
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        let size = self.view.frame.size
+//        choisitContraintes(size: size)
+//        DispatchQueue.main.async {
+//            self.dessineCamembert()
+//        }
+//        tableViewEmissions.reloadData()
+//    }
+
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        choisitContraintes(size: size)
         DispatchQueue.main.async {
+            self.choisitContraintes(size: size)
             self.dessineCamembert()
         }
         tableViewEmissions.reloadData()
@@ -480,7 +506,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             debut = 0.0
             for emission in lesEmissions {
                 let intervalle = emission.emission / emissionsCalculees
-                if emission.emission >= limite {
+                if emission.emission >= limite && intervalle > 0.05 {
                     //            if emission.emission / emissionsCalculees > 0.05 {  // on n'affiche le nom des émissions que si elles sont au moins 5% du total
                     let largeurLabel = self.camembert.frame.width / 3
                     //                let fontSize = min(UIFont.systemFontSize, largeurLabel / 10.0)

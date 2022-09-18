@@ -64,7 +64,7 @@ class CelluleEmission: UITableViewCell {
 
     func choisitContraintes() {
         let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.contrainteGlissiereGaucheEtroit.isActive = !estLarge
             self.contrainteGlissiereGaucheLarge.isActive = estLarge
             self.contrainteGlissiereHautLarge.isActive = estLarge
@@ -73,7 +73,7 @@ class CelluleEmission: UITableViewCell {
             self.contrainteNomEmissionDroiteEtroit.isActive = !estLarge
             self.contrainteNomEmissionHautEtroit.isActive = !estLarge
             self.labelNom.numberOfLines = estLarge ? 2 : 1
-        }
+//        }
 print("largeur", self.frame.width, "Cellule large", estLarge)
     }
 }
