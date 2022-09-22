@@ -105,30 +105,6 @@ func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
     return total
 }
 
-func texteEmissions(typesEmissions: [TypeEmission]) -> (String, UIColor) {
-    emissionsCalculees = calculeEmissions(typesEmissions: typesEmissions)
-    let emissionsParPersonne = emissionsCalculees / typesEmissions[SorteEmission.effectif.rawValue].valeur
-    emissionsSoutenables = 2500.0 / 365 * typesEmissions[1].valeur // kg eq CO2 par personne
-    var couleur: UIColor = .black
-    var texte = ""
-    if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 {
-        texte = emissionsCalculees >= 1000.0 ? String(format: "%.2f t eq. CO2 (%.0f kg eq. CO2 / personne) : ", emissionsCalculees / 1000.0, emissionsParPersonne) : String(format: "%.0f kg eq. CO2 (%.0f kg eq. CO2 / personne) : ", emissionsCalculees, emissionsParPersonne)
-            
-        let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
-        if ratio > 1 {
-            texte.append(String(format: "%.0f fois les émissions soutenables", ratio))
-        } else {
-            texte.append(String(format: "%.0f%% des émissions soutenables", ratio * 100.0))
-        }
-        if ratio < 0.8 {couleur = .systemGreen}
-        else if ratio < 1.2 {couleur = .orange}
-        else {couleur = .red}
-        return (texte, couleur)
-        
-    } else {
-        return (String(format: "%.0f kg eq. CO2", emissionsCalculees), couleur)
-    }
-}
 
 func texteEmissionsLigne(typeEmission: TypeEmission) -> (String, UIColor) {
     if typeEmission.emission == 0 || emissionsCalculees.isNaN {

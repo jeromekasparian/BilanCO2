@@ -30,7 +30,11 @@ class CelluleEmission: UITableViewCell {
     @IBOutlet var contrainteNomEmissionVerticaleLarge: NSLayoutConstraint!
     @IBOutlet var contrainteNomEmissionDroiteEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteNomEmissionHautEtroit: NSLayoutConstraint!
-    
+    @IBOutlet var contrainteBoutonInfoVerticaleLarge: NSLayoutConstraint!
+    @IBOutlet var contrainteBoutonInfoVerticaleEtroit: NSLayoutConstraint!
+    @IBOutlet var contrainteAffichageValeurDroiteLarge: NSLayoutConstraint!
+    @IBOutlet var contrainteAffichageValeurDroiteEtroit: NSLayoutConstraint!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,8 +76,12 @@ class CelluleEmission: UITableViewCell {
             self.contrainteNomEmissionVerticaleLarge.isActive = estLarge
             self.contrainteNomEmissionDroiteEtroit.isActive = !estLarge
             self.contrainteNomEmissionHautEtroit.isActive = !estLarge
+        self.contrainteBoutonInfoVerticaleLarge.isActive = estLarge
+        self.contrainteBoutonInfoVerticaleEtroit.isActive = !estLarge
+        self.contrainteAffichageValeurDroiteLarge.isActive = estLarge
+        self.contrainteAffichageValeurDroiteEtroit.isActive = !estLarge
             self.labelNom.numberOfLines = estLarge ? 2 : 1
 //        }
-print("largeur", self.frame.width, "Cellule large", estLarge)
+//print("largeur", self.frame.width, "Cellule large", estLarge)
     }
 }

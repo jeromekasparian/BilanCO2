@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B517AB8528D8FB6A005FF834 /* GrandCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8428D8FB6A005FF834 /* GrandCamembert.swift */; };
+		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
 		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
 		B51AD1C228CA439700888CDD /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
-		B52C37B728CA032000388960 /* Conseil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52C37B628CA032000388960 /* Conseil.swift */; };
 		B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */; };
 		B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */; };
 		B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9728C5134E00FBBAE3 /* ViewController.swift */; };
@@ -22,9 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B517AB8428D8FB6A005FF834 /* GrandCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandCamembert.swift; sourceTree = "<group>"; };
+		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
-		B52C37B628CA032000388960 /* Conseil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conseil.swift; sourceTree = "<group>"; };
 		B54DCF9028C5134E00FBBAE3 /* BilanCO2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BilanCO2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,8 +78,9 @@
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
 				B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */,
-				B52C37B628CA032000388960 /* Conseil.swift */,
 				B51AD1C128CA439700888CDD /* Graphique.swift */,
+				B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */,
+				B517AB8428D8FB6A005FF834 /* GrandCamembert.swift */,
 				B54DCF9728C5134E00FBBAE3 /* ViewController.swift */,
 				B54DCF9928C5134E00FBBAE3 /* Main.storyboard */,
 				B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */,
@@ -161,11 +164,12 @@
 			files = (
 				B51AD1C228CA439700888CDD /* Graphique.swift in Sources */,
 				B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */,
+				B517AB8528D8FB6A005FF834 /* GrandCamembert.swift in Sources */,
 				B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */,
 				B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */,
 				B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */,
-				B52C37B728CA032000388960 /* Conseil.swift in Sources */,
 				B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */,
+				B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */,
 				B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,13 +317,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BilanCO2/BilanCO2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -347,13 +352,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BilanCO2/BilanCO2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
