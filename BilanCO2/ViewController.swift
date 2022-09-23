@@ -8,19 +8,8 @@
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
 // - Dégradé de couleur interne à chaque section
-// - icone : fond unioniste
-// - logo unioniste quelque part
 // - Dessin du camembert : erreur de contexte + intégrer ce qui peut l'être à la classe Graphique (ou la supprimer ?)
-// - modal : bouton fermer pour les anciennes versions + fermeture par swipe??
-// - modal : erreur sur les contraintes -> texte écrasé, camembert déborde
-
-//CALCUL
-//- si camp en avion, comparer aux émissions annuelles autorisées
-// problème interactions repas / durée
-
-// Nettoyage code
-// - affichage cellule -> mettre en sous-routine ce qui est en commun
-// - dessin du camembert -> transférer vers Graphique et mettre en facteur les camemberts
+// - compléter les explications du graphique et du texte associé
 
 // *** Priorité 2 ***
 // INTERFACE
