@@ -7,9 +7,9 @@
 
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
-// - Dégradé de couleur interne à chaque section
 // - Dessin du camembert : erreur de contexte + intégrer ce qui peut l'être à la classe Graphique (ou la supprimer ?)
 // - compléter les explications du graphique et du texte associé
+// - le camembert se cale en bas quand la vue est verticale très allongée
 
 // *** Priorité 2 ***
 // INTERFACE
@@ -18,6 +18,7 @@
 
 // *** A décider ***
 // sliders : largeur fixe ?
+// - Dégradé de couleur interne à chaque section ??
 
 import UIKit
 //import AVFoundation
@@ -76,6 +77,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 
         boutonOuvrirGrandCamembert.setTitle("", for: .normal)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        if #available(iOS 15.0, *) {
+          tableViewEmissions.sectionHeaderTopPadding = 0
+        }
         DispatchQueue.main.async {
             self.actualiseAffichageEmissions()
             self.dessineCamembert(camembert: self.camembert)

@@ -6,7 +6,7 @@
 //
 
 // infos for the data
-// facteur d'émission pour la durée : 2 repas végétariens par jour (0,51 kgCO2 par repas, soit 1,02 par jour); les repas avec viande (rouge 6.29 kg CO2, blanche 1.35 kg CO2) sont le supplément par rapport à ça
+// facteur d'émission pour la durée : 2 repas végétariens par jour (0,51 kg CO2 par repas, soit 1,02 par jour); les repas avec viande (rouge 6.29 kg CO2, blanche 1.35 kg CO2) sont le supplément par rapport à ça
 
 import Foundation
 import UIKit

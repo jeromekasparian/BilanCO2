@@ -17,6 +17,7 @@ class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var contrainteAffichageEmissionsDroitePaysage: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageEmissionsBasPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageEmissionsBasPaysage: NSLayoutConstraint!
+    @IBOutlet var contrainteAffichageEmissionHauteurPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertGauchePaysage: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertGauchePortrait: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertHautPaysage: NSLayoutConstraint!
@@ -39,6 +40,7 @@ class ViewControllerAvecCamembert: UIViewController {
         self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
         self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
         self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
+        self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
 
         self.contrainteCamembertHautPaysage.isActive = !estModePortrait
         self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
@@ -59,7 +61,7 @@ class ViewControllerAvecCamembert: UIViewController {
         var camembertVide: Bool = true
         let rayon = min(camembert.frame.width, camembert.frame.height) / 2 * 0.9 * sqrt(emissionsCalculees / referenceRayon)
         for emission in lesEmissions {
-            if emission.valeur > 0 {
+            if emission.emission > 0 {
                 camembertVide = false
                 let graphique = Graphique()
                 graphique.frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) //camembert.frame //CGRect(x: 50, y: 100, width: 200, height: 200)
@@ -117,7 +119,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 let intervalle = emission.emission / emissionsCalculees
                 if emission.emission >= limite && intervalle > 0.05 { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
                     let largeurLabel = camembert.frame.width / 3
-                    let hauteurLabel = largeurLabel / 4.5 // UIFont.systemFontSize
+                    let hauteurLabel = largeurLabel / 6 // UIFont.systemFontSize
                     let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
                     let positionX = CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5 - largeurLabel) / 2.0
                     let positionY = CGFloat(camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5 - hauteurLabel) / 2.0
@@ -135,7 +137,7 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     @IBAction func afficheExplicationsFigure() {
-        let message = "Ce graphique représente la répartition des émisssions du camp. Le cercle vert permet de les comparer avec les émissions soutenables, soit l'équivalent de 2,5 tonnes équivalent CO2 par personne et par an, rapportées à la durée du camp."
+        let message = "Ce graphique représente la répartition des émisssions du camp. Le cercle vert permet de les comparer avec les émissions soutenables, soit l'équivalent de 2,5 tonnes équivalent CO₂ par personne et par an, rapportées à la durée du camp."
         let alerte = UIAlertController(title: "Pour en savoir plus", message: message, preferredStyle: .alert)
         alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
         self.present(alerte, animated: true)
@@ -153,7 +155,7 @@ class ViewControllerAvecCamembert: UIViewController {
     }
 
     func texteEmissions(typesEmissions: [TypeEmission]) -> NSAttributedString { //}(String, UIColor) {
-        emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.effectif.rawValue].valeur // kg eq CO2 par personne
+        emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.effectif.rawValue].valeur // kg eq CO₂ par personne
         let emissionsParPersonne = emissionsCalculees / typesEmissions[SorteEmission.effectif.rawValue].valeur
         var couleur: UIColor = .black
         let texte = NSMutableAttributedString(string: "")
@@ -161,15 +163,16 @@ class ViewControllerAvecCamembert: UIViewController {
 
             let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? "%.1f t" : "%.0f kg"
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
-            texte.append(NSMutableAttributedString(string: String(format: "CO₂ : " + formatTexteValeurEmissionsTotales + "\n%.0f kg / personne\n", emissionsPourAffichage, emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]))
+            texte.append(NSMutableAttributedString(string: String(format: "CO₂ : " + formatTexteValeurEmissionsTotales, emissionsPourAffichage), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]))
+            texte.append(NSAttributedString(string: String(format:"\n%.0f kg / personne\n", emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
 //
                 let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
                 if ratio <= 1 {
-                    texte.append(NSAttributedString(string: String(format: "%.0f%% des émissions soutenables\n", ratio * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                    texte.append(NSAttributedString(string: String(format: "%.0f%% des émissions soutenables\n", ratio * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
                 } else if ratio <= 2 {
-                    texte.append(NSAttributedString(string: String(format: "%.1f x les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                    texte.append(NSAttributedString(string: String(format: "%.1f x les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
                 } else {
-                    texte.append(NSAttributedString(string: String(format: "%.0f x les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                    texte.append(NSAttributedString(string: String(format: "%.0f x les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
                 }
                 if ratio < 0.8 {couleur = vert2}
                 else if ratio < 1.2 {couleur = orange}
@@ -188,7 +191,8 @@ class ViewControllerAvecCamembert: UIViewController {
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
             return NSAttributedString(attributedString: texte) //
         } else {
-            return NSAttributedString(string:String(format: "Émissions : %.0f kg eq. CO2", emissionsCalculees), attributes: [NSAttributedString.Key.foregroundColor: couleur])
+            return NSAttributedString(string:"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", attributes: [NSAttributedString.Key.foregroundColor: couleur])
+//            return NSAttributedString(string:String(format: "Émissions : %.0f kg eq. CO₂", emissionsCalculees), attributes: [NSAttributedString.Key.foregroundColor: couleur])
         }
 //            return NSAttributedString(string: "")
     }
