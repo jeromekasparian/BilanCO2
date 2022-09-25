@@ -106,19 +106,6 @@ func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
 }
 
 
-func texteEmissionsLigne(typeEmission: TypeEmission) -> (String, UIColor) {
-    if typeEmission.emission == 0 || emissionsCalculees.isNaN {
-        return ("", .black)
-    } else {
-        let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
-        let texte = String(format: "%.0f kg eq. CO2 (%.0f%%)", typeEmission.emission, pourcentage)
-        var couleur: UIColor = .gray
-        if pourcentage > 10.0 {couleur = .black}
-        if pourcentage > 20.0 {couleur = .red}
-        return (texte, couleur)
-    }
-}
-
 func decodeCSV(data: String) -> ([TypeEmission], [String]) {
     var lesEmetteursLus: [TypeEmission] = []
     var lesSections: [String] = []
@@ -161,3 +148,15 @@ func lireFichier(nom: String) -> ([TypeEmission], [String]) {
         return ([], [])
     }
 }
+        
+
+func arrondi(_ nombre: Double) -> Double { // arrondi à deux chiffres significatifs
+    if nombre < 100 {
+        return round(nombre)
+    } else {
+        let nombreChiffres = Int(ceil(log(nombre) / log(10.0) + 0.01))
+        let facteur = pow(10, Double(nombreChiffres - 2))
+        return facteur * round(nombre / facteur)
+    }
+}
+

@@ -68,6 +68,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         tableViewEmissions.dataSource = self
         actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+//        if #available(iOS 13.0, *) {
+//            affichageEmissions.backgroundColor = .systemBackground.withAlphaComponent(0.2)
+//        } else {
+//            affichageEmissions.backgroundColor = .white.withAlphaComponent(0.2)
+//        }
 
         boutonOuvrirGrandCamembert.setTitle("", for: .normal)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
@@ -107,6 +112,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         return compteur + indexPath.row
     }
     
+    
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
@@ -128,11 +134,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
             cell.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, emission.valeur).replacingOccurrences(of: " ", with: "\u{2007}") // on remplace les espaces par des blancs par des espaces de largeur fixe insécables
             cell.labelValeur.font = UIFont.monospacedDigitSystemFont(ofSize: cell.labelValeur.font.pointSize, weight: .regular)
-            let (texte, couleur) = texteEmissionsLigne(typeEmission: emission)
-            cell.labelEmissionIndividuelle.text = texte
-            cell.labelEmissionIndividuelle.textColor = couleur
+        cell.actualiseEmissionIndividuelle(typeEmission: emission)
+//            let (texte, couleur) = texteEmissionsLigne(typeEmission: emission)
+//            cell.labelEmissionIndividuelle.text = texte
+//            cell.labelEmissionIndividuelle.textColor = couleur
             cell.boutonInfo.isEnabled = !emission.conseil.isEmpty
-            cell.backgroundColor = UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.backgroundColor = couleursEEUdF6[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
         return cell
     }
@@ -164,7 +171,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let hauteurLabel = CGFloat(24.0)
         let headerView = UIView() //frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: hauteurLabel + 2 * margeVerticale))
 //        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
-        headerView.backgroundColor = UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
+        headerView.backgroundColor = couleursEEUdF6[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
         
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
         headerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline).withSize(21) //  .boldSystemFont(ofSize: 24) // UIFont(name: "Verdana", size: 20)
@@ -220,7 +227,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             if cell.glissiere.value == cell.glissiere.minimumValue {
                 lesEmissions[ligne].valeur = 0.0
             } else {
-                lesEmissions[ligne].valeur = exp(Double(cell.glissiere.value))
+                lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
             }
         } else {
             lesEmissions[ligne].valeur = Double(cell.glissiere.value)
@@ -264,9 +271,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
 
         DispatchQueue.main.async{
-            let (texte, couleur) = texteEmissionsLigne(typeEmission: lesEmissions[ligne])
-            cell.labelEmissionIndividuelle.text = texte
-            cell.labelEmissionIndividuelle.textColor = couleur
+            cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
+//            let (texte, couleur) = texteEmissionsLigne(typeEmission: lesEmissions[ligne])
+//            cell.labelEmissionIndividuelle.text = texte
+//            cell.labelEmissionIndividuelle.textColor = couleur
         }
     }
     

@@ -84,4 +84,23 @@ class CelluleEmission: UITableViewCell {
 //        }
 //print("largeur", self.frame.width, "Cellule large", estLarge)
     }
+    
+    func texteEmissionsLigne(typeEmission: TypeEmission) -> (String, UIColor) {
+        if typeEmission.emission == 0 || emissionsCalculees.isNaN {
+            return ("", .black)
+        } else {
+            let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
+            let texte = String(format: "%.0f kg eq. CO2 (%.0f%%)", typeEmission.emission, pourcentage)
+            var couleur: UIColor = .gray
+            if pourcentage > 10.0 {couleur = .black}
+            if pourcentage > 20.0 {couleur = rougeVif}
+            return (texte, couleur)
+        }
+    }
+
+    func actualiseEmissionIndividuelle(typeEmission: TypeEmission) {
+        let (texte, couleur) = texteEmissionsLigne(typeEmission: typeEmission)
+        self.labelEmissionIndividuelle.text = texte
+        self.labelEmissionIndividuelle.textColor = couleur
+    }
 }

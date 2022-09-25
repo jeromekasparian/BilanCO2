@@ -16,7 +16,7 @@ Aller-retour vers le camp;Matériel expédié;kg;500;0.000535333;;2;;;;;;Expédi
 Déplacements sur place;Car;km;1000;1.191666667;;;;1;;;;Le car est efficace s'il est raisonnablement plein;Car
 Déplacements sur place;Voiture;km;2000;0.2;;;;1;;;;Faire les courses près du lieu de camp économise sur l'essence, et sur la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute;Voiture
 Déplacements sur place;Voiture électrique;km ;2000;0.1;;;;1;;;;Faire les courses près du lieu de camp économise sur l'essence, et sur la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute;Voiture électrique
-Hébergement;Tentes;;10;11.30555556;;;;;1;;;Entretenir ses tentes, c'est les renouveler moins souvent, donc moins polluer;Tentes
-Hébergement;Marabouts;;5;81.27777778;;;;;1;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Marabouts
+Hébergement;Tentes;;10;8.1;;;;;1;;;Entretenir ses tentes, c'est les renouveler moins souvent, donc moins polluer;Tentes
+Hébergement;Marabouts;;5;30.5;;;;;1;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Marabouts
 Hébergement;En dur;pers.;50;1.09;;;1;;1;1;;L'hébergement sous tente n'est pas seulement sympa, il est aussi nettement moins polluant;Couchage en dur
-Matériel;Achats de matériel;€;9999;0.366666667;;;;;;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Matériel
+Matériel;Achats de matériel;€;9999;0.366666667;;;;1;;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Matériel

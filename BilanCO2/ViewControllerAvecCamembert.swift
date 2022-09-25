@@ -26,6 +26,11 @@ class ViewControllerAvecCamembert: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         boutonAideGraphique.setTitle("", for: .normal)
+//        if #available(iOS 13.0, *) {
+//            affichageEmissions.backgroundColor = .systemBackground.withAlphaComponent(0.3)
+//        } else {
+//            affichageEmissions.backgroundColor = .white.withAlphaComponent(0.3)
+//        }
     }
     func choisitContraintes(size: CGSize){
         let estModePortrait = size.width <= size.height
@@ -65,7 +70,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 let intervalle = emission.emission / emissionsCalculees
                 graphique.fillPercentage = intervalle
                 let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
-                graphique.color = UIColor(morgenStemningNumber: numeroSection, MorgenStemningScaleSize: lesSections.count)
+                graphique.color = couleursEEUdF6[numeroSection] //UIColor(morgenStemningNumber: numeroSection, MorgenStemningScaleSize: lesSections.count)
                 graphique.draw(graphique.frame) //, debut: 0, etendue: 0.9)
                 camembert.addSubview(graphique)
                 debut = debut + intervalle
@@ -98,7 +103,7 @@ class ViewControllerAvecCamembert: UIViewController {
             graphique.trackWidth = min(graphique.frame.width, graphique.frame.height) / 50.0
             graphique.startPoint = 0.0
             graphique.fillPercentage = 1.0
-            graphique.color = .green.withAlphaComponent(0.5) // UIColor(morgenStemningNumber: numeroSection, MorgenStemningScaleSize: lesSections.count)
+            graphique.color = .green.withAlphaComponent(0.8)
             graphique.draw(graphique.frame) //, debut: 0, etendue: 0.9)
             camembert.addSubview(graphique)
         }
@@ -112,7 +117,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 let intervalle = emission.emission / emissionsCalculees
                 if emission.emission >= limite && intervalle > 0.05 { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
                     let largeurLabel = camembert.frame.width / 3
-                    let hauteurLabel = largeurLabel / 5 // UIFont.systemFontSize
+                    let hauteurLabel = largeurLabel / 4.5 // UIFont.systemFontSize
                     let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
                     let positionX = CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5 - largeurLabel) / 2.0
                     let positionY = CGFloat(camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5 - hauteurLabel) / 2.0
@@ -154,31 +159,31 @@ class ViewControllerAvecCamembert: UIViewController {
         let texte = NSMutableAttributedString(string: "")
         if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 {
 
-            let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? "%.2f t" : "%.0f kg"
+            let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? "%.1f t" : "%.0f kg"
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
-            texte.append(NSMutableAttributedString(string: String(format: "CO₂ : " + formatTexteValeurEmissionsTotales + "\n%.0f kg / personne\n", emissionsPourAffichage, emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]))
+            texte.append(NSMutableAttributedString(string: String(format: "CO₂ : " + formatTexteValeurEmissionsTotales + "\n%.0f kg / personne\n", emissionsPourAffichage, emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]))
 //
                 let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
                 if ratio <= 1 {
                     texte.append(NSAttributedString(string: String(format: "%.0f%% des émissions soutenables\n", ratio * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
-                } else if ratio <= 3 {
-                    texte.append(NSAttributedString(string: String(format: "%.1f fois les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                } else if ratio <= 2 {
+                    texte.append(NSAttributedString(string: String(format: "%.1f x les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
                 } else {
-                    texte.append(NSAttributedString(string: String(format: "%.0f fois les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                    texte.append(NSAttributedString(string: String(format: "%.0f x les émissions soutenables\n", ratio), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
                 }
-                if ratio < 0.8 {couleur = .systemGreen}
-                else if ratio < 1.2 {couleur = .orange}
-                else {couleur = .red}
+                if ratio < 0.8 {couleur = vert2}
+                else if ratio < 1.2 {couleur = orange}
+                else {couleur = rougeVif}
             if emissionsParPersonne > 0.3 * emissionsSoutenablesAnnuelles {
                 let ratioAnnuel = emissionsParPersonne / emissionsSoutenablesAnnuelles
                 if ratioAnnuel <= 1 {
                     texte.append(NSAttributedString(string: String(format: "%.0f%% des émissions soutenables annuelles", ratioAnnuel * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
-                } else if ratioAnnuel <= 3 {
-                    texte.append(NSAttributedString(string: String(format: "%.1f fois les émissions soutenables annuelles", ratioAnnuel), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
+                } else if ratioAnnuel <= 2 {
+                    texte.append(NSAttributedString(string: String(format: "%.1f x les émissions soutenables annuelles", ratioAnnuel), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
                 } else {
-                    texte.append(NSAttributedString(string: String(format: "%.0f fois les émissions soutenables annuelles", ratioAnnuel), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
+                    texte.append(NSAttributedString(string: String(format: "%.0f x les émissions soutenables annuelles", ratioAnnuel), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
                 }
-                couleur = .red
+                couleur = rougeVif
             }
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
             return NSAttributedString(attributedString: texte) //

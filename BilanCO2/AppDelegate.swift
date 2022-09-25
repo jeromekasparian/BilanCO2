@@ -13,6 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        if #available(iOS 13.0, *) {
+//            window?.overrideUserInterfaceStyle = .light
+//        }
 #if targetEnvironment(macCatalyst) //modifié
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
