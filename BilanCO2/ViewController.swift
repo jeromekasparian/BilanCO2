@@ -33,6 +33,7 @@ let userDefaults = UserDefaults.standard
 let largeurMiniTableViewEcranLarge:CGFloat = 400
 var lesEmissions: [TypeEmission] = []
 let emissionsSoutenablesAnnuelles: Double = 2500.0 // t eq. C02 / an / personne
+var afficherPictos: Bool = true
 
 class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, UIPopoverControllerDelegate {
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
@@ -80,6 +81,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         if #available(iOS 15.0, *) {
           tableViewEmissions.sectionHeaderTopPadding = 0
         }
+        // mise en place de la détection du swipe left à 3 doigts pour activer le mode debug
+        let swipePictos = UISwipeGestureRecognizer(target:self, action: #selector(changeModePictos))
+        swipePictos.direction = UISwipeGestureRecognizer.Direction.left
+        swipePictos.numberOfTouchesRequired = 3
+        self.view.addGestureRecognizer(swipePictos)
+
         DispatchQueue.main.async {
             self.actualiseAffichageEmissions()
             self.dessineCamembert(camembert: self.camembert)
@@ -92,6 +99,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         super.viewDidAppear(animated)
         choisitContraintes(size: self.view.frame.size)
         
+    }
+    
+    @objc func changeModePictos() {
+        afficherPictos.toggle()
+        DispatchQueue.main.async {
+            self.dessineCamembert(camembert: self.camembert)
+            self.tableViewEmissions.reloadData()
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -126,7 +141,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             cell.delegate = self
             cell.choisitContraintes()
             cell.selectionStyle = .none
+        if afficherPictos && !emission.picto.isEmpty {
+            cell.labelNom.text = emission.picto + " " + emission.nom
+        } else {
             cell.labelNom.text = emission.nom
+        }
             if emission.echelleLog {
                 cell.glissiere.minimumValue = Float(2.3)
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
