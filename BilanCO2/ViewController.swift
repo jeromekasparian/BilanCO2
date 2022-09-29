@@ -7,7 +7,7 @@
 
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
-// - Dessin du camembert : erreur de contexte + intégrer ce qui peut l'être à la classe Graphique (ou la supprimer ?)
+// - Dessin du camembert : erreur de contexte + intégrer ce qui peut l'être à la classe Graphique (ou la supprimer ?). Ou bien l'outil d'Hervé ?
 // - compléter les explications du graphique et du texte associé
 // - le camembert se cale en bas quand la vue est verticale très allongée
 
@@ -19,6 +19,39 @@
 // *** A décider ***
 // sliders : largeur fixe ?
 // - Dégradé de couleur interne à chaque section ??
+// - supprimer le launcscreen ?
+// - aspect du Grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
+
+//Logique d'usage
+//Le ciblage des mesures à mettre en oeuvre relève en fait de l’enchainement de 2 étapes de raisonnement :
+//1) priorisation (c’est dans la catégorie repas que je fais 60% de mes émissions)
+//2) subsitution (je peux remplacer la viande rouge par du poisson blanc)
+//
+//Ton graph actuel ne permet pas voir ce qui se passe au sein d’une catégorie, donc il n’aide pas au 2)
+//En revanche, il a une vrai valeur ajouté pour la priorisation. Donc j’en ferais sa fonction… et je supprimerais les sous-catégories.
+//De toute façon si aujourd’hui j’y vais en Car, mon graph ne me montrera pas de catégorie Train, donc je ne verrais pas que "tiens le train c’est mieux que le car"
+//
+//Ce qui aide à la substitution, c’est le tableau lui même, en particulier :
+//- le fait d’avoir lié le nombre de repas de chaque type, on voit vraiment que ça se substitue.
+//
+//Tu pourrais aller plus loin, et proposer des suggestions, tant que le bilan dépasse le 100%, genre une alerte
+//- Les repas représente xx tonnes donc yy% de votre bilan carbonne, et si vous remplaciez 3 repas avec viande rouge par des repas végé ? [ok faisons ça] [as-tu une autre suggestion?]
+//- les transports représente xx tonnes donc yy% de votre bilan carbonne, e et si vous y alliez en train plutôt qu’en car ? [ok faisons ça] [pas maintenant je vais déjà chercher un lieu moins loin de mon local][as-tu une autre suggestion ?]
+
+//Aspect
+//C'est déjà une police de la charte graphique, celle des titres.
+//et une police plus « spécifique » à l’identité visuelle des EU ?
+//Comme la pseudo-maniscrite :
+//<Capture d’écran 2022-09-25 à 19.43.16.png>
+//ou encore :
+//Comfortaa
+//pour les mots « Éclaireuses Éclaireurs UNIONISTES »
+//
+//Tekton Pro Bold
+//pour les mots « de FRANCE »
+
+
+
 
 import UIKit
 //import AVFoundation

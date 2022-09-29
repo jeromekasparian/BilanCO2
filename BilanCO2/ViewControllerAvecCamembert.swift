@@ -112,27 +112,27 @@ class ViewControllerAvecCamembert: UIViewController {
         
         // écrire la légende des éléments principaux dans le camembert
         let emissionsClassees = lesEmissions.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
-        let nombreMaxiLabels = afficherPictos ? 10 : 5
+        let nombreMaxiLabels = afficherPictos ? 8 : 5
         let limite = emissionsClassees.isEmpty ? 0.0 : emissionsClassees.count >= nombreMaxiLabels ? emissionsClassees[nombreMaxiLabels - 1].emission : emissionsClassees.last?.emission ?? 0.0 // on affiche les 4 postes d'émission les plus importants, à condition qu'ils soient non-nuls
         if limite > 0 {
             debut = 0.0
             for emission in lesEmissions {
                 let intervalle = emission.emission / emissionsCalculees
                 if emission.emission >= limite && intervalle > 0.05 { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
-                    let largeurLabel = camembert.frame.width / 3
-                    let hauteurLabel = largeurLabel / 4 //
+                        let largeurLabel = afficherPictos ? camembert.frame.width / 5 : camembert.frame.width / 3
+                    let hauteurLabel = afficherPictos ? largeurLabel * 0.7 : largeurLabel / 4
 //                    let hauteurLabel = UIFont.systemFontSize * 1.5
                     let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
                     let positionX = CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5 - largeurLabel) / 2.0
                     let positionY = CGFloat(camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5 - hauteurLabel) / 2.0
                     let texte = UILabel(frame: CGRect(x: positionX, y: positionY, width: largeurLabel, height: hauteurLabel))
                     texte.numberOfLines = 1
-                    texte.adjustsFontSizeToFitWidth = true
                     texte.textAlignment = .center
                     if afficherPictos && !emission.picto.isEmpty {
-                        texte.font = .systemFont(ofSize: largeurLabel)
+                        texte.font = .systemFont(ofSize: hauteurLabel)
                         texte.text = emission.picto
                     } else {
+                        texte.adjustsFontSizeToFitWidth = true
                         texte.font = .systemFont(ofSize: largeurLabel / 4)
                         texte.text = emission.nomCourt
                     }
