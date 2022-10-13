@@ -10,6 +10,8 @@ import UIKit
 
 class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var affichageEmissions: UILabel!
+//    @IBOutlet var affichageEmissionsParPersonne: UILabel!
+//    @IBOutlet var affichageEmissionsSoutenables: UILabel!
     @IBOutlet var camembert: UIView!
     @IBOutlet var boutonAideGraphique: UIButton!
 
@@ -47,9 +49,10 @@ class ViewControllerAvecCamembert: UIViewController {
         self.contrainteCamembertGauchePortrait.isActive = estModePortrait
         self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
         self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
+        self.affichageEmissions.textAlignment = estModePortrait ? .center : .left
     }
     
-    func dessineCamembert(camembert: UIView) {
+    func dessineCamembert(camembert: UIView, grandFormat: Bool) {
         for subView in camembert.subviews {
             if subView is Graphique || subView is UILabel {
                 subView.removeFromSuperview()
@@ -112,15 +115,16 @@ class ViewControllerAvecCamembert: UIViewController {
         
         // écrire la légende des éléments principaux dans le camembert
         let emissionsClassees = lesEmissions.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
-        let nombreMaxiLabels = afficherPictos ? 8 : 5
+        let nombreMaxiLabels = afficherPictos ? (grandFormat ? 12 : 8) : 5
         let limite = emissionsClassees.isEmpty ? 0.0 : emissionsClassees.count >= nombreMaxiLabels ? emissionsClassees[nombreMaxiLabels - 1].emission : emissionsClassees.last?.emission ?? 0.0 // on affiche les 4 postes d'émission les plus importants, à condition qu'ils soient non-nuls
+        let pourcentageMini = grandFormat ? 0.03 : 0.05
         if limite > 0 {
             debut = 0.0
             for emission in lesEmissions {
                 let intervalle = emission.emission / emissionsCalculees
-                if emission.emission >= limite && intervalle > 0.05 { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
+                if emission.emission >= limite && intervalle > pourcentageMini { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
                         let largeurLabel = afficherPictos ? camembert.frame.width / 5 : camembert.frame.width / 3
-                    let hauteurLabel = afficherPictos ? largeurLabel * 0.7 : largeurLabel / 4
+                    let hauteurLabel = afficherPictos ? (grandFormat ? largeurLabel * 0.5 : largeurLabel * 0.7) : largeurLabel / 4
 //                    let hauteurLabel = UIFont.systemFontSize * 1.5
                     let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
                     let positionX = CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5 - largeurLabel) / 2.0
@@ -145,37 +149,40 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     @IBAction func afficheExplicationsFigure() {
-        let message = "Ce graphique représente la répartition des émisssions du camp. Le cercle vert permet de les comparer avec les émissions soutenables, soit l'équivalent de 2,5 tonnes équivalent CO₂ par personne et par an, rapportées à la durée du camp."
+        let message = "Ce graphique représente la répartition des émisssions de gaz à effet de serre dues au camp. Le cercle vert permet de les comparer avec les émissions soutenables : elles correspondent à 6,8 kg équivalent CO₂ par personne et par jour de camp."
         let alerte = UIAlertController(title: "Pour en savoir plus", message: message, preferredStyle: .alert)
         alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
         self.present(alerte, animated: true)
     }
 
     
-    @objc func actualiseAffichageEmissions() {
+    @objc func actualiseAffichageEmissions(grandFormat: Bool) {
         //        print("affichage")
         DispatchQueue.main.async{
-            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions)
+            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions, grandFormat: grandFormat)
 //            let (texte, couleur) = self.texteEmissions(typesEmissions: lesEmissions)
 //            self.affichageEmissions.text = texte
 //            self.affichageEmissions.textColor = couleur
         }
     }
 
-    func texteEmissions(typesEmissions: [TypeEmission]) -> NSAttributedString { //}(String, UIColor) {
+    func texteEmissions(typesEmissions: [TypeEmission], grandFormat: Bool) -> NSAttributedString { //}(String, UIColor) {
         emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
         let emissionsParPersonne = emissionsCalculees / typesEmissions[SorteEmission.effectif.rawValue].valeur
         var couleur: UIColor = .black
         let texte = NSMutableAttributedString(string: "")
         if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 {
+            let tailleTextePrincipal: CGFloat = grandFormat ? 3 : 2
+            let tailleTexteSecondaire = 0.75 * tailleTextePrincipal
+            let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
 
             let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? "%.1f t" : "%.0f kg"
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
-            texte.append(NSMutableAttributedString(string: String(format: "CO₂ : " + formatTexteValeurEmissionsTotales, emissionsPourAffichage), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]))
+            texte.append(NSMutableAttributedString(string: String(format: "CO₂ : " + formatTexteValeurEmissionsTotales, emissionsPourAffichage), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTextePrincipal)]))
             if emissionsParPersonne >= 1000 {
-                texte.append(NSAttributedString(string: String(format:"\n%.1f t / personne\n", emissionsParPersonne / 1000.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                texte.append(NSAttributedString(string: String(format:"\n%.1f t / personne\n", emissionsParPersonne / 1000.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire)]))
             } else {
-                texte.append(NSAttributedString(string: String(format:"\n%.0f kg / personne\n", emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                texte.append(NSAttributedString(string: String(format:"\n%.0f kg / personne\n", emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire)]))
 
             }
 //
@@ -183,11 +190,11 @@ class ViewControllerAvecCamembert: UIViewController {
             let dureeEquivalenteSoutenableMois = dureeEquivalenteSoutenableAns * 12
             let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
             if dureeEquivalenteSoutenableJours <= 60 {
-                texte.append(NSAttributedString(string: String(format: "= %.0f jours d'émissions soutenables", dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f jours d'émissions soutenables", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
             } else if dureeEquivalenteSoutenableMois < 24 {
-                texte.append(NSAttributedString(string: String(format: "= %.0f mois d'émissions soutenables", dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f mois d'émissions soutenables", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
             } else {
-                texte.append(NSAttributedString(string: String(format: "= %.0f ans d'émissions soutenables", dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f ans d'émissions soutenables", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
             }
                 let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
 //                if ratio <= 1 {

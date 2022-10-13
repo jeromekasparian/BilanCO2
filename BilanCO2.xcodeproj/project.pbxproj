@@ -21,6 +21,8 @@
 		B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFA728C5172500FBBAE3 /* Data.swift */; };
 		B54DCFAA28C5192300FBBAE3 /* Data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B54DCFA928C5192300FBBAE3 /* Data.csv */; };
 		B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */; };
+		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
+		B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		B54DCFA928C5192300FBBAE3 /* Data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Data.csv; sourceTree = "<group>"; };
 		B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleEmission.swift; sourceTree = "<group>"; };
 		B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BilanCO2.entitlements; sourceTree = "<group>"; };
+		B5D81F1A28F2126300188489 /* CelluleCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleCredits.swift; sourceTree = "<group>"; };
+		B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCredits.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +84,11 @@
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
 				B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
+				B5D81F1A28F2126300188489 /* CelluleCredits.swift */,
 				B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */,
 				B51AD1C128CA439700888CDD /* Graphique.swift */,
 				B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */,
+				B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */,
 				B517AB8428D8FB6A005FF834 /* GrandCamembert.swift */,
 				B54DCF9728C5134E00FBBAE3 /* ViewController.swift */,
 				B54DCF9928C5134E00FBBAE3 /* Main.storyboard */,
@@ -168,6 +174,8 @@
 				B51AD1C228CA439700888CDD /* Graphique.swift in Sources */,
 				B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */,
 				B517AB8528D8FB6A005FF834 /* GrandCamembert.swift in Sources */,
+				B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */,
+				B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */,
 				B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */,
 				B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */,
 				B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */,

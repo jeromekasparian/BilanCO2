@@ -23,5 +23,6 @@ let jaune = couleur(rouge: 255, vert: 229, bleu: 0)
 let orange = couleur(rouge: 243, vert: 146, bleu: 0)
 let rougeVif = couleur(rouge: 228, vert: 31, bleu: 19)
 let rouge = couleur(rouge: 190, vert: 22, bleu: 34)
+//let blanc =
 
-let couleursEEUdF6 = [vert2, vert1, vert3, jaune, orange, rouge]
+let couleursEEUdF6 = [vert2, vert1, vert3, jaune, orange, rouge, .white]

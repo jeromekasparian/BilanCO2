@@ -8,8 +8,18 @@
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
 // - Dessin du camembert : erreur de contexte + intégrer ce qui peut l'être à la classe Graphique (ou la supprimer ?). Ou bien l'outil d'Hervé ?
-// - compléter les explications du graphique et du texte associé
-// - le camembert se cale en bas quand la vue est verticale très allongée
+// - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
+// - fonction d'export
+//      - réseaux sociaux (regarde mon camp sobre - toi aussi utilise l'app)
+//      - détaillé (liste des émissions)
+// - nom de l'app
+// - actualiser en continu le texte des émissions
+// - le tableView passe sous le premier titre en haut (Mac seulement)
+// - affiner le nombre et taille des pictos + la taille du texte affichageEmissions en fonction de l'espace disponible
+
+// Explications
+// - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
+// - Daniel : swipe / tap pour basculer d'un affichage à l'autre (plusieurs manières de formuler la soutenabilité)
 
 // *** Priorité 2 ***
 // INTERFACE
@@ -22,7 +32,7 @@
 // - supprimer le launcscreen ?
 // - aspect du Grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
 
-//Logique d'usage
+// HERVE Logique d'usage
 //Le ciblage des mesures à mettre en oeuvre relève en fait de l’enchainement de 2 étapes de raisonnement :
 //1) priorisation (c’est dans la catégorie repas que je fais 60% de mes émissions)
 //2) subsitution (je peux remplacer la viande rouge par du poisson blanc)
@@ -68,13 +78,15 @@ var lesEmissions: [TypeEmission] = []
 let emissionsSoutenablesAnnuelles: Double = 2500.0 // t eq. C02 / an / personne
 var afficherPictos: Bool = true
 
-class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, UIPopoverControllerDelegate {
+class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
+    
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
     
     let keyValeursUtilisateurs = "keyValeursUtilisateurs"
     //    var camp = CaracteristiquesCamp()
     
     let cellReuseIdentifier = "CelluleEmission"
+    let cellReuseIdentifierCredits = "CelluleCredits"
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
     @IBOutlet var boutonOuvrirGrandCamembert: UIButton!
@@ -121,8 +133,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         self.view.addGestureRecognizer(swipePictos)
 
         DispatchQueue.main.async {
-            self.actualiseAffichageEmissions()
-            self.dessineCamembert(camembert: self.camembert)
+            self.actualiseAffichageEmissions(grandFormat: false)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
 
             self.tableViewEmissions.reloadData()
         }
@@ -137,7 +149,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @objc func changeModePictos() {
         afficherPictos.toggle()
         DispatchQueue.main.async {
-            self.dessineCamembert(camembert: self.camembert)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
             self.tableViewEmissions.reloadData()
         }
     }
@@ -168,17 +180,18 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
-        let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)] //  lesEmissions.filter({$0.categorie == lesSections[indexPath.section]})[indexPath.row]
-        let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
-        // set the text from the data model
+        if indexPath.section < lesSections.count - 1 {  // les vraies données
+            let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)] //  lesEmissions.filter({$0.categorie == lesSections[indexPath.section]})[indexPath.row]
+            let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
+            // set the text from the data model
             cell.delegate = self
             cell.choisitContraintes()
             cell.selectionStyle = .none
-        if afficherPictos && !emission.picto.isEmpty {
-            cell.labelNom.text = emission.picto + " " + emission.nom
-        } else {
-            cell.labelNom.text = emission.nom
-        }
+            if afficherPictos && !emission.picto.isEmpty {
+                cell.labelNom.text = emission.picto + " " + emission.nom
+            } else {
+                cell.labelNom.text = emission.nom
+            }
             if emission.echelleLog {
                 cell.glissiere.minimumValue = Float(2.3)
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
@@ -190,14 +203,22 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
             cell.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, emission.valeur).replacingOccurrences(of: " ", with: "\u{2007}") // on remplace les espaces par des blancs par des espaces de largeur fixe insécables
             cell.labelValeur.font = UIFont.monospacedDigitSystemFont(ofSize: cell.labelValeur.font.pointSize, weight: .regular)
-        cell.actualiseEmissionIndividuelle(typeEmission: emission)
-//            let (texte, couleur) = texteEmissionsLigne(typeEmission: emission)
-//            cell.labelEmissionIndividuelle.text = texte
-//            cell.labelEmissionIndividuelle.textColor = couleur
+            cell.actualiseEmissionIndividuelle(typeEmission: emission)
+            //            let (texte, couleur) = texteEmissionsLigne(typeEmission: emission)
+            //            cell.labelEmissionIndividuelle.text = texte
+            //            cell.labelEmissionIndividuelle.textColor = couleur
             cell.boutonInfo.isEnabled = !emission.conseil.isEmpty
-        cell.backgroundColor = couleursEEUdF6[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+            cell.backgroundColor = couleursEEUdF6[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
-        return cell
+            return cell
+        }
+        else {  // la dernière section : les données
+            let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
+            cell.selectionStyle = .none
+            cell.delegate = self
+            cell.boutonOuvrirWeb.setTitle("", for: .normal)
+            return cell
+        }
     }
     
     func formatAffichageValeur(valeurMax: Double) -> String {
@@ -212,7 +233,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
+//        if indexPath.section == lesSections.count - 1 {
+//            return 150
+//        } else {
+//            return UITableView.automaticDimension
+//        }
 //    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -253,6 +278,17 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             return headerHeight
         }
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let height: CGFloat = 48
+//        if #available(iOS 11.0, *) {
+//            tableView.estimatedSectionHeaderHeight = height
+//            return UITableView.automaticDimension
+//        } else {
+//            return height
+//        }
+//
+//    }
 
     
     func afficheConseil(cell: CelluleEmission){
@@ -331,6 +367,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //            let (texte, couleur) = texteEmissionsLigne(typeEmission: lesEmissions[ligne])
 //            cell.labelEmissionIndividuelle.text = texte
 //            cell.labelEmissionIndividuelle.textColor = couleur
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+//            self.actualiseAffichageEmissions(grandFormat: false)
         }
     }
     
@@ -338,8 +376,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
         DispatchQueue.main.async{
-            self.dessineCamembert(camembert: self.camembert)
-            self.actualiseAffichageEmissions()
+//            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+            self.actualiseAffichageEmissions(grandFormat: false)
            self.tableViewEmissions.reloadData()
         }
     }
@@ -376,12 +414,28 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             self.contrainteVueResultatGauchePaysage.isActive = !estModePortrait
     }
 
+    
+    func ouvrirWebEEUdF() {
+        print("web")
+        let adresse = "https://www.eeudf.org"
+        if let url = URL(string: adresse), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url)
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+
+    }
+
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let size = self.view.frame.size
         choisitContraintes(size: size)
         DispatchQueue.main.async {
-            self.dessineCamembert(camembert: self.camembert)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
         }
         tableViewEmissions.reloadData()
     }
@@ -390,7 +444,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async {
             self.choisitContraintes(size: self.view.frame.size)
-            self.dessineCamembert(camembert: self.camembert)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
         }
         tableViewEmissions.reloadData()
     }

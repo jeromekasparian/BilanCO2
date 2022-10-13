@@ -15,8 +15,8 @@ class GrandCamembert: ViewControllerAvecCamembert {
     override func viewDidLoad() {
         super.viewDidLoad()
         choisitContraintes(size: self.view.frame.size)
-        actualiseAffichageEmissions()
-        dessineCamembert(camembert: camembert)
+        actualiseAffichageEmissions(grandFormat: true)
+        dessineCamembert(camembert: camembert, grandFormat: true)
         boutonFermer.setTitle("", for: .normal)
     }
     
@@ -27,7 +27,7 @@ class GrandCamembert: ViewControllerAvecCamembert {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async {
             self.choisitContraintes(size: size)
-            self.dessineCamembert(camembert: self.camembert)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: true)
         }
     }
     
@@ -36,7 +36,7 @@ class GrandCamembert: ViewControllerAvecCamembert {
         let size = self.view.frame.size
         choisitContraintes(size: size)
         DispatchQueue.main.async {
-            self.dessineCamembert(camembert: self.camembert)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: true)
         }
     }
 

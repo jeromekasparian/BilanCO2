@@ -1,10 +1,10 @@
 Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt;Picto
 Informations générales;Effectif;;100;0;1;;;;1;;;;;
 Informations générales;Durée;j;50;0;1;;;;1;;;Si le camp est plus long, les transports sont amortis sur plus de jours;;
-Repas;Avec viande rouge (bœuf, agneau);;50;6.29;1;;;;1;;2;La viande rouge (bœuf, veau, agneau)est très émettrice de gaz à effets de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. C'est sans doute le poste d'émission le plus facile à réduire sans toucher au projet global du camp.;Viande rouge;🥩
-Repas;Avec viande blanche (porc, volaille);;50;1.35;1;;;;1;;2;La viande blanche (porc, volaille, lapin) fait plus que doubler l'impact carbone par rapport à un repas végétarien;Viande blanche;🍗
-Repas;Végétarien;;50;0.51;1;;;;1;;2;La viande blanche fait plus que doubler l'impact carbone par rapport à un repas végétarien;Repas;🌽
-Repas;Cuisinés au gaz;;50;0.08;1;;;;1;;2;;Gaz;🔥
+Repas;Avec bœuf, veau ou agneau;;50;6.29;1;;;;1;;2;La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effets de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. C'est sans doute le poste d'émission le plus facile à réduire sans toucher au projet global du camp.;Viande rouge;🥩
+Repas;Avec porc, volaille, poisson;;50;1.35;1;;;;1;;2;La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien;Viande blanche;🍗
+Repas;Végétarien;;50;0.51;1;;;;1;;2;Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas;Repas;🌽
+Repas;Cuisinés au gaz;;50;0.08;1;;;;1;;2;Quelques idées pour réduire votre consommation de gaz : couvrir les casseroles, protéger les tripattes du vent, adapter les quantités chauffées aux besoins, couper le gaz un peu avant la fin de la cuisson, qui va se terminer sur la chaleur accumulée;Gaz;🔥
 Aller-retour vers le camp;Distance Local - camp;km;9999;0;;;;1;;;;Un camp plus proche nécessite moins de déplacements, et permet de choisir des modes de transport moins polluants. Sauf si un camp tout proche se traduit par des allers-retours en voiture plus nombreux;;
 Aller-retour vers le camp;Train;pers. AR;50;0.002;;2;;;1;1;;Le train est de loin le mode de transport le moins polluant;Train;🚆
 Aller-retour vers le camp;Car;AR;3;1.191666667;;2;;;1;;;Un car est intéressant s'il est bien rempli. Pour 10 personnes à bord, il pollue autant qu'une voiture individuelle. Attention également à prendre en compte les éventuels retours à vide;Car;🚌
@@ -20,3 +20,4 @@ Hébergement;Tentes;;10;8.1;;;;;1;;;Entretenir ses tentes, c'est les renouveler 
 Hébergement;Marabouts;;5;30.5;;;;;1;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Marabouts;🎪
 Hébergement;En dur;pers.;50;1.09;;;1;;1;1;;L'hébergement sous tente n'est pas seulement sympa, il est aussi nettement moins polluant;Couchage en dur;🏠
 Matériel;Achats de matériel;€;9999;0.366666667;;;;1;;;;Entretenir son matériel, c'est le renouveler moins souvent, donc moins polluer;Matériel;🛠
+Impressum;Crédits;;0;0;;;;;;;;;;
