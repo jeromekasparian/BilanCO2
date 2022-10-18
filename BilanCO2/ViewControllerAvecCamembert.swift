@@ -14,6 +14,7 @@ class ViewControllerAvecCamembert: UIViewController {
 //    @IBOutlet var affichageEmissionsSoutenables: UILabel!
     @IBOutlet var camembert: UIView!
     @IBOutlet var boutonAideGraphique: UIButton!
+    @IBOutlet var boutonExport: UIButton!
 
     @IBOutlet var contrainteAffichageEmissionsDroitePortrait: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageEmissionsDroitePaysage: NSLayoutConstraint!
@@ -29,6 +30,7 @@ class ViewControllerAvecCamembert: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         boutonAideGraphique.setTitle("", for: .normal)
+        boutonExport.setTitle("", for: .normal)
 //        if #available(iOS 13.0, *) {
 //            affichageEmissions.backgroundColor = .systemBackground.withAlphaComponent(0.3)
 //        } else {
@@ -37,7 +39,7 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     func choisitContraintes(size: CGSize){
         let estModePortrait = size.width <= size.height
-//        print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
+        print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
         self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
         self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
         self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
@@ -52,65 +54,102 @@ class ViewControllerAvecCamembert: UIViewController {
         self.affichageEmissions.textAlignment = estModePortrait ? .center : .left
     }
     
+    private func getGraphStartAndEndPointsInRadians(debut: CGFloat, etendue: CGFloat) -> (graphStartingPoint: CGFloat, graphEndingPoint: CGFloat) {
+        // debut et étendue en %
+        return(CGFloat(2 * .pi * (debut - 0.25)), CGFloat(2 * .pi * (debut + etendue - 0.25)))
+    } // func
+
+    func dessineSecteur(rect: CGRect, rayon: CGFloat, debut: CGFloat, etendue: CGFloat, epaisseurTrait: CGFloat, couleurSecteur: UIColor) {
+        let (angleDebutRadians, angleFinRadians) = self.getGraphStartAndEndPointsInRadians(debut: debut, etendue: etendue)
+        let center: CGPoint = CGPoint(x: rect.midX, y: rect.midY)
+        
+        // now we can draw the progress arc
+        let percentagePath = UIBezierPath(arcCenter: center, radius: rayon - (epaisseurTrait / 2), startAngle: angleDebutRadians, endAngle: angleFinRadians, clockwise: true)
+//        percentagePath.lineWidth = epaisseurTrait
+//        percentagePath.lineCapStyle = .butt
+        let shape = CAShapeLayer()
+        camembert.layer.addSublayer(shape)
+        shape.strokeColor = couleurSecteur.cgColor
+        shape.fillColor = .none
+        shape.lineWidth = epaisseurTrait
+        shape.lineCap = .butt
+        shape.path = percentagePath.cgPath
+    }
+    
+    
     func dessineCamembert(camembert: UIView, grandFormat: Bool) {
-        for subView in camembert.subviews {
-            if subView is Graphique || subView is UILabel {
-                subView.removeFromSuperview()
-            }
-        }
+        // effacer le camembert existant
+        camembert.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
+        
         var debut: CGFloat = 0.0
         let referenceRayon = max(emissionsCalculees, emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur)
         //        print(emissionsCalculees, emissionsSoutenables, emissionsCalculees / referenceRayon)
         var camembertVide: Bool = true
         let rayon = min(camembert.frame.width, camembert.frame.height) / 2 * 0.9 * sqrt(emissionsCalculees / referenceRayon)
+        let frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) //camembert.frame //CGRect(x: 50, y: 100, width: 200, height: 200)
+        var couleurSeparation = UIColor.black
+        if #available(iOS 13.0, *) {
+            couleurSeparation = .label
+        }
+
+
         for emission in lesEmissions {
             if emission.emission > 0 {
                 camembertVide = false
-                let graphique = Graphique()
-                graphique.frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) //camembert.frame //CGRect(x: 50, y: 100, width: 200, height: 200)
-                graphique.radius = rayon
-                print(graphique.radius)
-                graphique.trackWidth = graphique.radius // min(graphique.frame.width, graphique.frame.height) / 8.0
-                graphique.startPoint = debut
                 let intervalle = emission.emission / emissionsCalculees
-                graphique.fillPercentage = intervalle
                 let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
-                graphique.color = couleursEEUdF6[numeroSection] //UIColor(morgenStemningNumber: numeroSection, MorgenStemningScaleSize: lesSections.count)
-                graphique.draw(graphique.frame) //, debut: 0, etendue: 0.9)
-                camembert.addSubview(graphique)
+                dessineSecteur(rect: frame, rayon: rayon, debut: debut, etendue: intervalle, epaisseurTrait: rayon, couleurSecteur: couleursEEUdF6[numeroSection])
+                
+//                let graphique = Graphique()
+//                graphique.radius = rayon
+////                print(graphique.radius)
+//                graphique.trackWidth = graphique.radius // min(graphique.frame.width, graphique.frame.height) / 8.0
+//                graphique.startPoint = debut
+//                let intervalle = emission.emission / emissionsCalculees
+//                graphique.fillPercentage = intervalle
+//                let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
+//                graphique.color = couleursEEUdF6[numeroSection] //UIColor(morgenStemningNumber: numeroSection, MorgenStemningScaleSize: lesSections.count)
+//                graphique.draw(frame) //, debut: 0, etendue: 0.9)
+//                camembert.addSubview(graphique)
                 debut = debut + intervalle
+//
+//                // trace d'une séparation entre les secteurs
+                
+                dessineSecteur(rect: frame, rayon: rayon, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon, couleurSecteur: couleurSeparation)
 
-                // trace d'une séparation entre les secteurs
-                let graphique2 = Graphique()
-                graphique2.frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) //camembert.frame //CGRect(x: 50, y: 100, width: 200, height: 200)
-                graphique2.radius = rayon
-                print(graphique2.radius)
-                graphique2.trackWidth = graphique2.radius // min(graphique.frame.width, graphique.frame.height) / 8.0
-                graphique2.startPoint = debut - 0.0025
-                graphique2.fillPercentage = 0.005
-                if #available(iOS 13.0, *) {
-                    graphique2.color = .label
-                } else {
-                    graphique2.color = .black
-                }
-                graphique2.draw(graphique2.frame) //, debut: 0, etendue: 0.9)
-                camembert.addSubview(graphique2)
+                
+//                let graphique2 = Graphique()
+////                graphique2.frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) //camembert.frame //CGRect(x: 50, y: 100, width: 200, height: 200)
+//                graphique2.radius = rayon
+////                print(graphique2.radius)
+//                graphique2.trackWidth = graphique2.radius // min(graphique.frame.width, graphique.frame.height) / 8.0
+//                graphique2.startPoint = debut - 0.0025
+//                graphique2.fillPercentage = 0.005
+//                if #available(iOS 13.0, *) {
+//                    graphique2.color = .label
+//                } else {
+//                    graphique2.color = .black
+//                }
+//                graphique2.draw(frame) //, debut: 0, etendue: 0.9)
+//                camembert.addSubview(graphique2)
             } // if emission.valeur > 0
         } // for
         
 
         // la référence de soutenabilité
         if !camembertVide {
-            let graphique = Graphique()
-            graphique.frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) 
-            graphique.radius = min(graphique.frame.width, graphique.frame.height) / 2 * 0.9 * sqrt(emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / referenceRayon)
-            print(graphique.radius)
-            graphique.trackWidth = min(graphique.frame.width, graphique.frame.height) / 50.0
-            graphique.startPoint = 0.0
-            graphique.fillPercentage = 1.0
-            graphique.color = .green.withAlphaComponent(0.8)
-            graphique.draw(graphique.frame) //, debut: 0, etendue: 0.9)
-            camembert.addSubview(graphique)
+            let rayonCercleVert = min(frame.width, frame.height) / 2 * 0.9 * sqrt(emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / referenceRayon)
+            dessineSecteur(rect: frame, rayon: rayonCercleVert, debut: 0.0, etendue: 1.0, epaisseurTrait: min(frame.width, frame.height) / 50.0, couleurSecteur: .green.withAlphaComponent(0.8))
+
+//            let graphique = Graphique()
+////            graphique.frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height)
+////            print(graphique.radius)
+//            graphique.trackWidth = min(graphique.frame.width, graphique.frame.height) / 50.0
+//            graphique.startPoint = 0.0
+//            graphique.fillPercentage = 1.0
+//            graphique.color = .green.withAlphaComponent(0.8)
+//            graphique.draw(frame) //, debut: 0, etendue: 0.9)
+//            camembert.addSubview(graphique)
         }
         
         // écrire la légende des éléments principaux dans le camembert
@@ -123,7 +162,8 @@ class ViewControllerAvecCamembert: UIViewController {
             for emission in lesEmissions {
                 let intervalle = emission.emission / emissionsCalculees
                 if emission.emission >= limite && intervalle > pourcentageMini { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
-                        let largeurLabel = afficherPictos ? camembert.frame.width / 5 : camembert.frame.width / 3
+                    let largeurLabel = rayon / 2.2
+//                        let largeurLabel = afficherPictos ? camembert.frame.width / 5 : camembert.frame.width / 3
                     let hauteurLabel = afficherPictos ? (grandFormat ? largeurLabel * 0.5 : largeurLabel * 0.7) : largeurLabel / 4
 //                    let hauteurLabel = UIFont.systemFontSize * 1.5
                     let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
@@ -219,7 +259,7 @@ class ViewControllerAvecCamembert: UIViewController {
 //                couleur = rougeVif
 //            }
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
-            return NSAttributedString(attributedString: texte) //
+            return NSAttributedString(attributedString: texte) // NSAttributedString(string: "TOTO") //
         } else {
             return NSAttributedString(string:"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", attributes: [NSAttributedString.Key.foregroundColor: couleur])
 //            return NSAttributedString(string:String(format: "Émissions : %.0f kg eq. CO₂", emissionsCalculees), attributes: [NSAttributedString.Key.foregroundColor: couleur])
@@ -227,5 +267,75 @@ class ViewControllerAvecCamembert: UIViewController {
 //            return NSAttributedString(string: "")
     }
 
+// https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
+    @IBAction func exportAsPdfFromView(sender: UIButton) {
+        self.boutonExport.isHidden = true
+        self.boutonAideGraphique.isHidden = true
+        let vueAExporter = sender.superview ?? self.view!
+        let pdfPageFrame = vueAExporter.bounds
+        let pdfData = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
+        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
+        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
+        vueAExporter.layer.render(in: pdfContext)
+        UIGraphicsEndPDFContext()
+        
+        let path = URL(fileURLWithPath: NSTemporaryDirectory())
+        let saveFileURL = path.appendingPathComponent("/CO2.pdf")
+        do{
+            try pdfData.write(to: saveFileURL)
+        } catch {
+            print("error-Grrr")
+        }
+        let activityViewController = UIActivityViewController(activityItems: [NSAttributedString(string: "Les émissions de CO₂ de mon camp", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]), texteListeEmissions(lesEmissions: lesEmissions), saveFileURL], applicationActivities: nil) // "" : le corps du message intégré automatiquement
+        #if targetEnvironment(macCatalyst)
+        //"Don't do this !!"
+        #else
+        activityViewController.setValue("BC de mon camp", forKey: "subject")
+        #endif
+        activityViewController.completionWithItemsHandler = {
+            (activity, success, items, error) in
+            if activity != nil {if activity!.rawValue == "com.apple.UIKit.activity.RemoteOpenInApplication-ByCopy"{print("Coquinou")
+                }
+            }
+        }
+        if let popover = activityViewController.popoverPresentationController {
+            popover.barButtonItem  = self.navigationItem.rightBarButtonItem
+            popover.permittedArrowDirections = .up
+            popover.sourceView = sender;
+            popover.sourceRect = sender.frame;
+        }
+        present(activityViewController, animated: true, completion: {
+            self.remettreBoutons()
+        })
+    }
     
+    func remettreBoutons(){
+        boutonExport.isHidden = false
+        boutonAideGraphique.isHidden = false
+    }
+    
+    func texteListeEmissions(lesEmissions: [TypeEmission]) -> NSAttributedString {
+        let texte = NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
+        var categorie = ""
+        for emission in lesEmissions {
+            if emission.emission > 0 {
+                if emission.categorie != categorie {
+                    categorie = emission.categorie
+                    texte.append(NSAttributedString(string: "\n" + categorie + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+                }
+                if emission.emission < 2000.0 {
+                    texte.append(NSAttributedString(string: emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: ", %.0f kg CO₂ (%.0f%%)\n", emission.emission, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                } else {
+                    texte.append(NSAttributedString(string: emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: ", %.2f t CO₂ (%.0f%%)\n", emission.emission / 1000.0, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                }
+            }
+        }
+        if emissionsCalculees < 2000.0 {
+            texte.append(NSAttributedString(string: String(format: "\nTotal %.0f kg CO₂", emissionsCalculees), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+        } else {
+            texte.append(NSAttributedString(string: String(format: "\nTotal %.2f t CO₂", emissionsCalculees / 1000), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+        }
+        return texte
+    }
 }

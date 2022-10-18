@@ -7,15 +7,16 @@
 
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
-// - Dessin du camembert : erreur de contexte + intégrer ce qui peut l'être à la classe Graphique (ou la supprimer ?). Ou bien l'outil d'Hervé ?
-// - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
 // - fonction d'export
-//      - réseaux sociaux (regarde mon camp sobre - toi aussi utilise l'app)
-//      - détaillé (liste des émissions)
+//      - réseaux sociaux (regarde mon camp sobre - toi aussi utilise l'app) : comment différencier les deux exports ?
+//      - messages d'erreur extension pdf
+//      - message d'erreur "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error."
+//      - message d'erreur fermeture du dialogue d'export
 // - nom de l'app
-// - actualiser en continu le texte des émissions
-// - le tableView passe sous le premier titre en haut (Mac seulement)
-// - affiner le nombre et taille des pictos + la taille du texte affichageEmissions en fonction de l'espace disponible
+// - formulation du texte concernant les émissions soutenables
+// - problèmes positionnement : séquence contraintes / dessin camembert
+//      - mode paysage au lieu de portrait pour le camembert et le texte associé
+//      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
 
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
@@ -23,6 +24,7 @@
 
 // *** Priorité 2 ***
 // INTERFACE
+// - le tableView passe sous le premier titre en haut (Mac en mode iPad seulement -- ok sur iphone/ipad et sur mac Catalyst)
 // - Localisation, y compris les noms de types d'émission
 // - éviter les superposition de textes dans le camembert
 
@@ -87,10 +89,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
+    var ligneEnCours: Int = -1
+    var celluleEnCours: CelluleEmission! = nil
+
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
     @IBOutlet var boutonOuvrirGrandCamembert: UIButton!
-        
+    
     @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewDroitePortrait: NSLayoutConstraint!
@@ -301,85 +306,110 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         self.present(alerte, animated: true)
     }
     
+    func debutMouvementGlissiere(cell: CelluleEmission){
+        if celluleEnCours == nil {
+            guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
+                print("erreur index Path")
+                return
+            }
+//        tableViewEmissions.indexPathsForVisibleRows?.compactMap({if $0 != indexPath {
+//            tableViewEmissions.cellForRow(at: $0)?.resignFirstResponder()
+//        }})
+            celluleEnCours = cell
+            ligneEnCours = numeroDeLigne(indexPath: indexPath)
+            print("ligne \(ligneEnCours)")
+        }
+    }
     
     func glissiereBougee(cell: CelluleEmission) {
 
-        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
-            print("erreur index Path")
-            return
-        }
-        let ligne = numeroDeLigne(indexPath: indexPath)
-        print("ligne \(ligne)")
+//        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
+//            print("erreur index Path")
+//            return
+//        }
+//        let ligne = numeroDeLigne(indexPath: indexPath)
+//        print("ligne \(ligne)")
+        if ligneEnCours >= 0 && celluleEnCours != nil {
+            DispatchQueue.main.async{
 
-        let emission = lesEmissions[ligne]
-        if emission.valeurEntiere {
-            cell.glissiere.value = round(cell.glissiere.value)
-        }
-        if emission.echelleLog {
-            if cell.glissiere.value == cell.glissiere.minimumValue {
-                lesEmissions[ligne].valeur = 0.0
-            } else {
-                lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
+                let ligne = self.ligneEnCours
+                let cellule = self.celluleEnCours
+            
+            let emission = lesEmissions[ligne]
+            if emission.valeurEntiere {
+                cellule!.glissiere.value = round(cellule!.glissiere.value)
             }
-        } else {
-            lesEmissions[ligne].valeur = Double(cell.glissiere.value)
-        }
-        cell.labelValeur.text = String(format: formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
-        switch ligne {
-        case SorteEmission.duree.rawValue:
-            actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
-            lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-            if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
+            if emission.echelleLog {
+                if cellule!.glissiere.value == cellule!.glissiere.minimumValue {
+                    lesEmissions[ligne].valeur = 0.0
+                } else {
+                    lesEmissions[ligne].valeur = arrondi(exp(Double(cellule!.glissiere.value)))
+                }
+            } else {
+                lesEmissions[ligne].valeur = Double(cellule!.glissiere.value)
+            }
+                cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
+            switch ligne {
+            case SorteEmission.duree.rawValue:
+                self.actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
+                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
+                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
+                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
+                    if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
+                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
+                        lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur
+                    }
+                }
+            case SorteEmission.repasViandeRouge.rawValue:
+                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
+                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
+                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
+                }
+            case SorteEmission.repasViandeBlanche.rawValue:
+                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
+                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
+                    lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                }
+            case SorteEmission.repasVegetarien.rawValue:
+                lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
                 if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
                     lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
-                    lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur
+                    lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
                 }
+            case SorteEmission.effectif.rawValue:
+                self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+            default:
+                print("rien")
             }
-        case SorteEmission.repasViandeRouge.rawValue:
-            lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-            if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
-            }
-        case SorteEmission.repasViandeBlanche.rawValue:
-            lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-            if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-            }
-        case SorteEmission.repasVegetarien.rawValue:
-            lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
-            if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
-                lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
-                lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
-            }
-        case SorteEmission.effectif.rawValue:
-            actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-        default:
-            print("rien")
-        }
-        emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+            emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
 
-        DispatchQueue.main.async{
-            cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
-//            let (texte, couleur) = texteEmissionsLigne(typeEmission: lesEmissions[ligne])
-//            cell.labelEmissionIndividuelle.text = texte
-//            cell.labelEmissionIndividuelle.textColor = couleur
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
-//            self.actualiseAffichageEmissions(grandFormat: false)
+                cellule!.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
+                //            let (texte, couleur) = texteEmissionsLigne(typeEmission: lesEmissions[ligne])
+                //            cell.labelEmissionIndividuelle.text = texte
+                //            cell.labelEmissionIndividuelle.textColor = couleur
+                self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+                self.actualiseAffichageEmissions(grandFormat: false)
+//                self.tableViewEmissions.reloadData()
+            }
         }
     }
     
     func finMouvementGlissiere(cell: CelluleEmission) {
-        let lesValeurs = lesEmissions.map({$0.valeur})
-        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
-        DispatchQueue.main.async{
-//            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
-            self.actualiseAffichageEmissions(grandFormat: false)
-           self.tableViewEmissions.reloadData()
-        }
+        glissiereBougee(cell: cell)
+            let lesValeurs = lesEmissions.map({$0.valeur})
+            userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+            DispatchQueue.main.async{
+                //            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+//                self.actualiseAffichageEmissions(grandFormat: false)
+                self.tableViewEmissions.reloadData()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.ligneEnCours = -1
+                self.celluleEnCours = nil
+            }
     }
     
 
@@ -402,16 +432,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
         
     override func choisitContraintes(size: CGSize){
-        super.choisitContraintes(size: self.vueResultats.frame.size)
         let estModePortrait = size.width <= size.height
+//        DispatchQueue.main.async {
+        super.choisitContraintes(size: self.vueResultats.frame.size)
+
             self.contrainteTableViewHautPortrait.isActive = estModePortrait
             self.contrainteTableViewDroitePortrait.isActive = estModePortrait
             self.contrainteVueResultatsGauchePortrait.isActive = estModePortrait
-
+            
             self.contrainteTableViewHautPaysage.isActive = !estModePortrait
             self.contrainteTableViewDroitePaysage.isActive = !estModePortrait
             self.contrainteVueResultatsBasPaysage.isActive = !estModePortrait
             self.contrainteVueResultatGauchePaysage.isActive = !estModePortrait
+//        vueResultats.updateConstraints()
+//        }
     }
 
     
@@ -433,8 +467,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let size = self.view.frame.size
-        choisitContraintes(size: size)
         DispatchQueue.main.async {
+            self.choisitContraintes(size: size)
             self.dessineCamembert(camembert: self.camembert, grandFormat: false)
         }
         tableViewEmissions.reloadData()

@@ -12,6 +12,7 @@ protocol CelluleEmissionDelegate: AnyObject {
     func glissiereBougee(cell: CelluleEmission)
     func finMouvementGlissiere(cell: CelluleEmission)
     func afficheConseil(cell: CelluleEmission)
+    func debutMouvementGlissiere(cell: CelluleEmission)
 }
 
 class CelluleEmission: UITableViewCell {
@@ -52,6 +53,10 @@ class CelluleEmission: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.delegate = nil
+    }
+    
+    @IBAction func attrappeSlider() {
+        self.delegate?.debutMouvementGlissiere(cell: self)
     }
     
     @IBAction func sliderBouge() {

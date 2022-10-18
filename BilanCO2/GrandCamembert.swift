@@ -34,8 +34,8 @@ class GrandCamembert: ViewControllerAvecCamembert {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let size = self.view.frame.size
-        choisitContraintes(size: size)
         DispatchQueue.main.async {
+            self.choisitContraintes(size: size)
             self.dessineCamembert(camembert: self.camembert, grandFormat: true)
         }
     }

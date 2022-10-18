@@ -5,6 +5,7 @@
 //  Created by Jérôme Kasparian on 08/09/2022.
 //
 
+// A PRIORI INUTILE MAINTENANT
 
 import UIKit
 
@@ -12,7 +13,7 @@ class Graphique: UIView {
     
     var startPoint: CGFloat = 0
     var color: UIColor = UIColor.yellow
-    var trackColor: UIColor = UIColor.gray
+//    var trackColor: UIColor = UIColor.gray
     var trackWidth: CGFloat = 1
     var fillPercentage: CGFloat = 1
     var radius: CGFloat = 50
@@ -39,27 +40,25 @@ class Graphique: UIView {
     
     override func draw(_ rect: CGRect) {
         // first we want to find the centerpoint and the radius of our rect
-        
+        frame = rect
         let center: CGPoint = CGPoint(x: rect.midX, y: rect.midY)
-        //        radius: CGFloat = rect.width / 2 * 0.8
         
         // we need our graph starting and ending points
         let (graphStartingPoint, graphEndingPoint) = self.getGraphStartAndEndPointsInRadians(debut: startPoint, etendue: fillPercentage)
-        
-        //    // now we need to first draw the track...
-        //    let trackPath = UIBezierPath(arcCenter: center, radius: radius - (trackWidth / 2), startAngle: graphStartingPoint, endAngle: 2.0 * .pi, clockwise: true)
-        //    trackPath.lineWidth = trackWidth
-        //    self.trackColor.setStroke()
-        //    trackPath.stroke()
         
         // now we can draw the progress arc
         let percentagePath = UIBezierPath(arcCenter: center, radius: radius - (trackWidth / 2), startAngle: graphStartingPoint, endAngle: graphEndingPoint, clockwise: true)
         percentagePath.lineWidth = trackWidth
         percentagePath.lineCapStyle = .butt
+        
+//        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         self.color.setStroke()
         percentagePath.stroke()
         
+//        UIGraphicsEndImageContext()
+        
     } // func
+    
     
 } // class
 

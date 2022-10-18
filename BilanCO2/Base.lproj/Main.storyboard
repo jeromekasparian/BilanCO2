@@ -45,9 +45,11 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="7df-Jh-f3B"/>
                                                     </constraints>
                                                     <connections>
-                                                        <action selector="lacheSlider" destination="EFk-PJ-bem" eventType="touchUpOutside" id="EW6-3E-QB0"/>
-                                                        <action selector="lacheSlider" destination="EFk-PJ-bem" eventType="touchUpInside" id="xr0-fn-LxK"/>
-                                                        <action selector="sliderBouge" destination="EFk-PJ-bem" eventType="valueChanged" id="pkF-ma-eHR"/>
+                                                        <action selector="attrappeSlider" destination="EFk-PJ-bem" eventType="touchDown" id="rtQ-zb-C9v"/>
+                                                        <action selector="lacheSlider" destination="EFk-PJ-bem" eventType="touchUpInside" id="a1l-RM-LUK"/>
+                                                        <action selector="lacheSlider" destination="EFk-PJ-bem" eventType="touchUpOutside" id="txi-NG-ErD"/>
+                                                        <action selector="sliderBouge" destination="EFk-PJ-bem" eventType="touchDragOutside" id="JSg-9N-gP7"/>
+                                                        <action selector="sliderBouge" destination="EFk-PJ-bem" eventType="touchDragInside" id="ugl-Ks-LCc"/>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 kg eq CO2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xo8-2T-5Q7">
@@ -223,9 +225,10 @@
                                             <constraint firstAttribute="width" constant="20" id="quH-hp-iLr"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-uP-kb1">
-                                        <rect key="frame" x="160" y="0.0" width="160" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-uP-kb1">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="140"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="2BJ-4x-dh9"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="ly2-uP-kb1" secondAttribute="height" id="42A-gW-PK4"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="oVZ-RY-t5P"/>
                                         </constraints>
@@ -241,6 +244,8 @@
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="2BJ-4x-dh9"/>
+                                                <exclude reference="42A-gW-PK4"/>
                                                 <exclude reference="oVZ-RY-t5P"/>
                                             </mask>
                                         </variation>
@@ -271,6 +276,18 @@
                                             <action selector="afficheExplicationsFigure" destination="BYZ-38-t0r" eventType="touchUpInside" id="di5-CT-o1n"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaZ-LP-cnI">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="8Pd-3u-mER"/>
+                                            <constraint firstAttribute="width" secondItem="KaZ-LP-cnI" secondAttribute="height" id="Hzg-Wd-ROb"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
+                                        <connections>
+                                            <action selector="exportAsPdfFromViewWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JDg-1P-nJg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -288,14 +305,16 @@
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="faL-l2-rgA" secondAttribute="bottom" id="HrK-b6-YD8"/>
                                     <constraint firstAttribute="bottom" secondItem="fLu-d3-J00" secondAttribute="bottom" constant="8" id="JpO-sQ-aMz"/>
                                     <constraint firstAttribute="trailing" secondItem="fLu-d3-J00" secondAttribute="trailing" constant="8" id="Pbf-Gz-wAC"/>
+                                    <constraint firstItem="KaZ-LP-cnI" firstAttribute="leading" secondItem="faL-l2-rgA" secondAttribute="leading" id="RZV-dV-GLC"/>
                                     <constraint firstAttribute="trailing" secondItem="vOa-Ps-mF3" secondAttribute="trailing" id="TwG-Jh-SuJ"/>
                                     <constraint firstAttribute="leading" secondItem="ly2-uP-kb1" secondAttribute="leading" id="UqC-gU-E71"/>
+                                    <constraint firstItem="KaZ-LP-cnI" firstAttribute="top" secondItem="faL-l2-rgA" secondAttribute="top" id="VBR-5e-RZe"/>
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="top" secondItem="ly2-uP-kb1" secondAttribute="bottom" id="X2L-C9-QBv"/>
                                     <constraint firstAttribute="centerX" secondItem="ly2-uP-kb1" secondAttribute="leading" id="ZpJ-rZ-asI"/>
                                     <constraint firstItem="vOa-Ps-mF3" firstAttribute="leading" secondItem="GlJ-TS-m2D" secondAttribute="leading" id="anZ-is-aUb"/>
                                     <constraint firstAttribute="trailing" secondItem="Q8S-1r-jbT" secondAttribute="trailing" constant="8" id="azI-HU-v1u"/>
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="trailing" secondItem="GlJ-TS-m2D" secondAttribute="centerX" id="csw-Jz-y29"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ly2-uP-kb1" secondAttribute="bottom" constant="20" symbolic="YES" id="fR9-Qg-fqU"/>
+                                    <constraint firstAttribute="bottom" secondItem="ly2-uP-kb1" secondAttribute="bottom" constant="20" symbolic="YES" id="fR9-Qg-fqU"/>
                                     <constraint firstAttribute="bottom" secondItem="iSS-El-IFn" secondAttribute="bottom" constant="8" id="glY-yQ-EVr"/>
                                     <constraint firstAttribute="leading" secondItem="faL-l2-rgA" secondAttribute="leading" priority="999" id="nzF-4q-SN1"/>
                                     <constraint firstAttribute="bottom" secondItem="vOa-Ps-mF3" secondAttribute="bottom" id="sst-LM-FiJ"/>
@@ -343,6 +362,7 @@
                     <connections>
                         <outlet property="affichageEmissions" destination="ly2-uP-kb1" id="YOA-xd-eEd"/>
                         <outlet property="boutonAideGraphique" destination="Zf8-ms-2Io" id="lR7-sw-idG"/>
+                        <outlet property="boutonExport" destination="KaZ-LP-cnI" id="WIh-Th-Psu"/>
                         <outlet property="boutonOuvrirGrandCamembert" destination="vOa-Ps-mF3" id="0BN-HC-Unb"/>
                         <outlet property="camembert" destination="faL-l2-rgA" id="Nhd-oW-R7h"/>
                         <outlet property="contrainteAffichageEmissionHauteurPortrait" destination="oVZ-RY-t5P" id="PPL-8g-PLu"/>
@@ -437,13 +457,13 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">L'estimation des estimations de gaz à effet de serres, converties en équivalent CO₂, se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
+                                        <string key="content">L'estimation des estimations de gaz à effet de serres, converties en équivalent CO₂, se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
 • Repas : le calcul se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend pas en compte les saisons, la distance des producteurs, le nombre d'intermédiaire, etc.
 • Cuisson : il s'agit d'une estimation basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz en fin de cuisson. Les repas qui ne sont pas cuisinés au gaz sont supposés cuits au feu de bois, avec un impact carbone nul. On considère en effet que dans une forêt gérée durablement, les arbres repoussent et stockent du carbone au même rythme qu'on en libère par la combustion du bois. À noter que ce raisonnement n'est valable qu'à long terme (30 ans). À court terme la combustion du bois dégage du CO₂.
 • Transports et déplacements : les calculs supposent une taille "moyenne" pour les véhicules concernés.
 • Hébergement : le calcul prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de la composition typique des tentes de patrouille et marabouts de 12 m. Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
 • Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions vient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
@@ -470,8 +490,8 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">On estime que la préservation du climat nécessite de limiter les émissions de gaz à effet de serre à 2,5 tonnes équivalent CO₂ par personne et par an. Les émissions du camp sont comparées à cette référence, ramenée au nombre de participants et à la durée du camp.
-</mutableString>
+                                        <string key="content">On estime que la préservation du climat nécessite de limiter les émissions de gaz à effet de serre à 2,5 tonnes équivalent CO₂ par personne et par an. Les émissions du camp sont comparées à cette référence, ramenée au nombre de participants et à la durée du camp.
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -516,7 +536,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
+                                        <string key="content">L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
 Elle ne prend notamment pas en compte
 • les activités scoutes à l'année
 • les émissions liées au matériel individuel des participants
@@ -524,7 +544,7 @@ Elle ne prend notamment pas en compte
 • les émissions des participants qui ne sont pas liées au camp mais qui se poursuivent pendant celui-ci : leur domicile notamment.
 Pour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.
 
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
@@ -891,6 +911,7 @@ Cg
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="logo eeudf coul" width="297.60000610351562" height="411"/>
         <image name="rondVert" width="361.64999389648438" height="376.25"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
