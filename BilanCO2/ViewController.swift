@@ -16,7 +16,8 @@
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - mode paysage au lieu de portrait pour le camembert et le texte associé
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
-//      - ajuster la taille du texte à l'espace disponible
+//      - ajuster la taille du texte de résultats / émissions à l'espace disponible
+// - mise à jour cf warnings GrandCamembert / test nouvelle forme
 
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
@@ -77,7 +78,7 @@ var lesSections: [String] = []
 let userDefaults = UserDefaults.standard
 let largeurMiniTableViewEcranLarge:CGFloat = 400
 var lesEmissions: [TypeEmission] = []
-let emissionsSoutenablesAnnuelles: Double = 2500.0 // t eq. C02 / an / personne
+let emissionsSoutenablesAnnuelles: Double = 2500.0 // t eq. CO2 / an / personne
 var afficherPictos: Bool = true
 
 enum Orientation {
@@ -330,7 +331,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //        }})
             celluleEnCours = cell
             ligneEnCours = numeroDeLigne(indexPath: indexPath)
-            print("Cellule en cours \(celluleEnCours), ligne \(ligneEnCours)")
+            print("Cellule en cours \(String(describing: celluleEnCours)), ligne \(ligneEnCours)")
         }
     }
     

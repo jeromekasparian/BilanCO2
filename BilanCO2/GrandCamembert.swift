@@ -16,6 +16,7 @@ class GrandCamembert: ViewControllerAvecCamembert {
         super.viewDidLoad()
         choisitContraintes(size: self.view.frame.size)
         actualiseAffichageEmissions(grandFormat: true)
+        
         dessineCamembert(camembert: camembert, grandFormat: true)
         boutonFermer.setTitle("", for: .normal)
     }

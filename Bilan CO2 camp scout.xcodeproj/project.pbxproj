@@ -31,7 +31,7 @@
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
 		B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouleursEEUdF.swift; sourceTree = "<group>"; };
-		B54DCF9028C5134E00FBBAE3 /* BilanCO2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BilanCO2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B54DCF9028C5134E00FBBAE3 /* Bilan CO2 camp scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilan CO2 camp scout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B54DCF9728C5134E00FBBAE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		B54DCF9128C5134E00FBBAE3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B54DCF9028C5134E00FBBAE3 /* BilanCO2.app */,
+				B54DCF9028C5134E00FBBAE3 /* Bilan CO2 camp scout.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,9 +102,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B54DCF8F28C5134E00FBBAE3 /* BilanCO2 */ = {
+		B54DCF8F28C5134E00FBBAE3 /* Bilan CO2 camp scout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B54DCFA428C5134E00FBBAE3 /* Build configuration list for PBXNativeTarget "BilanCO2" */;
+			buildConfigurationList = B54DCFA428C5134E00FBBAE3 /* Build configuration list for PBXNativeTarget "Bilan CO2 camp scout" */;
 			buildPhases = (
 				B54DCF8C28C5134E00FBBAE3 /* Sources */,
 				B54DCF8D28C5134E00FBBAE3 /* Frameworks */,
@@ -114,9 +114,9 @@
 			);
 			dependencies = (
 			);
-			name = BilanCO2;
+			name = "Bilan CO2 camp scout";
 			productName = BilanCO2;
-			productReference = B54DCF9028C5134E00FBBAE3 /* BilanCO2.app */;
+			productReference = B54DCF9028C5134E00FBBAE3 /* Bilan CO2 camp scout.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -134,7 +134,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "BilanCO2" */;
+			buildConfigurationList = B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan CO2 camp scout" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -147,7 +147,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B54DCF8F28C5134E00FBBAE3 /* BilanCO2 */,
+				B54DCF8F28C5134E00FBBAE3 /* Bilan CO2 camp scout */,
 			);
 		};
 /* End PBXProject section */
@@ -333,6 +333,7 @@
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -370,6 +371,7 @@
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -399,7 +401,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "BilanCO2" */ = {
+		B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan CO2 camp scout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B54DCFA228C5134E00FBBAE3 /* Debug */,
@@ -408,7 +410,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B54DCFA428C5134E00FBBAE3 /* Build configuration list for PBXNativeTarget "BilanCO2" */ = {
+		B54DCFA428C5134E00FBBAE3 /* Build configuration list for PBXNativeTarget "Bilan CO2 camp scout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B54DCFA528C5134E00FBBAE3 /* Debug */,
