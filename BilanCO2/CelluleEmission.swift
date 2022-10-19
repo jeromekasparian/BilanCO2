@@ -36,6 +36,7 @@ class CelluleEmission: UITableViewCell {
     @IBOutlet var contrainteAffichageValeurDroiteLarge: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageValeurDroiteEtroit: NSLayoutConstraint!
 
+//    var largeurCellule: LargeurCellule = .inconnu
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,8 +73,11 @@ class CelluleEmission: UITableViewCell {
     }
 
     func choisitContraintes() {
-        let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge
-//        DispatchQueue.main.async {
+//        let nouvelleLargeur: LargeurCellule = self.frame.width >= largeurMiniTableViewEcranLarge ? .large : .etroit
+//        if nouvelleLargeur != largeurCellule {
+//            largeurCellule = nouvelleLargeur
+            let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge //nouvelleLargeur == .large
+            //        DispatchQueue.main.async {
             self.contrainteGlissiereGaucheEtroit.isActive = !estLarge
             self.contrainteGlissiereGaucheLarge.isActive = estLarge
             self.contrainteGlissiereHautLarge.isActive = estLarge
@@ -81,18 +85,21 @@ class CelluleEmission: UITableViewCell {
             self.contrainteNomEmissionVerticaleLarge.isActive = estLarge
             self.contrainteNomEmissionDroiteEtroit.isActive = !estLarge
             self.contrainteNomEmissionHautEtroit.isActive = !estLarge
-        self.contrainteBoutonInfoVerticaleLarge.isActive = estLarge
-        self.contrainteBoutonInfoVerticaleEtroit.isActive = !estLarge
-        self.contrainteAffichageValeurDroiteLarge.isActive = estLarge
-        self.contrainteAffichageValeurDroiteEtroit.isActive = !estLarge
+            self.contrainteBoutonInfoVerticaleLarge.isActive = estLarge
+            self.contrainteBoutonInfoVerticaleEtroit.isActive = !estLarge
+            self.contrainteAffichageValeurDroiteLarge.isActive = estLarge
+            self.contrainteAffichageValeurDroiteEtroit.isActive = !estLarge
             self.labelNom.numberOfLines = estLarge ? 2 : 1
+            //        }
+            print("largeur", self.frame.width, "Cellule large", estLarge)
 //        }
-//print("largeur", self.frame.width, "Cellule large", estLarge)
     }
     
     func texteEmissionsLigne(typeEmission: TypeEmission) -> (String, UIColor) {
-        if typeEmission.emission == 0 || emissionsCalculees.isNaN {
+        if typeEmission.facteurEmission == 0 {
             return ("", .black)
+        } else if typeEmission.emission == 0 || emissionsCalculees.isNaN {
+            return (" ", .black)
         } else {
             let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
             let texte = String(format: "%.0f kg eq. CO₂ (%.0f%%)", typeEmission.emission, pourcentage)

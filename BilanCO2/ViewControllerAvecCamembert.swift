@@ -27,6 +27,8 @@ class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var contrainteCamembertCentreHPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
 
+    var orientationResultats: Orientation = .inconnu
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         boutonAideGraphique.setTitle("", for: .normal)
@@ -37,21 +39,27 @@ class ViewControllerAvecCamembert: UIViewController {
 //            affichageEmissions.backgroundColor = .white.withAlphaComponent(0.3)
 //        }
     }
-    func choisitContraintes(size: CGSize){
-        let estModePortrait = size.width <= size.height
-        print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
-        self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
-        self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
-        self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
-        self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
-        self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
-
-        self.contrainteCamembertHautPaysage.isActive = !estModePortrait
-        self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
-        self.contrainteCamembertGauchePortrait.isActive = estModePortrait
-        self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
-        self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
-        self.affichageEmissions.textAlignment = estModePortrait ? .center : .left
+    func choisitContraintes(size: CGSize) -> Bool {
+        let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
+        if nouvelleOrientation != orientationResultats {
+            orientationResultats = nouvelleOrientation
+            let estModePortrait = nouvelleOrientation == .portrait
+            print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
+            self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
+            self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
+            self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
+            self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
+            self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
+            
+            self.contrainteCamembertHautPaysage.isActive = !estModePortrait
+            self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
+            self.contrainteCamembertGauchePortrait.isActive = estModePortrait
+            self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
+            self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
+            self.affichageEmissions.textAlignment = estModePortrait ? .center : .left
+            return true
+        }
+        else {return false}
     }
     
     private func getGraphStartAndEndPointsInRadians(debut: CGFloat, etendue: CGFloat) -> (graphStartingPoint: CGFloat, graphEndingPoint: CGFloat) {

@@ -9,14 +9,14 @@
 // AFFICHAGE / mise en page
 // - fonction d'export
 //      - réseaux sociaux (regarde mon camp sobre - toi aussi utilise l'app) : comment différencier les deux exports ?
-//      - messages d'erreur extension pdf
-//      - message d'erreur "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error."
+//      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error."
 //      - message d'erreur fermeture du dialogue d'export
 // - nom de l'app
 // - formulation du texte concernant les émissions soutenables
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - mode paysage au lieu de portrait pour le camembert et le texte associé
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
+//      - ajuster la taille du texte à l'espace disponible
 
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
@@ -80,6 +80,18 @@ var lesEmissions: [TypeEmission] = []
 let emissionsSoutenablesAnnuelles: Double = 2500.0 // t eq. C02 / an / personne
 var afficherPictos: Bool = true
 
+enum Orientation {
+    case inconnu
+    case portrait
+    case paysage
+}
+
+//enum LargeurCellule {
+//    case inconnu
+//    case large
+//    case etroit
+//}
+
 class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
     
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
@@ -91,6 +103,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     let cellReuseIdentifierCredits = "CelluleCredits"
     var ligneEnCours: Int = -1
     var celluleEnCours: CelluleEmission! = nil
+    var orientationGlobale: Orientation = .inconnu
+//    var largeurCellule: LargeurCellule = .inconnu
 
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
@@ -139,7 +153,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 
         DispatchQueue.main.async {
             self.actualiseAffichageEmissions(grandFormat: false)
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
 
             self.tableViewEmissions.reloadData()
         }
@@ -147,8 +160,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        choisitContraintes(size: self.view.frame.size)
-        
+        redessineResultats(size: self.view.frame.size)
     }
     
     @objc func changeModePictos() {
@@ -185,6 +197,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
+        print("Cell for row at index path \(indexPath)")
         if indexPath.section < lesSections.count - 1 {  // les vraies données
             let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)] //  lesEmissions.filter({$0.categorie == lesSections[indexPath.section]})[indexPath.row]
             let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
@@ -317,7 +330,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //        }})
             celluleEnCours = cell
             ligneEnCours = numeroDeLigne(indexPath: indexPath)
-            print("ligne \(ligneEnCours)")
+            print("Cellule en cours \(celluleEnCours), ligne \(ligneEnCours)")
         }
     }
     
@@ -336,9 +349,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 let cellule = self.celluleEnCours
             
             let emission = lesEmissions[ligne]
-            if emission.valeurEntiere {
-                cellule!.glissiere.value = round(cellule!.glissiere.value)
-            }
+//            if emission.valeurEntiere {
+//                cellule!.glissiere.value = round(cellule!.glissiere.value)
+//            }
             if emission.echelleLog {
                 if cellule!.glissiere.value == cellule!.glissiere.minimumValue {
                     lesEmissions[ligne].valeur = 0.0
@@ -347,8 +360,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 }
             } else {
                 lesEmissions[ligne].valeur = Double(cellule!.glissiere.value)
+                if emission.valeurEntiere {
+                    lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
+                }
             }
-                cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
+            cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
             switch ligne {
             case SorteEmission.duree.rawValue:
                 self.actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
@@ -431,11 +447,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
         
-    override func choisitContraintes(size: CGSize){
-        let estModePortrait = size.width <= size.height
-//        DispatchQueue.main.async {
-        super.choisitContraintes(size: self.vueResultats.frame.size)
-
+    override func choisitContraintes(size: CGSize) -> Bool {
+        let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
+        var change = false
+        if nouvelleOrientation != orientationGlobale {
+            let estModePortrait = nouvelleOrientation == .portrait
+            orientationGlobale = nouvelleOrientation
+            //        DispatchQueue.main.async {
+            
             self.contrainteTableViewHautPortrait.isActive = estModePortrait
             self.contrainteTableViewDroitePortrait.isActive = estModePortrait
             self.contrainteVueResultatsGauchePortrait.isActive = estModePortrait
@@ -444,8 +463,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             self.contrainteTableViewDroitePaysage.isActive = !estModePortrait
             self.contrainteVueResultatsBasPaysage.isActive = !estModePortrait
             self.contrainteVueResultatGauchePaysage.isActive = !estModePortrait
-//        vueResultats.updateConstraints()
-//        }
+            change = true
+            //        }
+        }
+        let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
+        return change || change2
     }
 
     
@@ -462,25 +484,28 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 
     }
 
-    
+    func redessineResultats(size: CGSize) {
+        DispatchQueue.main.async {
+            let delai = self.choisitContraintes(size: size) ? 0.05 : 0.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
+                self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+            }
+        }
+        if celluleEnCours == nil { // pour ne pa
+            tableViewEmissions.reloadData()
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let size = self.view.frame.size
-        DispatchQueue.main.async {
-            self.choisitContraintes(size: size)
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
-        }
-        tableViewEmissions.reloadData()
+        redessineResultats(size: size)
     }
 
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        DispatchQueue.main.async {
-            self.choisitContraintes(size: self.view.frame.size)
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
-        }
-        tableViewEmissions.reloadData()
+        super.viewWillTransition(to: size, with: coordinator)
+        redessineResultats(size: size)
     }
     
 
