@@ -186,6 +186,8 @@ class ViewControllerAvecCamembert: UIViewController {
                     let texte = UILabel(frame: CGRect(x: positionX, y: positionY, width: largeurLabel, height: hauteurLabel))
                     texte.numberOfLines = 1
                     texte.textAlignment = .center
+                    texte.minimumScaleFactor = 0.5
+                    texte.lineBreakMode = .byTruncatingTail
                     if afficherPictos && !emission.picto.isEmpty {
                         texte.font = .systemFont(ofSize: hauteurLabel)
                         texte.text = emission.picto
