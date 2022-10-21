@@ -8,16 +8,11 @@
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
 // - fonction d'export
-//      - réseaux sociaux (regarde mon camp sobre - toi aussi utilise l'app) : comment différencier les deux exports ?
-//      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error."
-//      - message d'erreur fermeture du dialogue d'export
-// - nom de l'app
+//      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
+// - nom de l'app -> vérifier après upload
 // - formulation du texte concernant les émissions soutenables
 // - problèmes positionnement : séquence contraintes / dessin camembert
-//      - mode paysage au lieu de portrait pour le camembert et le texte associé
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
-//      - ajuster la taille du texte de résultats / émissions à l'espace disponible
-// - mise à jour cf warnings GrandCamembert / test nouvelle forme
 
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
@@ -27,11 +22,9 @@
 // INTERFACE
 // - le tableView passe sous le premier titre en haut (Mac en mode iPad seulement -- ok sur iphone/ipad et sur mac Catalyst)
 // - Localisation, y compris les noms de types d'émission
-// - éviter les superposition de textes dans le camembert
+// - export pdf : vectoriel plutôt que bitmap
 
 // *** A décider ***
-// sliders : largeur fixe ?
-// - Dégradé de couleur interne à chaque section ??
 // - supprimer le launcscreen ?
 // - aspect du Grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
 
@@ -153,7 +146,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         self.view.addGestureRecognizer(swipePictos)
 
         DispatchQueue.main.async {
-            self.actualiseAffichageEmissions(grandFormat: false)
+//            self.actualiseAffichageEmissions(grandFormat: false)
 
             self.tableViewEmissions.reloadData()
         }
@@ -198,7 +191,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
-        print("Cell for row at index path \(indexPath)")
+//        print("Cell for row at index path \(indexPath)")
         if indexPath.section < lesSections.count - 1 {  // les vraies données
             let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)] //  lesEmissions.filter({$0.categorie == lesSections[indexPath.section]})[indexPath.row]
             let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
@@ -490,6 +483,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let delai = self.choisitContraintes(size: size) ? 0.05 : 0.0
             DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
                 self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+                self.actualiseAffichageEmissions(grandFormat: false)
             }
         }
         if celluleEnCours == nil { // pour ne pa

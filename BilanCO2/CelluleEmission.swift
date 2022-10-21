@@ -91,7 +91,7 @@ class CelluleEmission: UITableViewCell {
             self.contrainteAffichageValeurDroiteEtroit.isActive = !estLarge
             self.labelNom.numberOfLines = estLarge ? 2 : 1
             //        }
-            print("largeur", self.frame.width, "Cellule large", estLarge)
+//            print("largeur", self.frame.width, "Cellule large", estLarge)
 //        }
     }
     
@@ -99,7 +99,7 @@ class CelluleEmission: UITableViewCell {
         if typeEmission.facteurEmission == 0 {
             return ("", .black)
         } else if typeEmission.emission == 0 || emissionsCalculees.isNaN {
-            return (" ", .black)
+            return ("", .black)
         } else {
             let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
             let texte = String(format: "%.0f kg eq. CO₂ (%.0f%%)", typeEmission.emission, pourcentage)

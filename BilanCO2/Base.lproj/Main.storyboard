@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BilanCO2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bilan_CO2_camp_scout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +20,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MyB-cA-vRv">
                                 <rect key="frame" x="0.0" y="160" width="320" height="408"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleEmission" rowHeight="85" id="EFk-PJ-bem" customClass="CelluleEmission" customModule="BilanCO2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleEmission" rowHeight="85" id="EFk-PJ-bem" customClass="CelluleEmission" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EFk-PJ-bem" id="aB8-26-4VT">
@@ -28,19 +28,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSL-Qj-3io">
-                                                    <rect key="frame" x="16" y="18" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="21" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0 km" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="45" translatesAutoresizingMaskIntoConstraints="NO" id="Heu-Mu-uuU">
-                                                    <rect key="frame" x="223.5" y="18.5" width="42.5" height="20"/>
+                                                    <rect key="frame" x="223.5" y="21.5" width="42.5" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-Xe-MK0">
-                                                    <rect key="frame" x="63.5" y="8" width="154" height="41.5"/>
+                                                    <rect key="frame" x="63.5" y="8" width="154" height="47.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="7df-Jh-f3B"/>
                                                     </constraints>
@@ -59,7 +59,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0p-cy-e8j">
-                                                    <rect key="frame" x="274" y="13.5" width="30" height="30"/>
+                                                    <rect key="frame" x="274" y="16.5" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="Sr0-Rv-UZD"/>
                                                         <constraint firstAttribute="height" constant="30" id="p5D-K2-wjM"/>
@@ -72,7 +72,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Xo8-2T-5Q7" firstAttribute="top" secondItem="vr9-Xe-MK0" secondAttribute="bottom" constant="8" id="0TE-t3-TTE"/>
+                                                <constraint firstItem="Xo8-2T-5Q7" firstAttribute="top" secondItem="vr9-Xe-MK0" secondAttribute="bottom" constant="2" id="0TE-t3-TTE"/>
                                                 <constraint firstItem="dSL-Qj-3io" firstAttribute="leading" secondItem="aB8-26-4VT" secondAttribute="leadingMargin" id="66D-U9-GiX"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Heu-Mu-uuU" secondAttribute="trailing" id="ABx-r3-gpx"/>
                                                 <constraint firstItem="e0p-cy-e8j" firstAttribute="trailing" secondItem="aB8-26-4VT" secondAttribute="trailingMargin" id="AEb-I9-oAj"/>
@@ -122,7 +122,7 @@
                                             <outlet property="labelValeur" destination="Heu-Mu-uuU" id="4Jv-O1-E8X"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleCredits" id="rYD-LR-4Zd" customClass="CelluleCredits" customModule="BilanCO2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleCredits" id="rYD-LR-4Zd" customClass="CelluleCredits" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="135" width="320" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rYD-LR-4Zd" id="oy6-Wm-3j9">
@@ -225,8 +225,8 @@
                                             <constraint firstAttribute="width" constant="20" id="quH-hp-iLr"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-uP-kb1">
-                                        <rect key="frame" x="160" y="0.0" width="160" height="140"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-uP-kb1">
+                                        <rect key="frame" x="160" y="0.0" width="152" height="140"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="2BJ-4x-dh9"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="ly2-uP-kb1" secondAttribute="height" id="42A-gW-PK4"/>
@@ -299,7 +299,7 @@
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="centerX" secondItem="GlJ-TS-m2D" secondAttribute="centerX" id="Bbk-W0-p4M"/>
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="leading" secondItem="GlJ-TS-m2D" secondAttribute="leading" priority="999" id="Dlz-ba-peA"/>
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="centerY" secondItem="GlJ-TS-m2D" secondAttribute="centerY" id="EYq-LV-Zud"/>
-                                    <constraint firstItem="ly2-uP-kb1" firstAttribute="trailing" secondItem="GlJ-TS-m2D" secondAttribute="trailing" id="Ei4-ZZ-A7A"/>
+                                    <constraint firstItem="ly2-uP-kb1" firstAttribute="trailing" secondItem="GlJ-TS-m2D" secondAttribute="trailing" constant="-8" id="Ei4-ZZ-A7A"/>
                                     <constraint firstItem="GAh-Wf-1Mz" firstAttribute="top" secondItem="GlJ-TS-m2D" secondAttribute="top" constant="8" id="H3S-mt-KYG"/>
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GlJ-TS-m2D" secondAttribute="top" id="HJK-Tb-kIK"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="faL-l2-rgA" secondAttribute="bottom" id="HrK-b6-YD8"/>
@@ -307,7 +307,7 @@
                                     <constraint firstAttribute="trailing" secondItem="fLu-d3-J00" secondAttribute="trailing" constant="8" id="Pbf-Gz-wAC"/>
                                     <constraint firstItem="KaZ-LP-cnI" firstAttribute="leading" secondItem="faL-l2-rgA" secondAttribute="leading" id="RZV-dV-GLC"/>
                                     <constraint firstAttribute="trailing" secondItem="vOa-Ps-mF3" secondAttribute="trailing" id="TwG-Jh-SuJ"/>
-                                    <constraint firstAttribute="leading" secondItem="ly2-uP-kb1" secondAttribute="leading" id="UqC-gU-E71"/>
+                                    <constraint firstAttribute="leading" secondItem="ly2-uP-kb1" secondAttribute="leading" constant="-8" id="UqC-gU-E71"/>
                                     <constraint firstItem="KaZ-LP-cnI" firstAttribute="top" secondItem="faL-l2-rgA" secondAttribute="top" id="VBR-5e-RZe"/>
                                     <constraint firstItem="faL-l2-rgA" firstAttribute="top" secondItem="ly2-uP-kb1" secondAttribute="bottom" id="X2L-C9-QBv"/>
                                     <constraint firstAttribute="centerX" secondItem="ly2-uP-kb1" secondAttribute="leading" id="ZpJ-rZ-asI"/>
@@ -393,7 +393,7 @@
         <!--View Controller Credits-->
         <scene sceneID="agj-ND-jkK">
             <objects>
-                <viewController id="tCZ-zV-FYG" customClass="ViewControllerCredits" customModule="BilanCO2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tCZ-zV-FYG" customClass="ViewControllerCredits" customModule="Bilan_CO2_camp_scout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l0n-Tn-BwQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -457,13 +457,13 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">L'estimation des estimations de gaz à effet de serres, converties en équivalent CO₂, se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
+                                        <mutableString key="content">L'estimation des estimations de gaz à effet de serres, converties en équivalent CO₂, se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
 • Repas : le calcul se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend pas en compte les saisons, la distance des producteurs, le nombre d'intermédiaire, etc.
 • Cuisson : il s'agit d'une estimation basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz en fin de cuisson. Les repas qui ne sont pas cuisinés au gaz sont supposés cuits au feu de bois, avec un impact carbone nul. On considère en effet que dans une forêt gérée durablement, les arbres repoussent et stockent du carbone au même rythme qu'on en libère par la combustion du bois. À noter que ce raisonnement n'est valable qu'à long terme (30 ans). À court terme la combustion du bois dégage du CO₂.
 • Transports et déplacements : les calculs supposent une taille "moyenne" pour les véhicules concernés.
 • Hébergement : le calcul prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de la composition typique des tentes de patrouille et marabouts de 12 m. Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
 • Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions vient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
@@ -481,7 +481,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">Émissions soutenables
+                                        <string key="content">Émissions acceptables pour préserver le climat
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -490,8 +490,8 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">On estime que la préservation du climat nécessite de limiter les émissions de gaz à effet de serre à 2,5 tonnes équivalent CO₂ par personne et par an. Les émissions du camp sont comparées à cette référence, ramenée au nombre de participants et à la durée du camp.
-</string>
+                                        <mutableString key="content">On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2,5 tonnes équivalent CO₂ par personne et par an. Les émissions du camp sont comparées à cette référence, ramenée au nombre de participants et à la durée du camp.
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -536,7 +536,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
+                                        <mutableString key="content">L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
 Elle ne prend notamment pas en compte
 • les activités scoutes à l'année
 • les émissions liées au matériel individuel des participants
@@ -544,7 +544,7 @@ Elle ne prend notamment pas en compte
 • les émissions des participants qui ne sont pas liées au camp mais qui se poursuivent pendant celui-ci : leur domicile notamment.
 Pour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.
 
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
@@ -741,7 +741,7 @@ Cg
         <!--Grand Camembert-->
         <scene sceneID="HGf-iq-Txf">
             <objects>
-                <viewController id="Qtj-FK-WVl" customClass="GrandCamembert" customModule="BilanCO2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qtj-FK-WVl" customClass="GrandCamembert" customModule="Bilan_CO2_camp_scout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mu0-fX-Foy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
