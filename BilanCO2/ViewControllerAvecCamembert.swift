@@ -87,10 +87,20 @@ class ViewControllerAvecCamembert: UIViewController {
     
     func dessineCamembert(camembert: UIView, grandFormat: Bool) {
         // effacer le camembert existant
-        camembert.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
+//        print("sublayers", camembert.layer.sublayers)
+        if camembert.layer.sublayers == nil {
+            print("sublayers nil")
+        } else {
+//            print ("nombre de sous couches", camembert.layer.sublayers?.count)
+            //        if (camembert.layer.sublayers?.isEmpty ?? true) {
+            camembert.layer.sublayers?.forEach({
+//                print("layer", $0)
+                $0.removeFromSuperlayer()
+            })
+        }
         var debut: CGFloat = 0.0
         let referenceRayon = max(emissionsCalculees, emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur)
-        //        print(emissionsCalculees, emissionsSoutenables, emissionsCalculees / referenceRayon)
+//                print(emissionsCalculees, emissionsSoutenables, emissionsCalculees / referenceRayon)
         var camembertVide: Bool = true
         let rayon = min(camembert.frame.width, camembert.frame.height) / 2 * 0.9 * sqrt(emissionsCalculees / referenceRayon)
         let frame = CGRect(x: 0, y: 0, width: camembert.frame.width, height: camembert.frame.height) //camembert.frame //CGRect(x: 50, y: 100, width: 200, height: 200)
@@ -155,7 +165,6 @@ class ViewControllerAvecCamembert: UIViewController {
 //            graphique.color = .green.withAlphaComponent(0.8)
 //            graphique.draw(frame) //, debut: 0, etendue: 0.9)
 //            camembert.addSubview(graphique)
-        }
         
         // écrire la légende des éléments principaux dans le camembert
         let emissionsClassees = lesEmissions.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
@@ -190,7 +199,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 debut = debut + intervalle
             }
         }
-        
+        }
     }
     
     @IBAction func afficheExplicationsFigure() {
@@ -202,17 +211,12 @@ class ViewControllerAvecCamembert: UIViewController {
 
     
     @objc func actualiseAffichageEmissions(grandFormat: Bool) {
-        //        print("affichage")
         DispatchQueue.main.async{
-            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions, grandFormat: grandFormat)
-//            let (texte, couleur) = self.texteEmissions(typesEmissions: lesEmissions)
-//            self.affichageEmissions.text = texte
-//            self.affichageEmissions.textColor = couleur
+            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions, grandFormat: grandFormat)  //  NSAttributedString(string:"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre")
         }
     }
 
     func texteEmissions(typesEmissions: [TypeEmission], grandFormat: Bool) -> NSAttributedString { //}(String, UIColor) {
-        emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
 //        print("espace dispo pour texte largeur hauteur ", affichageEmissions.frame.width, affichageEmissions.frame.height, "camembert l h", camembert.frame.width, camembert.frame.height)
 //        let facteurTailleTexte = sqrt(pow(affichageEmissions.frame.width, 2.0) + pow(affichageEmissions.frame.height, 2.0)) / 200.0
 
@@ -221,7 +225,7 @@ class ViewControllerAvecCamembert: UIViewController {
         let texte = NSMutableAttributedString(string: "")
         if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 {
             if !boutonExport.isEnabled {boutonExport.isEnabled = true}
-            let tailleTextePrincipal: CGFloat =  3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0  //grandFormat ? 3 : 2
+            let tailleTextePrincipal: CGFloat =  max(0.5, 3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0)  //grandFormat ? 3 : 2
             let tailleTexteSecondaire = 0.75 * tailleTextePrincipal
             let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
 
@@ -268,7 +272,9 @@ class ViewControllerAvecCamembert: UIViewController {
 //                couleur = rougeVif
 //            }
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
-            return NSAttributedString(attributedString: texte) // NSAttributedString(string: "TOTO") //
+//            print(texte.string)
+            return NSAttributedString(attributedString: texte) //
+//            return NSAttributedString(string: "TOTO") //
         } else {
             if boutonExport.isEnabled {boutonExport.isEnabled = false}
             return NSAttributedString(string:"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", attributes: [NSAttributedString.Key.foregroundColor: couleur])
@@ -301,7 +307,7 @@ class ViewControllerAvecCamembert: UIViewController {
         #if targetEnvironment(macCatalyst)
         //"Don't do this !!"
         #else
-        activityViewController.setValue("BC de mon camp", forKey: "subject")
+        activityViewController.setValue("Impact climat de mon camp", forKey: "subject")
         #endif
         activityViewController.completionWithItemsHandler = {
             (activity, success, items, error) in

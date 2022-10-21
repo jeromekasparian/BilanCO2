@@ -98,7 +98,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     var ligneEnCours: Int = -1
     var celluleEnCours: CelluleEmission! = nil
     var orientationGlobale: Orientation = .inconnu
-//    var largeurCellule: LargeurCellule = .inconnu
+    //    var largeurCellule: LargeurCellule = .inconnu
+//    var timeStampDernierRedessin = Date()
 
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
@@ -128,26 +129,26 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         tableViewEmissions.dataSource = self
         actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-//        if #available(iOS 13.0, *) {
-//            affichageEmissions.backgroundColor = .systemBackground.withAlphaComponent(0.2)
-//        } else {
-//            affichageEmissions.backgroundColor = .white.withAlphaComponent(0.2)
-//        }
-
+        //        if #available(iOS 13.0, *) {
+        //            affichageEmissions.backgroundColor = .systemBackground.withAlphaComponent(0.2)
+        //        } else {
+        //            affichageEmissions.backgroundColor = .white.withAlphaComponent(0.2)
+        //        }
+        
         boutonOuvrirGrandCamembert.setTitle("", for: .normal)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         if #available(iOS 15.0, *) {
-          tableViewEmissions.sectionHeaderTopPadding = 0
+            tableViewEmissions.sectionHeaderTopPadding = 0
         }
         // mise en place de la détection du swipe left à 3 doigts pour activer le mode debug
         let swipePictos = UISwipeGestureRecognizer(target:self, action: #selector(changeModePictos))
         swipePictos.direction = UISwipeGestureRecognizer.Direction.left
         swipePictos.numberOfTouchesRequired = 3
         self.view.addGestureRecognizer(swipePictos)
-
+        
         DispatchQueue.main.async {
-//            self.actualiseAffichageEmissions(grandFormat: false)
-
+            //            self.actualiseAffichageEmissions(grandFormat: false)
+            
             self.tableViewEmissions.reloadData()
         }
     }  // viewDidLoad
@@ -169,9 +170,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         return lesSections.count
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return lesSections[section]
-//    }
+    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    //        return lesSections[section]
+    //    }
     
     
     //// gestion des tableView
@@ -191,7 +192,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
-//        print("Cell for row at index path \(indexPath)")
+        //        print("Cell for row at index path \(indexPath)")
         if indexPath.section < lesSections.count - 1 {  // les vraies données
             let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)] //  lesEmissions.filter({$0.categorie == lesSections[indexPath.section]})[indexPath.row]
             let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
@@ -209,7 +210,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
                 cell.glissiere.value = log(Float(emission.valeur))
             } else {
-                cell.glissiere.minimumValue = Float(0.0)
+                cell.glissiere.minimumValue = emission.facteurEmission == 0 ? Float(1.0) : Float(0.0)
                 cell.glissiere.maximumValue = Float(emission.valeurMax)
                 cell.glissiere.value = Float(emission.valeur)
             }
@@ -219,7 +220,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             //            let (texte, couleur) = texteEmissionsLigne(typeEmission: emission)
             //            cell.labelEmissionIndividuelle.text = texte
             //            cell.labelEmissionIndividuelle.textColor = couleur
-            cell.boutonInfo.isEnabled = !emission.conseil.isEmpty
+            cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF6[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
             return cell
@@ -244,14 +245,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == lesSections.count - 1 {
-//            return 150
-//        } else {
-//            return UITableView.automaticDimension
-//        }
-//    }
-
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        if indexPath.section == lesSections.count - 1 {
+    //            return 150
+    //        } else {
+    //            return UITableView.automaticDimension
+    //        }
+    //    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var titreSection = lesSections[section]
         let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
@@ -263,7 +264,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let margeHorizontale = CGFloat(20.0)
         let hauteurLabel = CGFloat(24.0)
         let headerView = UIView() //frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: hauteurLabel + 2 * margeVerticale))
-//        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
+        //        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
         headerView.backgroundColor = couleursEEUdF6[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
         
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
@@ -271,43 +272,47 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //            headerLabel.textColor = UIColor.white
         headerLabel.text = titreSection // self.tableView(self.tableView, titleForHeaderInSection: section)
         headerLabel.numberOfLines = 1
-//        headerLabel.backgroundColor = .blue
+        //        headerLabel.backgroundColor = .blue
         headerLabel.adjustsFontSizeToFitWidth = true
-//        headerLabel.sizeToFit()
+        //        headerLabel.sizeToFit()
         headerView.addSubview(headerLabel)
-//        headerView.sizeToFit()
+        //        headerView.sizeToFit()
         return headerView
     }
     
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let headerHeight: CGFloat = 48
-        if #available(iOS 11.0, *) {
-            tableView.estimatedSectionHeaderHeight = headerHeight
-            return UITableView.automaticDimension
+        if lesSections[section] == "" {
+            return CGFloat(0.0)
         } else {
-            return headerHeight
+            let headerHeight: CGFloat = 48
+            if #available(iOS 11.0, *) {
+                tableView.estimatedSectionHeaderHeight = headerHeight
+                return UITableView.automaticDimension
+            } else {
+                return headerHeight
+            }
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let height: CGFloat = 48
-//        if #available(iOS 11.0, *) {
-//            tableView.estimatedSectionHeaderHeight = height
-//            return UITableView.automaticDimension
-//        } else {
-//            return height
-//        }
-//
-//    }
-
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        let height: CGFloat = 48
+    //        if #available(iOS 11.0, *) {
+    //            tableView.estimatedSectionHeaderHeight = height
+    //            return UITableView.automaticDimension
+    //        } else {
+    //            return height
+    //        }
+    //
+    //    }
+    
     
     func afficheConseil(cell: CelluleEmission){
         var message = ""
         if let indexPathDeLaCellule = tableViewEmissions.indexPath(for: cell) {
-                    message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
-                }
+            message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
+        }
         let alerte = UIAlertController(title: "Un conseil", message: message, preferredStyle: .alert)
         alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
         self.present(alerte, animated: true)
@@ -319,110 +324,101 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 print("erreur index Path")
                 return
             }
-//        tableViewEmissions.indexPathsForVisibleRows?.compactMap({if $0 != indexPath {
-//            tableViewEmissions.cellForRow(at: $0)?.resignFirstResponder()
-//        }})
+            //        tableViewEmissions.indexPathsForVisibleRows?.compactMap({if $0 != indexPath {
+            //            tableViewEmissions.cellForRow(at: $0)?.resignFirstResponder()
+            //        }})
             celluleEnCours = cell
             ligneEnCours = numeroDeLigne(indexPath: indexPath)
-            print("Cellule en cours \(String(describing: celluleEnCours)), ligne \(ligneEnCours)")
+            //            print("Cellule en cours \(String(describing: celluleEnCours)), ligne \(ligneEnCours)")
         }
     }
     
     func glissiereBougee(cell: CelluleEmission) {
-
-//        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
-//            print("erreur index Path")
-//            return
-//        }
-//        let ligne = numeroDeLigne(indexPath: indexPath)
-//        print("ligne \(ligne)")
+        
+        //        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
+        //            print("erreur index Path")
+        //            return
+        //        }
+        //        let ligne = numeroDeLigne(indexPath: indexPath)
+        //        print("ligne \(ligne)")
         if ligneEnCours >= 0 && celluleEnCours != nil {
             DispatchQueue.main.async{
-
                 let ligne = self.ligneEnCours
                 let cellule = self.celluleEnCours
-            
-            let emission = lesEmissions[ligne]
-//            if emission.valeurEntiere {
-//                cellule!.glissiere.value = round(cellule!.glissiere.value)
-//            }
-            if emission.echelleLog {
-                if cellule!.glissiere.value == cellule!.glissiere.minimumValue {
-                    lesEmissions[ligne].valeur = 0.0
+                let emission = lesEmissions[ligne]
+                if emission.echelleLog {
+                    if cellule!.glissiere.value == cellule!.glissiere.minimumValue {
+                        lesEmissions[ligne].valeur = 0.0
+                    } else {
+                        lesEmissions[ligne].valeur = arrondi(exp(Double(cellule!.glissiere.value)))
+                    }
                 } else {
-                    lesEmissions[ligne].valeur = arrondi(exp(Double(cellule!.glissiere.value)))
-                }
-            } else {
-                lesEmissions[ligne].valeur = Double(cellule!.glissiere.value)
-                if emission.valeurEntiere {
-                    lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
-                }
-            }
-            cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
-            switch ligne {
-            case SorteEmission.duree.rawValue:
-                self.actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
-                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
-                    if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
-                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
-                        lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur
+                    lesEmissions[ligne].valeur = Double(cellule!.glissiere.value)
+                    if emission.valeurEntiere {
+                        lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
                     }
                 }
-            case SorteEmission.repasViandeRouge.rawValue:
-                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
+                cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
+                switch ligne {
+                case SorteEmission.duree.rawValue:
+                    self.actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
+                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                    if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
+                        lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
+                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
+                        if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
+                            lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
+                            lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur
+                        }
+                    }
+                case SorteEmission.repasViandeRouge.rawValue:
+                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                    if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
+                        lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
+                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
+                    }
+                case SorteEmission.repasViandeBlanche.rawValue:
+                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                    if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
+                        lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
+                        lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
+                    }
+                case SorteEmission.repasVegetarien.rawValue:
+                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
+                    if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
+                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
+                        lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
+                    }
+                case SorteEmission.effectif.rawValue:
+                    self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+                default:
+                    print("rien")
                 }
-            case SorteEmission.repasViandeBlanche.rawValue:
-                lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                    lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                }
-            case SorteEmission.repasVegetarien.rawValue:
-                lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
-                if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
-                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
-                    lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
-                }
-            case SorteEmission.effectif.rawValue:
-                self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-            default:
-                print("rien")
-            }
-            emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
-
+                emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
                 cellule!.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
-                //            let (texte, couleur) = texteEmissionsLigne(typeEmission: lesEmissions[ligne])
-                //            cell.labelEmissionIndividuelle.text = texte
-                //            cell.labelEmissionIndividuelle.textColor = couleur
-                self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+//                if abs(self.timeStampDernierRedessin.timeIntervalSinceNow) > 1.0 {
                 self.actualiseAffichageEmissions(grandFormat: false)
-//                self.tableViewEmissions.reloadData()
-            }
+                    self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+//                    self.timeStampDernierRedessin = Date()
+//                }
+            }  // DispatchQueue.main.async
+        } // if ligneEnCours >= 0 && celluleEnCours != nil
+    }
+        
+    func finMouvementGlissiere(cell: CelluleEmission) {
+        glissiereBougee(cell: cell)
+        let lesValeurs = lesEmissions.map({$0.valeur})
+        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+        DispatchQueue.main.async{
+            self.tableViewEmissions.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.ligneEnCours = -1
+            self.celluleEnCours = nil
         }
     }
     
-    func finMouvementGlissiere(cell: CelluleEmission) {
-        glissiereBougee(cell: cell)
-            let lesValeurs = lesEmissions.map({$0.valeur})
-            userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
-            DispatchQueue.main.async{
-                //            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
-//                self.actualiseAffichageEmissions(grandFormat: false)
-                self.tableViewEmissions.reloadData()
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.ligneEnCours = -1
-                self.celluleEnCours = nil
-            }
-    }
     
-
     func actualiseValeursMaxEffectif(valeurMax: Double) {
         for i in 0...lesEmissions.count-1 {
             if lesEmissions[i].valeurMaxSelonEffectif > 0 {
@@ -440,7 +436,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
         }
     }
-        
+    
     override func choisitContraintes(size: CGSize) -> Bool {
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
         var change = false
@@ -463,7 +459,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
         return change || change2
     }
-
+    
     
     func ouvrirWebEEUdF() {
         print("web")
@@ -475,15 +471,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 // Fallback on earlier versions
             }
         }
-
+        
     }
-
+    
     func redessineResultats(size: CGSize) {
         DispatchQueue.main.async {
             let delai = self.choisitContraintes(size: size) ? 0.05 : 0.0
             DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
-                self.dessineCamembert(camembert: self.camembert, grandFormat: false)
                 self.actualiseAffichageEmissions(grandFormat: false)
+                self.dessineCamembert(camembert: self.camembert, grandFormat: false)
             }
         }
         if celluleEnCours == nil { // pour ne pa
@@ -496,14 +492,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let size = self.view.frame.size
         redessineResultats(size: size)
     }
-
+    
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         redessineResultats(size: size)
     }
     
-
+    
     
 }
 

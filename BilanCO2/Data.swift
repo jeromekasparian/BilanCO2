@@ -94,6 +94,7 @@ class TypeEmission {
 }
 
 func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
+    emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
     var total: Double = 0.0    
     for typeEmission in typesEmissions {
         if typeEmission.facteurEmission > 0 {

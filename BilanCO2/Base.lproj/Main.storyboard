@@ -136,7 +136,7 @@
                                                         <constraint firstAttribute="width" constant="85" id="yGk-IT-OvA"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2002 Jérôme Kasparian, EEUdF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m5u-95-qHn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2022 Jérôme Kasparian, EEUdF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m5u-95-qHn">
                                                     <rect key="frame" x="113.5" y="92.5" width="190.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -457,13 +457,13 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">L'estimation des estimations de gaz à effet de serres, converties en équivalent CO₂, se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
+                                        <string key="content">L'estimation des estimations de gaz à effet de serres, converties en équivalent CO₂, se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
 • Repas : le calcul se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend pas en compte les saisons, la distance des producteurs, le nombre d'intermédiaire, etc.
 • Cuisson : il s'agit d'une estimation basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz en fin de cuisson. Les repas qui ne sont pas cuisinés au gaz sont supposés cuits au feu de bois, avec un impact carbone nul. On considère en effet que dans une forêt gérée durablement, les arbres repoussent et stockent du carbone au même rythme qu'on en libère par la combustion du bois. À noter que ce raisonnement n'est valable qu'à long terme (30 ans). À court terme la combustion du bois dégage du CO₂.
 • Transports et déplacements : les calculs supposent une taille "moyenne" pour les véhicules concernés.
 • Hébergement : le calcul prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de la composition typique des tentes de patrouille et marabouts de 12 m. Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
 • Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions vient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
@@ -490,8 +490,8 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2,5 tonnes équivalent CO₂ par personne et par an. Les émissions du camp sont comparées à cette référence, ramenée au nombre de participants et à la durée du camp.
-</mutableString>
+                                        <string key="content">On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2,5 tonnes équivalent CO₂ par personne et par an. Les émissions du camp sont comparées à cette référence, ramenée au nombre de participants et à la durée du camp.
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -536,7 +536,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
+                                        <string key="content">L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
 Elle ne prend notamment pas en compte
 • les activités scoutes à l'année
 • les émissions liées au matériel individuel des participants
@@ -544,7 +544,7 @@ Elle ne prend notamment pas en compte
 • les émissions des participants qui ne sont pas liées au camp mais qui se poursuivent pendant celui-ci : leur domicile notamment.
 Pour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.
 
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" metaFont="system" size="17"/>
