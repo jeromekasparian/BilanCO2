@@ -9,8 +9,6 @@
 // AFFICHAGE / mise en page
 // - fonction d'export
 //      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
-// - nom de l'app -> vérifier après upload
-// - formulation du texte concernant les émissions soutenables
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
 
@@ -22,7 +20,7 @@
 // INTERFACE
 // - le tableView passe sous le premier titre en haut (Mac en mode iPad seulement -- ok sur iphone/ipad et sur mac Catalyst)
 // - Localisation, y compris les noms de types d'émission
-// - export pdf : vectoriel plutôt que bitmap
+// - export pdf : vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
 // *** A décider ***
 // - supprimer le launcscreen ?
@@ -422,8 +420,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func actualiseValeursMaxEffectif(valeurMax: Double) {
         for i in 0...lesEmissions.count-1 {
             if lesEmissions[i].valeurMaxSelonEffectif > 0 {
+                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax
                 lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxSelonEffectif
-                lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+                if collerAuMax {
+                    lesEmissions[i].valeur = lesEmissions[i].valeurMax
+                } else {
+                    lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+                }
             }
         }
     }
@@ -431,8 +434,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func actualiseValeursMaxRepas(valeurMax: Double) {
         for i in 0...lesEmissions.count-1 {
             if lesEmissions[i].valeurMaxNbRepas > 0 {
+                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax
                 lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxNbRepas
-                lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+                if collerAuMax {
+                    lesEmissions[i].valeur = lesEmissions[i].valeurMax
+                } else {
+                    lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+                }
             }
         }
     }

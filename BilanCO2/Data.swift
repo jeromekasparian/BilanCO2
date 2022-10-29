@@ -126,7 +126,8 @@ func decodeCSV(data: String) -> ([TypeEmission], [String]) {
             let valeurEntiere = (Int(elements[9]) ?? 0) == 1
             let valeurMaxSelonEffectif = Double(elements[10]) ?? 0
             let valeurMaxNbRepas = Double(elements[11]) ?? 0
-            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: 0.0, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12], nomCourt: elements[13], picto: elements[14]))
+            let valeur = facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
+            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12], nomCourt: elements[13], picto: elements[14]))
             if lesSections.isEmpty || lesSections.last != elements[0] {
                 lesSections.append(elements[0])
             }

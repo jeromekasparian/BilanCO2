@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+let texteAfficherExplicationsFigures = "afficheExplicationFigures"
+
 class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var affichageEmissions: UILabel!
 //    @IBOutlet var affichageEmissionsParPersonne: UILabel!
@@ -176,9 +178,9 @@ class ViewControllerAvecCamembert: UIViewController {
             for emission in lesEmissions {
                 let intervalle = emission.emission / emissionsCalculees
                 if emission.emission >= limite && intervalle > pourcentageMini { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
-                    let largeurLabel = rayon / 2.2
+                    let largeurLabel = rayon / 1.8
 //                        let largeurLabel = afficherPictos ? camembert.frame.width / 5 : camembert.frame.width / 3
-                    let hauteurLabel = afficherPictos ? (grandFormat ? largeurLabel * 0.5 : largeurLabel * 0.7) : largeurLabel / 4
+                    let hauteurLabel = afficherPictos ? largeurLabel * 0.5 : largeurLabel / 4
 //                    let hauteurLabel = UIFont.systemFontSize * 1.5
                     let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
                     let positionX = CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5 - largeurLabel) / 2.0
@@ -186,7 +188,7 @@ class ViewControllerAvecCamembert: UIViewController {
                     let texte = UILabel(frame: CGRect(x: positionX, y: positionY, width: largeurLabel, height: hauteurLabel))
                     texte.numberOfLines = 1
                     texte.textAlignment = .center
-                    texte.minimumScaleFactor = 0.5
+                    texte.minimumScaleFactor = 0.2
                     texte.lineBreakMode = .byTruncatingTail
                     if afficherPictos && !emission.picto.isEmpty {
                         texte.font = .systemFont(ofSize: hauteurLabel)
@@ -205,10 +207,12 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     @IBAction func afficheExplicationsFigure() {
-        let message = "Ce graphique représente la répartition des émisssions de gaz à effet de serre dues au camp. Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 6,8 kg équivalent CO₂ par personne et par jour de camp."
-        let alerte = UIAlertController(title: "Pour en savoir plus", message: message, preferredStyle: .alert)
-        alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
-        self.present(alerte, animated: true)
+        ligneExplicationsSelectionnee = 1
+        performSegue(withIdentifier: "Explications", sender: nil)
+//        let message = "Ce graphique représente la répartition des émisssions de gaz à effet de serre dues au camp. Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 6,8 kg équivalent CO₂ par personne et par jour de camp."
+//        let alerte = UIAlertController(title: "Pour en savoir plus", message: message, preferredStyle: .alert)
+//        alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
+//        self.present(alerte, animated: true)
     }
 
     
@@ -245,11 +249,11 @@ class ViewControllerAvecCamembert: UIViewController {
             let dureeEquivalenteSoutenableMois = dureeEquivalenteSoutenableAns * 12
             let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
             if dureeEquivalenteSoutenableJours <= 60 {
-                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
+                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
             } else if dureeEquivalenteSoutenableMois < 24 {
-                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
+                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
             } else {
-                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
+                texte.append(NSAttributedString(string: String(format: "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
             }
                 let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
 //                if ratio <= 1 {
@@ -344,17 +348,18 @@ class ViewControllerAvecCamembert: UIViewController {
                     categorie = emission.categorie
                     texte.append(NSAttributedString(string: "\n" + categorie + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
                 }
+                let textePicto = afficherPictos && !emission.picto.isEmpty ? emission.picto + " " : ""
                 if emission.emission < 2000.0 {
-                    texte.append(NSAttributedString(string: emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: ", %.0f kg CO₂ (%.0f%%)\n", emission.emission, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                    texte.append(NSAttributedString(string: textePicto + emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: ", %.0f kg CO₂ (%.0f%%)\n", emission.emission, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
                 } else {
-                    texte.append(NSAttributedString(string: emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: ", %.2f t CO₂ (%.0f%%)\n", emission.emission / 1000.0, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                    texte.append(NSAttributedString(string: textePicto + emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: ", %.2f t CO₂ (%.0f%%)\n", emission.emission / 1000.0, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
                 }
             }
         }
         if emissionsCalculees < 2000.0 {
-            texte.append(NSAttributedString(string: String(format: "\nTotal %.0f kg CO₂", emissionsCalculees), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+            texte.append(NSAttributedString(string: String(format: "\nTotal : %.0f kg CO₂", emissionsCalculees), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
         } else {
-            texte.append(NSAttributedString(string: String(format: "\nTotal %.2f t CO₂", emissionsCalculees / 1000), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
+            texte.append(NSAttributedString(string: String(format: "\nTotal : %.2f t CO₂", emissionsCalculees / 1000), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
         }
         texte.append(NSAttributedString(string: "\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
         texte.append(NSAttributedString(string: "Bilan CO2 camp scout", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)]))        

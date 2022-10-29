@@ -11,6 +11,8 @@
 		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
 		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
 		B51AD1C228CA439700888CDD /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
+		B5215E28290C7493008DA009 /* ViewControllerExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E27290C7493008DA009 /* ViewControllerExplications.swift */; };
+		B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E29290D3BD5008DA009 /* CreationPDF.swift */; };
 		B52DCA1B28DFA03F00DAA900 /* CouleursEEUdF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */; };
 		B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */; };
 		B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */; };
@@ -30,6 +32,8 @@
 		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
+		B5215E27290C7493008DA009 /* ViewControllerExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExplications.swift; sourceTree = "<group>"; };
+		B5215E29290D3BD5008DA009 /* CreationPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationPDF.swift; sourceTree = "<group>"; };
 		B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouleursEEUdF.swift; sourceTree = "<group>"; };
 		B54DCF9028C5134E00FBBAE3 /* Bilan CO2 camp scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilan CO2 camp scout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +62,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5215E2B290D3C24008DA009 /* PasUtilise */ = {
+			isa = PBXGroup;
+			children = (
+				B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */,
+				B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */,
+				B517AB8428D8FB6A005FF834 /* GrandCamembert.swift */,
+				B5215E29290D3BD5008DA009 /* CreationPDF.swift */,
+			);
+			path = PasUtilise;
+			sourceTree = "<group>";
+		};
 		B54DCF8728C5134E00FBBAE3 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +92,7 @@
 		B54DCF9228C5134E00FBBAE3 /* BilanCO2 */ = {
 			isa = PBXGroup;
 			children = (
+				B5215E2B290D3C24008DA009 /* PasUtilise */,
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
 				B54DCFA928C5192300FBBAE3 /* Data.csv */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
@@ -85,11 +101,9 @@
 				B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
 				B5D81F1A28F2126300188489 /* CelluleCredits.swift */,
-				B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */,
 				B51AD1C128CA439700888CDD /* Graphique.swift */,
 				B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */,
-				B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */,
-				B517AB8428D8FB6A005FF834 /* GrandCamembert.swift */,
+				B5215E27290C7493008DA009 /* ViewControllerExplications.swift */,
 				B54DCF9728C5134E00FBBAE3 /* ViewController.swift */,
 				B54DCF9928C5134E00FBBAE3 /* Main.storyboard */,
 				B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */,
@@ -179,8 +193,10 @@
 				B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */,
 				B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */,
 				B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */,
+				B5215E28290C7493008DA009 /* ViewControllerExplications.swift in Sources */,
 				B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */,
 				B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */,
+				B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */,
 				B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */,
 				B52DCA1B28DFA03F00DAA900 /* CouleursEEUdF.swift in Sources */,
 			);
@@ -329,7 +345,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BilanCO2/BilanCO2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
@@ -367,7 +383,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BilanCO2/BilanCO2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
