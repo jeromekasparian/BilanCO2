@@ -11,6 +11,7 @@
 //      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
+// lors de l'export on voit les boutons disparaître
 
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
@@ -23,8 +24,11 @@
 // - export pdf : vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
 // *** A décider ***
-// - supprimer le launcscreen ?
 // - aspect du Grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
+
+//DÉCLINAISONS
+//Hervé : J’avais fait pour Compétences lite/full. En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure.
+
 
 // HERVE Logique d'usage
 //Le ciblage des mesures à mettre en oeuvre relève en fait de l’enchainement de 2 étapes de raisonnement :

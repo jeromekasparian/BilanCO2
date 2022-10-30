@@ -89,15 +89,23 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if ligneExplicationsSelectionnee == indexPath.row {
+        if ligneExplicationsSelectionnee == indexPath.row { // on désélectionne la ligne qui était sélectionnée
             ligneExplicationsSelectionnee = -1
-        } else {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        } else if ligneExplicationsSelectionnee == -1 { // aucune ligne n'était sélectionnée
             ligneExplicationsSelectionnee = indexPath.row
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        } else {  // on avait une ligne sélectionnée et on en sélectionne une autre
+            let ancienIndexPath = IndexPath(row: ligneExplicationsSelectionnee, section: 0)
+            ligneExplicationsSelectionnee = indexPath.row
+            tableView.reloadRows(at: [indexPath, ancienIndexPath], with: .automatic)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
 //        print("Cliqué sur la ligne \(indexPath.row), ligne sélectionnée \(ligneExplicationsSelectionnee)")
-        tableView.reloadData()
+//        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//        tableView.reloadData()
 //        if ligneExplicationsSelectionnee >= 0 {
-            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
 //        } else {
 //            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
 //        }
