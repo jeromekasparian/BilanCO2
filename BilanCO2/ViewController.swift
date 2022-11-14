@@ -11,7 +11,22 @@
 //      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
-// lors de l'export on voit les boutons disparaître
+// - lors de l'export on voit les boutons disparaître transitoirement
+// - écran principal : remplacer autant que possible un tableView.reloadData par reloadRow
+// - Localisation, y compris les noms de types d'émission
+// - export pdf : vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
+// - Bouton reset
+// transport : Ferry
+// activité : voile, amortissement bateau
+// Autres activités ?
+// Curseurs entiers : champ de texte ? + / -
+// Train : allers simples ?
+// export réseaux sociaux : seul le PDF passe -> intégrer la liste au PDF
+// Mahtieu Escande Toulouse -> Android ? matthieu.escande@gmail.com +33 7 82 53 91 24
+// déchets : mentionner qu'on les néglige
+// Crash ligne 348 / curseur viande rouge - index out of range
+//Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
+//2022-11-13 12:28:02.534604+0100 Bilan CO2 camp scout[22742:955704] Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
 
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
@@ -20,13 +35,11 @@
 // *** Priorité 2 ***
 // INTERFACE
 // - le tableView passe sous le premier titre en haut (Mac en mode iPad seulement -- ok sur iphone/ipad et sur mac Catalyst)
-// - Localisation, y compris les noms de types d'émission
-// - export pdf : vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
 // *** A décider ***
 // - aspect du Grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
 
-//DÉCLINAISONS
+//DÉCLINAISONS AUTRES ÉVÉNEMENTS
 //Hervé : J’avais fait pour Compétences lite/full. En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure.
 
 
@@ -45,19 +58,6 @@
 //Tu pourrais aller plus loin, et proposer des suggestions, tant que le bilan dépasse le 100%, genre une alerte
 //- Les repas représente xx tonnes donc yy% de votre bilan carbonne, et si vous remplaciez 3 repas avec viande rouge par des repas végé ? [ok faisons ça] [as-tu une autre suggestion?]
 //- les transports représente xx tonnes donc yy% de votre bilan carbonne, e et si vous y alliez en train plutôt qu’en car ? [ok faisons ça] [pas maintenant je vais déjà chercher un lieu moins loin de mon local][as-tu une autre suggestion ?]
-
-//Aspect
-//C'est déjà une police de la charte graphique, celle des titres.
-//et une police plus « spécifique » à l’identité visuelle des EU ?
-//Comme la pseudo-maniscrite :
-//<Capture d’écran 2022-09-25 à 19.43.16.png>
-//ou encore :
-//Comfortaa
-//pour les mots « Éclaireuses Éclaireurs UNIONISTES »
-//
-//Tekton Pro Bold
-//pour les mots « de FRANCE »
-
 
 
 
@@ -208,7 +208,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 cell.labelNom.text = emission.nom
             }
             if emission.echelleLog {
-                cell.glissiere.minimumValue = Float(2.3)
+                cell.glissiere.minimumValue = Float(0.0) // valeur minimale = 1 // Float(2.3) // valeur minimum = 10
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
                 cell.glissiere.value = log(Float(emission.valeur))
             } else {

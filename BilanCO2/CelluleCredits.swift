@@ -10,8 +10,8 @@ import UIKit
 
 protocol CelluleCreditsDelegate: AnyObject {
     func ouvrirWebEEUdF()
-    func finMouvementGlissiere(cell: CelluleEmission)
-    func afficheConseil(cell: CelluleEmission)
+//    func finMouvementGlissiere(cell: CelluleEmission)
+//    func afficheConseil(cell: CelluleEmission)
 }
 
 class CelluleCredits: UITableViewCell {
