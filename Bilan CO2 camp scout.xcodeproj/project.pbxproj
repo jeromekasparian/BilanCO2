@@ -82,7 +82,7 @@
 		B54DCF8728C5134E00FBBAE3 = {
 			isa = PBXGroup;
 			children = (
-				B54DCF9228C5134E00FBBAE3 /* BilanCO2 */,
+				B54DCF9228C5134E00FBBAE3 /* VersionApple */,
 				B54DCF9128C5134E00FBBAE3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B54DCF9228C5134E00FBBAE3 /* BilanCO2 */ = {
+		B54DCF9228C5134E00FBBAE3 /* VersionApple */ = {
 			isa = PBXGroup;
 			children = (
 				B5215E2B290D3C24008DA009 /* PasUtilise */,
@@ -118,7 +118,7 @@
 				B54DCF9E28C5134E00FBBAE3 /* LaunchScreen.storyboard */,
 				B54DCFA128C5134E00FBBAE3 /* Info.plist */,
 			);
-			path = BilanCO2;
+			path = VersionApple;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,9 +359,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BilanCO2/BilanCO2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = L3A73K7T3G;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
@@ -382,6 +383,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = JK.BilanCO2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -397,9 +399,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BilanCO2/BilanCO2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = L3A73K7T3G;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BilanCO2/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
@@ -420,6 +423,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = JK.BilanCO2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;

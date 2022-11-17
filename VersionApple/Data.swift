@@ -39,16 +39,17 @@ enum SorteEmission: Int {
     case voyageCar = 8
     case voyageVoiture = 9
     case voyageVoitureElectrique = 10
-    case voyageAvion = 11
-    case voyageCamion = 12
-    case voyageMaterielExpedie = 13
-    case deplacementsCar = 14
-    case deplacementsVoiture = 15
-    case deplacementsVoitureElectrique = 16
-    case hebergementTentes = 17
-    case hebergementMarabout = 18
-    case hebergementDur = 19
-    case achatsMateriel = 20
+    case voyageBateau = 11
+    case voyageAvion = 12
+    case voyageCamion = 13
+    case voyageMaterielExpedie = 14
+    case deplacementsCar = 15
+    case deplacementsVoiture = 16
+    case deplacementsVoitureElectrique = 17
+    case hebergementTentes = 18
+    case hebergementMarabout = 19
+    case hebergementDur = 20
+    case achatsMateriel = 21
 //    case nomCourt = 21
 //    case picto = 22
 }

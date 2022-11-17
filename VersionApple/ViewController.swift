@@ -9,22 +9,31 @@
 // AFFICHAGE / mise en page
 // - fonction d'export
 //      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
+//      - lors de l'export on voit les boutons disparaître transitoirement
+//      - seul le PDF passe -> intégrer la liste au PDF
+//      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
+
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
-// - lors de l'export on voit les boutons disparaître transitoirement
 // - écran principal : remplacer autant que possible un tableView.reloadData par reloadRow
-// - Localisation, y compris les noms de types d'émission
-// - export pdf : vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
-// - Bouton reset
-// transport : Ferry
-// activité : voile, amortissement bateau
-// Autres activités ?
-// Curseurs entiers : champ de texte ? + / -
-// Train : allers simples ?
-// export réseaux sociaux : seul le PDF passe -> intégrer la liste au PDF
-// Mahtieu Escande Toulouse -> Android ? matthieu.escande@gmail.com +33 7 82 53 91 24
-// déchets : mentionner qu'on les néglige
-// Crash ligne 348 / curseur viande rouge - index out of range
+// - Localisation
+// - quota acceptable : 2.5 ou 2 tonnes ?
+// - Bouton reset - Thomas
+// - Gamme de couleur - Confusion bien -- mal // trouver une solution
+// - Camembert / donnut
+// - Camembert = mettre en valeur le secteur "actif"
+// - renvoyer vers des ressources
+//      - EDLN banque de menus végétariens lamarmite.edln.org
+//      - Voiture : covoitribu : https://www.covoitribu.fr/  // tableur en ligne de Matthieu
+//      -
+// - transport : Ferry : aussi sur place ? - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle), les éclais des canots (3 voiles) et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s
+// - activité : voile, amortissement bateau - Yolène
+// - Autres activités ?
+// - Curseurs entiers : champ de texte ? Stepper + / - ? - Thomas
+// - Train : allers simples ? - Thomas
+// - Version Android : Mahtieu Escande, matthieu.escande@gmail.com +33 7 82 53 91 24
+// - déchets : mentionner qu'on les néglige -- Jules
+// - Crash ligne 348 / curseur viande rouge - index out of range -- Axel et Joachim
 //Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
 //2022-11-13 12:28:02.534604+0100 Bilan CO2 camp scout[22742:955704] Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
 
