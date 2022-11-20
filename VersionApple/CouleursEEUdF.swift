@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-//extension UIColor {
-//}
 
 func couleur(rouge: Double, vert: Double, bleu: Double) -> UIColor {
     /// renvoie la couleur RGB en 8 bits
@@ -23,6 +21,7 @@ let jaune = couleur(rouge: 255, vert: 229, bleu: 0)
 let orange = couleur(rouge: 243, vert: 146, bleu: 0)
 let rougeVif = couleur(rouge: 228, vert: 31, bleu: 19)
 let rouge = couleur(rouge: 190, vert: 22, bleu: 34)
-//let blanc =
+let bleuCiel = couleur(rouge: 159, vert: 197, bleu: 232)
+let grisTresClair = couleur(rouge: 229, vert: 229, bleu: 234)   // équivalent du systemGray5 en mode clair. Cf https://noahgilmore.com/blog/dark-mode-uicolor-compatibility/
 
-let couleursEEUdF6 = [vert2, vert1, vert3, jaune, orange, rouge, .white]
+let couleursEEUdF5 = [grisTresClair, vert2, vert1, vert3, jaune, .white]

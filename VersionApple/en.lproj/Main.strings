@@ -1,0 +1,87 @@
+
+/* Class = "UIButton"; configuration.title = " "; ObjectID = "09i-zM-WkB"; */
+"09i-zM-WkB.configuration.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "09i-zM-WkB"; */
+"09i-zM-WkB.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = " "; ObjectID = "A3Y-5l-GjF"; */
+"A3Y-5l-GjF.configuration.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "A3Y-5l-GjF"; */
+"A3Y-5l-GjF.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = " "; ObjectID = "EvK-Ly-UYE"; */
+"EvK-Ly-UYE.configuration.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "EvK-Ly-UYE"; */
+"EvK-Ly-UYE.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FBh-Mp-HtV"; */
+"FBh-Mp-HtV.text" = "Label";
+
+/* Class = "UILabel"; text = " 0 km"; ObjectID = "Heu-Mu-uuU"; */
+"Heu-Mu-uuU.text" = " 0 km";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "KaZ-LP-cnI"; */
+"KaZ-LP-cnI.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = " "; ObjectID = "OR5-bd-q4u"; */
+"OR5-bd-q4u.configuration.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "OR5-bd-q4u"; */
+"OR5-bd-q4u.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Thm-nC-acu"; */
+"Thm-nC-acu.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "OK"; ObjectID = "Tp9-Xh-sbh"; */
+"Tp9-Xh-sbh.configuration.title" = "OK";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Tp9-Xh-sbh"; */
+"Tp9-Xh-sbh.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Pour en savoir plus"; ObjectID = "VSe-EG-bPT"; */
+"VSe-EG-bPT.text" = "Learn more";
+
+/* Class = "UIButton"; configuration.title = "www.eeudf.org"; ObjectID = "VfD-G3-IjY"; */
+"VfD-G3-IjY.configuration.title" = "www.eeudf.org";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VfD-G3-IjY"; */
+"VfD-G3-IjY.normalTitle" = "www.eeudf.org";
+
+/* Class = "UILabel"; text = "1000 kg eq CO2"; ObjectID = "Xo8-2T-5Q7"; */
+"Xo8-2T-5Q7.text" = "1000 kg eq CO2";
+
+/* Class = "UIButton"; configuration.title = "Pour en savoir plus"; ObjectID = "YwT-b9-pSW"; */
+"YwT-b9-pSW.configuration.title" = "Learn more";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "YwT-b9-pSW"; */
+"YwT-b9-pSW.normalTitle" = "Learn more";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Zf8-ms-2Io"; */
+"Zf8-ms-2Io.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dSL-Qj-3io"; */
+"dSL-Qj-3io.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "e0p-cy-e8j"; */
+"e0p-cy-e8j.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "© 2022 Jérôme Kasparian, EEUdF"; ObjectID = "m5u-95-qHn"; */
+"m5u-95-qHn.text" = "© 2022 Jérôme Kasparian, EEUdF";
+
+/* Class = "UIButton"; configuration.title = " "; ObjectID = "vOa-Ps-mF3"; */
+"vOa-Ps-mF3.configuration.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vOa-Ps-mF3"; */
+"vOa-Ps-mF3.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "OK"; ObjectID = "wjH-Me-4Mr"; */
+"wjH-Me-4Mr.configuration.title" = "OK";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wjH-Me-4Mr"; */
+"wjH-Me-4Mr.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Bilan carbone du camp"; ObjectID = "xN7-YI-tvf"; */
+"xN7-YI-tvf.text" = "Carbon budget of camp";

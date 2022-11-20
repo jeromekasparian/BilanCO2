@@ -1,0 +1,79 @@
+/* 
+  Localizable.strings
+  Bilan CO2 camp scout
+
+  Created by Jérôme Kasparian on 08/11/2022.
+  
+*/
+
+// ViewController
+
+"Un conseil" = "Advice";
+"OK" = "OK";
+"https://www.eeudf.org" = "https://www.eeudf.org";
+
+// ViewControllerExplications
+
+"texteMethodo" = "Greenhouse gas emissions, converted into CO₂-equivalent, rely on average emission factors for each category, based on the typical conditions of a scouting camp
+
+   • Catering: The estimation focuses on lunch and dinner, with average emission factors for each type of meal. It does not consider seasonality, distance to producers, number of intermediary resellers, etc.
+
+   • Cooking: The estimation is based on average cooking time, without accounting for actual conditions: cover, protection against wind, size of pans, end of cooking with gas off. If not cooked with gas, meals are supposed to be cooked with wood fire, with no carbon impact. In a sustainably managed forest, one can consider that trees grow and store carbon at the same pace as emissions by wood burning. Note that this reasoning is only valid in the long term (30 years). In the shorter term, wood burning produces CO₂.
+
+   • Transports and on-site mobility: estimations rely on average-sized vehicles.
+
+   • Accommodation: The estimation assumes an amortization of tents over 5 years and heavy tents over 8 years, based on typical patrol tents and 12-m heavy tents, respectively. Buildings are assumed to e used 4 months a year (holiday facility).
+
+   • Gear: Emissions are estimated based on typical scouting gear (tools, cooking gear…). Most of the emissions stem from metal gear. Unlike tents, no amortization is considered. Rather, gear acquired for a camp is assigned to this camp.";
+
+"texteGraphique" = "The graph displays the shares of greenhouse gases emitted by the camp.
+The green circle allows to compare them with acceptable emissions, i.e., emissions compatible with climate preservation. They amount to 5.5 kg CO₂-equivalent per person and per day.";
+
+"texteEmissionsAcceptables" = "Scientists estimate that climate preservation requires to restrict greenhouse gases to 2 tons CO₂-equivalent per person and per year, i.e., 5.5 kg CO₂-equivalent per person and per day. Emissions by the camp are scaled to its duration and number of participants, and compared to this reference.";
+
+"texteLimites" = "The app estimates the order of magnitude of the main greenhouse gas emissions by a scouting camp. It considers transportation, catering, and gear.
+
+It does not consider:
+   • waste handling
+   • specific activities
+   • scouting activities during the schoolyear
+   • emissions related to personal gear of participants
+   • emissions due to the transport of participants from home to the meeting place before the travel to the camp site
+   • participants' emissions other than related to the camp, that continue during the camp. This include for example their home.
+
+For optimal precision, an assessment by a qualified expert is required.";
+
+"texteSources" = "   • climatmundi, EEUdF greenhouse gas emission assessment, 2008
+   • Ademe, bilans-ges.ademe.fr
+   • Carbone 4, www.carbone4.com/analyse-faq-voiture-electrique ";
+
+"texteRemerciements" = "Éléonore Berger, Louise de Boysson, Suzanne Chevrel, Flore-Anne de Clermont, Matthieu Escande, Daniel Hollaar, Hervé Kasparian, Agathe Lafont, Juliette Maupas, Roxane de Pol, Paul Manguy";
+
+"Méthodologie & hypothèses" = "Methodology & assumptions";
+"Graphique" = "Graph";
+"Émissions acceptables pour préserver le climat" = "Climate compatible emissions";
+"Limites" = "Limits";
+"Sources" = "Sources";
+"Remerciements" = "Acknowledgements";
+
+// ViewControllerAvecCamembert
+"%.1f t" = "%.1f ton";
+"%.0f kg" = "%.0f kg";
+"CO₂ : " = "CO₂ : ";
+"\n%.1f t / personne\n" = "\n%.1f ton / person\n";
+"\n%.0f kg / personne\n" = "\n%.0f kg / person\n";
+"En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "Over %.0f days, this camp emits as much as %.0f days of climate-compatible emissions";
+"En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "Over %.0f days, this camp emits as much as %.0f months of climate-compatible emissions";
+"En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "Over %.0f days, this camp emits as much as %.0f years of climate-compatible emissions";
+"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Use sliders to parametrize you camp and evaluate its greenhouse gas emissions";
+"Les émissions de CO₂ de mon camp" = "CO₂ emissions from y camp";
+"Impact climat de mon camp" = "Climate impact of my camp";
+", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg CO₂ (%.0f%%)\n";
+", %.2f t CO₂ (%.0f%%)\n" = ", %.2f ton CO₂ (%.0f%%)\n";
+"\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg CO₂";
+"\nTotal : %.2f t CO₂" = "\nTotal : %.2f ton CO₂";
+"\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEvaluate and reduce the climate impact of your camp with the app ";
+"Bilan CO2 camp scout" = "Scouting camp CO₂ budget";
+
+// CelluleEmission
+"%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";

@@ -10,7 +10,7 @@ Trip to the camp and back;Train;people;50;0.002;;2;;;1;1;;Train is by far the le
 Trip to the camp and back;Bus;roundtrips;3;1.191666667;;2;;;1;;;A bus is relevant if full. With 10 people on board, it pollutes as much as a car. Also, avoid empty trips back.;Bus;🚌
 Trip to the camp and back;Car;roundtrips;50;0.2;;2;;;1;2;;Distances travelled can be reduced by renting on site rather than in your home place. If participants are driven by their parents on the camp site, organize carpooling to reduce the number of cars.;Car;🚗
 Trip to the camp and back;Electric car;roundtrips;50;0.1;;2;;;1;2;;An electric car emits half greenhouse gases as compard to a regular one. This is still much with regard to train, or to a fully booked bus.;Electric car;🚙
-Trip to the camp and back;Boat;people AR;50;0.002;;2;;;1;1;;Except for the train, boat is the less carbon-intensive means of transportation;Boat;⛴
+Trip to the camp and back;Boat;roundtrips;50;0.002;;2;;;1;1;;Except for the train, boat is the less carbon-intensive means of transportation;Boat;⛴️
 Trip to the camp and back;Airplane;people;50;0.2;;2;;;1;1;;Airplane is doubly polluting: because it emits much CO₂ per kilometer, and because it allows long-haul travel that would be impossible otherwise.;Airplane;✈️
 Trip to the camp and back;Truck / Van;roundtrips;3;0.3;;2;;;1;;;Sending gear and get it delivered on the camp site pollutes in general less than transporting it by oneself, especially in a half-empty van.;Van;🚚
 Trip to the camp and back;Freight;kg;500;0.000535333;;2;;;;;;Shipping in advance allows to use slower transport: less expensive and less polluting.;Shipping;📦

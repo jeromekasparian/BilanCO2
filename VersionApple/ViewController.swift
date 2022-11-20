@@ -16,23 +16,19 @@
 // - problèmes positionnement : séquence contraintes / dessin camembert
 //      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
 // - écran principal : remplacer autant que possible un tableView.reloadData par reloadRow
-// - Localisation
-// - quota acceptable : 2.5 ou 2 tonnes ?
 // - Bouton reset - Thomas
-// - Gamme de couleur - Confusion bien -- mal // trouver une solution
 // - Camembert / donnut
 // - Camembert = mettre en valeur le secteur "actif"
 // - renvoyer vers des ressources
-//      - EDLN banque de menus végétariens lamarmite.edln.org
-//      - Voiture : covoitribu : https://www.covoitribu.fr/  // tableur en ligne de Matthieu
-//      -
-// - transport : Ferry : aussi sur place ? - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle), les éclais des canots (3 voiles) et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s
-// - activité : voile, amortissement bateau - Yolène
+//      - Covoiturage : tableur en ligne de Matthieu
+//      - interrail -> possibilité d'avoir 2 ressources
+//      - autres ressources ?
+// - transport : Ferry : aussi sur place ?
+// - activité : voile, amortissement bateau - Yolène -- - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle, 210 kg, polyester : 2,4 kg C02 par kg de plastique = 500 kg), les éclais des canots (3 voiles) et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s
 // - Autres activités ?
 // - Curseurs entiers : champ de texte ? Stepper + / - ? - Thomas
 // - Train : allers simples ? - Thomas
 // - Version Android : Mahtieu Escande, matthieu.escande@gmail.com +33 7 82 53 91 24
-// - déchets : mentionner qu'on les néglige -- Jules
 // - Crash ligne 348 / curseur viande rouge - index out of range -- Axel et Joachim
 //Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
 //2022-11-13 12:28:02.534604+0100 Bilan CO2 camp scout[22742:955704] Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
@@ -82,7 +78,7 @@ var lesSections: [String] = []
 let userDefaults = UserDefaults.standard
 let largeurMiniTableViewEcranLarge:CGFloat = 400
 var lesEmissions: [TypeEmission] = []
-let emissionsSoutenablesAnnuelles: Double = 2500.0 // t eq. CO2 / an / personne
+let emissionsSoutenablesAnnuelles: Double = 2000.0 // t eq. CO2 / an / personne
 var afficherPictos: Bool = true
 
 enum Orientation {
@@ -232,7 +228,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             //            cell.labelEmissionIndividuelle.text = texte
             //            cell.labelEmissionIndividuelle.textColor = couleur
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
-            cell.backgroundColor = couleursEEUdF6[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+            cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
             return cell
         }
@@ -276,7 +272,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let hauteurLabel = CGFloat(24.0)
         let headerView = UIView() //frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: hauteurLabel + 2 * margeVerticale))
         //        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
-        headerView.backgroundColor = couleursEEUdF6[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
+        headerView.backgroundColor = couleursEEUdF5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
         
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
         headerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline).withSize(21) //  .boldSystemFont(ofSize: 24) // UIFont(name: "Verdana", size: 20)
@@ -307,26 +303,19 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        let height: CGFloat = 48
-    //        if #available(iOS 11.0, *) {
-    //            tableView.estimatedSectionHeaderHeight = height
-    //            return UITableView.automaticDimension
-    //        } else {
-    //            return height
-    //        }
-    //
-    //    }
-    
-    
     func afficheConseil(cell: CelluleEmission){
-        var message = ""
+        //        var message = ""
         if let indexPathDeLaCellule = tableViewEmissions.indexPath(for: cell) {
-            message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
+            let message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
+            let nomRessource = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].nomRessource
+            let lienRessource = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].lienRessource
+            let alerte = UIAlertController(title: NSLocalizedString("Un conseil", comment: ""), message: message, preferredStyle: .alert)
+            if !nomRessource.isEmpty {
+                alerte.addAction(UIAlertAction(title: nomRessource, style: .default, handler: {_ in self.ouvrirWeb(adresse: lienRessource)}))
+            }
+            alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
+            self.present(alerte, animated: true)
         }
-        let alerte = UIAlertController(title: "Un conseil", message: message, preferredStyle: .alert)
-        alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
-        self.present(alerte, animated: true)
     }
     
     func debutMouvementGlissiere(cell: CelluleEmission){
@@ -335,23 +324,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 print("erreur index Path")
                 return
             }
-            //        tableViewEmissions.indexPathsForVisibleRows?.compactMap({if $0 != indexPath {
-            //            tableViewEmissions.cellForRow(at: $0)?.resignFirstResponder()
-            //        }})
             celluleEnCours = cell
             ligneEnCours = numeroDeLigne(indexPath: indexPath)
-            //            print("Cellule en cours \(String(describing: celluleEnCours)), ligne \(ligneEnCours)")
         }
     }
     
     func glissiereBougee(cell: CelluleEmission) {
-        
-        //        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
-        //            print("erreur index Path")
-        //            return
-        //        }
-        //        let ligne = numeroDeLigne(indexPath: indexPath)
-        //        print("ligne \(ligne)")
         if ligneEnCours >= 0 && celluleEnCours != nil {
             DispatchQueue.main.async{
                 let ligne = self.ligneEnCours
@@ -412,6 +390,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     self.dessineCamembert(camembert: self.camembert, grandFormat: false)
 //                    self.timeStampDernierRedessin = Date()
 //                }
+//                self.tableViewEmissions.reloadRows(at: [self.tableViewEmissions.indexPath(for: cellule!)!], with: .automatic)
             }  // DispatchQueue.main.async
         } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
@@ -481,10 +460,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         return change || change2
     }
     
-    
-    func ouvrirWebEEUdF() {
-        print("web")
-        let adresse = "https://www.eeudf.org"
+    @objc func ouvrirWeb(adresse: String) {
         if let url = URL(string: adresse), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url)
@@ -492,8 +468,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 // Fallback on earlier versions
             }
         }
-        
     }
+
+    func ouvrirWebEEUdF() {
+        ouvrirWeb(adresse: NSLocalizedString("https://www.eeudf.org", comment: ""))
+    }
+//        print("web")
+//        let adresse = NSLocalizedString("https://www.eeudf.org", comment: "")
+//
+//    }
     
     func redessineResultats(size: CGSize) {
         DispatchQueue.main.async {

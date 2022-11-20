@@ -1,0 +1,81 @@
+/* 
+  Localizable.strings
+  Bilan CO2 camp scout
+
+  Created by Jérôme Kasparian on 08/11/2022.
+  
+*/
+
+// ViewController
+
+"Un conseil" = "Un conseil";
+"OK" = "OK";
+"https://www.eeudf.org" = "https://www.eeudf.org";
+
+// ViewControllerExplications
+
+"texteMethodo" = "L'app estime les émissions de gaz à effet de serre (converties en équivalent CO₂) en se basant sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
+
+   • Repas : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaire, etc.
+
+   • Cuisson : l'estimation est basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz avant la fin de cuisson. Les repas qui ne sont pas cuisinés au gaz sont supposés cuits au feu de bois, avec un impact carbone nul. On considère en effet que dans une forêt gérée durablement, les arbres repoussent et stockent du carbone au même rythme qu'on en libère par la combustion du bois. À noter que ce raisonnement n'est valable qu'à long terme (30 ans). À court terme la combustion du bois dégage du CO₂.
+
+   • Transports et déplacements : les estimations considèrent des véhicules de taille moyenne dans leur catégorie.
+
+   • Hébergement : les estimations prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
+
+   • Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.";
+
+"texteGraphique" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au camp.
+Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour de camp.";
+
+"texteEmissionsAcceptables" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour de camp. Les émissions du camp sont ramenées au nombre de participants et à la durée du camp, puis comparées avec cette référence.";
+
+"texteLimites" = "L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
+
+En particulier, elle ne prend pas en compte :
+   • les déchets
+   • les activités spécifiques
+   • les activités scoutes à l'année
+   • les émissions liées au matériel individuel des participants
+   • les émissions liées au transport des participants jusqu'au lieu de rendez-vous
+   • les émissions des participants qui ne sont pas liées au camp mais qui se poursuivent pendant celui-ci : leur domicile notamment.
+
+Pour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.";
+
+"texteSources" = "   • climatmundi, bilan carbone EEUdF, 2008
+   • Ademe, bilans-ges.ademe.fr
+   • Carbone 4, www.carbone4.com/analyse-faq-voiture-electrique ";
+
+"texteRemerciements" = "Éléonore Berger, Louise de Boysson, Suzanne Chevrel, Flore-Anne de Clermont, Matthieu Escande, Daniel Hollaar, Hervé Kasparian, Agathe Lafont, Juliette Maupas, Roxane de Pol, Paul Manguy";
+
+"Méthodologie & hypothèses" = "Méthodologie & hypothèses";
+"Graphique" = "Graphique";
+"Émissions acceptables pour préserver le climat" = "Émissions acceptables pour préserver le climat";
+"Limites" = "Limites";
+"Sources" = "Sources";
+"Remerciements" = "Remerciements";
+
+// ViewControllerAvecCamembert
+"%.1f t" = "%.1f t";
+"%.0f kg" = "%.0f kg";
+"CO₂ : " = "CO₂ : ";
+"\n%.1f t / personne\n" = "\n%.1f t / personne\n";
+"\n%.0f kg / personne\n" = "\n%.0f kg / personne\n";
+"En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
+"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre";
+"Les émissions de CO₂ de mon camp" = "Les émissions de CO₂ de mon camp";
+"Impact climat de mon camp" = "Impact climat de mon camp";
+", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg CO₂ (%.0f%%)\n";
+", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t CO₂ (%.0f%%)\n";
+"\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg CO₂";
+"\nTotal : %.2f t CO₂" = "\nTotal : %.2f t CO₂";
+"\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app ";
+"Bilan CO2 camp scout" = "Bilan CO₂ camp scout";
+
+// CelluleEmission
+"%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
+
+
