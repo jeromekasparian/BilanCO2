@@ -7,28 +7,32 @@
 
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
+
+// - la page d'aide déborde parfois sur toute la largeur de l'écran.
+// - problèmes positionnement : séquence contraintes / dessin camembert
+// - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
+// - Camembert : séparations en ligne plutôt qu'en secteur étroit
+
+// Fonctionnalités
+// - Ajouter un bouton reset - Thomas
+// - renvoyer vers des ressources
+//      - Covoiturage : tableur en ligne de Matthieu
+//      - autres ressources ?
+// - transport : Ferry : aussi sur place ?
+// - activité : voile, amortissement bateau - Yolène -- - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle, 210 kg, polyester : 2,4 kg C02 par kg de plastique = 500 kg), les éclais des canots (3 voiles) - Bois et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s  - Demander au Coma - Jérémy Balas
+// - Autres activités ?
+// - Curseurs entiers : champ de texte ? Stepper + / - ? - Thomas
+// - Train : allers simples ? - Thomas
+
+// - Version Android : Mahtieu Escande, matthieu.escande@gmail.com +33 7 82 53 91 24
+
+// Anomalies
 // - fonction d'export
 //      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
 //      - lors de l'export on voit les boutons disparaître transitoirement
 //      - seul le PDF passe -> intégrer la liste au PDF
 //      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
-// - problèmes positionnement : séquence contraintes / dessin camembert
-//      - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
-// - écran principal : remplacer autant que possible un tableView.reloadData par reloadRow
-// - Bouton reset - Thomas
-// - Camembert / donnut
-// - Camembert = mettre en valeur le secteur "actif"
-// - renvoyer vers des ressources
-//      - Covoiturage : tableur en ligne de Matthieu
-//      - interrail -> possibilité d'avoir 2 ressources
-//      - autres ressources ?
-// - transport : Ferry : aussi sur place ?
-// - activité : voile, amortissement bateau - Yolène -- - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle, 210 kg, polyester : 2,4 kg C02 par kg de plastique = 500 kg), les éclais des canots (3 voiles) et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s
-// - Autres activités ?
-// - Curseurs entiers : champ de texte ? Stepper + / - ? - Thomas
-// - Train : allers simples ? - Thomas
-// - Version Android : Mahtieu Escande, matthieu.escande@gmail.com +33 7 82 53 91 24
 // - Crash ligne 348 / curseur viande rouge - index out of range -- Axel et Joachim
 //Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
 //2022-11-13 12:28:02.534604+0100 Bilan CO2 camp scout[22742:955704] Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
@@ -42,7 +46,7 @@
 // - le tableView passe sous le premier titre en haut (Mac en mode iPad seulement -- ok sur iphone/ipad et sur mac Catalyst)
 
 // *** A décider ***
-// - aspect du Grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
+// - aspect du grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
 
 //DÉCLINAISONS AUTRES ÉVÉNEMENTS
 //Hervé : J’avais fait pour Compétences lite/full. En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure.
@@ -93,6 +97,8 @@ enum Orientation {
 //    case etroit
 //}
 
+var ligneEnCours: Int = -1
+
 class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
     
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
@@ -102,7 +108,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
-    var ligneEnCours: Int = -1
     var celluleEnCours: CelluleEmission! = nil
     var orientationGlobale: Orientation = .inconnu
     //    var largeurCellule: LargeurCellule = .inconnu
@@ -307,11 +312,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        var message = ""
         if let indexPathDeLaCellule = tableViewEmissions.indexPath(for: cell) {
             let message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
-            let nomRessource = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].nomRessource
-            let lienRessource = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].lienRessource
+            let nomsRessources = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].nomsRessources
+            let liensRessources = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].liensRessources
             let alerte = UIAlertController(title: NSLocalizedString("Un conseil", comment: ""), message: message, preferredStyle: .alert)
-            if !nomRessource.isEmpty {
-                alerte.addAction(UIAlertAction(title: nomRessource, style: .default, handler: {_ in self.ouvrirWeb(adresse: lienRessource)}))
+            if !nomsRessources.isEmpty && !liensRessources.isEmpty {
+                for i in 0...min(nomsRessources.count, liensRessources.count) - 1 {
+                    alerte.addAction(UIAlertAction(title: nomsRessources[i], style: .default, handler: {_ in self.ouvrirWeb(adresse: liensRessources[i])}))
+                }
             }
             alerte.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "bouton OK"), style: .default, handler: nil))
             self.present(alerte, animated: true)
@@ -332,7 +339,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func glissiereBougee(cell: CelluleEmission) {
         if ligneEnCours >= 0 && celluleEnCours != nil {
             DispatchQueue.main.async{
-                let ligne = self.ligneEnCours
+                let ligne = ligneEnCours
                 let cellule = self.celluleEnCours
                 let emission = lesEmissions[ligne]
                 if emission.echelleLog {
@@ -390,7 +397,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     self.dessineCamembert(camembert: self.camembert, grandFormat: false)
 //                    self.timeStampDernierRedessin = Date()
 //                }
-//                self.tableViewEmissions.reloadRows(at: [self.tableViewEmissions.indexPath(for: cellule!)!], with: .automatic)
+//                if let indexPath = self.tableViewEmissions.indexPath(for: cell) {
+//                    self.tableViewEmissions.reloadRows(at: [indexPath], with: .automatic)
+//                }
             }  // DispatchQueue.main.async
         } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
@@ -403,8 +412,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             self.tableViewEmissions.reloadData()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.ligneEnCours = -1
+            ligneEnCours = -1
             self.celluleEnCours = nil
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
         }
     }
     

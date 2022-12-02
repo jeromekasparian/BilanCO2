@@ -72,10 +72,10 @@ class TypeEmission {
     var conseil: String
     var nomCourt: String
     var picto: String
-    var nomRessource: String
-    var lienRessource: String
+    var nomsRessources: [String]
+    var liensRessources: [String]
     
-    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomRessource: String, lienRessource: String) {
+    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String]) {
         self.categorie = categorie
         self.nom = nom
         self.unite = unite
@@ -93,8 +93,8 @@ class TypeEmission {
         self.conseil = conseil
         self.nomCourt = nomCourt.isEmpty ? nom : nomCourt
         self.picto = picto
-        self.nomRessource = nomRessource
-        self.lienRessource = lienRessource
+        self.nomsRessources = nomsRessources
+        self.liensRessources = liensRessources
     }
 }
 
@@ -132,7 +132,8 @@ func decodeCSV(data: String) -> ([TypeEmission], [String]) {
             let valeurMaxSelonEffectif = Double(elements[10]) ?? 0
             let valeurMaxNbRepas = Double(elements[11]) ?? 0
             let valeur = facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
-            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12], nomCourt: elements[13], picto: elements[14], nomRessource: elements[15], lienRessource: elements[16]))
+            
+            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12], nomCourt: elements[13], picto: elements[14], nomsRessources: elements[15].components(separatedBy: ","), liensRessources: elements[16].components(separatedBy: ",")))
             if lesSections.isEmpty || lesSections.last != elements[0] {
                 lesSections.append(elements[0])
             }
