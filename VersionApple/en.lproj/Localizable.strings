@@ -11,6 +11,10 @@
 "Un conseil" = "Advice";
 "OK" = "OK";
 "https://www.eeudf.org" = "https://www.eeudf.org";
+"Initialisation" = "Reset";
+"Effacer les données ?" = "Reset all data?";
+"Annuler" = "Cancel";
+"Effacer" = "Reset";
 
 // ViewControllerExplications
 

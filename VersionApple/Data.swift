@@ -28,8 +28,8 @@ let separateur = ";" // le séparateur dans les fichiers de données
 //}
 
 enum SorteEmission: Int {
-    case effectif = 0
-    case duree = 1
+    case duree = 0
+    case effectif = 1
     case repasViandeRouge = 2
     case repasViandeBlanche = 3
     case repasVegetarien = 4

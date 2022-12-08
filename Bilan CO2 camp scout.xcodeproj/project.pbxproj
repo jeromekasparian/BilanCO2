@@ -26,7 +26,6 @@
 		B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5E0FE8D292A50C5001D0790 /* Data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE8F292A50C5001D0790 /* Data.csv */; };
-		B5E2D3302919BC3B001FEC93 /* DataEN.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5E2D32F2919BC3B001FEC93 /* DataEN.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +54,6 @@
 		B5E0FE8C292A507B001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E0FE8E292A50C5001D0790 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text; name = fr; path = fr.lproj/Data.csv; sourceTree = "<group>"; };
 		B5E0FE90292A50CA001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Data.csv; sourceTree = "<group>"; };
-		B5E2D32F2919BC3B001FEC93 /* DataEN.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DataEN.csv; sourceTree = "<group>"; };
 		B5E2D3312919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E2D3322919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +103,6 @@
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
 				B5E0FE89292A5044001D0790 /* Localizable.strings */,
 				B5E0FE8F292A50C5001D0790 /* Data.csv */,
-				B5E2D32F2919BC3B001FEC93 /* DataEN.csv */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
 				B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */,
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
@@ -185,7 +182,6 @@
 			files = (
 				B5E0FE8D292A50C5001D0790 /* Data.csv in Resources */,
 				B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */,
-				B5E2D3302919BC3B001FEC93 /* DataEN.csv in Resources */,
 				B54DCFA028C5134E00FBBAE3 /* LaunchScreen.storyboard in Resources */,
 				B54DCF9D28C5134E00FBBAE3 /* Assets.xcassets in Resources */,
 				B54DCF9B28C5134E00FBBAE3 /* Main.storyboard in Resources */,
@@ -383,7 +379,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -423,7 +419,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

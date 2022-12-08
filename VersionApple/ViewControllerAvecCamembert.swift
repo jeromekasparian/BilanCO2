@@ -10,6 +10,7 @@ import UIKit
 
 let texteAfficherExplicationsFigures = "afficheExplicationFigures"
 let facteurDonnut: CGFloat = 0.6
+
 class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var affichageEmissions: UILabel!
     //    @IBOutlet var affichageEmissionsParPersonne: UILabel!
@@ -30,33 +31,53 @@ class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
     
     var orientationResultats: Orientation = .inconnu
-    
+    let soutenabiliteDansDonnut:Bool = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         boutonAideGraphique.setTitle("", for: .normal)
         boutonExport.setTitle("", for: .normal)
     }
+    
+    // désactiver les contraintes inutiles avant d'activer les nouvelles
     func choisitContraintes(size: CGSize) -> Bool {
+        print("choisit contraintes Camembert debut")
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
         if nouvelleOrientation != orientationResultats {
             orientationResultats = nouvelleOrientation
             let estModePortrait = nouvelleOrientation == .portrait
             //            print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
-            self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
-            self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
-            self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
-            self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
-            self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
-            
-            self.contrainteCamembertHautPaysage.isActive = !estModePortrait
-            self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
-            self.contrainteCamembertGauchePortrait.isActive = estModePortrait
-            self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
-            self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
+            if estModePortrait {
+                self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
+                self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
+                self.contrainteCamembertHautPaysage.isActive = !estModePortrait
+                self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
+                self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
+                self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
+                self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
+                self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
+                self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
+                self.contrainteCamembertGauchePortrait.isActive = estModePortrait
+            } else {
+                self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
+                self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
+                self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
+                self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
+                self.contrainteCamembertGauchePortrait.isActive = estModePortrait
+                self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
+                self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
+                self.contrainteCamembertHautPaysage.isActive = !estModePortrait
+                self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
+                self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
+            }
             self.affichageEmissions.textAlignment = estModePortrait ? .center : .left
+            print("choisit contraintes fin true")
             return true
         }
-        else {return false}
+        else {
+            print("choisit contraintes fin false")
+            return false
+        }
     }
     
     private func getGraphStartAndEndPointsInRadians(debut: CGFloat, etendue: CGFloat) -> (graphStartingPoint: CGFloat, graphEndingPoint: CGFloat) {
@@ -101,29 +122,30 @@ class ViewControllerAvecCamembert: UIViewController {
     
     
     func dessinePicto(frame: CGRect, picto: String, x: CGFloat, y: CGFloat, facteurTaille: CGFloat, alpha: CGFloat){
-        let largeurLabel = (picto.count == 1 ? camembert.frame.width / 5 : camembert.frame.width / 3) * facteurTaille
-//                let largeurLabel = rayon / 1.8
-                let hauteurLabel = picto.count == 1 ? largeurLabel * 0.5 : largeurLabel / 4
-                let texte = UILabel(frame: CGRect(x: x - (largeurLabel / 2.0), y: y - (hauteurLabel / 2.0), width: largeurLabel, height: hauteurLabel))
-                texte.numberOfLines = 1
-                texte.textAlignment = .center
-                texte.minimumScaleFactor = 0.2
-                texte.lineBreakMode = .byTruncatingTail
-                texte.font = .systemFont(ofSize: hauteurLabel)
-                texte.text = picto
-                texte.alpha = alpha
-                camembert.addSubview(texte)
+        if !picto.isEmpty {
+            let largeurLabel = (picto.count == 1 ? camembert.frame.width / 5 : camembert.frame.width / 3) * facteurTaille
+            //                let largeurLabel = rayon / 1.8
+            let hauteurLabel = picto.count == 1 ? largeurLabel * 0.5 : largeurLabel / 4
+            let texte = UILabel(frame: CGRect(x: x - (largeurLabel / 2.0), y: y - (hauteurLabel / 2.0), width: largeurLabel, height: hauteurLabel))
+            texte.numberOfLines = 1
+            texte.textAlignment = .center
+            texte.minimumScaleFactor = 0.2
+            texte.lineBreakMode = .byTruncatingTail
+            texte.font = .systemFont(ofSize: hauteurLabel)
+            texte.text = picto
+            texte.alpha = alpha
+            camembert.addSubview(texte)
+        }
     }
-    
-    let soutenabiliteDansDonnut:Bool = true
+        
     func dessineCamembert(camembert: UIView, grandFormat: Bool) {
         // effacer le camembert existant
-        if camembert.layer.sublayers == nil {
-            print("sublayers nil")
+        if let sublayers = camembert.layer.sublayers {
+            if !sublayers.isEmpty {
+                sublayers.forEach({ $0.removeFromSuperlayer() })
+            }
         } else {
-            camembert.layer.sublayers?.forEach({
-                $0.removeFromSuperlayer()
-            })
+            print("sublayers nil")
         }
         var debut: CGFloat = 0.0
         var referenceRayon =  max(emissionsCalculees, emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur)
@@ -138,35 +160,28 @@ class ViewControllerAvecCamembert: UIViewController {
 //        if #available(iOS 13.0, *) {
 //            couleurSeparation = .label
 //        }
+//        print("debut donnut")
         var ligne: Int = 0
-        for emission in lesEmissions {
-            if emission.emission > 0 {
-                camembertVide = false
-                let intervalle = emission.emission / emissionsCalculees
-                let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
-                let rayonPourPartDeCamembert = ligne == ligneEnCours ? rayon * 1.1 : rayon
-                dessineSecteur(rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
-                debut = debut + intervalle
-                dessineSecteur(rect: frame, rayon: rayon, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurSeparationNoire)
-            } // if emission.valeur > 0
-            ligne = ligne + 1
-        } // for
-        
+        if !premierAffichageApresInitialisation {
+            for emission in lesEmissions {
+                if emission.emission > 0 {
+                    //                print("emission non vide : ",emission.nom, emission.valeur, emission.emission)
+                    camembertVide = false
+                    let intervalle = emission.emission / emissionsCalculees
+                    let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
+                    let rayonPourPartDeCamembert = ligne == ligneEnCours ? rayon * 1.1 : rayon
+                    dessineSecteur(rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
+                    debut = debut + intervalle
+                    dessineSecteur(rect: frame, rayon: rayon, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurSeparationNoire)
+                } // if emission.valeur > 0
+                ligne = ligne + 1
+            } // for
+        }
         // la référence de soutenabilité
         if !camembertVide {
             if soutenabiliteDansDonnut {
 //                let rayonCercleVert = rayon * (1 - facteurDonnut)
                 let ratioSoutenabilite = emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / emissionsCalculees
-//                dessineSecteur(rect: frame, rayon: rayonCercleVert, debut: 0.0, etendue: 1.0, epaisseurTrait: rayonCercleVert, couleurSecteur: couleurSoutenabilite(ratioSoutenabilite: 1 / ratioSoutenabilite))
-//                dessineSecteur(rect: frame, rayon: rayonCercleVert, debut: 0.0, etendue: 1.0, epaisseurTrait: min(frame.width, frame.height) / 100.0, couleurSecteur: .black)
-//                if ratioSoutenabilite > 1.3 {
-//                    dessinePicto(frame: frame, picto: "✅", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, alpha: 1)
-//                } else if ratioSoutenabilite < 0.7 {
-//                    dessinePicto(frame: frame, picto: "❌", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, alpha: 1)
-//                } else {
-//                    dessinePicto(frame: frame, picto: "❌", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, alpha: (1.3 - ratioSoutenabilite) / 0.6)
-//                    dessinePicto(frame: frame, picto: "✅", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, alpha: (ratioSoutenabilite - 0.7) / 0.6)
-//                }
                 let seuilHaut = 1.3
                 let seuilMilieu = 1.0
                 let seuilBas = 0.7
@@ -187,15 +202,16 @@ class ViewControllerAvecCamembert: UIViewController {
                 let rayonCercleVert = min(frame.width, frame.height) / 2 * 0.9 * sqrt(emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / referenceRayon)
                 dessineSecteur(rect: frame, rayon: rayonCercleVert, debut: 0.0, etendue: 1.0, epaisseurTrait: min(frame.width, frame.height) / 50.0, couleurSecteur: .green.withAlphaComponent(0.8))
             }
-            
+//            print("soutenabilite ok")
             // écrire la légende des éléments principaux dans le camembert
-            let emissionsClassees = lesEmissions.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
+            let emissionsClassees = lesEmissions.count <= 1 ? lesEmissions : lesEmissions.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
             let nombreMaxiLabels = afficherPictos ? (grandFormat ? 12 : 8) : 5
             let limite = emissionsClassees.isEmpty ? 0.0 : emissionsClassees.count >= nombreMaxiLabels ? emissionsClassees[nombreMaxiLabels - 1].emission : emissionsClassees.last?.emission ?? 0.0 // on affiche les 4 postes d'émission les plus importants, à condition qu'ils soient non-nuls
             let pourcentageMini = grandFormat ? 0.03 : 0.05
             var positionPourAffichageEnGrand: CGFloat = -1
             var lignePourAffichageEnGrand: Int = -1
             var intervallePourAffichageEnGrand: CGFloat = -1
+//            print("labels")
             if limite > 0 {
                 debut = 0.0
                 var ligne: Int = 0
@@ -223,7 +239,10 @@ class ViewControllerAvecCamembert: UIViewController {
                     dessinePicto(frame: frame, picto: lesEmissions[lignePourAffichageEnGrand].picto, x: CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5) / 2.0, y: (camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5) / 2.0, facteurTaille: 1.5, alpha: 1.0)
                 }
             }
-        } // if !camembertVide
+        } else { // else : if camembertVide : indispensable de mettre quelque chose pour éviter les crashes lors de la mise en page de la subview
+            dessinePicto(frame: frame, picto: " ", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: 2.0, alpha: 1)
+        } // else : if camembertVide
+        print("fin camembert")
     }
     
     @IBAction func afficheExplicationsFigure() {
@@ -242,11 +261,11 @@ class ViewControllerAvecCamembert: UIViewController {
         let emissionsParPersonne = emissionsCalculees / typesEmissions[SorteEmission.effectif.rawValue].valeur
         var couleur: UIColor = .black
         let texte = NSMutableAttributedString(string: "")
-        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 {
+        let tailleTextePrincipal: CGFloat =  max(0.5, 3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0)  //grandFormat ? 3 : 2
+        let tailleTexteSecondaire = 0.75 * tailleTextePrincipal
+        let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
+        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 && !premierAffichageApresInitialisation {
             if !boutonExport.isEnabled {boutonExport.isEnabled = true}
-            let tailleTextePrincipal: CGFloat =  max(0.5, 3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0)  //grandFormat ? 3 : 2
-            let tailleTexteSecondaire = 0.75 * tailleTextePrincipal
-            let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
             
             let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? NSLocalizedString("%.1f t", comment: "") : NSLocalizedString("%.0f kg", comment: "")
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
@@ -278,7 +297,7 @@ class ViewControllerAvecCamembert: UIViewController {
             return NSAttributedString(attributedString: texte) //
         } else {
             if boutonExport.isEnabled {boutonExport.isEnabled = false}
-            return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur])
+            return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
         }
     }
     

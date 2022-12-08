@@ -73,23 +73,41 @@ class CelluleEmission: UITableViewCell {
     }
 
     func choisitContraintes() {
+//        print("choisit contraintes cell debut")
 //        let nouvelleLargeur: LargeurCellule = self.frame.width >= largeurMiniTableViewEcranLarge ? .large : .etroit
 //        if nouvelleLargeur != largeurCellule {
 //            largeurCellule = nouvelleLargeur
             let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge //nouvelleLargeur == .large
             //        DispatchQueue.main.async {
-            self.contrainteGlissiereGaucheEtroit.isActive = !estLarge
-            self.contrainteGlissiereGaucheLarge.isActive = estLarge
-            self.contrainteGlissiereHautLarge.isActive = estLarge
-            self.contrainteNomEmissionVerticaleEtroit.isActive = !estLarge
-            self.contrainteNomEmissionVerticaleLarge.isActive = estLarge
-            self.contrainteNomEmissionDroiteEtroit.isActive = !estLarge
-            self.contrainteNomEmissionHautEtroit.isActive = !estLarge
-            self.contrainteBoutonInfoVerticaleLarge.isActive = estLarge
-            self.contrainteBoutonInfoVerticaleEtroit.isActive = !estLarge
-            self.contrainteAffichageValeurDroiteLarge.isActive = estLarge
-            self.contrainteAffichageValeurDroiteEtroit.isActive = !estLarge
-            self.labelNom.numberOfLines = estLarge ? 2 : 1
+        if estLarge { // désactiver les contraintes avant d'activer les autres
+            self.contrainteGlissiereGaucheEtroit.isActive = false
+            self.contrainteNomEmissionVerticaleEtroit.isActive = false
+            self.contrainteNomEmissionDroiteEtroit.isActive = false
+            self.contrainteNomEmissionHautEtroit.isActive = false
+            self.contrainteBoutonInfoVerticaleEtroit.isActive = false
+            self.contrainteAffichageValeurDroiteEtroit.isActive = false
+            self.contrainteGlissiereGaucheLarge.isActive = true
+            self.contrainteGlissiereHautLarge.isActive = true
+            self.contrainteNomEmissionVerticaleLarge.isActive = true
+            self.contrainteBoutonInfoVerticaleLarge.isActive = true
+            self.contrainteAffichageValeurDroiteLarge.isActive = true
+            self.labelNom.numberOfLines = 2
+        } else {
+            self.contrainteGlissiereGaucheLarge.isActive = false
+            self.contrainteGlissiereHautLarge.isActive = false
+            self.contrainteNomEmissionVerticaleLarge.isActive = false
+            self.contrainteBoutonInfoVerticaleLarge.isActive = false
+            self.contrainteAffichageValeurDroiteLarge.isActive = false
+            self.contrainteNomEmissionVerticaleEtroit.isActive = true
+            self.contrainteGlissiereGaucheEtroit.isActive = true
+            self.contrainteNomEmissionDroiteEtroit.isActive = true
+            self.contrainteNomEmissionHautEtroit.isActive = true
+            self.contrainteBoutonInfoVerticaleEtroit.isActive = true
+            self.contrainteAffichageValeurDroiteEtroit.isActive = true
+            self.labelNom.numberOfLines = 1
+        }
+//        print("choisit contraintes cell fin")
+
             //        }
 //            print("largeur", self.frame.width, "Cellule large", estLarge)
 //        }

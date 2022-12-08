@@ -11,6 +11,10 @@
 "Un conseil" = "Un conseil";
 "OK" = "OK";
 "https://www.eeudf.org" = "https://www.eeudf.org";
+"Initialisation" = "Réinitialisation";
+"Effacer les données ?" = "Effacer les données ?";
+"Annuler" = "Annuler";
+"Effacer" = "Effacer";
 
 // ViewControllerExplications
 
@@ -77,5 +81,4 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 
 // CelluleEmission
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
-
 

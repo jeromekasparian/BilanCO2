@@ -1,6 +1,6 @@
 Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt;Picto;TitreRessource;LienRessource
-General information;Group size;person;100;0;1;;;;1;;;;;;;
 General information;Duration;days;50;0;1;;;;1;;;If the camp lasts longer, travels will be amortised over more days;;;;
+General information;Group size;person;100;0;1;;;;1;;;;;;;
 Catering;With beef, veal or lamb;meals;50;6.29;1;;;;1;;2;Meals with beef, veal, or lamb meat emit much greenhouse gases: almost 5 times more than other meats, and 12 times more than a vegetarian meal. This is probably the easiest opportunity to reduce greenhouse gases without affecting the core project or the camp. La Marmite Éclairée helps you design environmentally friendly menus;Red meat;🥩;La Marmite Éclairée;https://lamarmite.edln.org
 Catering;With pork, poultry, fish;meals;50;1.35;1;;;;1;;2;Including porc, poultry, rabbit, or fish in a meal doubles its carbon impact as compared to a vegetarian meal. La Marmite Éclairée helps you design environmentally friendly menus;White meat;🍗;La Marmite Éclairée;https://lamarmite.edln.org
 Catering;Vegetarian;meals;50;0.51;1;;;;1;;2;To further reduce climate impact, prefer fresh, local, seasonal products and minimize packaging. La Marmite Éclairée helps you design environmentally friendly menus;Meals;🌽;La Marmite Éclairée;https://lamarmite.edln.org

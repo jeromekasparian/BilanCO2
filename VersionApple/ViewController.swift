@@ -14,23 +14,25 @@
 // - Camembert : séparations en ligne plutôt qu'en secteur étroit
 
 // Fonctionnalités
-// - Ajouter un bouton reset - Thomas
+// - recalcul trop fréquent (emissions Calculées : XXX : 1 par ligne ?)
+// - Afficher le message de bienvenue si initialisé
+// - init : localisation de l'alerte
+// - Mode zoom : pas en mode iPhone / iOS ?
+// - nettoyage code / lisibilité
+// - couleurs du thumb pour l'acceptatibilité ?
 // - renvoyer vers des ressources
-//      - Covoiturage : tableur en ligne de Matthieu
+//      - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
 //      - autres ressources ?
 // - transport : Ferry : aussi sur place ?
 // - activité : voile, amortissement bateau - Yolène -- - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle, 210 kg, polyester : 2,4 kg C02 par kg de plastique = 500 kg), les éclais des canots (3 voiles) - Bois et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s  - Demander au Coma - Jérémy Balas
 // - Autres activités ?
-// - Curseurs entiers : champ de texte ? Stepper + / - ? - Thomas
-// - Train : allers simples ? - Thomas
-
-// - Version Android : Mahtieu Escande, matthieu.escande@gmail.com +33 7 82 53 91 24
+// - Train et autres transports : allers simples ? - Thomas
 
 // Anomalies
 // - fonction d'export
 //      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
-//      - lors de l'export on voit les boutons disparaître transitoirement
-//      - seul le PDF passe -> intégrer la liste au PDF
+//      - lors de l'export l'escamotage temporaire des boutons n'est pas très beau
+//      - seul le PDF passe dans les messageries instantanées -> intégrer la liste au PDF
 //      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
 // - Crash ligne 348 / curseur viande rouge - index out of range -- Axel et Joachim
@@ -98,6 +100,7 @@ enum Orientation {
 //}
 
 var ligneEnCours: Int = -1
+var premierAffichageApresInitialisation: Bool = true
 
 class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
     
@@ -115,7 +118,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
-    @IBOutlet var boutonOuvrirGrandCamembert: UIButton!
     
     @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
@@ -136,18 +138,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             for i in 0...lesValeurs.count - 1 {
                 lesEmissions[i].valeur = lesValeurs[i]
             }
+            premierAffichageApresInitialisation = false
         }
         tableViewEmissions.delegate = self
         tableViewEmissions.dataSource = self
-        actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-        //        if #available(iOS 13.0, *) {
-        //            affichageEmissions.backgroundColor = .systemBackground.withAlphaComponent(0.2)
-        //        } else {
-        //            affichageEmissions.backgroundColor = .white.withAlphaComponent(0.2)
-        //        }
-        
-        boutonOuvrirGrandCamembert.setTitle("", for: .normal)
+        ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         if #available(iOS 15.0, *) {
             tableViewEmissions.sectionHeaderTopPadding = 0
@@ -160,7 +156,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         
         DispatchQueue.main.async {
             //            self.actualiseAffichageEmissions(grandFormat: false)
-            
             self.tableViewEmissions.reloadData()
         }
     }  // viewDidLoad
@@ -218,20 +213,19 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 cell.labelNom.text = emission.nom
             }
             if emission.echelleLog {
-                cell.glissiere.minimumValue = Float(0.0) // valeur minimale = 1 // Float(2.3) // valeur minimum = 10
+                cell.glissiere.minimumValue = Float(2.3) // valeur minimum = 10 // Float(0.0) pour une valeur minimum de 1
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
+                emission.valeur = max(emission.valeur, exp(Double(cell.glissiere.minimumValue)))
                 cell.glissiere.value = log(Float(emission.valeur))
             } else {
                 cell.glissiere.minimumValue = emission.facteurEmission == 0 ? Float(1.0) : Float(0.0)
                 cell.glissiere.maximumValue = Float(emission.valeurMax)
+                emission.valeur = max(emission.valeur, Double(cell.glissiere.minimumValue))
                 cell.glissiere.value = Float(emission.valeur)
             }
             cell.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, emission.valeur).replacingOccurrences(of: " ", with: "\u{2007}") // on remplace les espaces par des blancs par des espaces de largeur fixe insécables
             cell.labelValeur.font = UIFont.monospacedDigitSystemFont(ofSize: cell.labelValeur.font.pointSize, weight: .regular)
             cell.actualiseEmissionIndividuelle(typeEmission: emission)
-            //            let (texte, couleur) = texteEmissionsLigne(typeEmission: emission)
-            //            cell.labelEmissionIndividuelle.text = texte
-            //            cell.labelEmissionIndividuelle.textColor = couleur
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
@@ -325,23 +319,89 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
+    var minValueEnCours: Float = .nan
+    var maxValueEnCours: Float = .nan
+    var valeurPrecedente: Float = .nan
+    var couleurDefautThumb: UIColor = .white
+    var glissiereModeZoom: Bool = false
+    var compteurCurseurImmobile: Int = 0
+    var dateDernierMouvementCurseur: Double = .nan
+    
+    func effacerDonnees() {
+        premierAffichageApresInitialisation = true
+        for i in 0...lesEmissions.count - 1 {
+            lesEmissions[i].valeur = lesEmissions[i].facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
+        }
+        actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+        ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+        emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        print("emissions Calculées : ", emissionsCalculees)
+        let lesValeurs = lesEmissions.map({$0.valeur})
+        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+        
+        DispatchQueue.main.async {
+            self.tableViewEmissions.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.actualiseAffichageEmissions(grandFormat: false)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false)
+        }
+    }
+    
     func debutMouvementGlissiere(cell: CelluleEmission){
         if celluleEnCours == nil {
             guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
                 print("erreur index Path")
                 return
             }
+            premierAffichageApresInitialisation = false
             celluleEnCours = cell
             ligneEnCours = numeroDeLigne(indexPath: indexPath)
+            minValueEnCours = cell.glissiere.minimumValue
+            maxValueEnCours = cell.glissiere.maximumValue
+            valeurPrecedente = cell.glissiere.value
+            couleurDefautThumb = cell.glissiere.thumbTintColor ?? .white
+            glissiereModeZoom = false
+            compteurCurseurImmobile = 0
+            dateDernierMouvementCurseur = Date().timeIntervalSince1970
         }
     }
     
     func glissiereBougee(cell: CelluleEmission) {
+        print("glissiere bougée 1")
         if ligneEnCours >= 0 && celluleEnCours != nil {
+            let ligne = ligneEnCours
+            let cellule = celluleEnCours
+            let emission = lesEmissions[ligne]
+            print("valeur : ", cellule!.glissiere.value)
             DispatchQueue.main.async{
-                let ligne = ligneEnCours
-                let cellule = self.celluleEnCours
-                let emission = lesEmissions[ligne]
+                if (cellule!.glissiere.value == self.valeurPrecedente && !self.glissiereModeZoom) || Date().timeIntervalSince1970 - self.dateDernierMouvementCurseur >= 1.0 { // curseur quasi-immobile ?
+                    self.compteurCurseurImmobile = self.compteurCurseurImmobile + 1
+//                    print("compteurCurseurImmobile", self.compteurCurseurImmobile)
+                    if self.compteurCurseurImmobile > 18 { // on attend un certain temps avec le curseur presque immobile avant de passer en mode zoom
+                        if ligne == SorteEmission.duree.rawValue && cellule!.glissiere.value == cellule!.glissiere.minimumValue {
+                            self.alerteConfirmationReset()
+                            self.finMouvementGlissiere(cell: cell)
+                        }
+                        cellule!.glissiere.thumbTintColor = .gray
+                        self.glissiereModeZoom = true
+                        let intervalleMinMax = cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue
+                        cellule!.glissiere.maximumValue = cellule!.glissiere.value + intervalleMinMax / 20
+                        cellule!.glissiere.minimumValue = cellule!.glissiere.value - intervalleMinMax / 20
+                        if cellule!.glissiere.maximumValue > self.maxValueEnCours {
+                            cellule!.glissiere.minimumValue = cellule!.glissiere.minimumValue - (cellule!.glissiere.maximumValue - self.maxValueEnCours)
+                            cellule!.glissiere.maximumValue = self.maxValueEnCours
+                        }
+                        if cellule!.glissiere.minimumValue < self.minValueEnCours {
+                            cellule!.glissiere.maximumValue = cellule!.glissiere.maximumValue + (self.minValueEnCours - cellule!.glissiere.minimumValue)
+                            cellule!.glissiere.minimumValue = self.minValueEnCours
+                        }
+                    }
+                } else {
+                    self.compteurCurseurImmobile = 0
+                }
+                self.dateDernierMouvementCurseur = Date().timeIntervalSince1970
+                self.valeurPrecedente = cellule!.glissiere.value
                 if emission.echelleLog {
                     if cellule!.glissiere.value == cellule!.glissiere.minimumValue {
                         lesEmissions[ligne].valeur = 0.0
@@ -357,34 +417,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
                 switch ligne {
                 case SorteEmission.duree.rawValue:
-                    self.actualiseValeursMaxRepas(valeurMax: lesEmissions[SorteEmission.duree.rawValue].valeur)
-                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                    if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                        lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
-                        if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
-                            lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
-                            lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur
-                        }
-                    }
+                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
                 case SorteEmission.repasViandeRouge.rawValue:
-                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                    if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                        lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur
-                    }
+                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
                 case SorteEmission.repasViandeBlanche.rawValue:
-                    lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                    if lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur < 0 {
-                        lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur = 0
-                        lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur
-                    }
+                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
                 case SorteEmission.repasVegetarien.rawValue:
-                    lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
-                    if lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur < 0 {
-                        lesEmissions[SorteEmission.repasViandeBlanche.rawValue].valeur = 0
-                        lesEmissions[SorteEmission.repasViandeRouge.rawValue].valeur = 2 * lesEmissions[SorteEmission.duree.rawValue].valeur - lesEmissions[SorteEmission.repasVegetarien.rawValue].valeur
-                    }
+                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
                 case SorteEmission.effectif.rawValue:
                     self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
                 default:
@@ -392,30 +431,49 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 }
                 emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
                 cellule!.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
-//                if abs(self.timeStampDernierRedessin.timeIntervalSinceNow) > 1.0 {
                 self.actualiseAffichageEmissions(grandFormat: false)
                     self.dessineCamembert(camembert: self.camembert, grandFormat: false)
-//                    self.timeStampDernierRedessin = Date()
-//                }
-//                if let indexPath = self.tableViewEmissions.indexPath(for: cell) {
-//                    self.tableViewEmissions.reloadRows(at: [indexPath], with: .automatic)
-//                }
             }  // DispatchQueue.main.async
         } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
         
+    func alerteConfirmationReset(){
+        let alerte = UIAlertController(title: NSLocalizedString("Initialisation", comment: ""), message: NSLocalizedString("Effacer les données ?", comment: ""), preferredStyle: .alert)
+        alerte.addAction(UIAlertAction(title: NSLocalizedString("Annuler", comment: ""), style: .default, handler: nil))
+        alerte.addAction(UIAlertAction(title: NSLocalizedString("Effacer", comment: ""), style: .destructive, handler: {_ in self.effacerDonnees()}))
+        self.present(alerte, animated: true)
+
+    }
+    func ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
+        let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
+        actualiseValeursMaxRepas(valeurMax: nombreJours)
+        lesEmissions[priorite1.rawValue].valeur = min(lesEmissions[priorite1.rawValue].valeur, nombreJours * 2)
+        lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur)
+        lesEmissions[priorite3.rawValue].valeur = nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
+    }
+    
     func finMouvementGlissiere(cell: CelluleEmission) {
+        print("Fin mouvement 1")
         glissiereBougee(cell: cell)
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+//        print("Fin mouvement 2")
+        cell.glissiere.minimumValue = minValueEnCours
+        cell.glissiere.maximumValue = maxValueEnCours
+//        print("Fin mouvement 3")
+        glissiereModeZoom = false
+        compteurCurseurImmobile = 0
         DispatchQueue.main.async{
+            cell.glissiere.thumbTintColor = self.couleurDefautThumb
             self.tableViewEmissions.reloadData()
         }
+//        print("Fin mouvement 4")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             ligneEnCours = -1
             self.celluleEnCours = nil
             self.dessineCamembert(camembert: self.camembert, grandFormat: false)
         }
+//        print("Fin mouvement 5")
     }
     
     

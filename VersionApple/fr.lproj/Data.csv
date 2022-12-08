@@ -1,6 +1,6 @@
 Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt;Picto;TitreRessource;LienRessource
-Informations générales;Effectif;personnes;100;0;1;;;;1;;;;;;;
 Informations générales;Durée;jours;50;0;1;;;;1;;;Si le camp est plus long, les transports sont amortis sur plus de jours;;;;
+Informations générales;Effectif;personnes;100;0;1;;;;1;;;;;;;
 Repas;Avec bœuf, veau ou agneau;repas;50;6.29;1;;;;1;;2;La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effets de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. C'est sans doute le poste d'émission le plus facile à réduire sans affecter le projet du camp. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental;Viande rouge;🥩;La Marmite Éclairée;https://lamarmite.edln.org
 Repas;Avec porc, volaille, poisson;repas;50;1.35;1;;;;1;;2;La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental;Viande blanche;🍗;La Marmite Éclairée;https://lamarmite.edln.org
 Repas;Végétarien;repas;50;0.51;1;;;;1;;2;Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental;Repas;🌽;La Marmite Éclairée;https://lamarmite.edln.org
