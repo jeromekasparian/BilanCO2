@@ -103,24 +103,6 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     
-    //    func dessineSeparation(rect: CGRect, rayon: CGFloat, angle: CGFloat, epaisseurTrait: CGFloat, couleur: UIColor) {
-    //        let center: CGPoint = CGPoint(x: rect.midX, y: rect.midY)
-    //        let pointeur: UnsafeMutablePointer<CGAffineTransform> = (CGAffineTransform(rotationAngle: angle))
-    //        let ligne = UIBezierPath(cgPath: CGPath(rect: CGRect(origin: center, size: CGSize(width: 2.0, height: rayon)), transform: pointeur))
-    //        // now we can draw the progress arc
-    ////        let percentagePath = UIBezierPath(arcCenter: center, radius: rayon - (epaisseurTrait / 2), startAngle: angleDebutRadians, endAngle: angleFinRadians, clockwise: true)
-    ////        percentagePath.lineWidth = epaisseurTrait
-    ////        percentagePath.lineCapStyle = .butt
-    //        let shape = CAShapeLayer()
-    //        camembert.layer.addSublayer(shape)
-    //        shape.strokeColor = couleur.cgColor
-    //        shape.fillColor = .none
-    //        shape.lineWidth = epaisseurTrait
-    //        shape.lineCap = .butt
-    //        shape.path = ligne.cgPath
-    //    }
-    
-    
     func dessinePicto(frame: CGRect, picto: String, x: CGFloat, y: CGFloat, facteurTaille: CGFloat, alpha: CGFloat){
         if !picto.isEmpty {
             let largeurLabel = (picto.count == 1 ? camembert.frame.width / 5 : camembert.frame.width / 3) * facteurTaille
@@ -162,21 +144,22 @@ class ViewControllerAvecCamembert: UIViewController {
 //        }
 //        print("debut donnut")
         var ligne: Int = 0
-        if !premierAffichageApresInitialisation {
+//        if !premierAffichageApresInitialisation {
             for emission in lesEmissions {
                 if emission.emission > 0 {
                     //                print("emission non vide : ",emission.nom, emission.valeur, emission.emission)
                     camembertVide = false
                     let intervalle = emission.emission / emissionsCalculees
                     let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
-                    let rayonPourPartDeCamembert = ligne == ligneEnCours ? rayon * 1.1 : rayon
+                    let agrandirSecteur = ligne == ligneEnCours || (ligneEnCours == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) || (ligneEnCours == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCours == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
+                    let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
                     dessineSecteur(rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
                     debut = debut + intervalle
-                    dessineSecteur(rect: frame, rayon: rayon, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurSeparationNoire)
+                    dessineSecteur(rect: frame, rayon: rayonPourPartDeCamembert, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurSeparationNoire)
                 } // if emission.valeur > 0
                 ligne = ligne + 1
             } // for
-        }
+//        }
         // la référence de soutenabilité
         if !camembertVide {
             if soutenabiliteDansDonnut {
@@ -246,7 +229,7 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     @IBAction func afficheExplicationsFigure() {
-        ligneExplicationsSelectionnee = 1
+//        ligneExplicationsSelectionnee = 1
         performSegue(withIdentifier: "Explications", sender: nil)
     }
     
@@ -264,7 +247,7 @@ class ViewControllerAvecCamembert: UIViewController {
         let tailleTextePrincipal: CGFloat =  max(0.5, 3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0)  //grandFormat ? 3 : 2
         let tailleTexteSecondaire = 0.75 * tailleTextePrincipal
         let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
-        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 && !premierAffichageApresInitialisation {
+        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 { //} && !premierAffichageApresInitialisation {
             if !boutonExport.isEnabled {boutonExport.isEnabled = true}
             
             let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? NSLocalizedString("%.1f t", comment: "") : NSLocalizedString("%.0f kg", comment: "")

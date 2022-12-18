@@ -24,8 +24,11 @@ let texteRemerciements = NSLocalizedString("texteRemerciements", comment: "")
 
 
 class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let lesParagraphes = [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Graphique", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""), NSLocalizedString("Limites", comment: ""), NSLocalizedString("Sources", comment: ""), NSLocalizedString("Remerciements", comment: "")]
-    let lesTextes = [texteMethodo, texteGraphique, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
+//    let lesParagraphes = [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Graphique", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""), NSLocalizedString("Limites", comment: ""), NSLocalizedString("Sources", comment: ""), NSLocalizedString("Remerciements", comment: "")]
+//    let lesTextes = [texteMethodo, texteGraphique, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
+    let lesTextes = [texteMethodo, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
+    let lesParagraphes = [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""), NSLocalizedString("Limites", comment: ""), NSLocalizedString("Sources", comment: ""), NSLocalizedString("Remerciements", comment: "")]
+
     let cellReuseIdentifier = "celluleExplications"
 
     @IBOutlet var tableView: UITableView!

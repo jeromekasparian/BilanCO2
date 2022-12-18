@@ -7,19 +7,12 @@
 
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
-
 // - la page d'aide déborde parfois sur toute la largeur de l'écran.
 // - problèmes positionnement : séquence contraintes / dessin camembert
 // - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
-// - Camembert : séparations en ligne plutôt qu'en secteur étroit
 
 // Fonctionnalités
-// - recalcul trop fréquent (emissions Calculées : XXX : 1 par ligne ?)
-// - Afficher le message de bienvenue si initialisé
-// - init : localisation de l'alerte
-// - Mode zoom : pas en mode iPhone / iOS ?
 // - nettoyage code / lisibilité
-// - couleurs du thumb pour l'acceptatibilité ?
 // - renvoyer vers des ressources
 //      - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
 //      - autres ressources ?
@@ -35,10 +28,6 @@
 //      - seul le PDF passe dans les messageries instantanées -> intégrer la liste au PDF
 //      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
-// - Crash ligne 348 / curseur viande rouge - index out of range -- Axel et Joachim
-//Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
-//2022-11-13 12:28:02.534604+0100 Bilan CO2 camp scout[22742:955704] Swift/ContiguousArrayBuffer.swift:575: Fatal error: Index out of range
-
 // Explications
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
 // - Daniel : swipe / tap pour basculer d'un affichage à l'autre (plusieurs manières de formuler la soutenabilité)
@@ -52,7 +41,8 @@
 
 //DÉCLINAISONS AUTRES ÉVÉNEMENTS
 //Hervé : J’avais fait pour Compétences lite/full. En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure.
-
+// - Conférence
+// - Festival
 
 // HERVE Logique d'usage
 //Le ciblage des mesures à mettre en oeuvre relève en fait de l’enchainement de 2 étapes de raisonnement :
@@ -100,7 +90,7 @@ enum Orientation {
 //}
 
 var ligneEnCours: Int = -1
-var premierAffichageApresInitialisation: Bool = true
+//var premierAffichageApresInitialisation: Bool = true
 
 class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
     
@@ -138,7 +128,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             for i in 0...lesValeurs.count - 1 {
                 lesEmissions[i].valeur = lesValeurs[i]
             }
-            premierAffichageApresInitialisation = false
+//            premierAffichageApresInitialisation = false
         }
         tableViewEmissions.delegate = self
         tableViewEmissions.dataSource = self
@@ -217,12 +207,16 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
                 emission.valeur = max(emission.valeur, exp(Double(cell.glissiere.minimumValue)))
                 cell.glissiere.value = log(Float(emission.valeur))
+                if cell.glissiere.value == cell.glissiere.minimumValue {
+                    emission.valeur = 0.0
+                }
             } else {
-                cell.glissiere.minimumValue = emission.facteurEmission == 0 ? Float(1.0) : Float(0.0)
+                cell.glissiere.minimumValue = 0.0 // emission.facteurEmission == 0 ? Float(1.0) : Float(0.0)
                 cell.glissiere.maximumValue = Float(emission.valeurMax)
                 emission.valeur = max(emission.valeur, Double(cell.glissiere.minimumValue))
                 cell.glissiere.value = Float(emission.valeur)
             }
+            cell.glissiere.thumbTintColor = .white // attention si couleur différentes pour l'animation ?
             cell.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, emission.valeur).replacingOccurrences(of: " ", with: "\u{2007}") // on remplace les espaces par des blancs par des espaces de largeur fixe insécables
             cell.labelValeur.font = UIFont.monospacedDigitSystemFont(ofSize: cell.labelValeur.font.pointSize, weight: .regular)
             cell.actualiseEmissionIndividuelle(typeEmission: emission)
@@ -310,6 +304,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let liensRessources = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].liensRessources
             let alerte = UIAlertController(title: NSLocalizedString("Un conseil", comment: ""), message: message, preferredStyle: .alert)
             if !nomsRessources.isEmpty && !liensRessources.isEmpty {
+                print("nom ressource : ", nomsRessources, "liens ressources", liensRessources)
+
                 for i in 0...min(nomsRessources.count, liensRessources.count) - 1 {
                     alerte.addAction(UIAlertAction(title: nomsRessources[i], style: .default, handler: {_ in self.ouvrirWeb(adresse: liensRessources[i])}))
                 }
@@ -325,12 +321,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     var couleurDefautThumb: UIColor = .white
     var glissiereModeZoom: Bool = false
     var compteurCurseurImmobile: Int = 0
-    var dateDernierMouvementCurseur: Double = .nan
+//    var dateDernierMouvementCurseur: Double = .nan
     
     func effacerDonnees() {
-        premierAffichageApresInitialisation = true
+//        premierAffichageApresInitialisation = true
         for i in 0...lesEmissions.count - 1 {
-            lesEmissions[i].valeur = lesEmissions[i].facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
+            lesEmissions[i].valeur = 0.0 // lesEmissions[i].facteurEmission > 0 ? //0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
         }
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
@@ -348,13 +344,16 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
+//    var dureeEstDejaZero: Bool = true
+//    var effectifEstDejaZero: Bool = true
+
     func debutMouvementGlissiere(cell: CelluleEmission){
         if celluleEnCours == nil {
             guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
                 print("erreur index Path")
                 return
             }
-            premierAffichageApresInitialisation = false
+//            premierAffichageApresInitialisation = false
             celluleEnCours = cell
             ligneEnCours = numeroDeLigne(indexPath: indexPath)
             minValueEnCours = cell.glissiere.minimumValue
@@ -363,10 +362,35 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             couleurDefautThumb = cell.glissiere.thumbTintColor ?? .white
             glissiereModeZoom = false
             compteurCurseurImmobile = 0
-            dateDernierMouvementCurseur = Date().timeIntervalSince1970
+//            dateDernierMouvementCurseur = Date().timeIntervalSince1970
+//            delaiEnCoursPourZoom = false
+            cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
+//            dureeEstDejaZero = lesEmissions[SorteEmission.duree.rawValue].valeur == 0
+//            effectifEstDejaZero = lesEmissions[SorteEmission.effectif.rawValue].valeur == 0
         }
     }
     
+    func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
+        if (ligne == SorteEmission.duree.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) || (ligne == SorteEmission.effectif.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) {
+            self.alerteConfirmationReset()
+            self.finMouvementGlissiere(cell: cellule)
+        }
+        cellule.glissiere.thumbTintColor = .gray
+        self.glissiereModeZoom = true
+        let intervalleMinMax = cellule.glissiere.maximumValue - cellule.glissiere.minimumValue
+        cellule.glissiere.maximumValue = cellule.glissiere.value + intervalleMinMax / 20
+        cellule.glissiere.minimumValue = cellule.glissiere.value - intervalleMinMax / 20
+        if cellule.glissiere.maximumValue > self.maxValueEnCours {
+            cellule.glissiere.minimumValue = cellule.glissiere.minimumValue - (cellule.glissiere.maximumValue - self.maxValueEnCours)
+            cellule.glissiere.maximumValue = self.maxValueEnCours
+        }
+        if cellule.glissiere.minimumValue < self.minValueEnCours {
+            cellule.glissiere.maximumValue = cellule.glissiere.maximumValue + (self.minValueEnCours - cellule.glissiere.minimumValue)
+            cellule.glissiere.minimumValue = self.minValueEnCours
+        }
+    }
+    
+//    var delaiEnCoursPourZoom: Bool = false
     func glissiereBougee(cell: CelluleEmission) {
         print("glissiere bougée 1")
         if ligneEnCours >= 0 && celluleEnCours != nil {
@@ -375,35 +399,19 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let emission = lesEmissions[ligne]
             print("valeur : ", cellule!.glissiere.value)
             DispatchQueue.main.async{
-                if (cellule!.glissiere.value == self.valeurPrecedente && !self.glissiereModeZoom) || Date().timeIntervalSince1970 - self.dateDernierMouvementCurseur >= 1.0 { // curseur quasi-immobile ?
+                if !self.glissiereModeZoom && abs(cellule!.glissiere.value - self.valeurPrecedente) < 0.01 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) { // curseur quasi-immobile ?
+                    //                if !self.glissiereModeZoom && (cellule!.glissiere.value == self.valeurPrecedente || Date().timeIntervalSince1970 - self.dateDernierMouvementCurseur >= 1.0) { // curseur quasi-immobile ?
                     self.compteurCurseurImmobile = self.compteurCurseurImmobile + 1
-//                    print("compteurCurseurImmobile", self.compteurCurseurImmobile)
+                    //                    print("compteurCurseurImmobile", self.compteurCurseurImmobile)
                     if self.compteurCurseurImmobile > 18 { // on attend un certain temps avec le curseur presque immobile avant de passer en mode zoom
-                        if ligne == SorteEmission.duree.rawValue && cellule!.glissiere.value == cellule!.glissiere.minimumValue {
-                            self.alerteConfirmationReset()
-                            self.finMouvementGlissiere(cell: cell)
-                        }
-                        cellule!.glissiere.thumbTintColor = .gray
-                        self.glissiereModeZoom = true
-                        let intervalleMinMax = cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue
-                        cellule!.glissiere.maximumValue = cellule!.glissiere.value + intervalleMinMax / 20
-                        cellule!.glissiere.minimumValue = cellule!.glissiere.value - intervalleMinMax / 20
-                        if cellule!.glissiere.maximumValue > self.maxValueEnCours {
-                            cellule!.glissiere.minimumValue = cellule!.glissiere.minimumValue - (cellule!.glissiere.maximumValue - self.maxValueEnCours)
-                            cellule!.glissiere.maximumValue = self.maxValueEnCours
-                        }
-                        if cellule!.glissiere.minimumValue < self.minValueEnCours {
-                            cellule!.glissiere.maximumValue = cellule!.glissiere.maximumValue + (self.minValueEnCours - cellule!.glissiere.minimumValue)
-                            cellule!.glissiere.minimumValue = self.minValueEnCours
-                        }
+                        self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!)
                     }
                 } else {
                     self.compteurCurseurImmobile = 0
                 }
-                self.dateDernierMouvementCurseur = Date().timeIntervalSince1970
                 self.valeurPrecedente = cellule!.glissiere.value
                 if emission.echelleLog {
-                    if cellule!.glissiere.value == cellule!.glissiere.minimumValue {
+                    if cellule!.glissiere.value == self.minValueEnCours { //  cellule!.glissiere.minimumValue {
                         lesEmissions[ligne].valeur = 0.0
                     } else {
                         lesEmissions[ligne].valeur = arrondi(exp(Double(cellule!.glissiere.value)))
@@ -418,6 +426,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 switch ligne {
                 case SorteEmission.duree.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+//                    if cellule!.glissiere.value == cellule!.glissiere.minimumValue && !self.dureeEstDejaZero {
+//                            self.alerteConfirmationReset()
+//                            self.finMouvementGlissiere(cell: cell)
+//                        self.dureeEstDejaZero = true
+//                    } else {
+//                        self.dureeEstDejaZero = false
+//                    }
                 case SorteEmission.repasViandeRouge.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
                 case SorteEmission.repasViandeBlanche.rawValue:
@@ -426,6 +441,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
                 case SorteEmission.effectif.rawValue:
                     self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+//                    if cellule!.glissiere.value == cellule!.glissiere.minimumValue && !self.effectifEstDejaZero {
+//                            self.alerteConfirmationReset()
+//                            self.finMouvementGlissiere(cell: cell)
+//                        self.effectifEstDejaZero = true
+//                    } else {
+//                        self.effectifEstDejaZero = false
+//                    }
                 default:
                     print("rien")
                 }
@@ -453,7 +475,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     func finMouvementGlissiere(cell: CelluleEmission) {
-        print("Fin mouvement 1")
+//        delaiEnCoursPourZoom = false
+      print("Fin mouvement 1")
         glissiereBougee(cell: cell)
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
@@ -480,7 +503,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func actualiseValeursMaxEffectif(valeurMax: Double) {
         for i in 0...lesEmissions.count-1 {
             if lesEmissions[i].valeurMaxSelonEffectif > 0 {
-                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax
+                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
                 lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxSelonEffectif
                 if collerAuMax {
                     lesEmissions[i].valeur = lesEmissions[i].valeurMax
@@ -494,7 +517,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func actualiseValeursMaxRepas(valeurMax: Double) {
         for i in 0...lesEmissions.count-1 {
             if lesEmissions[i].valeurMaxNbRepas > 0 {
-                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax
+                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
                 lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxNbRepas
                 if collerAuMax {
                     lesEmissions[i].valeur = lesEmissions[i].valeurMax
