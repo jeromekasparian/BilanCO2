@@ -8,18 +8,16 @@
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
 // - la page d'aide déborde parfois sur toute la largeur de l'écran.
-// - problèmes positionnement : séquence contraintes / dessin camembert
-// - le camembert se cale en bas quand la vue est verticale très allongée -> tester sur iPad split view
 
 // Fonctionnalités
+// - aide : mettre des sous-titres en gras
 // - nettoyage code / lisibilité
 // - renvoyer vers des ressources
 //      - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
 //      - autres ressources ?
-// - transport : Ferry : aussi sur place ?
+// - transport : Ferry, train, bus : aussi sur place ?
 // - activité : voile, amortissement bateau - Yolène -- - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle, 210 kg, polyester : 2,4 kg C02 par kg de plastique = 500 kg), les éclais des canots (3 voiles) - Bois et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s  - Demander au Coma - Jérémy Balas
 // - Autres activités ?
-// - Train et autres transports : allers simples ? - Thomas
 
 // Anomalies
 // - fonction d'export
@@ -32,12 +30,9 @@
 // - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
 // - Daniel : swipe / tap pour basculer d'un affichage à l'autre (plusieurs manières de formuler la soutenabilité)
 
-// *** Priorité 2 ***
-// INTERFACE
-// - le tableView passe sous le premier titre en haut (Mac en mode iPad seulement -- ok sur iphone/ipad et sur mac Catalyst)
-
 // *** A décider ***
 // - aspect du grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
+// - Train et autres transports : allers simples ? - Thomas
 
 //DÉCLINAISONS AUTRES ÉVÉNEMENTS
 //Hervé : J’avais fait pour Compétences lite/full. En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure.
@@ -102,7 +97,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
     var celluleEnCours: CelluleEmission! = nil
-    var orientationGlobale: Orientation = .inconnu
+//    var orientationGlobale: Orientation = .inconnu
     //    var largeurCellule: LargeurCellule = .inconnu
 //    var timeStampDernierRedessin = Date()
 
@@ -426,13 +421,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 switch ligne {
                 case SorteEmission.duree.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-//                    if cellule!.glissiere.value == cellule!.glissiere.minimumValue && !self.dureeEstDejaZero {
-//                            self.alerteConfirmationReset()
-//                            self.finMouvementGlissiere(cell: cell)
-//                        self.dureeEstDejaZero = true
-//                    } else {
-//                        self.dureeEstDejaZero = false
-//                    }
                 case SorteEmission.repasViandeRouge.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
                 case SorteEmission.repasViandeBlanche.rawValue:
@@ -441,13 +429,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
                 case SorteEmission.effectif.rawValue:
                     self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-//                    if cellule!.glissiere.value == cellule!.glissiere.minimumValue && !self.effectifEstDejaZero {
-//                            self.alerteConfirmationReset()
-//                            self.finMouvementGlissiere(cell: cell)
-//                        self.effectifEstDejaZero = true
-//                    } else {
-//                        self.effectifEstDejaZero = false
-//                    }
                 default:
                     print("rien")
                 }
@@ -531,22 +512,33 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     override func choisitContraintes(size: CGSize) -> Bool {
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
         var change = false
-        if nouvelleOrientation != orientationGlobale {
-            let estModePortrait = nouvelleOrientation == .portrait
-            orientationGlobale = nouvelleOrientation
-            //        DispatchQueue.main.async {
-            
-            self.contrainteTableViewHautPortrait.isActive = estModePortrait
-            self.contrainteTableViewDroitePortrait.isActive = estModePortrait
-            self.contrainteVueResultatsGauchePortrait.isActive = estModePortrait
-            
-            self.contrainteTableViewHautPaysage.isActive = !estModePortrait
-            self.contrainteTableViewDroitePaysage.isActive = !estModePortrait
-            self.contrainteVueResultatsBasPaysage.isActive = !estModePortrait
-            self.contrainteVueResultatGauchePaysage.isActive = !estModePortrait
-            change = true
-            //        }
-        }
+//        if nouvelleOrientation != orientationGlobale {
+//            let estModePortrait = nouvelleOrientation == .portrait
+//            orientationGlobale = nouvelleOrientation
+//            print("choisit contraintes, orientation", nouvelleOrientation)
+//            if estModePortrait {  // on désactive avant d'activer pour éviter les conflits
+            if nouvelleOrientation == .portrait && self.contrainteTableViewHautPaysage.isActive {
+                self.contrainteTableViewHautPaysage.isActive = false
+                self.contrainteTableViewDroitePaysage.isActive = false
+                self.contrainteVueResultatsBasPaysage.isActive = false
+                self.contrainteVueResultatGauchePaysage.isActive = false
+
+                self.contrainteTableViewHautPortrait.isActive = true
+                self.contrainteTableViewDroitePortrait.isActive = true
+                self.contrainteVueResultatsGauchePortrait.isActive = true
+                change = true
+            } else if nouvelleOrientation == .paysage && self.contrainteTableViewHautPortrait.isActive {
+                self.contrainteTableViewHautPortrait.isActive = false
+                self.contrainteTableViewDroitePortrait.isActive = false
+                self.contrainteVueResultatsGauchePortrait.isActive = false
+                
+                self.contrainteTableViewHautPaysage.isActive = true
+                self.contrainteTableViewDroitePaysage.isActive = true
+                self.contrainteVueResultatsBasPaysage.isActive = true
+                self.contrainteVueResultatGauchePaysage.isActive = true
+                change = true
+            }
+//        }
         let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
         return change || change2
     }

@@ -228,7 +228,7 @@
                                             <constraint firstAttribute="width" secondItem="faL-l2-rgA" secondAttribute="height" multiplier="1:1" id="gdK-y5-fFm"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zf8-ms-2Io">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zf8-ms-2Io">
                                         <rect key="frame" x="0.0" y="130" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Zf8-ms-2Io" secondAttribute="height" multiplier="1:1" id="Cd5-50-fcd"/>
@@ -296,7 +296,7 @@
                             <constraint firstItem="MyB-cA-vRv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cuO-Ob-XtD"/>
                             <constraint firstItem="GlJ-TS-m2D" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="g9L-WH-Br0"/>
                             <constraint firstItem="MyB-cA-vRv" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gOL-XO-5Ac"/>
-                            <constraint firstItem="MyB-cA-vRv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gV7-Ub-n5d"/>
+                            <constraint firstItem="MyB-cA-vRv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gV7-Ub-n5d"/>
                             <constraint firstItem="GlJ-TS-m2D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oTK-n3-tFK"/>
                             <constraint firstItem="MyB-cA-vRv" firstAttribute="top" secondItem="GlJ-TS-m2D" secondAttribute="bottom" id="skr-N9-pJE"/>
                             <constraint firstItem="GlJ-TS-m2D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="syp-z8-llM"/>

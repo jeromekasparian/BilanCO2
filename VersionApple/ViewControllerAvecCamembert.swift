@@ -30,7 +30,7 @@ class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var contrainteCamembertCentreHPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
     
-    var orientationResultats: Orientation = .inconnu
+//    var orientationResultats: Orientation = .inconnu
     let soutenabiliteDansDonnut:Bool = true
 
     override func viewDidLoad() {
@@ -41,39 +41,41 @@ class ViewControllerAvecCamembert: UIViewController {
     
     // désactiver les contraintes inutiles avant d'activer les nouvelles
     func choisitContraintes(size: CGSize) -> Bool {
-        print("choisit contraintes Camembert debut")
+//        print("choisit contraintes Camembert debut")
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
-        if nouvelleOrientation != orientationResultats {
-            orientationResultats = nouvelleOrientation
-            let estModePortrait = nouvelleOrientation == .portrait
-            //            print("choisitContraintes width height portrait", size.width, size.height, estModePortrait)
-            if estModePortrait {
-                self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
-                self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
-                self.contrainteCamembertHautPaysage.isActive = !estModePortrait
-                self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
-                self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
-                self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
-                self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
-                self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
-                self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
-                self.contrainteCamembertGauchePortrait.isActive = estModePortrait
-            } else {
-                self.contrainteAffichageEmissionsDroitePortrait.isActive = estModePortrait
-                self.contrainteAffichageEmissionsBasPortrait.isActive = estModePortrait
-                self.contrainteAffichageEmissionHauteurPortrait.isActive = estModePortrait
-                self.contrainteCamembertCentreHPortrait.isActive = estModePortrait
-                self.contrainteCamembertGauchePortrait.isActive = estModePortrait
-                self.contrainteAffichageEmissionsDroitePaysage.isActive = !estModePortrait
-                self.contrainteAffichageEmissionsBasPaysage.isActive = !estModePortrait
-                self.contrainteCamembertHautPaysage.isActive = !estModePortrait
-                self.contrainteCamembertGauchePaysage.isActive = !estModePortrait
-                self.contrainteCamembertCentreVPaysage.isActive = !estModePortrait
+//        if nouvelleOrientation != orientationResultats {
+//            orientationResultats = nouvelleOrientation
+//            let estModePortrait = nouvelleOrientation == .portrait
+            if nouvelleOrientation == .portrait && self.contrainteAffichageEmissionsDroitePaysage.isActive {
+                self.contrainteAffichageEmissionsDroitePaysage.isActive = false
+                self.contrainteAffichageEmissionsBasPaysage.isActive = false
+                self.contrainteCamembertHautPaysage.isActive = false
+                self.contrainteCamembertGauchePaysage.isActive = false
+                self.contrainteCamembertCentreVPaysage.isActive = false
+                self.contrainteAffichageEmissionsDroitePortrait.isActive = true
+                self.contrainteAffichageEmissionsBasPortrait.isActive = true
+                self.contrainteAffichageEmissionHauteurPortrait.isActive = true
+                self.contrainteCamembertCentreHPortrait.isActive = true
+                self.contrainteCamembertGauchePortrait.isActive = true
+                self.affichageEmissions.textAlignment = .center
+                print("choisit contraintes fin portrait true")
+                return true
+            } else if nouvelleOrientation == .paysage && self.contrainteAffichageEmissionsDroitePortrait.isActive {
+                self.contrainteAffichageEmissionsDroitePortrait.isActive = false
+                self.contrainteAffichageEmissionsBasPortrait.isActive = false
+                self.contrainteAffichageEmissionHauteurPortrait.isActive = false
+                self.contrainteCamembertCentreHPortrait.isActive = false
+                self.contrainteCamembertGauchePortrait.isActive = false
+                self.contrainteAffichageEmissionsDroitePaysage.isActive = true
+                self.contrainteAffichageEmissionsBasPaysage.isActive = true
+                self.contrainteCamembertHautPaysage.isActive = true
+                self.contrainteCamembertGauchePaysage.isActive = true
+                self.contrainteCamembertCentreVPaysage.isActive = true
+                self.affichageEmissions.textAlignment = .left
+                print("choisit contraintes fin paysage true")
+                return true
             }
-            self.affichageEmissions.textAlignment = estModePortrait ? .center : .left
-            print("choisit contraintes fin true")
-            return true
-        }
+//        }
         else {
             print("choisit contraintes fin false")
             return false
@@ -105,7 +107,7 @@ class ViewControllerAvecCamembert: UIViewController {
     
     func dessinePicto(frame: CGRect, picto: String, x: CGFloat, y: CGFloat, facteurTaille: CGFloat, alpha: CGFloat){
         if !picto.isEmpty {
-            let largeurLabel = (picto.count == 1 ? camembert.frame.width / 5 : camembert.frame.width / 3) * facteurTaille
+            let largeurLabel = min(camembert.frame.width, camembert.frame.height) * facteurTaille / (picto.count == 1 ? 5 : 3)
             //                let largeurLabel = rayon / 1.8
             let hauteurLabel = picto.count == 1 ? largeurLabel * 0.5 : largeurLabel / 4
             let texte = UILabel(frame: CGRect(x: x - (largeurLabel / 2.0), y: y - (hauteurLabel / 2.0), width: largeurLabel, height: hauteurLabel))
@@ -151,7 +153,7 @@ class ViewControllerAvecCamembert: UIViewController {
                     camembertVide = false
                     let intervalle = emission.emission / emissionsCalculees
                     let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
-                    let agrandirSecteur = ligne == ligneEnCours || (ligneEnCours == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) || (ligneEnCours == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCours == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
+                    let agrandirSecteur = ligne == ligneEnCours || (ligneEnCours == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) // || (ligneEnCours == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCours == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
                     let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
                     dessineSecteur(rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
                     debut = debut + intervalle
@@ -225,7 +227,7 @@ class ViewControllerAvecCamembert: UIViewController {
         } else { // else : if camembertVide : indispensable de mettre quelque chose pour éviter les crashes lors de la mise en page de la subview
             dessinePicto(frame: frame, picto: " ", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: 2.0, alpha: 1)
         } // else : if camembertVide
-        print("fin camembert")
+//        print("fin camembert")
     }
     
     @IBAction func afficheExplicationsFigure() {
