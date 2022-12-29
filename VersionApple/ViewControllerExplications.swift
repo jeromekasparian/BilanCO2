@@ -55,9 +55,17 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.textLabel?.text = lesParagraphes[ligne]
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.font = .boldSystemFont(ofSize: 24)
-        cell.detailTextLabel?.text = (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : ""
         cell.detailTextLabel?.numberOfLines = 0
         cell.detailTextLabel?.font = .systemFont(ofSize: 18)
+//        if #available(iOS 15, *) {
+//            do {
+//                try cell.detailTextLabel?.attributedText = NSAttributedString(markdown: (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : "", options: .)
+//            } catch {
+//                cell.detailTextLabel?.text = (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : ""
+//            }
+//        } else {
+            cell.detailTextLabel?.text = (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : ""
+//        }
         cell.accessoryType = .none
         return cell
     }

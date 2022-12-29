@@ -58,7 +58,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 self.contrainteCamembertCentreHPortrait.isActive = true
                 self.contrainteCamembertGauchePortrait.isActive = true
                 self.affichageEmissions.textAlignment = .center
-                print("choisit contraintes fin portrait true")
+//                print("choisit contraintes fin portrait true")
                 return true
             } else if nouvelleOrientation == .paysage && self.contrainteAffichageEmissionsDroitePortrait.isActive {
                 self.contrainteAffichageEmissionsDroitePortrait.isActive = false
@@ -72,12 +72,12 @@ class ViewControllerAvecCamembert: UIViewController {
                 self.contrainteCamembertGauchePaysage.isActive = true
                 self.contrainteCamembertCentreVPaysage.isActive = true
                 self.affichageEmissions.textAlignment = .left
-                print("choisit contraintes fin paysage true")
+//                print("choisit contraintes fin paysage true")
                 return true
             }
 //        }
         else {
-            print("choisit contraintes fin false")
+//            print("choisit contraintes fin false")
             return false
         }
     }

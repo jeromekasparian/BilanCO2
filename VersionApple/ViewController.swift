@@ -11,12 +11,11 @@
 
 // Fonctionnalités
 // - aide : mettre des sous-titres en gras
-// - nettoyage code / lisibilité
 // - renvoyer vers des ressources
 //      - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
 //      - autres ressources ?
 // - transport : Ferry, train, bus : aussi sur place ?
-// - activité : voile, amortissement bateau - Yolène -- - Yolène : les louveteaux ont des caravelles (un peu plus gros qu'un optimiste, https://fr.scoutwiki.org/Caravelle, 210 kg, polyester : 2,4 kg C02 par kg de plastique = 500 kg), les éclais des canots (3 voiles) - Bois et les aînés des randonneurs (habitables). Mais je ne suis pas sûre que ce soit des bateaux qui existent en dehors des scouts, je sais que les canots ont été inventés par et pour les éclaireur.euse.s  - Demander au Coma - Jérémy Balas
+// - activité : voile, amortissement bateau - Yolène - cf données de Jérémy Balas
 // - Autres activités ?
 
 // Anomalies
@@ -26,16 +25,13 @@
 //      - seul le PDF passe dans les messageries instantanées -> intégrer la liste au PDF
 //      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
 
-// Explications
-// - Daniel : les X jours soutenables sont ambigus quand c'est moins que la durée du camp -> retour en pourcentage
-// - Daniel : swipe / tap pour basculer d'un affichage à l'autre (plusieurs manières de formuler la soutenabilité)
 
 // *** A décider ***
 // - aspect du grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
 // - Train et autres transports : allers simples ? - Thomas
 
 //DÉCLINAISONS AUTRES ÉVÉNEMENTS
-//Hervé : J’avais fait pour Compétences lite/full. En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure.
+//Hervé : En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure. - J’avais fait pour Compétences lite/full. 
 // - Conférence
 // - Festival
 
@@ -100,6 +96,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //    var orientationGlobale: Orientation = .inconnu
     //    var largeurCellule: LargeurCellule = .inconnu
 //    var timeStampDernierRedessin = Date()
+    var bloquerLePassageEnModeZoom: Bool = false
 
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
@@ -357,11 +354,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             couleurDefautThumb = cell.glissiere.thumbTintColor ?? .white
             glissiereModeZoom = false
             compteurCurseurImmobile = 0
+            compteurCurseurImmobileEstInhibe = false
 //            dateDernierMouvementCurseur = Date().timeIntervalSince1970
 //            delaiEnCoursPourZoom = false
             cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
 //            dureeEstDejaZero = lesEmissions[SorteEmission.duree.rawValue].valeur == 0
 //            effectifEstDejaZero = lesEmissions[SorteEmission.effectif.rawValue].valeur == 0
+            bloquerLePassageEnModeZoom = false
         }
     }
     
@@ -370,7 +369,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             self.alerteConfirmationReset()
             self.finMouvementGlissiere(cell: cellule)
         }
+//        cellule.glissiere.setThumbImage(cellule.glissiere.thumbImage(for: .selected), for: .normal)
         cellule.glissiere.thumbTintColor = .gray
+//        cellule.glissiere.minimumTrackTintColor = .red
         self.glissiereModeZoom = true
         let intervalleMinMax = cellule.glissiere.maximumValue - cellule.glissiere.minimumValue
         cellule.glissiere.maximumValue = cellule.glissiere.value + intervalleMinMax / 20
@@ -384,24 +385,47 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             cellule.glissiere.minimumValue = self.minValueEnCours
         }
     }
+
+    func desactiverModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
+        cellule.glissiere.thumbTintColor = .white
+        self.glissiereModeZoom = false
+        cellule.glissiere.maximumValue = maxValueEnCours
+        cellule.glissiere.minimumValue = minValueEnCours
+    }
+
+    var compteurCurseurImmobileEstInhibe: Bool = false
     
-//    var delaiEnCoursPourZoom: Bool = false
     func glissiereBougee(cell: CelluleEmission) {
-        print("glissiere bougée 1")
+//        print("glissiere bougée 1")
         if ligneEnCours >= 0 && celluleEnCours != nil {
             let ligne = ligneEnCours
             let cellule = celluleEnCours
             let emission = lesEmissions[ligne]
-            print("valeur : ", cellule!.glissiere.value)
+//            print("valeur : ", cellule!.glissiere.value)
             DispatchQueue.main.async{
-                if !self.glissiereModeZoom && abs(cellule!.glissiere.value - self.valeurPrecedente) < 0.01 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) { // curseur quasi-immobile ?
-                    //                if !self.glissiereModeZoom && (cellule!.glissiere.value == self.valeurPrecedente || Date().timeIntervalSince1970 - self.dateDernierMouvementCurseur >= 1.0) { // curseur quasi-immobile ?
-                    self.compteurCurseurImmobile = self.compteurCurseurImmobile + 1
-                    //                    print("compteurCurseurImmobile", self.compteurCurseurImmobile)
-                    if self.compteurCurseurImmobile > 18 { // on attend un certain temps avec le curseur presque immobile avant de passer en mode zoom
-                        self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!)
+                if self.bloquerLePassageEnModeZoom && cellule!.glissiere.value >= cellule!.glissiere.minimumValue + (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) * 0.2 && cellule!.glissiere.value <= cellule!.glissiere.minimumValue + (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) * 0.8 {
+                    self.bloquerLePassageEnModeZoom = false
+                }
+                if !self.glissiereModeZoom && !self.bloquerLePassageEnModeZoom && abs(cellule!.glissiere.value - self.valeurPrecedente) < 0.01 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) { // curseur quasi-immobile ?
+                    if !self.compteurCurseurImmobileEstInhibe {
+                        self.compteurCurseurImmobile = self.compteurCurseurImmobile + 1
+                        if #available(iOS 1, *) {  // exclure MacCatalyst
+                            self.compteurCurseurImmobileEstInhibe = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.025) {
+                                self.compteurCurseurImmobileEstInhibe = false
+                            }
+                        }
+                        if self.compteurCurseurImmobile > 18 { // on attend un certain temps avec le curseur presque immobile avant de passer en mode zoom
+                            self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!)
+                        }
                     }
-                } else {
+                } else if self.glissiereModeZoom && ((cellule!.glissiere.value >= cellule!.glissiere.maximumValue && self.maxValueEnCours != cellule!.glissiere.maximumValue) || (cellule!.glissiere.value <= cellule!.glissiere.minimumValue && self.minValueEnCours != cellule!.glissiere.minimumValue)) { // immobile en bout de glissière quand on est en mode zoom -> on en sort
+                    self.compteurCurseurImmobile = self.compteurCurseurImmobile + 1
+                    if self.compteurCurseurImmobile > 18 { // on attend un certain temps avec le curseur presque immobile avant de passer en mode zoom
+                        self.desactiverModeZoomGlissiere(ligne: ligne, cellule: cellule!)
+                        self.bloquerLePassageEnModeZoom = true
+                    }
+                } else {  // le curseur a bougé
                     self.compteurCurseurImmobile = 0
                 }
                 self.valeurPrecedente = cellule!.glissiere.value
@@ -417,7 +441,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                         lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
                     }
                 }
-                cellule!.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
+                let loupe = self.glissiereModeZoom ? "🔎" : ""  // variante 🔬
+                cellule!.labelValeur.text = String(format: loupe + self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, lesEmissions[ligne].valeur).replacingOccurrences(of: " ", with: "\u{2007}")
                 switch ligne {
                 case SorteEmission.duree.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
@@ -429,8 +454,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
                 case SorteEmission.effectif.rawValue:
                     self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-                default:
-                    print("rien")
+                default: let dummy = 1
+//                    print("rien")
                 }
                 emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
                 cellule!.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
@@ -460,12 +485,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
       print("Fin mouvement 1")
         glissiereBougee(cell: cell)
         let lesValeurs = lesEmissions.map({$0.valeur})
+        compteurCurseurImmobileEstInhibe = false
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
 //        print("Fin mouvement 2")
         cell.glissiere.minimumValue = minValueEnCours
         cell.glissiere.maximumValue = maxValueEnCours
 //        print("Fin mouvement 3")
         glissiereModeZoom = false
+        bloquerLePassageEnModeZoom = false
         compteurCurseurImmobile = 0
         DispatchQueue.main.async{
             cell.glissiere.thumbTintColor = self.couleurDefautThumb
