@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let texteAfficherExplicationsFigures = "afficheExplicationFigures"
+//let texteAfficherExplicationsFigures = "afficheExplicationFigures"
 let facteurDonnut: CGFloat = 0.6
 
 class ViewControllerAvecCamembert: UIViewController {
@@ -16,7 +16,7 @@ class ViewControllerAvecCamembert: UIViewController {
     //    @IBOutlet var affichageEmissionsParPersonne: UILabel!
     //    @IBOutlet var affichageEmissionsSoutenables: UILabel!
     @IBOutlet var camembert: UIView!
-    @IBOutlet var boutonAideGraphique: UIButton!
+//    @IBOutlet var boutonAideGraphique: UIButton!
     @IBOutlet var boutonExport: UIButton!
     
     @IBOutlet var contrainteAffichageEmissionsDroitePortrait: NSLayoutConstraint!
@@ -35,7 +35,7 @@ class ViewControllerAvecCamembert: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        boutonAideGraphique.setTitle("", for: .normal)
+//        boutonAideGraphique.setTitle("", for: .normal)
         boutonExport.setTitle("", for: .normal)
     }
     
@@ -122,7 +122,7 @@ class ViewControllerAvecCamembert: UIViewController {
         }
     }
         
-    func dessineCamembert(camembert: UIView, grandFormat: Bool) {
+    func dessineCamembert(camembert: UIView, grandFormat: Bool, curseurActif: Bool) {
         // effacer le camembert existant
         if let sublayers = camembert.layer.sublayers {
             if !sublayers.isEmpty {
@@ -165,23 +165,35 @@ class ViewControllerAvecCamembert: UIViewController {
         // la référence de soutenabilité
         if !camembertVide {
             if soutenabiliteDansDonnut {
-//                let rayonCercleVert = rayon * (1 - facteurDonnut)
-                let ratioSoutenabilite = emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / emissionsCalculees
-                let seuilHaut = 1.3
-                let seuilMilieu = 1.0
-                let seuilBas = 0.7
-                let taillePicto: CGFloat = 1.8
-                if ratioSoutenabilite > 1.3 {
-                    dessinePicto(frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
-                } else if ratioSoutenabilite < 0.7 {
-                    dessinePicto(frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
-                } else if ratioSoutenabilite > 1.0 {
-                    dessinePicto(frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilHaut - ratioSoutenabilite) / (seuilHaut - seuilMilieu))
-                    dessinePicto(frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilMilieu) / (seuilHaut - seuilMilieu))
-                } else {  // entre 1 et le seuil bas
-                    dessinePicto(frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilMilieu - ratioSoutenabilite) / (seuilMilieu - seuilBas))
-                    dessinePicto(frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilBas) / (seuilMilieu - seuilBas))
-
+                if lesEmissions[SorteEmission.effectif.rawValue].valeur > 0 {
+                    //                let rayonCercleVert = rayon * (1 - facteurDonnut)
+                    let ratioSoutenabilite = emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / emissionsCalculees
+                    let seuilHaut = 1.3
+                    let seuilMilieu = 1.0
+                    let seuilBas = 0.7
+                    let taillePicto: CGFloat = 1.8
+                    if ratioSoutenabilite > seuilHaut {
+                        dessinePicto(frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                    } else if ratioSoutenabilite < seuilBas {
+                        dessinePicto(frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                    } else if curseurActif {
+                        if ratioSoutenabilite > seuilMilieu {
+                            dessinePicto(frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilHaut - ratioSoutenabilite) / (seuilHaut - seuilMilieu))
+                            dessinePicto(frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilMilieu) / (seuilHaut - seuilMilieu))
+                        } else {  // entre 1 et le seuil bas
+                            dessinePicto(frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilMilieu - ratioSoutenabilite) / (seuilMilieu - seuilBas))
+                            dessinePicto(frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilBas) / (seuilMilieu - seuilBas))
+                            
+                        }
+                    } else {
+                        if ratioSoutenabilite > seuilMilieu + ((seuilHaut - seuilMilieu) / 2.0 ) {
+                            dessinePicto(frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                        } else if ratioSoutenabilite < seuilMilieu - ((seuilMilieu - seuilBas) / 2.0 ) {
+                            dessinePicto(frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                        } else {
+                            dessinePicto(frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                        }
+                    }
                 }
             } else {
                 let rayonCercleVert = min(frame.width, frame.height) / 2 * 0.9 * sqrt(emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / referenceRayon)
@@ -209,7 +221,7 @@ class ViewControllerAvecCamembert: UIViewController {
                     } else {
 //                        let taillePicto = ligne == ligneEnCours ? 1.5 : 1.0
                         if (emission.emission >= limite && intervalle > pourcentageMini) || ligne == ligneEnCours { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
-                            let positionAngulaireLabel = Double (2 * .pi * (debut + (intervalle / 2.0) - 0.25))
+                            let positionAngulaireLabel: Double = 2.0 * .pi * Double(debut + (intervalle / 2.0) - 0.25)
                             dessinePicto(frame: frame, picto: emission.picto, x: CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5) / 2.0, y: (camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5) / 2.0, facteurTaille: 1.0, alpha: 1.0)
                             
                         }
@@ -230,15 +242,15 @@ class ViewControllerAvecCamembert: UIViewController {
 //        print("fin camembert")
     }
     
-    @IBAction func afficheExplicationsFigure() {
-//        ligneExplicationsSelectionnee = 1
-        performSegue(withIdentifier: "Explications", sender: nil)
-    }
+//    @IBAction func afficheExplicationsFigure() {
+////        ligneExplicationsSelectionnee = 1
+//        performSegue(withIdentifier: "Explications", sender: nil)
+//    }
     
     
     @objc func actualiseAffichageEmissions(grandFormat: Bool) {
         DispatchQueue.main.async{
-            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions, grandFormat: grandFormat)  //  NSAttributedString(string:"Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre")
+            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions, grandFormat: grandFormat)
         }
     }
     
@@ -249,35 +261,41 @@ class ViewControllerAvecCamembert: UIViewController {
         let tailleTextePrincipal: CGFloat =  max(0.5, 3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0)  //grandFormat ? 3 : 2
         let tailleTexteSecondaire = 0.75 * tailleTextePrincipal
         let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
-        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 { //} && !premierAffichageApresInitialisation {
+//        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 { //} && !premierAffichageApresInitialisation {
+        if emissionsCalculees > 0 {
             if !boutonExport.isEnabled {boutonExport.isEnabled = true}
             
-            let formatTexteValeurEmissionsTotales = emissionsCalculees >= 1000.0 ? NSLocalizedString("%.1f t", comment: "") : NSLocalizedString("%.0f kg", comment: "")
+            let formatTexteValeurEmissionsTotales = emissionsCalculees < 1000.0 ? NSLocalizedString("%.0f kg", comment: "") : emissionsCalculees < 100000.0 ? NSLocalizedString("%.1f t", comment: "") : NSLocalizedString("%.0f t", comment: "")
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
             texte.append(NSMutableAttributedString(string: String(format: NSLocalizedString("CO₂ : ", comment: "") + formatTexteValeurEmissionsTotales, emissionsPourAffichage), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTextePrincipal)]))
-            if emissionsParPersonne >= 1000 {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.1f t / personne\n", comment: ""), emissionsParPersonne / 1000.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire)]))
+            if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 {
+                if emissionsParPersonne >= 1000 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.1f t / personne\n", comment: ""), emissionsParPersonne / 1000.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire)]))
+                } else {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.0f kg / personne\n", comment: ""), emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire)]))
+                    
+                }
+                //
+                let dureeEquivalenteSoutenableAns = emissionsParPersonne / emissionsSoutenablesAnnuelles
+                let dureeEquivalenteSoutenableMois = dureeEquivalenteSoutenableAns * 12
+                let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
+                if dureeEquivalenteSoutenableJours <= 60 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
+                } else if dureeEquivalenteSoutenableMois < 24 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
+                } else {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
+                }
+                let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
+                //            let ratio = emissionsSoutenables / emissionsParPersonne
+                couleur = couleurSoutenabilite(ratioSoutenabilite: ratio)
+                //            if ratio < 0.8 {couleur = vert2}
+                //            else if ratio < 1.2 {couleur = orange}
+                //            else {couleur = rougeVif}
             } else {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.0f kg / personne\n", comment: ""), emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire)]))
-                
+                couleur = .black
+                texte.addAttributes([NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTextePrincipal, weight: .regular)], range: NSRange(location: 0, length: texte.length))
             }
-            //
-            let dureeEquivalenteSoutenableAns = emissionsParPersonne / emissionsSoutenablesAnnuelles
-            let dureeEquivalenteSoutenableMois = dureeEquivalenteSoutenableAns * 12
-            let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
-            if dureeEquivalenteSoutenableJours <= 60 {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
-            } else if dureeEquivalenteSoutenableMois < 24 {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
-            } else {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)]))
-            }
-            let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
-//            let ratio = emissionsSoutenables / emissionsParPersonne
-            couleur = couleurSoutenabilite(ratioSoutenabilite: ratio)
-//            if ratio < 0.8 {couleur = vert2}
-//            else if ratio < 1.2 {couleur = orange}
-//            else {couleur = rougeVif}
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
             return NSAttributedString(attributedString: texte) //
         } else {
@@ -289,7 +307,7 @@ class ViewControllerAvecCamembert: UIViewController {
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
         self.boutonExport.isHidden = true
-        self.boutonAideGraphique.isHidden = true
+//        self.boutonAideGraphique.isHidden = true
         let vueAExporter = sender.superview ?? self.view!
         let pdfPageFrame = vueAExporter.bounds
         let pdfData = NSMutableData()
@@ -333,7 +351,7 @@ class ViewControllerAvecCamembert: UIViewController {
     
     func remettreBoutons(){
         boutonExport.isHidden = false
-        boutonAideGraphique.isHidden = false
+//        boutonAideGraphique.isHidden = false
     }
     
     func texteListeEmissions(lesEmissions: [TypeEmission]) -> NSAttributedString {

@@ -30,19 +30,43 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
     let lesParagraphes = [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""), NSLocalizedString("Limites", comment: ""), NSLocalizedString("Sources", comment: ""), NSLocalizedString("Remerciements", comment: "")]
 
     let cellReuseIdentifier = "celluleExplications"
+    var lesTextesFormattes: [NSAttributedString] = []
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var boutonFermer: UIButton!
     @IBOutlet var boutonOK: UIButton!
 
     override func viewDidLoad(){
+        lesTextesFormattes = lesTextes.map({formatteTexte(texte: "\n" + $0)})
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)  // you don't need to register your UITableViewCell subclass if you're using prototype cells. -- https://stackoverflow.com/questions/37623281/swift-customizing-tableview-to-hold-multiple-columns-of-data
-        if ligneExplicationsSelectionnee >= 0 {
+        if ligneExplicationsSelectionnee >= 0 && lesParagraphes.count > ligneExplicationsSelectionnee {
             tableView.scrollToRow(at: IndexPath(row: ligneExplicationsSelectionnee, section: 0), at: .top, animated: true)
         }
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+    if ligneExplicationsSelectionnee >= 0 && lesParagraphes.count > ligneExplicationsSelectionnee {
+        tableView.scrollToRow(at: IndexPath(row: ligneExplicationsSelectionnee, section: 0), at: .top, animated: true)
+    }
+        super.viewDidAppear(animated)
+}
+    
+    func formatteTexte(texte: String) -> NSAttributedString {
+        let marqueur = "***"
+        let longueurMarqueur = marqueur.count
+        let lesIndices = texte.indicesOf(string: marqueur)
+        let nombreOccurrences = lesIndices.count / 2
+        let texteSansMarqueurs = texte.replacingOccurrences(of: marqueur, with: "")
+        let texteFormatte = NSMutableAttributedString(string: texteSansMarqueurs, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
+        if nombreOccurrences > 0 {
+            for i in 0...nombreOccurrences - 1 {
+                texteFormatte.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18).boldItalics()], range: NSRange(location: lesIndices[2 * i] - 2 * longueurMarqueur * i, length: lesIndices[2 * i + 1] - lesIndices[2 * i] - longueurMarqueur))   // symbolicTraits: [.traitBold, .traitItalic]
+            }
+        }
+        return texteFormatte as NSAttributedString
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,16 +80,7 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.font = .boldSystemFont(ofSize: 24)
         cell.detailTextLabel?.numberOfLines = 0
-        cell.detailTextLabel?.font = .systemFont(ofSize: 18)
-//        if #available(iOS 15, *) {
-//            do {
-//                try cell.detailTextLabel?.attributedText = NSAttributedString(markdown: (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : "", options: .)
-//            } catch {
-//                cell.detailTextLabel?.text = (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : ""
-//            }
-//        } else {
-            cell.detailTextLabel?.text = (ligneExplicationsSelectionnee == ligne) ? "\n" + lesTextes[ligne] : ""
-//        }
+        cell.detailTextLabel?.attributedText = (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne ? lesTextesFormattes[ligne] : NSAttributedString(string: "")
         cell.accessoryType = .none
         return cell
     }
@@ -79,16 +94,71 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
             ligneExplicationsSelectionnee = indexPath.row
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        } else {  // on avait une ligne sélectionnée et on en sélectionne une autre
+        } else if lesParagraphes.count > ligneExplicationsSelectionnee {  // on avait une ligne sélectionnée et on en sélectionne une autre -- on vérifie qu'on est bien dans le tableau
             let ancienIndexPath = IndexPath(row: ligneExplicationsSelectionnee, section: 0)
             ligneExplicationsSelectionnee = indexPath.row
             tableView.reloadRows(at: [indexPath, ancienIndexPath], with: .automatic)
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        } else {
+            ligneExplicationsSelectionnee = -1
         }
     }
     
     @IBAction func fermerExplications() {
         self.dismiss(animated: true)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+//        ligneExplicationsSelectionnee = -1
+//        print("disappear")
+        super.viewWillDisappear(animated)
+    }
 
+}
+
+
+extension String {
+    func indicesOf(string: String) -> [Int] {
+        var indices = [Int]()
+        var searchStartIndex = self.startIndex
+
+        while searchStartIndex < self.endIndex,
+            let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
+            !range.isEmpty
+        {
+            let index = distance(from: self.startIndex, to: range.lowerBound)
+            indices.append(index)
+            searchStartIndex = range.upperBound
+        }
+
+        return indices
+    }
+}
+
+// https://stackoverflow.com/questions/34499735/how-to-apply-bold-and-italics-to-an-nsmutableattributedstring-range
+extension UIFont {
+
+    func withTraits(_ traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
+
+        // create a new font descriptor with the given traits
+        guard let fd = fontDescriptor.withSymbolicTraits(traits) else {
+            // the given traits couldn't be applied, return self
+            return self
+        }
+            
+        // return a new font with the created font descriptor
+        return UIFont(descriptor: fd, size: pointSize)
+    }
+
+    func italics() -> UIFont {
+        return withTraits(.traitItalic)
+    }
+
+    func bold() -> UIFont {
+        return withTraits(.traitBold)
+    }
+
+    func boldItalics() -> UIFont {
+        return withTraits([ .traitBold, .traitItalic ])
+    }
 }

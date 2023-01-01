@@ -31,24 +31,24 @@
 //- Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.";
 //
 //
-"texteMethodo" = "L'app estime les émissions de gaz à effet de serre (converties en équivalent CO₂) en se basant sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
+"texteMethodo" = "L'app estime les émissions de gaz à effet de serre, converties en équivalent CO₂. Elle se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout.
 
-   • Repas : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaire, etc.
+   • ***Repas*** : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaire, etc.
 
-   • Cuisson : l'estimation est basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz avant la fin de cuisson.
+   • ***Cuisson*** : l'estimation est basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz avant la fin de cuisson.
      Les repas qui ne sont pas cuisinés au gaz sont supposés cuits au feu de bois, avec un impact carbone nul. On considère en effet que dans une forêt gérée durablement, les arbres repoussent et stockent du carbone au même rythme qu'on en libère par la combustion du bois. À noter que ce raisonnement n'est valable qu'à long terme (30 ans). À court terme la combustion du bois dégage du CO₂.
 
-   • Transports et déplacements : les estimations considèrent des véhicules de taille moyenne dans leur catégorie.
+   • ***Transports et déplacements*** : les estimations considèrent des véhicules de taille moyenne dans leur catégorie.
      Si un trajet en train est complété par un car entre la gare et le lieu de camp, comptez ce dernier dans les déplacements sur place. De manière générale, si vous utilisez plusieurs moyens de transport, entrez celui qui est utilisé sur la plus grande distance en tant que trajet vers le camp, et l'autre comme un déplacement sur place.
 
-   • Hébergement : les estimations prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
+   • ***Hébergement*** : les estimations prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
 
-   • Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.";
+   • ***Matériel*** : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.";
 
 "texteGraphique" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au camp.
-Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour de camp.";
+Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour de camp.";
 
-"texteEmissionsAcceptables" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour de camp. Les émissions du camp sont ramenées au nombre de participants et à la durée du camp, puis comparées avec cette référence.";
+"texteEmissionsAcceptables" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour de camp. \n\nLes émissions du camp sont ramenées au nombre de participants et à la durée du camp, puis comparées avec cette référence.";
 
 "texteLimites" = "L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
 
@@ -77,6 +77,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 
 // ViewControllerAvecCamembert
 "%.1f t" = "%.1f t";
+"%.0f t" = "%.0f t";
 "%.0f kg" = "%.0f kg";
 "CO₂ : " = "CO₂ : ";
 "\n%.1f t / personne\n" = "\n%.1f t / personne\n";

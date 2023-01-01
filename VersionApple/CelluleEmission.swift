@@ -26,13 +26,13 @@ class CelluleEmission: UITableViewCell {
 
     @IBOutlet var contrainteGlissiereGaucheEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteGlissiereGaucheLarge: NSLayoutConstraint!
-    @IBOutlet var contrainteGlissiereHautLarge: NSLayoutConstraint!
+//    @IBOutlet var contrainteGlissiereHautLarge: NSLayoutConstraint!
     @IBOutlet var contrainteNomEmissionVerticaleEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteNomEmissionVerticaleLarge: NSLayoutConstraint!
     @IBOutlet var contrainteNomEmissionDroiteEtroit: NSLayoutConstraint!
-    @IBOutlet var contrainteNomEmissionHautEtroit: NSLayoutConstraint!
-    @IBOutlet var contrainteBoutonInfoVerticaleLarge: NSLayoutConstraint!
-    @IBOutlet var contrainteBoutonInfoVerticaleEtroit: NSLayoutConstraint!
+//    @IBOutlet var contrainteNomEmissionHautEtroit: NSLayoutConstraint!
+//    @IBOutlet var contrainteBoutonInfoVerticaleLarge: NSLayoutConstraint!
+//    @IBOutlet var contrainteBoutonInfoVerticaleEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageValeurDroiteLarge: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageValeurDroiteEtroit: NSLayoutConstraint!
 
@@ -72,39 +72,43 @@ class CelluleEmission: UITableViewCell {
         self.delegate?.afficheConseil(cell: self)
     }
 
-    func choisitContraintes() {
+    func choisitContraintesCelluleEmission() {
 //        print("choisit contraintes cell debut")
 //        let nouvelleLargeur: LargeurCellule = self.frame.width >= largeurMiniTableViewEcranLarge ? .large : .etroit
 //        if nouvelleLargeur != largeurCellule {
 //            largeurCellule = nouvelleLargeur
-            let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge //nouvelleLargeur == .large
+//            let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge //nouvelleLargeur == .large
+        let estLarge = (self.frame.width - labelNom.textWidth() - labelValeur.textWidth() - boutonInfo.frame.width - 12 - 32)  >= largeurMiniGlissiere // 12 : les intervalles ; 32 : les marges à gauche et à droite
+//        print("contraintes", labelNom.text!, self.frame.width, labelNom.textWidth(), glissiere.frame.width, labelValeur.textWidth(), boutonInfo.frame.width, self.frame.width - labelNom.textWidth() - labelValeur.textWidth() - boutonInfo.frame.width - 12 - 32, estLarge, contrainteAffichageValeurDroiteLarge.isActive)
             //        DispatchQueue.main.async {
         if estLarge { // désactiver les contraintes avant d'activer les autres
+//            print("Large", labelNom.text)
             self.contrainteGlissiereGaucheEtroit.isActive = false
             self.contrainteNomEmissionVerticaleEtroit.isActive = false
             self.contrainteNomEmissionDroiteEtroit.isActive = false
-            self.contrainteNomEmissionHautEtroit.isActive = false
-            self.contrainteBoutonInfoVerticaleEtroit.isActive = false
+//            self.contrainteNomEmissionHautEtroit.isActive = false
+//            self.contrainteBoutonInfoVerticaleEtroit.isActive = false
             self.contrainteAffichageValeurDroiteEtroit.isActive = false
             self.contrainteGlissiereGaucheLarge.isActive = true
-            self.contrainteGlissiereHautLarge.isActive = true
+//            self.contrainteGlissiereHautLarge.isActive = true
             self.contrainteNomEmissionVerticaleLarge.isActive = true
-            self.contrainteBoutonInfoVerticaleLarge.isActive = true
+//            self.contrainteBoutonInfoVerticaleLarge.isActive = true
             self.contrainteAffichageValeurDroiteLarge.isActive = true
-            self.labelNom.numberOfLines = 2
+//            self.labelNom.numberOfLines = 2
         } else {
+//            print("Etroit", labelNom.text)
             self.contrainteGlissiereGaucheLarge.isActive = false
-            self.contrainteGlissiereHautLarge.isActive = false
+//            self.contrainteGlissiereHautLarge.isActive = false
             self.contrainteNomEmissionVerticaleLarge.isActive = false
-            self.contrainteBoutonInfoVerticaleLarge.isActive = false
+//            self.contrainteBoutonInfoVerticaleLarge.isActive = false
             self.contrainteAffichageValeurDroiteLarge.isActive = false
             self.contrainteNomEmissionVerticaleEtroit.isActive = true
             self.contrainteGlissiereGaucheEtroit.isActive = true
             self.contrainteNomEmissionDroiteEtroit.isActive = true
-            self.contrainteNomEmissionHautEtroit.isActive = true
-            self.contrainteBoutonInfoVerticaleEtroit.isActive = true
+//            self.contrainteNomEmissionHautEtroit.isActive = true
+//            self.contrainteBoutonInfoVerticaleEtroit.isActive = true
             self.contrainteAffichageValeurDroiteEtroit.isActive = true
-            self.labelNom.numberOfLines = 1
+//            self.labelNom.numberOfLines = 1
         }
 //        print("choisit contraintes cell fin")
 

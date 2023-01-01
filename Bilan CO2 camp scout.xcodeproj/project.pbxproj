@@ -26,6 +26,7 @@
 		B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5E0FE8D292A50C5001D0790 /* Data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE8F292A50C5001D0790 /* Data.csv */; };
+		B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		B5E0FE90292A50CA001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Data.csv; sourceTree = "<group>"; };
 		B5E2D3312919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E2D3322919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				B5E0FE8F292A50C5001D0790 /* Data.csv */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
 				B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */,
+				B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */,
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
 				B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
@@ -197,6 +200,7 @@
 			files = (
 				B51AD1C228CA439700888CDD /* Graphique.swift in Sources */,
 				B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */,
+				B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */,
 				B517AB8528D8FB6A005FF834 /* GrandCamembert.swift in Sources */,
 				B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */,
 				B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */,
@@ -379,13 +383,13 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -419,13 +423,13 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
