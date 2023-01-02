@@ -24,9 +24,9 @@ class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var contrainteAffichageEmissionsBasPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageEmissionsBasPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageEmissionHauteurPortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteCamembertGauchePaysage: NSLayoutConstraint!
-    @IBOutlet var contrainteCamembertGauchePortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteCamembertHautPaysage: NSLayoutConstraint!
+    @IBOutlet var contrainteCamembertDroitePaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteCamembertGauchePortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteCamembertHautPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertCentreHPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
     
@@ -49,14 +49,14 @@ class ViewControllerAvecCamembert: UIViewController {
             if nouvelleOrientation == .portrait && self.contrainteAffichageEmissionsDroitePaysage.isActive {
                 self.contrainteAffichageEmissionsDroitePaysage.isActive = false
                 self.contrainteAffichageEmissionsBasPaysage.isActive = false
-                self.contrainteCamembertHautPaysage.isActive = false
-                self.contrainteCamembertGauchePaysage.isActive = false
+//                self.contrainteCamembertHautPaysage.isActive = false
+                self.contrainteCamembertDroitePaysage.isActive = false
                 self.contrainteCamembertCentreVPaysage.isActive = false
                 self.contrainteAffichageEmissionsDroitePortrait.isActive = true
                 self.contrainteAffichageEmissionsBasPortrait.isActive = true
                 self.contrainteAffichageEmissionHauteurPortrait.isActive = true
                 self.contrainteCamembertCentreHPortrait.isActive = true
-                self.contrainteCamembertGauchePortrait.isActive = true
+//                self.contrainteCamembertGauchePortrait.isActive = true
                 self.affichageEmissions.textAlignment = .center
 //                print("choisit contraintes fin portrait true")
                 return true
@@ -65,11 +65,11 @@ class ViewControllerAvecCamembert: UIViewController {
                 self.contrainteAffichageEmissionsBasPortrait.isActive = false
                 self.contrainteAffichageEmissionHauteurPortrait.isActive = false
                 self.contrainteCamembertCentreHPortrait.isActive = false
-                self.contrainteCamembertGauchePortrait.isActive = false
+//                self.contrainteCamembertGauchePortrait.isActive = false
                 self.contrainteAffichageEmissionsDroitePaysage.isActive = true
                 self.contrainteAffichageEmissionsBasPaysage.isActive = true
-                self.contrainteCamembertHautPaysage.isActive = true
-                self.contrainteCamembertGauchePaysage.isActive = true
+//                self.contrainteCamembertHautPaysage.isActive = true
+                self.contrainteCamembertDroitePaysage.isActive = true
                 self.contrainteCamembertCentreVPaysage.isActive = true
                 self.affichageEmissions.textAlignment = .left
 //                print("choisit contraintes fin paysage true")
@@ -351,6 +351,9 @@ class ViewControllerAvecCamembert: UIViewController {
     
     func remettreBoutons(){
         boutonExport.isHidden = false
+        if emissionsCalculees > 0 {
+            boutonExport.isEnabled = true
+        }
 //        boutonAideGraphique.isHidden = false
     }
     

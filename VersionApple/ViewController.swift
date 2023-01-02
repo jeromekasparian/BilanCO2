@@ -8,7 +8,8 @@
 // *** Priorite 1 ***
 // AFFICHAGE / mise en page
 // - la page d'aide déborde parfois sur toute la largeur de l'écran.
-// - prendre en charge le mode sombre
+// - prendre en charge le mode sombre ?
+// - 
 
 // Fonctionnalités
 // - renvoyer vers des ressources
@@ -57,6 +58,10 @@
 import UIKit
 //import AVFoundation
 
+let largeurMiniGlissiere: CGFloat = 150
+let emissionsSoutenablesAnnuelles: Double = 2000.0 // t eq. CO2 / an / personne
+let facteurZoomGlissiere: Float = 10.0
+
 //let notificationEmetteursChanges = "notificationEmetteursChanges"
 let notificationBackground = "notificationBackground"
 var emissionsCalculees: Double = .nan
@@ -65,9 +70,7 @@ var lesSections: [String] = []
 //var effectif: Double = .nan
 let userDefaults = UserDefaults.standard
 //let largeurMiniTableViewEcranLarge: CGFloat = 400
-let largeurMiniGlissiere: CGFloat = 150
 var lesEmissions: [TypeEmission] = []
-let emissionsSoutenablesAnnuelles: Double = 2000.0 // t eq. CO2 / an / personne
 var afficherPictos: Bool = true
 
 enum Orientation {
@@ -115,8 +118,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        _ = choisitContraintes(size: self.view.frame.size)
+        _ = self.choisitContraintes(size: self.view.frame.size)
         (lesEmissions, lesSections) = lireFichier(nom: "Data")
         let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
         if !lesValeurs.isEmpty && lesValeurs.count == lesEmissions.count {
@@ -125,29 +127,34 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
 //            premierAffichageApresInitialisation = false
         }
-        tableViewEmissions.delegate = self
-        tableViewEmissions.dataSource = self
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        tableViewEmissions.delegate = self
+        tableViewEmissions.dataSource = self
         if #available(iOS 15.0, *) {
             tableViewEmissions.sectionHeaderTopPadding = 0
         }
         // mise en place de la détection du swipe left à 3 doigts pour activer le mode debug
-        let swipePictos = UISwipeGestureRecognizer(target:self, action: #selector(changeModePictos))
-        swipePictos.direction = UISwipeGestureRecognizer.Direction.left
-        swipePictos.numberOfTouchesRequired = 3
-        self.view.addGestureRecognizer(swipePictos)
+//        let swipePictos = UISwipeGestureRecognizer(target:self, action: #selector(changeModePictos))
+//        swipePictos.direction = UISwipeGestureRecognizer.Direction.left
+//        swipePictos.numberOfTouchesRequired = 3
+//        self.view.addGestureRecognizer(swipePictos)
         
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             //            self.actualiseAffichageEmissions(grandFormat: false)
-            self.tableViewEmissions.reloadData()
-        }
+//            self.tableViewEmissions.reloadData()
+//        }
+        super.viewDidLoad()
     }  // viewDidLoad
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        redessineResultats(size: self.view.frame.size, curseurActif: false)
+//        DispatchQueue.main.async {
+            self.redessineResultats(size: self.view.frame.size, curseurActif: false)
+//        print("didappear")
+//        tableViewEmissions.reloadData()
+//        }
     }
     
     @objc func changeModePictos() {
@@ -218,10 +225,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
-            cell.choisitContraintesCelluleEmission()
+            cell.choisitContraintesCelluleEmission(largeurTableView: tableViewEmissions.frame.width)  // si on ne lui fournit pas la largeur du tableView, à la première exécution il a une largeur fausse pour certaines cellules.
             return cell
         }
-        else {  // la dernière section : les données
+        else {  // la dernière section : l'ours
             let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
             cell.selectionStyle = .none
             cell.delegate = self
@@ -316,11 +323,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     func texteValeurPourTableView(valeurMax: Double, unite: String, valeur: Double, afficherLoupe: Bool, tailleFonte: CGFloat) -> NSAttributedString {
         let alpha = afficherLoupe ? 1.0 : 0.0
-        var couleurLoupe = UIColor.black
-        if #available(iOS 13.0, *) {
-            couleurLoupe = UIColor.label
-        }
-        let texteAAfficher = NSMutableAttributedString(string: "🔎", attributes: [NSAttributedString.Key.foregroundColor: couleurLoupe.withAlphaComponent(alpha)])
+        let couleurLoupe = UIColor.black.withAlphaComponent(alpha) // n'importe quelle couleur est ok en fait - du moins tant qu'on ne gère pas le mode sombre
+        let texteAAfficher = NSMutableAttributedString(string: "🔎", attributes: [NSAttributedString.Key.foregroundColor: couleurLoupe])
         let texteValeurUnite =  NSAttributedString(string: String(format: self.formatAffichageValeur(valeurMax: valeurMax), valeur).replacingOccurrences(of: " ", with: "\u{2007}") + " " + unite, attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: tailleFonte, weight: .regular)])
         texteAAfficher.append(texteValeurUnite)
         return texteAAfficher as NSAttributedString
@@ -377,19 +381,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
         }
     }
-    
+        
     func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
         if (ligne == SorteEmission.duree.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) || (ligne == SorteEmission.effectif.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) {
             self.alerteConfirmationReset()
             self.finMouvementGlissiere(cell: cellule)
         }
-        cellule.glissiere.thumbTintColor = .gray
-        self.glissiereModeZoom = true
         let intervalleHaut = cellule.glissiere.maximumValue - cellule.glissiere.value
         let intervalleBas = cellule.glissiere.value - cellule.glissiere.minimumValue
-        cellule.glissiere.maximumValue = cellule.glissiere.value + (intervalleHaut / 10)
-        cellule.glissiere.minimumValue = cellule.glissiere.value - (intervalleBas / 10)
+        cellule.glissiere.maximumValue = max(min(cellule.glissiere.maximumValue, cellule.glissiere.value + 1), cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere))
+        cellule.glissiere.minimumValue = min(max(cellule.glissiere.minimumValue, cellule.glissiere.value - 1), cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere))
+        cellule.glissiere.thumbTintColor = .gray
+        self.glissiereModeZoom = true
 //        print("nouvel intervalle", cellule.glissiere.minimumValue, cellule.glissiere.value, cellule.glissiere.maximumValue)
+
     }
 
     func desactiverModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
@@ -407,12 +412,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let cellule = celluleEnCours
             let emission = lesEmissions[ligne]
             DispatchQueue.main.async{
-                if !self.glissiereModeZoom {
+                if !self.glissiereModeZoom && ((cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || emission.echelleLog) {
                     let valeur = cellule!.glissiere.value
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         if !self.mouvementGlissiereFini {
                             if abs(valeur - cellule!.glissiere.value) < 0.02 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) && !self.glissiereModeZoom {
                                 self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!)
+                                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: Double(self.maxValueEnCours), unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
                             }
                         }
                     }

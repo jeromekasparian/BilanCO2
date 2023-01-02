@@ -72,14 +72,15 @@ class CelluleEmission: UITableViewCell {
         self.delegate?.afficheConseil(cell: self)
     }
 
-    func choisitContraintesCelluleEmission() {
+    func choisitContraintesCelluleEmission(largeurTableView: CGFloat) {
 //        print("choisit contraintes cell debut")
 //        let nouvelleLargeur: LargeurCellule = self.frame.width >= largeurMiniTableViewEcranLarge ? .large : .etroit
 //        if nouvelleLargeur != largeurCellule {
 //            largeurCellule = nouvelleLargeur
 //            let estLarge = self.frame.width >= largeurMiniTableViewEcranLarge //nouvelleLargeur == .large
-        let estLarge = (self.frame.width - labelNom.textWidth() - labelValeur.textWidth() - boutonInfo.frame.width - 12 - 32)  >= largeurMiniGlissiere // 12 : les intervalles ; 32 : les marges à gauche et à droite
-//        print("contraintes", labelNom.text!, self.frame.width, labelNom.textWidth(), glissiere.frame.width, labelValeur.textWidth(), boutonInfo.frame.width, self.frame.width - labelNom.textWidth() - labelValeur.textWidth() - boutonInfo.frame.width - 12 - 32, estLarge, contrainteAffichageValeurDroiteLarge.isActive)
+        let largeurCellule = largeurTableView
+        let estLarge = (largeurCellule - labelNom.textWidth() - labelValeur.textWidth() - boutonInfo.frame.width - 12 - 32)  >= largeurMiniGlissiere // 12 : les intervalles ; 32 : les marges à gauche et à droite
+//        print("contraintes", labelNom.text!, largeurCellule, labelNom.textWidth(), glissiere.frame.width, labelValeur.textWidth(), boutonInfo.frame.width, largeurCellule - labelNom.textWidth() - labelValeur.textWidth() - boutonInfo.frame.width - 12 - 32, estLarge, contrainteAffichageValeurDroiteLarge.isActive)
             //        DispatchQueue.main.async {
         if estLarge { // désactiver les contraintes avant d'activer les autres
 //            print("Large", labelNom.text)
