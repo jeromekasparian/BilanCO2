@@ -105,7 +105,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
-    
+    @IBOutlet var boutonEffacerDonnees: UIButton!
+
     @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewDroitePortrait: NSLayoutConstraint!
@@ -114,7 +115,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteVueResultatsGauchePortrait: NSLayoutConstraint!
     @IBOutlet var contrainteVueResultatsBasPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteVueResultatGauchePaysage: NSLayoutConstraint!
-    
     
     
     override func viewDidLoad() {
@@ -127,6 +127,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
 //            premierAffichageApresInitialisation = false
         }
+        boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
@@ -382,15 +383,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
         
-    func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
-        if (ligne == SorteEmission.duree.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) || (ligne == SorteEmission.effectif.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) {
-            self.alerteConfirmationReset()
-            self.finMouvementGlissiere(cell: cellule)
-        }
+    func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission, echelleLog: Bool) {
+//        if (ligne == SorteEmission.duree.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) || (ligne == SorteEmission.effectif.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) {
+//            self.alerteConfirmationReset()
+//            self.finMouvementGlissiere(cell: cellule)
+//        }
         let intervalleHaut = cellule.glissiere.maximumValue - cellule.glissiere.value
         let intervalleBas = cellule.glissiere.value - cellule.glissiere.minimumValue
-        cellule.glissiere.maximumValue = max(min(cellule.glissiere.maximumValue, cellule.glissiere.value + 1), cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere))
-        cellule.glissiere.minimumValue = min(max(cellule.glissiere.minimumValue, cellule.glissiere.value - 1), cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere))
+        if echelleLog {
+            cellule.glissiere.maximumValue = cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere)
+            cellule.glissiere.minimumValue = cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere)
+        } else {
+            cellule.glissiere.maximumValue = max(min(cellule.glissiere.maximumValue, cellule.glissiere.value + 1), cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere))
+            cellule.glissiere.minimumValue = min(max(cellule.glissiere.minimumValue, cellule.glissiere.value - 1), cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere))
+        }
         cellule.glissiere.thumbTintColor = .gray
         self.glissiereModeZoom = true
 //        print("nouvel intervalle", cellule.glissiere.minimumValue, cellule.glissiere.value, cellule.glissiere.maximumValue)
@@ -417,8 +423,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         if !self.mouvementGlissiereFini {
                             if abs(valeur - cellule!.glissiere.value) < 0.02 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) && !self.glissiereModeZoom {
-                                self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!)
-                                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: Double(self.maxValueEnCours), unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
+                                self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!, echelleLog: emission.echelleLog)
+                                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
                             }
                         }
                     }
@@ -436,7 +442,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                         lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
                     }
                 }
-                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: Double(self.maxValueEnCours), unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
+                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
                 switch ligne {
                 case SorteEmission.duree.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
@@ -458,7 +464,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
         
-    func alerteConfirmationReset(){
+    @IBAction func alerteConfirmationReset(){
         let alerte = UIAlertController(title: NSLocalizedString("Initialisation", comment: ""), message: NSLocalizedString("Effacer les données ?", comment: ""), preferredStyle: .alert)
         alerte.addAction(UIAlertAction(title: NSLocalizedString("Annuler", comment: ""), style: .default, handler: nil))
         alerte.addAction(UIAlertAction(title: NSLocalizedString("Effacer", comment: ""), style: .destructive, handler: {_ in self.effacerDonnees()}))
