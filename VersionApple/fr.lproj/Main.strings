@@ -21,7 +21,7 @@
 "FBh-Mp-HtV.text" = "Label";
 
 /* Class = "UILabel"; text = " 0 km"; ObjectID = "Heu-Mu-uuU"; */
-"Heu-Mu-uuU.text" = " 0 km";
+"Heu-Mu-uuU.text" = "🔎";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "KaZ-LP-cnI"; */
 "KaZ-LP-cnI.normalTitle" = "Button";
@@ -69,7 +69,7 @@
 "e0p-cy-e8j.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "© 2022 Jérôme Kasparian, EEUdF"; ObjectID = "m5u-95-qHn"; */
-"m5u-95-qHn.text" = "© 2022 Jérôme Kasparian, EEUdF";
+"m5u-95-qHn.text" = "© 2023 Jérôme Kasparian, EEUdF";
 
 /* Class = "UIButton"; configuration.title = " "; ObjectID = "vOa-Ps-mF3"; */
 "vOa-Ps-mF3.configuration.title" = " ";

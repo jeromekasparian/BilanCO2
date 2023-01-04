@@ -106,6 +106,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
     @IBOutlet var boutonEffacerDonnees: UIButton!
+    @IBOutlet var boutonExport: UIButton!
 
     @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
@@ -128,9 +129,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //            premierAffichageApresInitialisation = false
         }
         boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
+        boutonExport.setTitle("", for: .normal)
+
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        boutonExport.isHidden = emissionsCalculees == 0
+        boutonEffacerDonnees.isHidden = emissionsCalculees == 0
         tableViewEmissions.delegate = self
         tableViewEmissions.dataSource = self
         if #available(iOS 15.0, *) {
@@ -188,7 +193,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         return compteur + indexPath.row
     }
     
-    
+   
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
@@ -199,11 +204,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             // set the text from the data model
             cell.delegate = self
             cell.selectionStyle = .none
-            if afficherPictos && !emission.picto.isEmpty {
-                cell.labelNom.text = emission.picto + " " + emission.nom
-            } else {
-                cell.labelNom.text = emission.nom
-            }
             if emission.echelleLog {
                 cell.glissiere.minimumValue = Float(2.3) // valeur minimum = 10 // Float(0.0) pour une valeur minimum de 1
                 cell.glissiere.maximumValue = log(Float(emission.valeurMax))
@@ -220,13 +220,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
             cell.glissiere.thumbTintColor = .white // attention si couleur différentes pour l'animation ?
 //            cell.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, emission.valeur).replacingOccurrences(of: " ", with: "\u{2007}") // on remplace les espaces par des blancs par des espaces de largeur fixe insécables
-            cell.labelValeur.attributedText = texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: false, tailleFonte: cell.labelValeur.font.pointSize)
+            cell.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
+            cell.labelValeur.isHidden = true // = texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: false, tailleFonte: cell.labelValeur.font.pointSize)
 //            cell.labelValeur.font = UIFont.monospacedDigitSystemFont(ofSize: cell.labelValeur.font.pointSize, weight: .regular)
             cell.actualiseEmissionIndividuelle(typeEmission: emission)
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
-            cell.choisitContraintesCelluleEmission(largeurTableView: tableViewEmissions.frame.width)  // si on ne lui fournit pas la largeur du tableView, à la première exécution il a une largeur fausse pour certaines cellules.
+//            cell.choisitContraintesCelluleEmission(largeurTableView: tableViewEmissions.frame.width)  // si on ne lui fournit pas la largeur du tableView, à la première exécution il a une largeur fausse pour certaines cellules.
             return cell
         }
         else {  // la dernière section : l'ours
@@ -322,14 +323,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-    func texteValeurPourTableView(valeurMax: Double, unite: String, valeur: Double, afficherLoupe: Bool, tailleFonte: CGFloat) -> NSAttributedString {
-        let alpha = afficherLoupe ? 1.0 : 0.0
-        let couleurLoupe = UIColor.black.withAlphaComponent(alpha) // n'importe quelle couleur est ok en fait - du moins tant qu'on ne gère pas le mode sombre
-        let texteAAfficher = NSMutableAttributedString(string: "🔎", attributes: [NSAttributedString.Key.foregroundColor: couleurLoupe])
-        let texteValeurUnite =  NSAttributedString(string: String(format: self.formatAffichageValeur(valeurMax: valeurMax), valeur).replacingOccurrences(of: " ", with: "\u{2007}") + " " + unite, attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: tailleFonte, weight: .regular)])
-        texteAAfficher.append(texteValeurUnite)
-        return texteAAfficher as NSAttributedString
-    }
+//    func texteValeurPourTableView(valeurMax: Double, unite: String, valeur: Double, afficherLoupe: Bool, tailleFonte: CGFloat) -> NSAttributedString {
+//        let alpha = afficherLoupe ? 1.0 : 0.0
+//        let couleurLoupe = UIColor.black.withAlphaComponent(alpha) // n'importe quelle couleur est ok en fait - du moins tant qu'on ne gère pas le mode sombre
+//        let texteAAfficher = NSMutableAttributedString(string: "🔎", attributes: [NSAttributedString.Key.foregroundColor: couleurLoupe])
+//        let texteValeurUnite =  NSAttributedString(string: String(format: self.formatAffichageValeur(valeurMax: valeurMax), valeur).replacingOccurrences(of: " ", with: "\u{2007}") + " " + unite, attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: tailleFonte, weight: .regular)])
+//        texteAAfficher.append(texteValeurUnite)
+//        return texteAAfficher as NSAttributedString
+//    }
     
     var minValueEnCours: Float = .nan
     var maxValueEnCours: Float = .nan
@@ -347,7 +348,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
-        print("emissions Calculées : ", emissionsCalculees)
+        boutonExport.isHidden = emissionsCalculees == 0
+        boutonEffacerDonnees.isHidden = emissionsCalculees == 0
+//        print("emissions Calculées : ", emissionsCalculees)
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
         
@@ -399,6 +402,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         cellule.glissiere.thumbTintColor = .gray
         self.glissiereModeZoom = true
+        cellule.labelValeur.isHidden = false
 //        print("nouvel intervalle", cellule.glissiere.minimumValue, cellule.glissiere.value, cellule.glissiere.maximumValue)
 
     }
@@ -424,7 +428,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                         if !self.mouvementGlissiereFini {
                             if abs(valeur - cellule!.glissiere.value) < 0.02 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) && !self.glissiereModeZoom {
                                 self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!, echelleLog: emission.echelleLog)
-                                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
+//                                cellule!.labelValeur.text = //self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
+//                                cellule!.labelValeur.isHidden = false
                             }
                         }
                     }
@@ -442,7 +447,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                         lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
                     }
                 }
-                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
+//                cellule!.labelValeur.isHidden = !self.glissiereModeZoom
+                cellule!.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
+//                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
                 switch ligne {
                 case SorteEmission.duree.rawValue:
                     self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
@@ -457,7 +464,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 default: let dummy = 1
                 }
                 emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+                self.boutonExport.isHidden = emissionsCalculees == 0
+                self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
                 cellule!.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
+                var lesIndexPathAActualiser: [IndexPath] = []
+                if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
+                    lesIndexPathAActualiser = [indexPathAActualiser]
+                }
+                self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
                 self.actualiseAffichageEmissions(grandFormat: false)
                 self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: true)
             }  // DispatchQueue.main.async
@@ -615,6 +629,48 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         super.viewWillTransition(to: size, with: coordinator)
     }
     
+    // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
+    @IBAction func exportAsPdfFromView(sender: UIButton) {
+//        self.boutonExport.isHidden = true
+//        self.boutonAideGraphique.isHidden = true
+        let vueAExporter = vueResultats!
+        let pdfPageFrame = vueAExporter.bounds
+        let pdfData = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
+        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
+        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
+        vueAExporter.layer.render(in: pdfContext)
+        UIGraphicsEndPDFContext()
+        
+        let path = URL(fileURLWithPath: NSTemporaryDirectory())
+        let saveFileURL = path.appendingPathComponent("/CO2.pdf")
+        do{
+            try pdfData.write(to: saveFileURL)
+        } catch {
+            print("error-Grrr")
+        }
+        let activityViewController = UIActivityViewController(activityItems: [NSAttributedString(string: NSLocalizedString("Les émissions de CO₂ de mon camp", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]), texteListeEmissions(lesEmissions: lesEmissions), saveFileURL], applicationActivities: nil) // "" : le corps du message intégré automatiquement
+#if targetEnvironment(macCatalyst)
+        //"Don't do this !!"
+#else
+        activityViewController.setValue(NSLocalizedString("Impact climat de mon camp", comment: ""), forKey: "subject")
+#endif
+        activityViewController.completionWithItemsHandler = {
+            (activity, success, items, error) in
+            if activity != nil {if activity!.rawValue == "com.apple.UIKit.activity.RemoteOpenInApplication-ByCopy"
+                {
+                print("Coquinou")
+            }
+            }
+        }
+        if let popover = activityViewController.popoverPresentationController {
+            popover.barButtonItem  = self.navigationItem.rightBarButtonItem
+            popover.permittedArrowDirections = .up
+            popover.sourceView = sender;
+            popover.sourceRect = sender.frame;
+        }
+        present(activityViewController, animated: true, completion: nil)
+    }
     
     
 }

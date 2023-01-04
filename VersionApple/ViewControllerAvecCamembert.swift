@@ -17,7 +17,6 @@ class ViewControllerAvecCamembert: UIViewController {
     //    @IBOutlet var affichageEmissionsSoutenables: UILabel!
     @IBOutlet var camembert: UIView!
 //    @IBOutlet var boutonAideGraphique: UIButton!
-    @IBOutlet var boutonExport: UIButton!
     
     @IBOutlet var contrainteAffichageEmissionsDroitePortrait: NSLayoutConstraint!
     @IBOutlet var contrainteAffichageEmissionsDroitePaysage: NSLayoutConstraint!
@@ -36,7 +35,6 @@ class ViewControllerAvecCamembert: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        boutonAideGraphique.setTitle("", for: .normal)
-        boutonExport.setTitle("", for: .normal)
     }
     
     // désactiver les contraintes inutiles avant d'activer les nouvelles
@@ -263,7 +261,7 @@ class ViewControllerAvecCamembert: UIViewController {
         let tailleTexteSoutenabilite = 0.75 * tailleTexteSecondaire
 //        if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 && !emissionsCalculees.isNaN && emissionsCalculees > 0 { //} && !premierAffichageApresInitialisation {
         if emissionsCalculees > 0 {
-            if !boutonExport.isEnabled {boutonExport.isEnabled = true}
+//            if !boutonExport.isEnabled {boutonExport.isEnabled = true}
             
             let formatTexteValeurEmissionsTotales = emissionsCalculees < 1000.0 ? NSLocalizedString("%.0f kg", comment: "") : emissionsCalculees < 100000.0 ? NSLocalizedString("%.1f t", comment: "") : NSLocalizedString("%.0f t", comment: "")
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
@@ -299,63 +297,20 @@ class ViewControllerAvecCamembert: UIViewController {
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
             return NSAttributedString(attributedString: texte) //
         } else {
-            if boutonExport.isEnabled {boutonExport.isEnabled = false}
+//            if boutonExport.isEnabled {boutonExport.isEnabled = false}
             return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
         }
     }
     
-    // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
-    @IBAction func exportAsPdfFromView(sender: UIButton) {
-        self.boutonExport.isHidden = true
-//        self.boutonAideGraphique.isHidden = true
-        let vueAExporter = sender.superview ?? self.view!
-        let pdfPageFrame = vueAExporter.bounds
-        let pdfData = NSMutableData()
-        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
-        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
-        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
-        vueAExporter.layer.render(in: pdfContext)
-        UIGraphicsEndPDFContext()
-        
-        let path = URL(fileURLWithPath: NSTemporaryDirectory())
-        let saveFileURL = path.appendingPathComponent("/CO2.pdf")
-        do{
-            try pdfData.write(to: saveFileURL)
-        } catch {
-            print("error-Grrr")
-        }
-        let activityViewController = UIActivityViewController(activityItems: [NSAttributedString(string: NSLocalizedString("Les émissions de CO₂ de mon camp", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]), texteListeEmissions(lesEmissions: lesEmissions), saveFileURL], applicationActivities: nil) // "" : le corps du message intégré automatiquement
-#if targetEnvironment(macCatalyst)
-        //"Don't do this !!"
-#else
-        activityViewController.setValue(NSLocalizedString("Impact climat de mon camp", comment: ""), forKey: "subject")
-#endif
-        activityViewController.completionWithItemsHandler = {
-            (activity, success, items, error) in
-            if activity != nil {if activity!.rawValue == "com.apple.UIKit.activity.RemoteOpenInApplication-ByCopy"
-                {
-                print("Coquinou")
-            }
-            }
-        }
-        if let popover = activityViewController.popoverPresentationController {
-            popover.barButtonItem  = self.navigationItem.rightBarButtonItem
-            popover.permittedArrowDirections = .up
-            popover.sourceView = sender;
-            popover.sourceRect = sender.frame;
-        }
-        present(activityViewController, animated: true, completion: {
-            self.remettreBoutons()
-        })
-    }
+
     
-    func remettreBoutons(){
-        boutonExport.isHidden = false
-        if emissionsCalculees > 0 {
-            boutonExport.isEnabled = true
-        }
-//        boutonAideGraphique.isHidden = false
-    }
+//    func remettreBoutons(){
+//        boutonExport.isHidden = false
+//        if emissionsCalculees > 0 {
+//            boutonExport.isEnabled = true
+//        }
+////        boutonAideGraphique.isHidden = false
+//    }
     
     func texteListeEmissions(lesEmissions: [TypeEmission]) -> NSAttributedString {
         let texte = NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
@@ -366,11 +321,11 @@ class ViewControllerAvecCamembert: UIViewController {
                     categorie = emission.categorie
                     texte.append(NSAttributedString(string: "\n" + categorie + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
                 }
-                let textePicto = afficherPictos && !emission.picto.isEmpty ? emission.picto + " " : ""
+//                let textePicto = afficherPictos && !emission.picto.isEmpty ? emission.picto + " " : ""
                 if emission.emission < 2000.0 {
-                    texte.append(NSAttributedString(string: textePicto + emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: NSLocalizedString(", %.0f kg CO₂ (%.0f%%)\n", comment: ""), emission.emission, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                    texte.append(NSAttributedString(string: texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos) + String(format: NSLocalizedString(", %.0f kg CO₂ (%.0f%%)\n", comment: ""), emission.emission, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
                 } else {
-                    texte.append(NSAttributedString(string: textePicto + emission.nom + String(format: " : %.0f ", emission.valeur) + emission.unite + String(format: NSLocalizedString(", %.2f t CO₂ (%.0f%%)\n", comment: ""), emission.emission / 1000.0, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+                    texte.append(NSAttributedString(string: texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos) + String(format: NSLocalizedString(", %.2f t CO₂ (%.0f%%)\n", comment: ""), emission.emission / 1000.0, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
                 }
             }
         }

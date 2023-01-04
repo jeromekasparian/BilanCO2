@@ -98,3 +98,4 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 // CelluleEmission
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
 
+" : %.0f " = " : %.0f ";

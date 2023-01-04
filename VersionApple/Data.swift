@@ -74,8 +74,9 @@ class TypeEmission {
     var picto: String
     var nomsRessources: [String]
     var liensRessources: [String]
+    var nomPluriel: String
     
-    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String]) {
+    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String], nomPluriel: String) {
         self.categorie = categorie
         self.nom = nom
         self.unite = unite
@@ -95,6 +96,7 @@ class TypeEmission {
         self.picto = picto
         self.nomsRessources = nomsRessources
         self.liensRessources = liensRessources
+        self.nomPluriel = nomPluriel
     }
 }
 
@@ -134,7 +136,7 @@ func decodeCSV(data: String) -> ([TypeEmission], [String]) {
             let valeur = 0.0 //facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
             let nomsRessources = elements[15].components(separatedBy: ",").filter({!$0.isEmpty})
             let liensRessources = elements[16].components(separatedBy: ",").filter({!$0.isEmpty})
-            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12].replacingOccurrences(of: "\\n", with: "\n"), nomCourt: elements[13], picto: elements[14], nomsRessources: nomsRessources, liensRessources: liensRessources))
+            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12].replacingOccurrences(of: "\\n", with: "\n"), nomCourt: elements[13], picto: elements[14], nomsRessources: nomsRessources, liensRessources: liensRessources, nomPluriel: elements[17]))
             if lesSections.isEmpty || lesSections.last != elements[0] {
                 lesSections.append(elements[0])
             }
@@ -172,3 +174,12 @@ func arrondi(_ nombre: Double) -> Double { // arrondi à deux chiffres significa
     }
 }
 
+func texteNomValeurUnite(emission: TypeEmission, afficherPictos: Bool) -> String {
+    let nom = emission.valeur <= 1 ? emission.nom : emission.nomPluriel
+    let texteNomValeur = emission.unite.isEmpty ? String(format: "%.0f " + nom, emission.valeur) : emission.nom + String(format: NSLocalizedString(" : %.0f ", comment: "") + emission.unite, emission.valeur)
+    if afficherPictos && !emission.picto.isEmpty {
+        return emission.picto + " " + texteNomValeur
+    } else {
+        return texteNomValeur
+    }
+}
