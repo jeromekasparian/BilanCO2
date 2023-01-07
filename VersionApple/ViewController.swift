@@ -116,8 +116,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteVueResultatsGauchePortrait: NSLayoutConstraint!
     @IBOutlet var contrainteVueResultatsBasPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteVueResultatGauchePaysage: NSLayoutConstraint!
-    
-    
+    @IBOutlet var contrainteLargeurBoutonEffacerLarge: NSLayoutConstraint!
+    @IBOutlet var contrainteLargeurBoutonExporterLarge: NSLayoutConstraint!
+    @IBOutlet var contrainteLargeurBoutonEffacerEtroit: NSLayoutConstraint!
+    @IBOutlet var contrainteLargeurBoutonExporterEtroit: NSLayoutConstraint!
+
     override func viewDidLoad() {
         _ = self.choisitContraintes(size: self.view.frame.size)
         (lesEmissions, lesSections) = lireFichier(nom: "Data")
@@ -367,6 +370,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //    var effectifEstDejaZero: Bool = true
 
     func debutMouvementGlissiere(cell: CelluleEmission){
+        print("debut mouvement glissière")
         if celluleEnCours == nil {
             guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
                 print("erreur index Path")
@@ -381,7 +385,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             couleurDefautThumb = cell.glissiere.thumbTintColor ?? .white
             glissiereModeZoom = false
 //            compteurCurseurImmobile = 0
-            mouvementGlissiereFini = false
+//            ligneTimerEnCoursPourZoom = -1
             cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
         }
     }
@@ -414,24 +418,25 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cellule.glissiere.minimumValue = minValueEnCours
     }
 
-    var mouvementGlissiereFini: Bool = true
     
     func glissiereBougee(cell: CelluleEmission) {
         if ligneEnCours >= 0 && celluleEnCours != nil {
+            print("glissiereBougee", celluleEnCours!.glissiere.value)
             let ligne = ligneEnCours
             let cellule = celluleEnCours
             let emission = lesEmissions[ligne]
             DispatchQueue.main.async{
                 if !self.glissiereModeZoom && ((cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || emission.echelleLog) {
                     let valeur = cellule!.glissiere.value
+                    let ligneAuDebutDuTimer = ligne
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        if !self.mouvementGlissiereFini {
-                            if abs(valeur - cellule!.glissiere.value) < 0.02 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) && !self.glissiereModeZoom {
+//                        if !self.mouvementGlissiereFini {
+                            if ligneAuDebutDuTimer == ligne && abs(valeur - cellule!.glissiere.value) < 0.02 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) && !self.glissiereModeZoom {
                                 self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!, echelleLog: emission.echelleLog)
 //                                cellule!.labelValeur.text = //self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
 //                                cellule!.labelValeur.isHidden = false
                             }
-                        }
+//                        }
                     }
                 }
                 self.valeurPrecedente = cellule!.glissiere.value
@@ -494,6 +499,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     func finMouvementGlissiere(cell: CelluleEmission) {
+        print("fin mouvement glissière")
         glissiereBougee(cell: cell)
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
@@ -501,7 +507,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.glissiere.maximumValue = maxValueEnCours
         glissiereModeZoom = false
 //        compteurCurseurImmobile = 0
-        mouvementGlissiereFini = true
+//        mouvementGlissiereFini = true
         DispatchQueue.main.async{
             cell.glissiere.thumbTintColor = self.couleurDefautThumb
             self.tableViewEmissions.reloadData()
@@ -542,6 +548,18 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
+    func dessineBoutons(ecranLarge: Bool){
+        let taille: CGFloat = ecranLarge ? 20 : 14
+        if #available(iOS 13.0, *) {
+            boutonExport.setImage(UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+            boutonEffacerDonnees.setImage(UIImage(systemName: "delete.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+        } else {
+            boutonExport.setImage(UIImage(named: "square.and.arrow.up"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+            boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+        }
+    }
+    
+    
     override func choisitContraintes(size: CGSize) -> Bool {
 //        print("choisitContraintes")
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
@@ -573,6 +591,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 change = true
             }
 //        }
+        let ecranLarge = self.vueResultats.frame.width >= 600
+        if ecranLarge {  // réduire la taille des boutons si on a un écran étroit.
+            self.contrainteLargeurBoutonEffacerEtroit.isActive = false
+            self.contrainteLargeurBoutonExporterEtroit.isActive = false
+            self.contrainteLargeurBoutonEffacerLarge.isActive = true
+            self.contrainteLargeurBoutonExporterLarge.isActive = true
+        } else {
+            self.contrainteLargeurBoutonEffacerLarge.isActive = false
+            self.contrainteLargeurBoutonExporterLarge.isActive = false
+            self.contrainteLargeurBoutonEffacerEtroit.isActive = true
+            self.contrainteLargeurBoutonExporterEtroit.isActive = true
+        }
+        dessineBoutons(ecranLarge: ecranLarge)
+//        print("largeurResultats", self.vueResultats.frame.width)
         let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
         return change || change2
     }
@@ -631,6 +663,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
+        print("sender", sender)
 //        self.boutonExport.isHidden = true
 //        self.boutonAideGraphique.isHidden = true
         let vueAExporter = vueResultats!
@@ -665,9 +698,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         if let popover = activityViewController.popoverPresentationController {
             popover.barButtonItem  = self.navigationItem.rightBarButtonItem
-            popover.permittedArrowDirections = .up
-            popover.sourceView = sender;
-            popover.sourceRect = sender.frame;
+            popover.permittedArrowDirections = .any
+            popover.sourceView = sender // sender;
+//            popover.delegate = self
+//            popover.sourceRect = sender.frame //sender.frame;
         }
         present(activityViewController, animated: true, completion: nil)
     }
