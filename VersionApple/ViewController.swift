@@ -5,55 +5,6 @@
 //  Created by Jérôme Kasparian on 04/09/2022.
 //
 
-// *** Priorite 1 ***
-// AFFICHAGE / mise en page
-// - la page d'aide déborde parfois sur toute la largeur de l'écran.
-// - prendre en charge le mode sombre ?
-// - 
-
-// Fonctionnalités
-// - renvoyer vers des ressources
-//      - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
-//      - autres ressources ?
-// - transport : Ferry, train, bus : aussi sur place ?
-// - activité : voile : cf données de Jérémy Balas
-// - Autres activités ?
-
-// Anomalies
-// - fonction d'export
-//      - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
-//      - lors de l'export l'escamotage temporaire du bouton n'est pas très beau
-//      - seul le PDF passe dans les messageries instantanées -> intégrer la liste au PDF
-//      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
-//      - formatter le texte d'accompagnement de l'export (titres notamment)
-
-
-// *** A décider ***
-// - aspect du grahpique / camembert : Hervé utilise le framework « charts » de Daniel Cohen Gindi & Philipp Jahoda https://github.com/danielgindi/Charts
-// - Train et autres transports : allers simples ? - Thomas
-
-//DÉCLINAISONS AUTRES ÉVÉNEMENTS
-//Hervé : En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure. - J’avais fait pour Compétences lite/full. 
-// - Conférence
-// - Festival
-
-// HERVE Logique d'usage
-//Le ciblage des mesures à mettre en oeuvre relève en fait de l’enchainement de 2 étapes de raisonnement :
-//1) priorisation (c’est dans la catégorie repas que je fais 60% de mes émissions)
-//2) subsitution (je peux remplacer la viande rouge par du poisson blanc)
-//
-//Ton graph actuel ne permet pas voir ce qui se passe au sein d’une catégorie, donc il n’aide pas au 2)
-//En revanche, il a une vrai valeur ajouté pour la priorisation. Donc j’en ferais sa fonction… et je supprimerais les sous-catégories.
-//De toute façon si aujourd’hui j’y vais en Car, mon graph ne me montrera pas de catégorie Train, donc je ne verrais pas que "tiens le train c’est mieux que le car"
-//
-//Ce qui aide à la substitution, c’est le tableau lui même, en particulier :
-//- le fait d’avoir lié le nombre de repas de chaque type, on voit vraiment que ça se substitue.
-//
-//Tu pourrais aller plus loin, et proposer des suggestions, tant que le bilan dépasse le 100%, genre une alerte
-//- Les repas représente xx tonnes donc yy% de votre bilan carbonne, et si vous remplaciez 3 repas avec viande rouge par des repas végé ? [ok faisons ça] [as-tu une autre suggestion?]
-//- les transports représente xx tonnes donc yy% de votre bilan carbonne, e et si vous y alliez en train plutôt qu’en car ? [ok faisons ça] [pas maintenant je vais déjà chercher un lieu moins loin de mon local][as-tu une autre suggestion ?]
-
-
 
 import UIKit
 //import AVFoundation
@@ -62,14 +13,11 @@ let largeurMiniGlissiere: CGFloat = 150
 let emissionsSoutenablesAnnuelles: Double = 2000.0 // t eq. CO2 / an / personne
 let facteurZoomGlissiere: Float = 10.0
 
-//let notificationEmetteursChanges = "notificationEmetteursChanges"
 let notificationBackground = "notificationBackground"
 var emissionsCalculees: Double = .nan
 var emissionsSoutenables: Double = .nan
 var lesSections: [String] = []
-//var effectif: Double = .nan
 let userDefaults = UserDefaults.standard
-//let largeurMiniTableViewEcranLarge: CGFloat = 400
 var lesEmissions: [TypeEmission] = []
 var afficherPictos: Bool = true
 
@@ -79,35 +27,30 @@ enum Orientation {
     case paysage
 }
 
-//enum LargeurCellule {
-//    case inconnu
-//    case large
-//    case etroit
-//}
-
 var ligneEnCours: Int = -1
-//var premierAffichageApresInitialisation: Bool = true
 
 class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
     
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
     
     let keyValeursUtilisateurs = "keyValeursUtilisateurs"
-    //    var camp = CaracteristiquesCamp()
     
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
-    var celluleEnCours: CelluleEmission! = nil
-//    var orientationGlobale: Orientation = .inconnu
-    //    var largeurCellule: LargeurCellule = .inconnu
-//    var timeStampDernierRedessin = Date()
-//    var bloquerLePassageEnModeZoom: Bool = false
-
+    //    var celluleEnCours: CelluleEmission! = nil
+    var compteurMouvementsGlissiere: Int = 0
+    var minValueNonZoomee: Float = .nan
+    var maxValueNonZoomee: Float = .nan
+    var valeurPrecedente: Float = .nan
+    var couleurDefautThumb: UIColor = .white
+    var glissiereModeZoom: Bool = false
+    
+    
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var vueResultats: UIView!
     @IBOutlet var boutonEffacerDonnees: UIButton!
     @IBOutlet var boutonExport: UIButton!
-
+    
     @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
     @IBOutlet var contrainteTableViewDroitePortrait: NSLayoutConstraint!
@@ -120,7 +63,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteLargeurBoutonExporterLarge: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonEffacerEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonExporterEtroit: NSLayoutConstraint!
-
+    
     override func viewDidLoad() {
         _ = self.choisitContraintes(size: self.view.frame.size)
         (lesEmissions, lesSections) = lireFichier(nom: "Data")
@@ -129,11 +72,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             for i in 0...lesValeurs.count - 1 {
                 lesEmissions[i].valeur = lesValeurs[i]
             }
-//            premierAffichageApresInitialisation = false
         }
         boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
         boutonExport.setTitle("", for: .normal)
-
+        
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
@@ -144,26 +86,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         if #available(iOS 15.0, *) {
             tableViewEmissions.sectionHeaderTopPadding = 0
         }
-        // mise en place de la détection du swipe left à 3 doigts pour activer le mode debug
-//        let swipePictos = UISwipeGestureRecognizer(target:self, action: #selector(changeModePictos))
-//        swipePictos.direction = UISwipeGestureRecognizer.Direction.left
-//        swipePictos.numberOfTouchesRequired = 3
-//        self.view.addGestureRecognizer(swipePictos)
-        
-//        DispatchQueue.main.async {
-            //            self.actualiseAffichageEmissions(grandFormat: false)
-//            self.tableViewEmissions.reloadData()
-//        }
         super.viewDidLoad()
     }  // viewDidLoad
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        DispatchQueue.main.async {
-            self.redessineResultats(size: self.view.frame.size, curseurActif: false)
-//        print("didappear")
-//        tableViewEmissions.reloadData()
-//        }
+        //        DispatchQueue.main.async {
+        self.redessineResultats(size: self.view.frame.size, curseurActif: false)
+        //        tableViewEmissions.reloadData()
+        //        }
     }
     
     @objc func changeModePictos() {
@@ -177,10 +108,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func numberOfSections(in tableView: UITableView) -> Int {
         return lesSections.count
     }
-    
-    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //        return lesSections[section]
-    //    }
     
     
     //// gestion des tableView
@@ -196,15 +123,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         return compteur + indexPath.row
     }
     
-   
+    
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
         //        print("Cell for row at index path \(indexPath)")
         if indexPath.section < lesSections.count - 1 {  // les vraies données
-            let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)] //  lesEmissions.filter({$0.categorie == lesSections[indexPath.section]})[indexPath.row]
+            let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)]
             let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
-            // set the text from the data model
             cell.delegate = self
             cell.selectionStyle = .none
             if emission.echelleLog {
@@ -221,16 +147,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 emission.valeur = max(emission.valeur, Double(cell.glissiere.minimumValue))
                 cell.glissiere.value = Float(emission.valeur)
             }
-            cell.glissiere.thumbTintColor = .white // attention si couleur différentes pour l'animation ?
-//            cell.labelValeur.text = String(format: self.formatAffichageValeur(valeurMax: emission.valeurMax) + emission.unite, emission.valeur).replacingOccurrences(of: " ", with: "\u{2007}") // on remplace les espaces par des blancs par des espaces de largeur fixe insécables
+            cell.glissiere.thumbTintColor = couleurDefautThumb // attention si couleur différentes pour l'animation ?
+            cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
             cell.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
-            cell.labelValeur.isHidden = true // = texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: false, tailleFonte: cell.labelValeur.font.pointSize)
-//            cell.labelValeur.font = UIFont.monospacedDigitSystemFont(ofSize: cell.labelValeur.font.pointSize, weight: .regular)
+            cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
             cell.actualiseEmissionIndividuelle(typeEmission: emission)
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
-//            cell.choisitContraintesCelluleEmission(largeurTableView: tableViewEmissions.frame.width)  // si on ne lui fournit pas la largeur du tableView, à la première exécution il a une largeur fausse pour certaines cellules.
             return cell
         }
         else {  // la dernière section : l'ours
@@ -242,27 +166,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-    func formatAffichageValeur(valeurMax: Double) -> String {
-        let nombreChiffresMax = valeurMax > 0 ? Int(ceil(log(valeurMax) / log(10.0) + 0.01)) : 1
-        switch nombreChiffresMax {
-        case 1: return "%1.0f"
-        case 2: return "%2.0f"
-        case 3: return "%3.0f"
-        case 4: return "%4.0f"
-        case 5: return "%5.0f"
-        case 6: return "%6.0f"
-        default: return "%.0f"
-        }
-    }
     
-    
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        if indexPath.section == lesSections.count - 1 {
-    //            return 150
-    //        } else {
-    //            return UITableView.automaticDimension
-    //        }
-    //    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var titreSection = lesSections[section]
@@ -277,21 +181,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let headerView = UIView() //frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: hauteurLabel + 2 * margeVerticale))
         //        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
         headerView.backgroundColor = couleursEEUdF5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
-        
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
         headerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline).withSize(21) //  .boldSystemFont(ofSize: 24) // UIFont(name: "Verdana", size: 20)
-        //            headerLabel.textColor = UIColor.white
         headerLabel.text = titreSection // self.tableView(self.tableView, titleForHeaderInSection: section)
         headerLabel.numberOfLines = 1
-        //        headerLabel.backgroundColor = .blue
         headerLabel.adjustsFontSizeToFitWidth = true
-        //        headerLabel.sizeToFit()
         headerView.addSubview(headerLabel)
-        //        headerView.sizeToFit()
         return headerView
     }
-    
-    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if lesSections[section] == "" {
@@ -316,7 +213,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let alerte = UIAlertController(title: NSLocalizedString("Un conseil", comment: ""), message: message, preferredStyle: .alert)
             if !nomsRessources.isEmpty && !liensRessources.isEmpty {
                 print("nom ressource : ", nomsRessources, "liens ressources", liensRessources)
-
+                
                 for i in 0...min(nomsRessources.count, liensRessources.count) - 1 {
                     alerte.addAction(UIAlertAction(title: nomsRessources[i], style: .default, handler: {_ in self.ouvrirWeb(adresse: liensRessources[i])}))
                 }
@@ -326,25 +223,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-//    func texteValeurPourTableView(valeurMax: Double, unite: String, valeur: Double, afficherLoupe: Bool, tailleFonte: CGFloat) -> NSAttributedString {
-//        let alpha = afficherLoupe ? 1.0 : 0.0
-//        let couleurLoupe = UIColor.black.withAlphaComponent(alpha) // n'importe quelle couleur est ok en fait - du moins tant qu'on ne gère pas le mode sombre
-//        let texteAAfficher = NSMutableAttributedString(string: "🔎", attributes: [NSAttributedString.Key.foregroundColor: couleurLoupe])
-//        let texteValeurUnite =  NSAttributedString(string: String(format: self.formatAffichageValeur(valeurMax: valeurMax), valeur).replacingOccurrences(of: " ", with: "\u{2007}") + " " + unite, attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: tailleFonte, weight: .regular)])
-//        texteAAfficher.append(texteValeurUnite)
-//        return texteAAfficher as NSAttributedString
-//    }
-    
-    var minValueEnCours: Float = .nan
-    var maxValueEnCours: Float = .nan
-    var valeurPrecedente: Float = .nan
-    var couleurDefautThumb: UIColor = .white
-    var glissiereModeZoom: Bool = false
-//    var compteurCurseurImmobile: Int = 0
-//    var dateDernierMouvementCurseur: Double = .nan
     
     func effacerDonnees() {
-//        premierAffichageApresInitialisation = true
         for i in 0...lesEmissions.count - 1 {
             lesEmissions[i].valeur = 0.0 // lesEmissions[i].facteurEmission > 0 ? //0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
         }
@@ -353,7 +233,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         boutonExport.isHidden = emissionsCalculees == 0
         boutonEffacerDonnees.isHidden = emissionsCalculees == 0
-//        print("emissions Calculées : ", emissionsCalculees)
+        //        print("emissions Calculées : ", emissionsCalculees)
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
         
@@ -366,35 +246,27 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-//    var dureeEstDejaZero: Bool = true
-//    var effectifEstDejaZero: Bool = true
-
     func debutMouvementGlissiere(cell: CelluleEmission){
-        print("debut mouvement glissière")
-        if celluleEnCours == nil {
-            guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
-                print("erreur index Path")
-                return
-            }
-//            premierAffichageApresInitialisation = false
-            celluleEnCours = cell
-            ligneEnCours = numeroDeLigne(indexPath: indexPath)
-            minValueEnCours = cell.glissiere.minimumValue
-            maxValueEnCours = cell.glissiere.maximumValue
-            valeurPrecedente = cell.glissiere.value
-            couleurDefautThumb = cell.glissiere.thumbTintColor ?? .white
-            glissiereModeZoom = false
-//            compteurCurseurImmobile = 0
-//            ligneTimerEnCoursPourZoom = -1
-            cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
+        //        if celluleEnCours == nil {
+        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
+            print("erreur index Path - debut mouvement glissière")
+            return
         }
+        //            compteurMouvementsGlissiere = compteurMouvementsGlissiere + 1
+        //            premierAffichageApresInitialisation = false
+        //            celluleEnCours = cell
+        ligneEnCours = numeroDeLigne(indexPath: indexPath)
+        minValueNonZoomee = cell.glissiere.minimumValue
+        maxValueNonZoomee = cell.glissiere.maximumValue
+        valeurPrecedente = cell.glissiere.value
+        //            couleurDefautThumb = cell.glissiere.thumbTintColor ?? .white
+        glissiereModeZoom = false
+        //            compteurCurseurImmobile = 0
+        //            ligneTimerEnCoursPourZoom = -1
+        //        }
     }
-        
+    
     func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission, echelleLog: Bool) {
-//        if (ligne == SorteEmission.duree.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) || (ligne == SorteEmission.effectif.rawValue && cellule.glissiere.value == cellule.glissiere.minimumValue) {
-//            self.alerteConfirmationReset()
-//            self.finMouvementGlissiere(cell: cellule)
-//        }
         let intervalleHaut = cellule.glissiere.maximumValue - cellule.glissiere.value
         let intervalleBas = cellule.glissiere.value - cellule.glissiere.minimumValue
         if echelleLog {
@@ -407,89 +279,92 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cellule.glissiere.thumbTintColor = .gray
         self.glissiereModeZoom = true
         cellule.labelValeur.isHidden = false
-//        print("nouvel intervalle", cellule.glissiere.minimumValue, cellule.glissiere.value, cellule.glissiere.maximumValue)
-
     }
-
-    func desactiverModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
-        cellule.glissiere.thumbTintColor = .white
-        self.glissiereModeZoom = false
-        cellule.glissiere.maximumValue = maxValueEnCours
-        cellule.glissiere.minimumValue = minValueEnCours
-    }
-
+    
+    //    func desactiverModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
+    //        cellule.glissiere.thumbTintColor = .white
+    //        self.glissiereModeZoom = false
+    //        cellule.glissiere.maximumValue = maxValueNonZoomee
+    //        cellule.glissiere.minimumValue = minValueNonZoomee
+    //    }
+    
     
     func glissiereBougee(cell: CelluleEmission) {
-        if ligneEnCours >= 0 && celluleEnCours != nil {
-            print("glissiereBougee", celluleEnCours!.glissiere.value)
-            let ligne = ligneEnCours
-            let cellule = celluleEnCours
-            let emission = lesEmissions[ligne]
-            DispatchQueue.main.async{
-                if !self.glissiereModeZoom && ((cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || emission.echelleLog) {
-                    let valeur = cellule!.glissiere.value
-                    let ligneAuDebutDuTimer = ligne
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                        if !self.mouvementGlissiereFini {
-                            if ligneAuDebutDuTimer == ligne && abs(valeur - cellule!.glissiere.value) < 0.02 * (cellule!.glissiere.maximumValue - cellule!.glissiere.minimumValue) && !self.glissiereModeZoom {
-                                self.activerModeZoomGlissiere(ligne: ligne, cellule: cellule!, echelleLog: emission.echelleLog)
-//                                cellule!.labelValeur.text = //self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
-//                                cellule!.labelValeur.isHidden = false
-                            }
-//                        }
-                    }
+        guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
+            print("erreur index Path - glissière bougée")
+            return
+        }
+        //        if ligneEnCours >= 0 && celluleEnCours != nil {
+        let ligne = numeroDeLigne(indexPath: indexPath)
+        //            let cellule = cell
+        let emission = lesEmissions[ligne]
+        print("glissiereBougee", cell.glissiere.value, emission.nom, compteurMouvementsGlissiere)
+        if !self.glissiereModeZoom && ((cell.glissiere.maximumValue - cell.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || emission.echelleLog) {
+            let valeur = cell.glissiere.value
+            let compteurAuDebutDuTimer = self.compteurMouvementsGlissiere
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if compteurAuDebutDuTimer == self.compteurMouvementsGlissiere && abs(valeur - cell.glissiere.value) < 0.02 * (cell.glissiere.maximumValue - cell.glissiere.minimumValue) && !self.glissiereModeZoom {
+                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
+                    self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: emission.echelleLog)
                 }
-                self.valeurPrecedente = cellule!.glissiere.value
-                if emission.echelleLog {
-                    if cellule!.glissiere.value == self.minValueEnCours { //  cellule!.glissiere.minimumValue {
-                        lesEmissions[ligne].valeur = 0.0
-                    } else {
-                        lesEmissions[ligne].valeur = arrondi(exp(Double(cellule!.glissiere.value)))
-                    }
+            }
+        }
+            self.valeurPrecedente = cell.glissiere.value
+            if emission.echelleLog {
+                if cell.glissiere.value == self.minValueNonZoomee { //  cellule!.glissiere.minimumValue {
+                    lesEmissions[ligne].valeur = 0.0
                 } else {
-                    lesEmissions[ligne].valeur = Double(cellule!.glissiere.value)
-                    if emission.valeurEntiere {
-                        lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
-                    }
+                    lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
                 }
-//                cellule!.labelValeur.isHidden = !self.glissiereModeZoom
-                cellule!.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
-//                cellule!.labelValeur.attributedText = self.texteValeurPourTableView(valeurMax: emission.valeurMax, unite: emission.unite, valeur: emission.valeur, afficherLoupe: self.glissiereModeZoom, tailleFonte: cell.labelValeur.font.pointSize)
-                switch ligne {
-                case SorteEmission.duree.rawValue:
-                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-                case SorteEmission.repasViandeRouge.rawValue:
-                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-                case SorteEmission.repasViandeBlanche.rawValue:
-                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
-                case SorteEmission.repasVegetarien.rawValue:
-                    self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
-                case SorteEmission.effectif.rawValue:
-                    self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-                default: let dummy = 1
+            } else {
+                lesEmissions[ligne].valeur = Double(cell.glissiere.value)
+                if emission.valeurEntiere {
+                    lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
                 }
-                emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
-                self.boutonExport.isHidden = emissionsCalculees == 0
-                self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
-                cellule!.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])
-                var lesIndexPathAActualiser: [IndexPath] = []
-                if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
-                    lesIndexPathAActualiser = [indexPathAActualiser]
-                }
-                self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
-                self.actualiseAffichageEmissions(grandFormat: false)
-                self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: true)
-            }  // DispatchQueue.main.async
-        } // if ligneEnCours >= 0 && celluleEnCours != nil
+            }
+        self.ajusteQuantitesLiees(ligne: ligne)
+        emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        DispatchQueue.main.async{
+            cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne], afficherPictos: afficherPictos)
+            self.boutonExport.isHidden = emissionsCalculees == 0
+            self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
+            //                cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])  // déjà inclus dans le reloadRows
+            var lesIndexPathAActualiser: [IndexPath] = []
+            if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
+                lesIndexPathAActualiser = [indexPathAActualiser]
+            }
+            self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
+            self.actualiseAffichageEmissions(grandFormat: false)
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: true)
+        }  // DispatchQueue.main.async
+        //        } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
-        
+    
     @IBAction func alerteConfirmationReset(){
         let alerte = UIAlertController(title: NSLocalizedString("Initialisation", comment: ""), message: NSLocalizedString("Effacer les données ?", comment: ""), preferredStyle: .alert)
         alerte.addAction(UIAlertAction(title: NSLocalizedString("Annuler", comment: ""), style: .default, handler: nil))
         alerte.addAction(UIAlertAction(title: NSLocalizedString("Effacer", comment: ""), style: .destructive, handler: {_ in self.effacerDonnees()}))
         self.present(alerte, animated: true)
+        
+    }
+    
+    func ajusteQuantitesLiees(ligne: Int) {
+        switch ligne {
+        case SorteEmission.duree.rawValue:
+            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+        case SorteEmission.repasViandeRouge.rawValue:
+            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+        case SorteEmission.repasViandeBlanche.rawValue:
+            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
+        case SorteEmission.repasVegetarien.rawValue:
+            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
+        case SorteEmission.effectif.rawValue:
+            self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+        default: let dummy = 1
+        }
 
     }
+    
     func ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
         let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
         actualiseValeursMaxRepas(valeurMax: nombreJours)
@@ -501,20 +376,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func finMouvementGlissiere(cell: CelluleEmission) {
         print("fin mouvement glissière")
         glissiereBougee(cell: cell)
+        ligneEnCours = -1
+        self.compteurMouvementsGlissiere = self.compteurMouvementsGlissiere + 1
         let lesValeurs = lesEmissions.map({$0.valeur})
         userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
-        cell.glissiere.minimumValue = minValueEnCours
-        cell.glissiere.maximumValue = maxValueEnCours
-        glissiereModeZoom = false
-//        compteurCurseurImmobile = 0
-//        mouvementGlissiereFini = true
-        DispatchQueue.main.async{
-            cell.glissiere.thumbTintColor = self.couleurDefautThumb
-            self.tableViewEmissions.reloadData()
-        }
+        //        cell.glissiere.minimumValue = minValueNonZoomee
+        //        cell.glissiere.maximumValue = maxValueNonZoomee
+        //       self.celluleEnCours = nil
+        //        ligneEnCours = -1
+        //        glissiereModeZoom = false
+        //        DispatchQueue.main.async{
+        //            cell.glissiere.thumbTintColor = self.couleurDefautThumb
+        //        }
+        self.tableViewEmissions.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            ligneEnCours = -1
-            self.celluleEnCours = nil
             self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: false)
         }
     }
@@ -561,52 +436,57 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     override func choisitContraintes(size: CGSize) -> Bool {
-//        print("choisitContraintes")
+        //        print("choisitContraintes")
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
         var change = false
-//        if nouvelleOrientation != orientationGlobale {
-//            let estModePortrait = nouvelleOrientation == .portrait
-//            orientationGlobale = nouvelleOrientation
-//            print("choisit contraintes, orientation", nouvelleOrientation)
-//            if estModePortrait {  // on désactive avant d'activer pour éviter les conflits
-            if nouvelleOrientation == .portrait && self.contrainteTableViewHautPaysage.isActive {
-                self.contrainteTableViewHautPaysage.isActive = false
-                self.contrainteTableViewDroitePaysage.isActive = false
-                self.contrainteVueResultatsBasPaysage.isActive = false
-                self.contrainteVueResultatGauchePaysage.isActive = false
-
-                self.contrainteTableViewHautPortrait.isActive = true
-                self.contrainteTableViewDroitePortrait.isActive = true
-                self.contrainteVueResultatsGauchePortrait.isActive = true
-                change = true
-            } else if nouvelleOrientation == .paysage && self.contrainteTableViewHautPortrait.isActive {
-                self.contrainteTableViewHautPortrait.isActive = false
-                self.contrainteTableViewDroitePortrait.isActive = false
-                self.contrainteVueResultatsGauchePortrait.isActive = false
-                
-                self.contrainteTableViewHautPaysage.isActive = true
-                self.contrainteTableViewDroitePaysage.isActive = true
-                self.contrainteVueResultatsBasPaysage.isActive = true
-                self.contrainteVueResultatGauchePaysage.isActive = true
-                change = true
-            }
-//        }
+        var change3 = false
+        
+        //        if nouvelleOrientation != orientationGlobale {
+        //            let estModePortrait = nouvelleOrientation == .portrait
+        //            orientationGlobale = nouvelleOrientation
+        //            print("choisit contraintes, orientation", nouvelleOrientation)
+        //            if estModePortrait {  // on désactive avant d'activer pour éviter les conflits
+        if nouvelleOrientation == .portrait && self.contrainteTableViewHautPaysage.isActive {
+            self.contrainteTableViewHautPaysage.isActive = false
+            self.contrainteTableViewDroitePaysage.isActive = false
+            self.contrainteVueResultatsBasPaysage.isActive = false
+            self.contrainteVueResultatGauchePaysage.isActive = false
+            
+            self.contrainteTableViewHautPortrait.isActive = true
+            self.contrainteTableViewDroitePortrait.isActive = true
+            self.contrainteVueResultatsGauchePortrait.isActive = true
+            change = true
+        } else if nouvelleOrientation == .paysage && self.contrainteTableViewHautPortrait.isActive {
+            self.contrainteTableViewHautPortrait.isActive = false
+            self.contrainteTableViewDroitePortrait.isActive = false
+            self.contrainteVueResultatsGauchePortrait.isActive = false
+            
+            self.contrainteTableViewHautPaysage.isActive = true
+            self.contrainteTableViewDroitePaysage.isActive = true
+            self.contrainteVueResultatsBasPaysage.isActive = true
+            self.contrainteVueResultatGauchePaysage.isActive = true
+            change = true
+        }
+        //        }
         let ecranLarge = self.vueResultats.frame.width >= 600
-        if ecranLarge {  // réduire la taille des boutons si on a un écran étroit.
+        if ecranLarge && !self.contrainteLargeurBoutonEffacerLarge.isActive {  // réduire la taille des boutons si on a un écran étroit.
             self.contrainteLargeurBoutonEffacerEtroit.isActive = false
             self.contrainteLargeurBoutonExporterEtroit.isActive = false
             self.contrainteLargeurBoutonEffacerLarge.isActive = true
             self.contrainteLargeurBoutonExporterLarge.isActive = true
-        } else {
+            dessineBoutons(ecranLarge: ecranLarge)
+            change3 = true
+        } else if !ecranLarge && !self.contrainteLargeurBoutonEffacerEtroit.isActive {
             self.contrainteLargeurBoutonEffacerLarge.isActive = false
             self.contrainteLargeurBoutonExporterLarge.isActive = false
             self.contrainteLargeurBoutonEffacerEtroit.isActive = true
             self.contrainteLargeurBoutonExporterEtroit.isActive = true
+            dessineBoutons(ecranLarge: ecranLarge)
+            change3 = true
         }
-        dessineBoutons(ecranLarge: ecranLarge)
-//        print("largeurResultats", self.vueResultats.frame.width)
+        //        print("largeurResultats", self.vueResultats.frame.width)
         let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
-        return change || change2
+        return change || change2 || change3
     }
     
     @objc func ouvrirWeb(adresse: String) {
@@ -618,14 +498,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
         }
     }
-
+    
     func ouvrirWebEEUdF() {
         ouvrirWeb(adresse: NSLocalizedString("https://www.eeudf.org", comment: ""))
     }
-//        print("web")
-//        let adresse = NSLocalizedString("https://www.eeudf.org", comment: "")
-//
-//    }
+    //        print("web")
+    //        let adresse = NSLocalizedString("https://www.eeudf.org", comment: "")
+    //
+    //    }
     
     func redessineResultats(size: CGSize, curseurActif: Bool) {
         DispatchQueue.main.async {
@@ -635,20 +515,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: curseurActif)
             }
         }
-        if celluleEnCours == nil { // pour ne pa
+        if ligneEnCours < 0 { // pour ne pa
             tableViewEmissions.reloadData()
         }
     }
     
-//    override func viewWillLayoutSubviews() {
-//        print("viewWillLayoutSubviews")
-//        let size = self.view.frame.size
-//        redessineResultats(size: size, curseurActif: false)
-//        super.viewWillLayoutSubviews()
-//    }
+    //    override func viewWillLayoutSubviews() {
+    //        print("viewWillLayoutSubviews")
+    //        let size = self.view.frame.size
+    //        redessineResultats(size: size, curseurActif: false)
+    //        super.viewWillLayoutSubviews()
+    //    }
     
     override func viewDidLayoutSubviews() {
-//        print("viewDidLayoutSubviews")
+        //        print("viewDidLayoutSubviews")
         let size = self.view.frame.size
         redessineResultats(size: size, curseurActif: false)
         super.viewDidLayoutSubviews()
@@ -656,7 +536,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        print("viewWillTransition")
+        //        print("viewWillTransition")
         redessineResultats(size: size, curseurActif: false)
         super.viewWillTransition(to: size, with: coordinator)
     }
@@ -664,8 +544,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
         print("sender", sender)
-//        self.boutonExport.isHidden = true
-//        self.boutonAideGraphique.isHidden = true
+        //        self.boutonExport.isHidden = true
+        //        self.boutonAideGraphique.isHidden = true
         let vueAExporter = vueResultats!
         let pdfPageFrame = vueAExporter.bounds
         let pdfData = NSMutableData()
@@ -700,12 +580,36 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             popover.barButtonItem  = self.navigationItem.rightBarButtonItem
             popover.permittedArrowDirections = .any
             popover.sourceView = sender // sender;
-//            popover.delegate = self
-//            popover.sourceRect = sender.frame //sender.frame;
+            //            popover.delegate = self
+            //            popover.sourceRect = sender.frame //sender.frame;
         }
         present(activityViewController, animated: true, completion: nil)
     }
     
+    
+    
+    
+    //    func formatAffichageValeur(valeurMax: Double) -> String {
+    //        let nombreChiffresMax = valeurMax > 0 ? Int(ceil(log(valeurMax) / log(10.0) + 0.01)) : 1
+    //        switch nombreChiffresMax {
+    //        case 1: return "%1.0f"
+    //        case 2: return "%2.0f"
+    //        case 3: return "%3.0f"
+    //        case 4: return "%4.0f"
+    //        case 5: return "%5.0f"
+    //        case 6: return "%6.0f"
+    //        default: return "%.0f"
+    //        }
+    //    }
+    //
+    //    func texteValeurPourTableView(valeurMax: Double, unite: String, valeur: Double, afficherLoupe: Bool, tailleFonte: CGFloat) -> NSAttributedString {
+    //        let alpha = afficherLoupe ? 1.0 : 0.0
+    //        let couleurLoupe = UIColor.black.withAlphaComponent(alpha) // n'importe quelle couleur est ok en fait - du moins tant qu'on ne gère pas le mode sombre
+    //        let texteAAfficher = NSMutableAttributedString(string: "🔎", attributes: [NSAttributedString.Key.foregroundColor: couleurLoupe])
+    //        let texteValeurUnite =  NSAttributedString(string: String(format: self.formatAffichageValeur(valeurMax: valeurMax), valeur).replacingOccurrences(of: " ", with: "\u{2007}") + " " + unite, attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: tailleFonte, weight: .regular)])
+    //        texteAAfficher.append(texteValeurUnite)
+    //        return texteAAfficher as NSAttributedString
+    //    }
     
 }
 
