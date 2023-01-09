@@ -254,7 +254,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="alerteConfirmationReset" destination="BYZ-38-t0r" eventType="touchUpInside" id="tGa-7s-4ZW"/>
+                                    <action selector="alerteConfirmationReset" destination="BYZ-38-t0r" eventType="touchUpInside" id="s5I-NC-aVO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaZ-LP-cnI">
@@ -377,6 +377,46 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wBa-bQ-WhU">
                                 <rect key="frame" x="31" y="77" width="258" height="418"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celluleExplications" rowHeight="200" id="yXs-Tb-ny3" customClass="CelluleExplications" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="258" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXs-Tb-ny3" id="iws-oA-0sK">
+                                            <rect key="frame" x="0.0" y="0.0" width="258" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" scrollEnabled="NO" editable="NO" text="Texte" translatesAutoresizingMaskIntoConstraints="NO" id="F88-4S-w5N">
+                                                    <rect key="frame" x="0.0" y="52" width="258" height="148"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Titre" translatesAutoresizingMaskIntoConstraints="NO" id="gwM-Ma-TuY">
+                                                    <rect key="frame" x="0.0" y="8" width="258" height="44"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gwM-Ma-TuY" firstAttribute="leading" secondItem="iws-oA-0sK" secondAttribute="leading" id="3Aw-Bp-JuU"/>
+                                                <constraint firstItem="F88-4S-w5N" firstAttribute="leading" secondItem="iws-oA-0sK" secondAttribute="leading" id="FV3-EX-eEl"/>
+                                                <constraint firstAttribute="trailing" secondItem="gwM-Ma-TuY" secondAttribute="trailing" id="Iak-8u-Ghz"/>
+                                                <constraint firstItem="F88-4S-w5N" firstAttribute="top" secondItem="gwM-Ma-TuY" secondAttribute="bottom" id="aPT-qt-1jE"/>
+                                                <constraint firstAttribute="trailing" secondItem="F88-4S-w5N" secondAttribute="trailing" id="asP-0D-Hvp"/>
+                                                <constraint firstItem="gwM-Ma-TuY" firstAttribute="top" secondItem="iws-oA-0sK" secondAttribute="top" constant="8" id="j4g-Q4-9c2"/>
+                                                <constraint firstAttribute="bottom" secondItem="F88-4S-w5N" secondAttribute="bottom" id="vIw-dd-YNx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="texte" destination="F88-4S-w5N" id="xmW-gX-qoE"/>
+                                            <outlet property="titre" destination="gwM-Ma-TuY" id="Qv2-b1-wWX"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour en savoir plus" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSe-EG-bPT">
                                 <rect key="frame" x="31" y="35" width="258" height="34"/>
@@ -439,6 +479,9 @@
         <image name="logo eeudf coul" width="297.60000610351562" height="411"/>
         <image name="rondVert" width="361.64999389648438" height="376.25"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

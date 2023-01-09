@@ -23,6 +23,7 @@
 		B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFA728C5172500FBBAE3 /* Data.swift */; };
 		B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */; };
 		B56E3204296AB72300276CE8 /* ToDoList.txt in Resources */ = {isa = PBXBuildFile; fileRef = B56E3203296AB72300276CE8 /* ToDoList.txt */; };
+		B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5716E12296C8CC7008EE908 /* CelluleExplications.swift */; };
 		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
@@ -49,6 +50,7 @@
 		B54DCFA728C5172500FBBAE3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleEmission.swift; sourceTree = "<group>"; };
 		B56E3203296AB72300276CE8 /* ToDoList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDoList.txt; sourceTree = "<group>"; };
+		B5716E12296C8CC7008EE908 /* CelluleExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleExplications.swift; sourceTree = "<group>"; };
 		B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BilanCO2.entitlements; sourceTree = "<group>"; };
 		B5D81F1A28F2126300188489 /* CelluleCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleCredits.swift; sourceTree = "<group>"; };
 		B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCredits.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
 				B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
+				B5716E12296C8CC7008EE908 /* CelluleExplications.swift */,
 				B5D81F1A28F2126300188489 /* CelluleCredits.swift */,
 				B51AD1C128CA439700888CDD /* Graphique.swift */,
 				B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */,
@@ -215,6 +218,7 @@
 				B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */,
 				B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */,
 				B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */,
+				B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */,
 				B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */,
 				B52DCA1B28DFA03F00DAA900 /* CouleursEEUdF.swift in Sources */,
 			);
@@ -387,7 +391,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -427,7 +431,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

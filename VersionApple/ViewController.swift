@@ -150,8 +150,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             cell.glissiere.thumbTintColor = couleurDefautThumb // attention si couleur différentes pour l'animation ?
             cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
             cell.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
+            cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
             cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
             cell.actualiseEmissionIndividuelle(typeEmission: emission)
+            cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
             cell.boutonInfo.setTitle("", for: .normal)
@@ -223,6 +225,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
+    @IBAction func alerteConfirmationReset(){
+        let alerte = UIAlertController(title: NSLocalizedString("Initialisation", comment: ""), message: NSLocalizedString("Effacer les données ?", comment: ""), preferredStyle: .alert)
+        alerte.addAction(UIAlertAction(title: NSLocalizedString("Annuler", comment: ""), style: .default, handler: nil))
+        alerte.addAction(UIAlertAction(title: NSLocalizedString("Effacer", comment: ""), style: .destructive, handler: {_ in self.effacerDonnees()}))
+        self.present(alerte, animated: true)
+    }
+
     
     func effacerDonnees() {
         for i in 0...lesEmissions.count - 1 {
@@ -264,30 +273,21 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //            compteurCurseurImmobile = 0
         //            ligneTimerEnCoursPourZoom = -1
         //        }
+        lancerTimerZoom(cell: cell, ligne: ligneEnCours)
     }
     
-    func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission, echelleLog: Bool) {
-        let intervalleHaut = cellule.glissiere.maximumValue - cellule.glissiere.value
-        let intervalleBas = cellule.glissiere.value - cellule.glissiere.minimumValue
-        if echelleLog {
-            cellule.glissiere.maximumValue = cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere)
-            cellule.glissiere.minimumValue = cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere)
-        } else {
-            cellule.glissiere.maximumValue = max(min(cellule.glissiere.maximumValue, cellule.glissiere.value + 1), cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere))
-            cellule.glissiere.minimumValue = min(max(cellule.glissiere.minimumValue, cellule.glissiere.value - 1), cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere))
+    func lancerTimerZoom(cell: CelluleEmission, ligne: Int) {
+        if !self.glissiereModeZoom && ((cell.glissiere.maximumValue - cell.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || lesEmissions[ligne].echelleLog) {
+            let valeur = cell.glissiere.value
+            let compteurAuDebutDuTimer = self.compteurMouvementsGlissiere
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if compteurAuDebutDuTimer == self.compteurMouvementsGlissiere && abs(valeur - cell.glissiere.value) < 0.02 * (cell.glissiere.maximumValue - cell.glissiere.minimumValue) && !self.glissiereModeZoom {
+                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
+                    self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: lesEmissions[ligne].echelleLog)
+                }
+            }
         }
-        cellule.glissiere.thumbTintColor = .gray
-        self.glissiereModeZoom = true
-        cellule.labelValeur.isHidden = false
     }
-    
-    //    func desactiverModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
-    //        cellule.glissiere.thumbTintColor = .white
-    //        self.glissiereModeZoom = false
-    //        cellule.glissiere.maximumValue = maxValueNonZoomee
-    //        cellule.glissiere.minimumValue = minValueNonZoomee
-    //    }
-    
     
     func glissiereBougee(cell: CelluleEmission) {
         guard let indexPath = self.tableViewEmissions.indexPath(for: cell) else {
@@ -296,19 +296,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         //        if ligneEnCours >= 0 && celluleEnCours != nil {
         let ligne = numeroDeLigne(indexPath: indexPath)
-        //            let cellule = cell
         let emission = lesEmissions[ligne]
-        print("glissiereBougee", cell.glissiere.value, emission.nom, compteurMouvementsGlissiere)
-        if !self.glissiereModeZoom && ((cell.glissiere.maximumValue - cell.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || emission.echelleLog) {
-            let valeur = cell.glissiere.value
-            let compteurAuDebutDuTimer = self.compteurMouvementsGlissiere
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                if compteurAuDebutDuTimer == self.compteurMouvementsGlissiere && abs(valeur - cell.glissiere.value) < 0.02 * (cell.glissiere.maximumValue - cell.glissiere.minimumValue) && !self.glissiereModeZoom {
-                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
-                    self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: emission.echelleLog)
-                }
-            }
-        }
+//        print("glissiereBougee", cell.glissiere.value, ligne, emission.nom, compteurMouvementsGlissiere)
+        lancerTimerZoom(cell: cell, ligne: ligne)
             self.valeurPrecedente = cell.glissiere.value
             if emission.echelleLog {
                 if cell.glissiere.value == self.minValueNonZoomee { //  cellule!.glissiere.minimumValue {
@@ -324,14 +314,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
         self.ajusteQuantitesLiees(ligne: ligne)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne], afficherPictos: afficherPictos)
         DispatchQueue.main.async{
-            cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne], afficherPictos: afficherPictos)
             self.boutonExport.isHidden = emissionsCalculees == 0
             self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
-            //                cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])  // déjà inclus dans le reloadRows
+            cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])  // Bizarre, devrait être déjà inclus dans le reloadRows
             var lesIndexPathAActualiser: [IndexPath] = []
             if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
                 lesIndexPathAActualiser = [indexPathAActualiser]
+                print(lesIndexPathAActualiser.count, "à actualiser")
             }
             self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
             self.actualiseAffichageEmissions(grandFormat: false)
@@ -340,12 +331,26 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
     
-    @IBAction func alerteConfirmationReset(){
-        let alerte = UIAlertController(title: NSLocalizedString("Initialisation", comment: ""), message: NSLocalizedString("Effacer les données ?", comment: ""), preferredStyle: .alert)
-        alerte.addAction(UIAlertAction(title: NSLocalizedString("Annuler", comment: ""), style: .default, handler: nil))
-        alerte.addAction(UIAlertAction(title: NSLocalizedString("Effacer", comment: ""), style: .destructive, handler: {_ in self.effacerDonnees()}))
-        self.present(alerte, animated: true)
-        
+    
+    func finMouvementGlissiere(cell: CelluleEmission) {
+//        print("fin mouvement glissière")
+        glissiereBougee(cell: cell)
+        ligneEnCours = -1
+        self.compteurMouvementsGlissiere = self.compteurMouvementsGlissiere + 1
+        let lesValeurs = lesEmissions.map({$0.valeur})
+        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+        //        cell.glissiere.minimumValue = minValueNonZoomee
+        //        cell.glissiere.maximumValue = maxValueNonZoomee
+        //       self.celluleEnCours = nil
+        //        ligneEnCours = -1
+        //        glissiereModeZoom = false
+        //        DispatchQueue.main.async{
+        //            cell.glissiere.thumbTintColor = self.couleurDefautThumb
+        //        }
+        self.tableViewEmissions.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: false)
+        }
     }
     
     func ajusteQuantitesLiees(ligne: Int) {
@@ -372,29 +377,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur)
         lesEmissions[priorite3.rawValue].valeur = nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
     }
-    
-    func finMouvementGlissiere(cell: CelluleEmission) {
-        print("fin mouvement glissière")
-        glissiereBougee(cell: cell)
-        ligneEnCours = -1
-        self.compteurMouvementsGlissiere = self.compteurMouvementsGlissiere + 1
-        let lesValeurs = lesEmissions.map({$0.valeur})
-        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
-        //        cell.glissiere.minimumValue = minValueNonZoomee
-        //        cell.glissiere.maximumValue = maxValueNonZoomee
-        //       self.celluleEnCours = nil
-        //        ligneEnCours = -1
-        //        glissiereModeZoom = false
-        //        DispatchQueue.main.async{
-        //            cell.glissiere.thumbTintColor = self.couleurDefautThumb
-        //        }
-        self.tableViewEmissions.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: false)
-        }
-    }
-    
-    
+
     func actualiseValeursMaxEffectif(valeurMax: Double) {
         for i in 0...lesEmissions.count-1 {
             if lesEmissions[i].valeurMaxSelonEffectif > 0 {
@@ -422,6 +405,29 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
         }
     }
+    
+    func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission, echelleLog: Bool) {
+        let intervalleHaut = cellule.glissiere.maximumValue - cellule.glissiere.value
+        let intervalleBas = cellule.glissiere.value - cellule.glissiere.minimumValue
+        if echelleLog {
+            cellule.glissiere.maximumValue = cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere)
+            cellule.glissiere.minimumValue = cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere)
+        } else {
+            cellule.glissiere.maximumValue = max(min(cellule.glissiere.maximumValue, cellule.glissiere.value + 1), cellule.glissiere.value + (intervalleHaut / facteurZoomGlissiere))
+            cellule.glissiere.minimumValue = min(max(cellule.glissiere.minimumValue, cellule.glissiere.value - 1), cellule.glissiere.value - (intervalleBas / facteurZoomGlissiere))
+        }
+        cellule.glissiere.thumbTintColor = .gray
+        self.glissiereModeZoom = true
+        cellule.labelValeur.isHidden = false
+    }
+    
+    //    func desactiverModeZoomGlissiere(ligne: Int, cellule: CelluleEmission) {
+    //        cellule.glissiere.thumbTintColor = .white
+    //        self.glissiereModeZoom = false
+    //        cellule.glissiere.maximumValue = maxValueNonZoomee
+    //        cellule.glissiere.minimumValue = minValueNonZoomee
+    //    }
+    
     
     func dessineBoutons(ecranLarge: Bool){
         let taille: CGFloat = ecranLarge ? 20 : 14
@@ -507,6 +513,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     //
     //    }
     
+    
     func redessineResultats(size: CGSize, curseurActif: Bool) {
         DispatchQueue.main.async {
             let delai = self.choisitContraintes(size: size) ? 0.01 : 0.00
@@ -515,7 +522,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: curseurActif)
             }
         }
-        if ligneEnCours < 0 { // pour ne pa
+        if ligneEnCours < 0 { // pour ne pas actualiser le tableView pendant qu'on manipule un curseur
             tableViewEmissions.reloadData()
         }
     }

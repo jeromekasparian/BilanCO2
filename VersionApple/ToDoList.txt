@@ -11,6 +11,7 @@
  - Autres activités ?
  
  - aide : rendre les liens cliquables
+ https://stackoverflow.com/questions/21629784/how-can-i-make-a-clickable-link-in-an-nsattributedstring
      - rendre la cellule non sélectionnable pour éviter la concurrence entre la cellule et ton texte.
     - verifier les paramètre de user interaction sur ton textview (selectable / interaction enabled)
     - une fois que tu as fait ça, si ça marche tu recrées la fonction de sélection de la cellule de la façon suivante :
