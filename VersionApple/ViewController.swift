@@ -282,7 +282,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let compteurAuDebutDuTimer = self.compteurMouvementsGlissiere
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if compteurAuDebutDuTimer == self.compteurMouvementsGlissiere && abs(valeur - cell.glissiere.value) < 0.02 * (cell.glissiere.maximumValue - cell.glissiere.minimumValue) && !self.glissiereModeZoom {
-                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
+//                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
                     self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: lesEmissions[ligne].echelleLog)
                 }
             }

@@ -168,7 +168,7 @@ func arrondi(_ nombre: Double) -> Double { // arrondi à deux chiffres significa
     if nombre < 100 {
         return round(nombre)
     } else {
-        let nombreChiffres = Int(ceil(log(nombre) / log(10.0) + 0.01))
+        let nombreChiffres = Int(ceil(log(nombre) / log(10.0) + 0.001))
         let facteur = pow(10, Double(nombreChiffres - 2))
         return facteur * round(nombre / facteur)
     }

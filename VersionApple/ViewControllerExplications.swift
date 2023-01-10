@@ -38,6 +38,7 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
 //    @IBOutlet var texteTest: UITextView!
     
     override func viewDidLoad(){
+        boutonFermer.setTitle("", for: .normal)
         lesTextesFormattes = lesTextes.map({formateTexte(texte: $0)})
 //        texteTest.text = lesTextes[3]
         tableView.delegate = self
