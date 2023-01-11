@@ -65,6 +65,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteLargeurBoutonExporterEtroit: NSLayoutConstraint!
     
     override func viewDidLoad() {
+        if #available(iOS 13, *) {
+            boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
+        } else {
+            boutonEffacerDonnees.setImage(nil, for: .normal)
+            boutonEffacerDonnees.setTitle("\u{0232B}", for: .normal) // ⌫  "\u{0232B}"
+        }
+        boutonExport.setTitle("", for: .normal)
         _ = self.choisitContraintes(size: self.view.frame.size)
         (lesEmissions, lesSections) = lireFichier(nom: "Data")
         let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
@@ -73,8 +80,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 lesEmissions[i].valeur = lesValeurs[i]
             }
         }
-        boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
-        boutonExport.setTitle("", for: .normal)
         
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
         ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
@@ -156,7 +161,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
             cell.boutonInfo.isHidden = emission.conseil.isEmpty
             cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
-            cell.boutonInfo.setTitle("", for: .normal)
+            cell.boutonInfo.setTitle("\u{2007}", for: .normal)
             return cell
         }
         else {  // la dernière section : l'ours
@@ -436,7 +441,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             boutonEffacerDonnees.setImage(UIImage(systemName: "delete.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
         } else {
             boutonExport.setImage(UIImage(named: "square.and.arrow.up"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-            boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+//            boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+            boutonEffacerDonnees.setImage(nil, for: .normal)
+            boutonEffacerDonnees.setTitle("\u{0232B}", for: .normal)
         }
     }
     
