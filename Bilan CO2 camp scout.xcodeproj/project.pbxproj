@@ -28,6 +28,7 @@
 		B5D81F1D28F30C0300188489 /* ViewControllerCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1C28F30C0300188489 /* ViewControllerCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5E0FE8D292A50C5001D0790 /* Data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE8F292A50C5001D0790 /* Data.csv */; };
+		B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
 		B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		B5E0FE90292A50CA001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Data.csv; sourceTree = "<group>"; };
 		B5E2D3312919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E2D3322919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B5FB6498297335D600F50436 /* CelluleVide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleVide.swift; sourceTree = "<group>"; };
 		B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 				B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
 				B5716E12296C8CC7008EE908 /* CelluleExplications.swift */,
+				B5FB6498297335D600F50436 /* CelluleVide.swift */,
 				B5D81F1A28F2126300188489 /* CelluleCredits.swift */,
 				B51AD1C128CA439700888CDD /* Graphique.swift */,
 				B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */,
@@ -219,6 +222,7 @@
 				B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */,
 				B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */,
 				B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */,
+				B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */,
 				B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */,
 				B52DCA1B28DFA03F00DAA900 /* CouleursEEUdF.swift in Sources */,
 			);
@@ -391,7 +395,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -431,7 +435,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

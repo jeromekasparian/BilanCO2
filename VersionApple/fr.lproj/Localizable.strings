@@ -40,10 +40,13 @@
 
    • ***Transports et déplacements*** : les estimations considèrent des véhicules de taille moyenne dans leur catégorie.
      Si un trajet en train est complété par un car entre la gare et le lieu de camp, comptez ce dernier dans les déplacements sur place. De manière générale, si vous utilisez plusieurs moyens de transport, entrez celui qui est utilisé sur la plus grande distance en tant que trajet vers le camp, et l'autre comme un déplacement sur place.
+    Les déplacements sur place, sur de courtes distances en train, bus ou bateau ont un impact négligeable et ne sont pas pris en compte
+
+   • ***Matériel*** : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.
 
    • ***Hébergement*** : les estimations prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
 
-   • ***Matériel*** : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.";
+    • ***Activités spécifiques*** : L'impact des activités marines est essentiellement lié à la fabrication des bateaux et à leur transport. La plupart des autres activités d'un camp scout peuvent être considérées comme incluses dans les achats de matériel";
 
 "texteGraphique" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au camp.
 Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour de camp.";
@@ -92,7 +95,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 ", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t CO₂ (%.0f%%)\n";
 "\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg CO₂";
 "\nTotal : %.2f t CO₂" = "\nTotal : %.2f t CO₂";
-"\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app ";
+"\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app Bilan CO₂ camp scout";
 "Bilan CO2 camp scout" = "Bilan CO₂ camp scout";
 
 // CelluleEmission

@@ -6,18 +6,7 @@
  - renvoyer vers des ressources
       - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
       - autres ressources ?
- - transport : Ferry, train, bus : aussi sur place ?
- - activité : voile : cf données de Jérémy Balas
- - Autres activités ?
- 
- - aide : rendre les liens cliquables
- https://stackoverflow.com/questions/21629784/how-can-i-make-a-clickable-link-in-an-nsattributedstring
-     - rendre la cellule non sélectionnable pour éviter la concurrence entre la cellule et ton texte.
-    - verifier les paramètre de user interaction sur ton textview (selectable / interaction enabled)
-    - une fois que tu as fait ça, si ça marche tu recrées la fonction de sélection de la cellule de la façon suivante :
-    - avoir un bouton clicable en « fond » de la cellule
-    - rendre ton viewcontroller delegate du text field et gérer l’évènement « didbecomefitstrespônder ou didchangeselection
-
+ - activité : voile : valider valeurs / cf questions en cours avec Jérémy Balas
 
  Fonction d'export
       - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop

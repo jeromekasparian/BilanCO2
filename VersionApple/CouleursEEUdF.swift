@@ -23,8 +23,9 @@ let rougeVif = couleur(rouge: 228, vert: 31, bleu: 19)
 let rouge = couleur(rouge: 190, vert: 22, bleu: 34)
 let bleuCiel = couleur(rouge: 159, vert: 197, bleu: 232)
 let grisTresClair = couleur(rouge: 229, vert: 229, bleu: 234)   // équivalent du systemGray5 en mode clair. Cf https://noahgilmore.com/blog/dark-mode-uicolor-compatibility/
-
-let couleursEEUdF5 = [grisTresClair, vert2, vert1, vert3, jaune, .white]
+let bleuMarine = couleur(rouge: 0, vert: 62, bleu: 98)
+//let couleursEEUdF5 = [grisTresClair, jaune, vert3, vert1, vert2, .white]
+let couleursEEUdF5 = [grisTresClair, jaune, vert3, vert1, vert2, bleuMarine, .white]
 
 func couleurIntermediaire(couleur1: UIColor, couleur2: UIColor, ratio: Double) -> UIColor {
     if ratio < 0 {
@@ -69,4 +70,9 @@ extension UIColor {
             return nil
         }
     }
+    
+//    func niveauDeGris() -> CGFloat {
+//        let (r, g, b, alpha) = self.composantes() ?? (0, 0, 0, 0)
+//        return (0.299 * r + 0.587 * g + 0.114 * b) * alpha
+//    }
 }

@@ -16,7 +16,7 @@ let facteurZoomGlissiere: Float = 10.0
 let notificationBackground = "notificationBackground"
 var emissionsCalculees: Double = .nan
 var emissionsSoutenables: Double = .nan
-var lesSections: [String] = []
+var lesSections: [Section] = []
 let userDefaults = UserDefaults.standard
 var lesEmissions: [TypeEmission] = []
 var afficherPictos: Bool = true
@@ -29,7 +29,7 @@ enum Orientation {
 
 var ligneEnCours: Int = -1
 
-class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, UIPopoverControllerDelegate {
+class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableViewDataSource, CelluleEmissionDelegate, CelluleCreditsDelegate, CelluleVideDelegate, UIPopoverControllerDelegate {
     
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
     
@@ -37,6 +37,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
+    let cellReuseIdentifierVide = "CelluleVide"
     //    var celluleEnCours: CelluleEmission! = nil
     var compteurMouvementsGlissiere: Int = 0
     var minValueNonZoomee: Float = .nan
@@ -81,8 +82,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
         }
         
-        actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-        ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+        actualiseValeursMax()
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         boutonExport.isHidden = emissionsCalculees == 0
         boutonEffacerDonnees.isHidden = emissionsCalculees == 0
@@ -91,8 +91,38 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         if #available(iOS 15.0, *) {
             tableViewEmissions.sectionHeaderTopPadding = 0
         }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sectionTapped))
+        tableViewEmissions.addGestureRecognizer(tapGesture)
+        tapGesture.delegate = self as? UIGestureRecognizerDelegate
+        
         super.viewDidLoad()
     }  // viewDidLoad
+    
+    @objc func sectionTapped(sender: UITapGestureRecognizer) {
+//        print("tap")
+        if sender.view != nil {
+                let tapLocation = sender.location(in: tableViewEmissions)
+                if let tapIndexPath = tableViewEmissions.indexPathForRow(at: tapLocation) {
+                    if (tableViewEmissions.cellForRow(at: tapIndexPath)) != nil {
+                        // do something with the row
+//                        print("tapped on row at index: \(tapIndexPath.row)")
+                    }
+                }  else {
+                    for i in 0..<tableViewEmissions.numberOfSections {
+                        let sectionHeaderArea = tableViewEmissions.rectForHeader(inSection: i)
+                        if sectionHeaderArea.contains(tapLocation) {
+                            // do something with the section
+//                            print("tapped on section at index: \(i)")
+                            if !lesSections[i].afficherLaSection || (lesSections[i].afficherLaSection && lesSections[i].emissionsSection == 0 && lesSections[i].optionnel) {
+                                lesSections[i].afficherLaSection.toggle()
+                                tableViewEmissions.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -118,12 +148,16 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     //// gestion des tableView
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lesEmissions.filter({$0.categorie == lesSections[section]}).count
+//        let nombreDeLignesDansLaSection = lesEmissions.filter({$0.categorie == lesSections[section]}).count
+//        let sectionOptionnelle = lesEmissions.filter({$0.categorie == lesSections[section]}).first?.sectionOptionnelle ?? false
+//        let afficherLaSection = !sectionOptionnelle || calculeEmissionsSection(section: section) > 0
+//        return afficherLaSection ? nombreDeLignesDansLaSection : 0
+        return lesEmissions.filter({$0.categorie == lesSections[section].nom}).count
     }
     
     func numeroDeLigne(indexPath: IndexPath) -> Int {
         var compteur: Int = 0
-        let nomDeSection = lesSections[indexPath.section]
+        let nomDeSection = lesSections[indexPath.section].nom
         while lesEmissions[compteur].categorie != nomDeSection {compteur = compteur + 1}
         return compteur + indexPath.row
     }
@@ -134,53 +168,74 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         // create a new cell if needed or reuse an old one
         //        print("Cell for row at index path \(indexPath)")
         if indexPath.section < lesSections.count - 1 {  // les vraies données
-            let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)]
-            let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
-            cell.delegate = self
-            cell.selectionStyle = .none
-            if emission.echelleLog {
-                cell.glissiere.minimumValue = Float(2.3) // valeur minimum = 10 // Float(0.0) pour une valeur minimum de 1
-                cell.glissiere.maximumValue = log(Float(emission.valeurMax))
-                emission.valeur = max(emission.valeur, exp(Double(cell.glissiere.minimumValue)))
-                cell.glissiere.value = log(Float(emission.valeur))
-                if cell.glissiere.value == cell.glissiere.minimumValue {
-                    emission.valeur = 0.0
-                }
+            if lesSections[indexPath.section].afficherLaSection {
+                return creeCelluleNormale(tableView, cellForRowAt: indexPath)
             } else {
-                cell.glissiere.minimumValue = 0.0 // emission.facteurEmission == 0 ? Float(1.0) : Float(0.0)
-                cell.glissiere.maximumValue = Float(emission.valeurMax)
-                emission.valeur = max(emission.valeur, Double(cell.glissiere.minimumValue))
-                cell.glissiere.value = Float(emission.valeur)
+                return creeCelluleVide(tableView, cellForRowAt: indexPath)
             }
-            cell.glissiere.thumbTintColor = couleurDefautThumb // attention si couleur différentes pour l'animation ?
-            cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
-            cell.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
-            cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
-            cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
-            cell.actualiseEmissionIndividuelle(typeEmission: emission)
-            cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
-            cell.boutonInfo.isHidden = emission.conseil.isEmpty
-            cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.4) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
-            cell.boutonInfo.setTitle("\u{2007}", for: .normal)
-            return cell
-        }
-        else {  // la dernière section : l'ours
-            let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
-            cell.selectionStyle = .none
-            cell.delegate = self
-            cell.boutonOuvrirWeb.setTitle("", for: .normal)
-            return cell
+        } else {  // la dernière section : l'ours
+            return creeCelluleCredits(tableView, cellForRowAt: indexPath)
         }
     }
+
+    func creeCelluleCredits (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
+        cell.selectionStyle = .none
+        cell.delegate = self
+        cell.boutonOuvrirWeb.setTitle("", for: .normal)
+        return cell
+    }
+
+    func creeCelluleVide (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierVide, for: indexPath) as! CelluleVide
+        cell.selectionStyle = .none
+        cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.delegate = self
+        return cell
+    }
+
+    func creeCelluleNormale (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)]
+        let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
+        cell.delegate = self
+        cell.selectionStyle = .none
+        if emission.echelleLog {
+            cell.glissiere.minimumValue = Float(2.3) // valeur minimum = 10 // Float(0.0) pour une valeur minimum de 1
+            cell.glissiere.maximumValue = log(Float(emission.valeurMax))
+            emission.valeur = max(emission.valeur, exp(Double(cell.glissiere.minimumValue)))
+            cell.glissiere.value = log(Float(emission.valeur))
+            if cell.glissiere.value == cell.glissiere.minimumValue {
+                emission.valeur = 0.0
+            }
+        } else {
+            cell.glissiere.minimumValue = 0.0 // emission.facteurEmission == 0 ? Float(1.0) : Float(0.0)
+            cell.glissiere.maximumValue = Float(emission.valeurMax)
+            emission.valeur = max(emission.valeur, Double(cell.glissiere.minimumValue))
+            cell.glissiere.value = Float(emission.valeur)
+        }
+        cell.glissiere.thumbTintColor = couleurDefautThumb // attention si couleur différentes pour l'animation ?
+        cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
+        cell.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
+        cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
+        cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
+        cell.actualiseEmissionIndividuelle(typeEmission: emission)
+        cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
+        cell.boutonInfo.isHidden = emission.conseil.isEmpty
+        cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.boutonInfo.setTitle("\u{2007}", for: .normal)
+        return cell
+    }
     
-    
+//    func calculeEmissionsSection(section: Int) -> Double {
+//        let titreSection = lesSections[section]
+//        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
+//        return lesEmissionsDeLaSection.reduce(0.0, +)
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var titreSection = lesSections[section]
-        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
-        let emissionsTotalesSection = lesEmissionsDeLaSection.reduce(0.0, +)
-        if emissionsTotalesSection > 0 {
-            titreSection = titreSection + String(format: " (%.0f %%)", emissionsTotalesSection / emissionsCalculees * 100.0)
+        var titreSection = lesSections[section].nom
+        if lesSections[section].emissionsSection > 0 {
+            titreSection = titreSection + String(format: " (%.0f %%)", lesSections[section].emissionsSection / emissionsCalculees * 100.0)
         }
         let margeVerticale = CGFloat(12.0)
         let margeHorizontale = CGFloat(20.0)
@@ -190,15 +245,30 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         headerView.backgroundColor = couleursEEUdF5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
         headerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline).withSize(21) //  .boldSystemFont(ofSize: 24) // UIFont(name: "Verdana", size: 20)
+        var blanc: CGFloat = 0
+        var alpha: CGFloat = 0
+        couleursEEUdF5[section].getWhite(&blanc, alpha: &alpha)
+//        print("blanc \(blanc)")
+        headerLabel.textColor = blanc > 0.5 ? .black : .white
         headerLabel.text = titreSection // self.tableView(self.tableView, titleForHeaderInSection: section)
         headerLabel.numberOfLines = 1
         headerLabel.adjustsFontSizeToFitWidth = true
         headerView.addSubview(headerLabel)
+        
+//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//        tapRecognizer.numberOfTapsRequired = 1
+//        tapRecognizer.numberOfTouchesRequired = 1
+//        headerView.addGestureRecognizer(tapRecognizer)
+        
         return headerView
     }
     
+//    @objc func handleTap(gestureRecognizer: UIGestureRecognizer) {
+//        print("Tapped")
+//    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if lesSections[section] == "" {
+        if lesSections[section].nom == "" {
             return CGFloat(0.0)
         } else {
             let headerHeight: CGFloat = 48
@@ -209,6 +279,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 return headerHeight
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectHeaderAt: Int) {
+        print("sélectionné", didSelectHeaderAt)
     }
     
     func afficheConseil(cell: CelluleEmission){
@@ -242,8 +316,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         for i in 0...lesEmissions.count - 1 {
             lesEmissions[i].valeur = 0.0 // lesEmissions[i].facteurEmission > 0 ? //0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
         }
-        actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-        ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+        actualiseValeursMax()
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         boutonExport.isHidden = emissionsCalculees == 0
         boutonEffacerDonnees.isHidden = emissionsCalculees == 0
@@ -361,55 +434,22 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func ajusteQuantitesLiees(ligne: Int) {
         switch ligne {
         case SorteEmission.duree.rawValue:
-            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         case SorteEmission.repasViandeRouge.rawValue:
-            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
         case SorteEmission.repasViandeBlanche.rawValue:
-            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
+            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
         case SorteEmission.repasVegetarien.rawValue:
-            self.ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
+            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
         case SorteEmission.effectif.rawValue:
-            self.actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+            actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+        case SorteEmission.optimist.rawValue, SorteEmission.caravelle.rawValue, SorteEmission.deriveur.rawValue, SorteEmission.canot.rawValue, SorteEmission.zodiac.rawValue:
+            actualiseValeurMaxBateaux()
         default: let dummy = 1
         }
 
     }
     
-    func ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
-        let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
-        actualiseValeursMaxRepas(valeurMax: nombreJours)
-        lesEmissions[priorite1.rawValue].valeur = min(lesEmissions[priorite1.rawValue].valeur, nombreJours * 2)
-        lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur)
-        lesEmissions[priorite3.rawValue].valeur = nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
-    }
-
-    func actualiseValeursMaxEffectif(valeurMax: Double) {
-        for i in 0...lesEmissions.count-1 {
-            if lesEmissions[i].valeurMaxSelonEffectif > 0 {
-                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
-                lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxSelonEffectif
-                if collerAuMax {
-                    lesEmissions[i].valeur = lesEmissions[i].valeurMax
-                } else {
-                    lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
-                }
-            }
-        }
-    }
-    
-    func actualiseValeursMaxRepas(valeurMax: Double) {
-        for i in 0...lesEmissions.count-1 {
-            if lesEmissions[i].valeurMaxNbRepas > 0 {
-                let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
-                lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxNbRepas
-                if collerAuMax {
-                    lesEmissions[i].valeur = lesEmissions[i].valeurMax
-                } else {
-                    lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
-                }
-            }
-        }
-    }
     
     func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission, echelleLog: Bool) {
         let intervalleHaut = cellule.glissiere.maximumValue - cellule.glissiere.value

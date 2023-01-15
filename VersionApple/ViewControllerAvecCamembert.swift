@@ -150,7 +150,7 @@ class ViewControllerAvecCamembert: UIViewController {
                     //                print("emission non vide : ",emission.nom, emission.valeur, emission.emission)
                     camembertVide = false
                     let intervalle = emission.emission / emissionsCalculees
-                    let numeroSection = lesSections.firstIndex(where: {$0 == emission.categorie}) ?? 0
+                    let numeroSection = lesSections.firstIndex(where: {$0.nom == emission.categorie}) ?? 0
                     let agrandirSecteur = ligne == ligneEnCours || (ligneEnCours == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) // || (ligneEnCours == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCours == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
                     let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
                     dessineSecteur(rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
@@ -334,8 +334,9 @@ class ViewControllerAvecCamembert: UIViewController {
         } else {
             texte.append(NSAttributedString(string: String(format: NSLocalizedString("\nTotal : %.2f t CO₂", comment: ""), emissionsCalculees / 1000), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.5)]))
         }
-        texte.append(NSAttributedString(string: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app ", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)]))
-        texte.append(NSAttributedString(string: NSLocalizedString("Bilan CO2 camp scout", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)]))
+        texte.append(NSAttributedString(string: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app ", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 1.2)]))
+        texte.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize * 1.2)], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+//        texte.append(NSAttributedString(string: NSLocalizedString("Bilan CO2 camp scout", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)]))
         return texte
     }
 }

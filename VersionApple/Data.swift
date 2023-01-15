@@ -39,17 +39,21 @@ enum SorteEmission: Int {
     case voyageCar = 8
     case voyageVoiture = 9
     case voyageVoitureElectrique = 10
-    case voyageBateau = 11
-    case voyageAvion = 12
-    case voyageCamion = 13
-    case voyageMaterielExpedie = 14
-    case deplacementsCar = 15
-    case deplacementsVoiture = 16
-    case deplacementsVoitureElectrique = 17
+    case voyageAvion = 11
+    case voyageCamion = 12
+    case voyageMaterielExpedie = 13
+    case deplacementsCar = 14
+    case deplacementsVoiture = 15
+    case deplacementsVoitureElectrique = 16
+    case achatsMateriel = 17
     case hebergementTentes = 18
     case hebergementMarabout = 19
     case hebergementDur = 20
-    case achatsMateriel = 21
+    case optimist = 21
+    case caravelle = 22
+    case deriveur = 23
+    case canot = 24
+    case zodiac = 25
 //    case nomCourt = 21
 //    case picto = 22
 }
@@ -75,8 +79,9 @@ class TypeEmission {
     var nomsRessources: [String]
     var liensRessources: [String]
     var nomPluriel: String
+    var sectionOptionnelle: Bool
     
-    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String], nomPluriel: String) {
+    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String], nomPluriel: String, sectionOptionnelle: Bool) {
         self.categorie = categorie
         self.nom = nom
         self.unite = unite
@@ -97,12 +102,28 @@ class TypeEmission {
         self.nomsRessources = nomsRessources
         self.liensRessources = liensRessources
         self.nomPluriel = nomPluriel
+        self.sectionOptionnelle = sectionOptionnelle
     }
+}
+
+class Section {
+    var nom: String
+    var emissionsSection: Double
+    var optionnel: Bool
+    var afficherLaSection: Bool
+    
+    init(nom: String, emissionsSection: Double, optionnel: Bool, afficherLaSection: Bool){
+        self.nom = nom
+        self.emissionsSection = emissionsSection
+        self.optionnel = optionnel
+        self.afficherLaSection = afficherLaSection
+    }
+    
 }
 
 func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
     emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
-    var total: Double = 0.0    
+    var total: Double = 0.0
     for typeEmission in typesEmissions {
         if typeEmission.facteurEmission > 0 {
             var multiplicateur: Double = 1
@@ -113,13 +134,18 @@ func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
             total = total + typeEmission.emission
         }
     }
+    for i in 0...lesSections.count - 1 {
+        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == lesSections[i].nom}).map({$0.emission})
+        lesSections[i].emissionsSection = lesEmissionsDeLaSection.reduce(0.0, +)
+        if lesSections[i].emissionsSection > 0 {lesSections[i].afficherLaSection = true}
+    }
     return total
 }
 
 
-func decodeCSV(data: String) -> ([TypeEmission], [String]) {
+func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
     var lesEmetteursLus: [TypeEmission] = []
-    var lesSections: [String] = []
+    var lesSections: [Section] = []
     let lignes = data.components(separatedBy: .newlines).dropFirst()
     for ligne in lignes {
         let elements = ligne.components(separatedBy: separateur)
@@ -136,16 +162,20 @@ func decodeCSV(data: String) -> ([TypeEmission], [String]) {
             let valeur = 0.0 //facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
             let nomsRessources = elements[15].components(separatedBy: ",").filter({!$0.isEmpty})
             let liensRessources = elements[16].components(separatedBy: ",").filter({!$0.isEmpty})
-            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12].replacingOccurrences(of: "\\n", with: "\n"), nomCourt: elements[13], picto: elements[14], nomsRessources: nomsRessources, liensRessources: liensRessources, nomPluriel: elements[17]))
-            if lesSections.isEmpty || lesSections.last != elements[0] {
-                lesSections.append(elements[0])
+            let sectionOptionnelle = (Int(elements[18]) ?? 0) == 1
+            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12].replacingOccurrences(of: "\\n", with: "\n"), nomCourt: elements[13], picto: elements[14], nomsRessources: nomsRessources, liensRessources: liensRessources, nomPluriel: elements[17], sectionOptionnelle: sectionOptionnelle))
+            if lesSections.isEmpty || (lesSections.last?.nom ?? "kzwx") != elements[0] {
+                lesSections.append(Section(nom: elements[0], emissionsSection: 0.0, optionnel: sectionOptionnelle, afficherLaSection: !sectionOptionnelle))
+            }
+            if valeur > 0 && sectionOptionnelle {
+                lesSections.last?.afficherLaSection = true
             }
         } // si ligne correcte
     } // for
     return (lesEmetteursLus, lesSections)
 }
 
-func lireFichier(nom: String) -> ([TypeEmission], [String]) {
+func lireFichier(nom: String) -> ([TypeEmission], [Section]) {
     // dans le DocumentDirectory si on est en train de charger un géonames monde entier et qu'on dédoublonne
     if let url = Bundle.main.url(forResource: nom, withExtension: "csv") {
         do {
@@ -181,5 +211,51 @@ func texteNomValeurUnite(emission: TypeEmission, afficherPictos: Bool) -> String
         return emission.picto + " " + texteNomValeur
     } else {
         return texteNomValeur
+    }
+}
+
+func actualiseValeursMax() {
+    actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+    ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
+    actualiseValeurMaxBateaux()
+}
+
+func ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
+    let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
+    actualiseValeursMaxRepas(valeurMax: nombreJours)
+    lesEmissions[priorite1.rawValue].valeur = min(lesEmissions[priorite1.rawValue].valeur, nombreJours * 2)
+    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur)
+    lesEmissions[priorite3.rawValue].valeur = nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
+}
+
+func actualiseValeurMaxBateaux(){
+    lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax = 3 + 2 * ( lesEmissions[SorteEmission.optimist.rawValue].valeur +  lesEmissions[SorteEmission.caravelle.rawValue].valeur +  lesEmissions[SorteEmission.deriveur.rawValue].valeur +  lesEmissions[SorteEmission.canot.rawValue].valeur +  lesEmissions[SorteEmission.zodiac.rawValue].valeur)
+}
+
+func actualiseValeursMaxEffectif(valeurMax: Double) {
+    for i in 0...lesEmissions.count-1 {
+        if lesEmissions[i].valeurMaxSelonEffectif > 0 {
+            let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
+            lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxSelonEffectif
+            if collerAuMax {
+                lesEmissions[i].valeur = lesEmissions[i].valeurMax
+            } else {
+                lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+            }
+        }
+    }
+}
+
+func actualiseValeursMaxRepas(valeurMax: Double) {
+    for i in 0...lesEmissions.count-1 {
+        if lesEmissions[i].valeurMaxNbRepas > 0 {
+            let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
+            lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxNbRepas
+            if collerAuMax {
+                lesEmissions[i].valeur = lesEmissions[i].valeurMax
+            } else {
+                lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+            }
+        }
     }
 }
