@@ -1,6 +1,5 @@
  AFFICHAGE / mise en page
  - la page d'aide déborde parfois sur toute la largeur de l'écran.
- - prendre en charge le mode sombre ?
 
  Fonctionnalités
  - renvoyer vers des ressources
@@ -10,9 +9,7 @@
 
  Fonction d'export
       - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
-      - seul le PDF passe dans les messageries instantanées -> intégrer la liste au PDF
-      - format vectoriel plutôt que bitmap : cf code Hervé CreationPDF.swift
-      - formatter le texte d'accompagnement de l'export (titres notamment)
+        
 
 DÉCLINAISONS AUTRES ÉVÉNEMENTS
 Hervé : En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure. - J’avais fait pour Compétences lite/full.

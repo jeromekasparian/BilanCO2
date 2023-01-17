@@ -204,13 +204,14 @@ func arrondi(_ nombre: Double) -> Double { // arrondi à deux chiffres significa
     }
 }
 
-func texteNomValeurUnite(emission: TypeEmission, afficherPictos: Bool) -> String {
+func texteNomValeurUnite(emission: TypeEmission) -> String { //, afficherPictos: Bool) -> String {
     let nom = emission.valeur <= 1 ? emission.nom : emission.nomPluriel
     let texteNomValeur = emission.unite.isEmpty ? String(format: "%.0f " + nom, emission.valeur) : emission.nom + String(format: NSLocalizedString(" : %.0f ", comment: "") + emission.unite, emission.valeur)
-    if afficherPictos && !emission.picto.isEmpty {
-        return emission.picto + " " + texteNomValeur
-    } else {
+//    if afficherPictos && !emission.picto.isEmpty {
+    if emission.picto.isEmpty {
         return texteNomValeur
+    } else {
+        return emission.picto + " " + texteNomValeur
     }
 }
 

@@ -19,7 +19,7 @@ var emissionsSoutenables: Double = .nan
 var lesSections: [Section] = []
 let userDefaults = UserDefaults.standard
 var lesEmissions: [TypeEmission] = []
-var afficherPictos: Bool = true
+//var afficherPictos: Bool = true
 
 enum Orientation {
     case inconnu
@@ -66,13 +66,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteLargeurBoutonExporterEtroit: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        if #available(iOS 13, *) {
+//        if #available(iOS 13, *) {
             boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
-        } else {
-            boutonEffacerDonnees.setImage(nil, for: .normal)
-            boutonEffacerDonnees.setTitle("\u{0232B}", for: .normal) // ⌫  "\u{0232B}"
-        }
+//        } else {
+//            boutonEffacerDonnees.setImage(, for: .normal)
+//            boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
+//            boutonEffacerDonnees.setTitle("\u{0232B}", for: .normal) // ⌫  "\u{0232B}"
+//        }
         boutonExport.setTitle("", for: .normal)
+        
         _ = self.choisitContraintes(size: self.view.frame.size)
         (lesEmissions, lesSections) = lireFichier(nom: "Data")
         let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
@@ -100,45 +102,35 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }  // viewDidLoad
     
     @objc func sectionTapped(sender: UITapGestureRecognizer) {
-//        print("tap")
+        //        print("tap")
         if sender.view != nil {
-                let tapLocation = sender.location(in: tableViewEmissions)
-                if let tapIndexPath = tableViewEmissions.indexPathForRow(at: tapLocation) {
-                    if (tableViewEmissions.cellForRow(at: tapIndexPath)) != nil {
-                        // do something with the row
-//                        print("tapped on row at index: \(tapIndexPath.row)")
-                    }
-                }  else {
-                    for i in 0..<tableViewEmissions.numberOfSections {
-                        let sectionHeaderArea = tableViewEmissions.rectForHeader(inSection: i)
-                        if sectionHeaderArea.contains(tapLocation) {
-                            // do something with the section
-//                            print("tapped on section at index: \(i)")
-                            if !lesSections[i].afficherLaSection || (lesSections[i].afficherLaSection && lesSections[i].emissionsSection == 0 && lesSections[i].optionnel) {
-                                lesSections[i].afficherLaSection.toggle()
-                                tableViewEmissions.reloadData()
-                            }
+            let tapLocation = sender.location(in: tableViewEmissions)
+            if let tapIndexPath = tableViewEmissions.indexPathForRow(at: tapLocation) {
+                if (tableViewEmissions.cellForRow(at: tapIndexPath)) != nil {
+                    // do something with the row
+                    //                        print("tapped on row at index: \(tapIndexPath.row)")
+                }
+            }  else {
+                for i in 0..<tableViewEmissions.numberOfSections {
+                    let sectionHeaderArea = tableViewEmissions.rectForHeader(inSection: i)
+                    if sectionHeaderArea.contains(tapLocation) {
+                        // do something with the section
+                        //                            print("tapped on section at index: \(i)")
+                        if !lesSections[i].afficherLaSection || (lesSections[i].afficherLaSection && lesSections[i].emissionsSection == 0 && lesSections[i].optionnel) {
+                            lesSections[i].afficherLaSection.toggle()
+                            tableViewEmissions.reloadData()
                         }
                     }
                 }
             }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        DispatchQueue.main.async {
         self.redessineResultats(size: self.view.frame.size, curseurActif: false)
-        //        tableViewEmissions.reloadData()
-        //        }
     }
     
-    @objc func changeModePictos() {
-        afficherPictos.toggle()
-        DispatchQueue.main.async {
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: false)
-            self.tableViewEmissions.reloadData()
-        }
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return lesSections.count
@@ -148,10 +140,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     //// gestion des tableView
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let nombreDeLignesDansLaSection = lesEmissions.filter({$0.categorie == lesSections[section]}).count
-//        let sectionOptionnelle = lesEmissions.filter({$0.categorie == lesSections[section]}).first?.sectionOptionnelle ?? false
-//        let afficherLaSection = !sectionOptionnelle || calculeEmissionsSection(section: section) > 0
-//        return afficherLaSection ? nombreDeLignesDansLaSection : 0
+        //        let nombreDeLignesDansLaSection = lesEmissions.filter({$0.categorie == lesSections[section]}).count
+        //        let sectionOptionnelle = lesEmissions.filter({$0.categorie == lesSections[section]}).first?.sectionOptionnelle ?? false
+        //        let afficherLaSection = !sectionOptionnelle || calculeEmissionsSection(section: section) > 0
+        //        return afficherLaSection ? nombreDeLignesDansLaSection : 0
         return lesEmissions.filter({$0.categorie == lesSections[section].nom}).count
     }
     
@@ -177,7 +169,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             return creeCelluleCredits(tableView, cellForRowAt: indexPath)
         }
     }
-
+    
     func creeCelluleCredits (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
         cell.selectionStyle = .none
@@ -185,7 +177,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.boutonOuvrirWeb.setTitle("", for: .normal)
         return cell
     }
-
+    
     func creeCelluleVide (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierVide, for: indexPath) as! CelluleVide
         cell.selectionStyle = .none
@@ -193,7 +185,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.delegate = self
         return cell
     }
-
+    
     func creeCelluleNormale (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)]
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
@@ -215,7 +207,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         cell.glissiere.thumbTintColor = couleurDefautThumb // attention si couleur différentes pour l'animation ?
         cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
-        cell.labelNom.text = texteNomValeurUnite(emission: emission, afficherPictos: afficherPictos)
+        cell.labelNom.text = texteNomValeurUnite(emission: emission) //, afficherPictos: afficherPictos)
         cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
         cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
         cell.actualiseEmissionIndividuelle(typeEmission: emission)
@@ -226,11 +218,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         return cell
     }
     
-//    func calculeEmissionsSection(section: Int) -> Double {
-//        let titreSection = lesSections[section]
-//        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
-//        return lesEmissionsDeLaSection.reduce(0.0, +)
-//    }
+    //    func calculeEmissionsSection(section: Int) -> Double {
+    //        let titreSection = lesSections[section]
+    //        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
+    //        return lesEmissionsDeLaSection.reduce(0.0, +)
+    //    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var titreSection = lesSections[section].nom
@@ -248,24 +240,24 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         var blanc: CGFloat = 0
         var alpha: CGFloat = 0
         couleursEEUdF5[section].getWhite(&blanc, alpha: &alpha)
-//        print("blanc \(blanc)")
+        //        print("blanc \(blanc)")
         headerLabel.textColor = blanc > 0.5 ? .black : .white
         headerLabel.text = titreSection // self.tableView(self.tableView, titleForHeaderInSection: section)
         headerLabel.numberOfLines = 1
         headerLabel.adjustsFontSizeToFitWidth = true
         headerView.addSubview(headerLabel)
         
-//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//        tapRecognizer.numberOfTapsRequired = 1
-//        tapRecognizer.numberOfTouchesRequired = 1
-//        headerView.addGestureRecognizer(tapRecognizer)
+        //        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        //        tapRecognizer.numberOfTapsRequired = 1
+        //        tapRecognizer.numberOfTouchesRequired = 1
+        //        headerView.addGestureRecognizer(tapRecognizer)
         
         return headerView
     }
     
-//    @objc func handleTap(gestureRecognizer: UIGestureRecognizer) {
-//        print("Tapped")
-//    }
+    //    @objc func handleTap(gestureRecognizer: UIGestureRecognizer) {
+    //        print("Tapped")
+    //    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if lesSections[section].nom == "" {
@@ -310,7 +302,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         alerte.addAction(UIAlertAction(title: NSLocalizedString("Effacer", comment: ""), style: .destructive, handler: {_ in self.effacerDonnees()}))
         self.present(alerte, animated: true)
     }
-
+    
     
     func effacerDonnees() {
         for i in 0...lesEmissions.count - 1 {
@@ -328,8 +320,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             self.tableViewEmissions.reloadData()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.actualiseAffichageEmissions(grandFormat: false)
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: false)
+            self.actualiseAffichageEmissions()
+            self.dessineCamembert(camembert: self.camembert, curseurActif: false)
         }
     }
     
@@ -360,7 +352,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let compteurAuDebutDuTimer = self.compteurMouvementsGlissiere
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if compteurAuDebutDuTimer == self.compteurMouvementsGlissiere && abs(valeur - cell.glissiere.value) < 0.02 * (cell.glissiere.maximumValue - cell.glissiere.minimumValue) && !self.glissiereModeZoom {
-//                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
+                    //                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
                     self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: lesEmissions[ligne].echelleLog)
                 }
             }
@@ -375,24 +367,24 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        if ligneEnCours >= 0 && celluleEnCours != nil {
         let ligne = numeroDeLigne(indexPath: indexPath)
         let emission = lesEmissions[ligne]
-//        print("glissiereBougee", cell.glissiere.value, ligne, emission.nom, compteurMouvementsGlissiere)
+        //        print("glissiereBougee", cell.glissiere.value, ligne, emission.nom, compteurMouvementsGlissiere)
         lancerTimerZoom(cell: cell, ligne: ligne)
-            self.valeurPrecedente = cell.glissiere.value
-            if emission.echelleLog {
-                if cell.glissiere.value == self.minValueNonZoomee { //  cellule!.glissiere.minimumValue {
-                    lesEmissions[ligne].valeur = 0.0
-                } else {
-                    lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
-                }
+        self.valeurPrecedente = cell.glissiere.value
+        if emission.echelleLog {
+            if cell.glissiere.value == self.minValueNonZoomee { //  cellule!.glissiere.minimumValue {
+                lesEmissions[ligne].valeur = 0.0
             } else {
-                lesEmissions[ligne].valeur = Double(cell.glissiere.value)
-                if emission.valeurEntiere {
-                    lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
-                }
+                lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
             }
+        } else {
+            lesEmissions[ligne].valeur = Double(cell.glissiere.value)
+            if emission.valeurEntiere {
+                lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
+            }
+        }
         self.ajusteQuantitesLiees(ligne: ligne)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
-        cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne], afficherPictos: afficherPictos)
+        cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne]) //, afficherPictos: afficherPictos)
         DispatchQueue.main.async{
             self.boutonExport.isHidden = emissionsCalculees == 0
             self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
@@ -403,15 +395,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 print(lesIndexPathAActualiser.count, "à actualiser")
             }
             self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
-            self.actualiseAffichageEmissions(grandFormat: false)
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: true)
+            self.actualiseAffichageEmissions()
+            self.dessineCamembert(camembert: self.camembert, curseurActif: true)
         }  // DispatchQueue.main.async
         //        } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
     
     
     func finMouvementGlissiere(cell: CelluleEmission) {
-//        print("fin mouvement glissière")
+        //        print("fin mouvement glissière")
         glissiereBougee(cell: cell)
         ligneEnCours = -1
         self.compteurMouvementsGlissiere = self.compteurMouvementsGlissiere + 1
@@ -427,7 +419,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        }
         self.tableViewEmissions.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: false)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: false)
         }
     }
     
@@ -447,7 +439,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             actualiseValeurMaxBateaux()
         default: let dummy = 1
         }
-
+        
     }
     
     
@@ -481,9 +473,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             boutonEffacerDonnees.setImage(UIImage(systemName: "delete.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
         } else {
             boutonExport.setImage(UIImage(named: "square.and.arrow.up"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-//            boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-            boutonEffacerDonnees.setImage(nil, for: .normal)
-            boutonEffacerDonnees.setTitle("\u{0232B}", for: .normal)
+           boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
         }
     }
     
@@ -565,8 +555,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         DispatchQueue.main.async {
             let delai = self.choisitContraintes(size: size) ? 0.01 : 0.00
             DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
-                self.actualiseAffichageEmissions(grandFormat: false)
-                self.dessineCamembert(camembert: self.camembert, grandFormat: false, curseurActif: curseurActif)
+                self.actualiseAffichageEmissions()
+                self.dessineCamembert(camembert: self.camembert, curseurActif: curseurActif)
             }
         }
         if ligneEnCours < 0 { // pour ne pas actualiser le tableView pendant qu'on manipule un curseur
@@ -597,50 +587,92 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
-        print("sender", sender)
-        //        self.boutonExport.isHidden = true
-        //        self.boutonAideGraphique.isHidden = true
-        let vueAExporter = vueResultats!
-        let pdfPageFrame = vueAExporter.bounds
-        let pdfData = NSMutableData()
-        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
-        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
-        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
-        vueAExporter.layer.render(in: pdfContext)
-        UIGraphicsEndPDFContext()
+        //        print("sender", sender)
         
-        let path = URL(fileURLWithPath: NSTemporaryDirectory())
-        let saveFileURL = path.appendingPathComponent("/CO2.pdf")
-        do{
-            try pdfData.write(to: saveFileURL)
-        } catch {
-            print("error-Grrr")
-        }
-        let activityViewController = UIActivityViewController(activityItems: [NSAttributedString(string: NSLocalizedString("Les émissions de CO₂ de mon camp", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * 2)]), texteListeEmissions(lesEmissions: lesEmissions), saveFileURL], applicationActivities: nil) // "" : le corps du message intégré automatiquement
+        //        let vueAExporter = vueResultats!
+        //        let pdfPageFrame = vueAExporter.bounds
+        //        let pdfData = NSMutableData()
+        //        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
+        //        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
+        //        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
+        //        vueAExporter.layer.render(in: pdfContext)
+        //        UIGraphicsEndPDFContext()
+        //
+        //        let path = URL(fileURLWithPath: NSTemporaryDirectory())
+        //        let saveFileURL = path.appendingPathComponent("/CO2.pdf")
+        //        do{
+        //            try pdfData.write(to: saveFileURL)
+        //        } catch {
+        //            print("error-Grrr")
+        //        }
+        var items: [Any] = []
+        if let urlPDFAExporter = generePDF() {
+            print("pdf ok")
+            items.append(urlPDFAExporter)
+            let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil) // "" : le corps du message intégré automatiquement
 #if targetEnvironment(macCatalyst)
-        //"Don't do this !!"
+            //"Don't do this !!"
 #else
-        activityViewController.setValue(NSLocalizedString("Impact climat de mon camp", comment: ""), forKey: "subject")
+            activityViewController.setValue(NSLocalizedString("Impact climat de mon camp", comment: ""), forKey: "subject")
 #endif
-        activityViewController.completionWithItemsHandler = {
-            (activity, success, items, error) in
-            if activity != nil {if activity!.rawValue == "com.apple.UIKit.activity.RemoteOpenInApplication-ByCopy"
-                {
-                print("Coquinou")
+            activityViewController.completionWithItemsHandler = {
+                (activity, success, items, error) in
+                if activity != nil {if activity!.rawValue == "com.apple.UIKit.activity.RemoteOpenInApplication-ByCopy"
+                    {
+                    print("Coquinou")
+                }
+                }
             }
+            if let popover = activityViewController.popoverPresentationController {
+                popover.barButtonItem  = self.navigationItem.rightBarButtonItem
+                popover.permittedArrowDirections = .any
+                popover.sourceView = sender // sender;
+                //            popover.delegate = self
+                //            popover.sourceRect = sender.frame //sender.frame;
             }
+            present(activityViewController, animated: true, completion: nil)
         }
-        if let popover = activityViewController.popoverPresentationController {
-            popover.barButtonItem  = self.navigationItem.rightBarButtonItem
-            popover.permittedArrowDirections = .any
-            popover.sourceView = sender // sender;
-            //            popover.delegate = self
-            //            popover.sourceRect = sender.frame //sender.frame;
-        }
-        present(activityViewController, animated: true, completion: nil)
     }
     
     
+    func generePDF() -> URL? {
+        let url = Bundle.main.url(forResource: "PageBlanche", withExtension: "pdf")! as CFURL
+        let originalPDF:CGPDFDocument=CGPDFDocument(url)!
+        let saveFileURL = NSTemporaryDirectory().appending("/CO2.pdf")
+        guard UIGraphicsBeginPDFContextToFile(saveFileURL, CGRect.zero, nil) else {
+            print("oups1", saveFileURL)
+            return nil
+        }
+        guard let destContext = UIGraphicsGetCurrentContext() else {
+            print("oups2")
+            return nil
+        }
+        
+        if let page = originalPDF.page(at: 1) {
+            var mediaBox = page.getBoxRect(.mediaBox)
+            destContext.beginPage(mediaBox: &mediaBox)
+            destContext.drawPDFPage(page)
+            destContext.textMatrix = .identity
+            destContext.translateBy(x: 0, y: mediaBox.height)
+            destContext.scaleBy(x: 1, y: -1)
+            
+            let marge: CGFloat = 40
+            let largeurTexte = mediaBox.width - 2 * marge
+            let textePourPdf1 = texteListeEmissions(lesEmissions: lesEmissions)
+            let hauteurTexte1 = textePourPdf1.hauteur(largeur: largeurTexte)
+            let box1 = CGRect(x: mediaBox.minX + marge, y: mediaBox.minY + marge, width: largeurTexte, height: hauteurTexte1 + marge)
+            textePourPdf1.draw(in: box1)
+//            print(textePourPdf1)
+            let hauteurMax2 = mediaBox.maxY - box1.maxY - marge
+            let hauteurEtLargeur = min(hauteurMax2, largeurTexte)
+            let box2 = CGRect(x: box1.minX + (largeurTexte - hauteurEtLargeur) / 2 , y: box1.maxY, width: hauteurEtLargeur, height: hauteurEtLargeur)
+            camembert.asImage().draw(in: box2)
+            destContext.endPage()
+        }
+        destContext.closePDF()
+        UIGraphicsEndPDFContext()
+        return URL(fileURLWithPath: saveFileURL)
+    }
     
     
     //    func formatAffichageValeur(valeurMax: Double) -> String {
@@ -667,3 +699,32 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
 }
 
+extension NSAttributedString {
+    func hauteur(largeur: CGFloat) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: largeur, height: .greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.attributedText = self
+        label.sizeToFit()
+        return label.frame.size.height
+    }
+}
+
+extension UIView {
+    
+    // Using a function since `var image` might conflict with an existing variable
+    // (like on `UIImageView`)
+    func asImage() -> UIImage {
+        if #available(iOS 10.0, *) {
+            let renderer = UIGraphicsImageRenderer(bounds: bounds)
+            return renderer.image { rendererContext in
+                layer.render(in: rendererContext.cgContext)
+            }
+        } else {
+            UIGraphicsBeginImageContext(self.frame.size)
+            self.layer.render(in:UIGraphicsGetCurrentContext()!)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return UIImage(cgImage: image!.cgImage!)
+        }
+    }
+}

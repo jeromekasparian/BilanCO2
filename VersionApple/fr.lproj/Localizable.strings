@@ -89,14 +89,19 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
 "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
 "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre";
-"Les émissions de CO₂ de mon camp" = "Les émissions de CO₂ de mon camp";
-"Impact climat de mon camp" = "Impact climat de mon camp";
-", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg CO₂ (%.0f%%)\n";
-", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t CO₂ (%.0f%%)\n";
-"\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg CO₂";
-"\nTotal : %.2f t CO₂" = "\nTotal : %.2f t CO₂";
+"Les émissions de CO₂ de mon camp" = "Impact climatique de mon camp";
+"Impact climat de mon camp" = "Impact climatique de mon camp";
+", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg éq. CO₂ (%.0f%%)\n";
+", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t éq. CO₂ (%.0f%%)\n";
+"\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg d'équivalent CO₂";
+"\nTotal : %.2f t CO₂" = "\nTotal : %.2f t d'équivalent CO₂";
 "\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app Bilan CO₂ camp scout";
 "Bilan CO2 camp scout" = "Bilan CO₂ camp scout";
+" (%.1f t / personne)\n" = " (%.1f t / personne)\n";
+" (%.1f kg / personne)\n" = " (%.1f kg / personne)\n";
+"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
 
 // CelluleEmission
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
