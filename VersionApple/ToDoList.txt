@@ -1,3 +1,5 @@
+ACTUALISER LIEN APP STORE
+
  AFFICHAGE / mise en page
  - la page d'aide déborde parfois sur toute la largeur de l'écran.
 

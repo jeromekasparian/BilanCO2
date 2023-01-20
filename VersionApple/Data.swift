@@ -230,7 +230,8 @@ func ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission, priorite2: SorteE
 }
 
 func actualiseValeurMaxBateaux(){
-    lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax = 3 + 2 * ( lesEmissions[SorteEmission.optimist.rawValue].valeur +  lesEmissions[SorteEmission.caravelle.rawValue].valeur +  lesEmissions[SorteEmission.deriveur.rawValue].valeur +  lesEmissions[SorteEmission.canot.rawValue].valeur +  lesEmissions[SorteEmission.zodiac.rawValue].valeur)
+    lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax = 3 + ceil(lesEmissions[SorteEmission.optimist.rawValue].valeur / 3) + 2 * (lesEmissions[SorteEmission.caravelle.rawValue].valeur +  lesEmissions[SorteEmission.deriveur.rawValue].valeur +  lesEmissions[SorteEmission.canot.rawValue].valeur +  lesEmissions[SorteEmission.zodiac.rawValue].valeur)
+    lesEmissions[SorteEmission.voyageCamion.rawValue].valeur = min(lesEmissions[SorteEmission.voyageCamion.rawValue].valeur, lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax)
 }
 
 func actualiseValeursMaxEffectif(valeurMax: Double) {
