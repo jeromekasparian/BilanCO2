@@ -33,7 +33,7 @@
 
     • ***Accommodation***: The estimation assumes an amortization of tents over 5 years and heavy tents over 8 years, based on typical patrol tents and 12-m heavy tents, respectively. Buildings are assumed to be used 4 months a year (holiday facility).
 
-    • ***Specific actions*** : The impact of sea scouting mainly stems from the construction and transport of ships. Most other activities typical of a scouting camp can be considered as included in the purchase of material.";
+    • ***Specific actions*** : The impact of sea scouting mainly stems from the transport of ships, as well as their amortization over 30 years (50 years for Optimists, 10 years for Zodiacs). Most other activities typical of a scouting camp can be considered as included in the purchase of material.";
 
 "texteGraphique" = "The graph displays the shares of greenhouse gases emitted by the camp.
 The green circle allows to compare them with acceptable emissions, i.e., emissions compatible with climate preservation. They amount to 5.5 kg CO₂-equivalent per person and per day.";

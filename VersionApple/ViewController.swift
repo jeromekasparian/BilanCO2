@@ -102,20 +102,20 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }  // viewDidLoad
     
     @objc func sectionTapped(sender: UITapGestureRecognizer) {
-        //        print("tap")
+        print("tap")
         if sender.view != nil {
             let tapLocation = sender.location(in: tableViewEmissions)
             if let tapIndexPath = tableViewEmissions.indexPathForRow(at: tapLocation) {
                 if (tableViewEmissions.cellForRow(at: tapIndexPath)) != nil {
                     // do something with the row
-                    //                        print("tapped on row at index: \(tapIndexPath.row)")
+                print("tapped on row at index: \(tapIndexPath.row)")
                 }
             }  else {
                 for i in 0..<tableViewEmissions.numberOfSections {
                     let sectionHeaderArea = tableViewEmissions.rectForHeader(inSection: i)
                     if sectionHeaderArea.contains(tapLocation) {
                         // do something with the section
-                        //                            print("tapped on section at index: \(i)")
+                        print("tapped on section at index: \(i)")
                         if !lesSections[i].afficherLaSection || (lesSections[i].afficherLaSection && lesSections[i].emissionsSection == 0 && lesSections[i].optionnel) {
                             lesSections[i].afficherLaSection.toggle()
                             tableViewEmissions.reloadData()
@@ -417,8 +417,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        DispatchQueue.main.async{
         //            cell.glissiere.thumbTintColor = self.couleurDefautThumb
         //        }
-        self.tableViewEmissions.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.tableViewEmissions.reloadData()
             self.dessineCamembert(camembert: self.camembert, curseurActif: false)
         }
     }

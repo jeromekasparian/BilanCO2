@@ -44,9 +44,9 @@
 
    • ***Matériel*** : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.
 
-   • ***Hébergement*** : les estimations prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
+   • ***Hébergement*** : l'estimation prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
 
-    • ***Activités spécifiques*** : L'impact des activités marines est essentiellement lié à la fabrication des bateaux et à leur transport. La plupart des autres activités d'un camp scout peuvent être considérées comme incluses dans les achats de matériel";
+    • ***Activités spécifiques*** : L'impact des activités marines est essentiellement lié au transport des bateaux et à leur amortissement sur 30 ans, sauf les Optimists (50 ans) et les Zodiacs (10 ans). La plupart des autres activités d'un camp scout peuvent être considérées comme incluses dans les achats de matériel";
 
 "texteGraphique" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au camp.
 Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour de camp.";

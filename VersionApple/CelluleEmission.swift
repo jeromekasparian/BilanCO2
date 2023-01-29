@@ -24,17 +24,17 @@ class CelluleEmission: UITableViewCell {
     @IBOutlet var labelEmissionIndividuelle: UILabel!
 //    @IBOutlet var labelConseil: UILabel!
 
-    @IBOutlet var contrainteGlissiereGaucheEtroit: NSLayoutConstraint!
-    @IBOutlet var contrainteGlissiereGaucheLarge: NSLayoutConstraint!
-//    @IBOutlet var contrainteGlissiereHautLarge: NSLayoutConstraint!
-    @IBOutlet var contrainteNomEmissionVerticaleEtroit: NSLayoutConstraint!
-    @IBOutlet var contrainteNomEmissionVerticaleLarge: NSLayoutConstraint!
-    @IBOutlet var contrainteNomEmissionDroiteEtroit: NSLayoutConstraint!
-//    @IBOutlet var contrainteNomEmissionHautEtroit: NSLayoutConstraint!
-//    @IBOutlet var contrainteBoutonInfoVerticaleLarge: NSLayoutConstraint!
-//    @IBOutlet var contrainteBoutonInfoVerticaleEtroit: NSLayoutConstraint!
-    @IBOutlet var contrainteAffichageValeurDroiteLarge: NSLayoutConstraint!
-    @IBOutlet var contrainteAffichageValeurDroiteEtroit: NSLayoutConstraint!
+//    @IBOutlet var contrainteGlissiereGaucheEtroit: NSLayoutConstraint!
+//    @IBOutlet var contrainteGlissiereGaucheLarge: NSLayoutConstraint!
+////    @IBOutlet var contrainteGlissiereHautLarge: NSLayoutConstraint!
+//    @IBOutlet var contrainteNomEmissionVerticaleEtroit: NSLayoutConstraint!
+//    @IBOutlet var contrainteNomEmissionVerticaleLarge: NSLayoutConstraint!
+//    @IBOutlet var contrainteNomEmissionDroiteEtroit: NSLayoutConstraint!
+////    @IBOutlet var contrainteNomEmissionHautEtroit: NSLayoutConstraint!
+////    @IBOutlet var contrainteBoutonInfoVerticaleLarge: NSLayoutConstraint!
+////    @IBOutlet var contrainteBoutonInfoVerticaleEtroit: NSLayoutConstraint!
+//    @IBOutlet var contrainteAffichageValeurDroiteLarge: NSLayoutConstraint!
+//    @IBOutlet var contrainteAffichageValeurDroiteEtroit: NSLayoutConstraint!
 
 //    var largeurCellule: LargeurCellule = .inconnu
     
