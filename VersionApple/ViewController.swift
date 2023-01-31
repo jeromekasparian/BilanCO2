@@ -105,12 +105,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         print("tap")
         if sender.view != nil {
             let tapLocation = sender.location(in: tableViewEmissions)
-            if let tapIndexPath = tableViewEmissions.indexPathForRow(at: tapLocation) {
-                if (tableViewEmissions.cellForRow(at: tapIndexPath)) != nil {
-                    // do something with the row
-                print("tapped on row at index: \(tapIndexPath.row)")
-                }
-            }  else {
+//            if let tapIndexPath = tableViewEmissions.indexPathForRow(at: tapLocation) {
+//                if (tableViewEmissions.cellForRow(at: tapIndexPath)) != nil {
+//                    // do something with the row
+//                print("tapped on row at index: \(tapIndexPath.row)")
+//                }
+//            }  else {
                 for i in 0..<tableViewEmissions.numberOfSections {
                     let sectionHeaderArea = tableViewEmissions.rectForHeader(inSection: i)
                     if sectionHeaderArea.contains(tapLocation) {
@@ -122,7 +122,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                         }
                     }
                 }
-            }
+//            }
         }
     }
     
