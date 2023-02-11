@@ -21,8 +21,9 @@ Matériel & hébergement;tente utilisée;;10;8.1;;;;;1;;;Des tentes entretenues 
 Matériel & hébergement;marabout utilisé;;5;30.5;;;;;1;;;Du matériel entretenu dure plus longtemps, donc pollue moins;Marabouts;🎪;;;marabouts utilisés;
 Matériel & hébergement;personne logée en dur;;50;1.09;;;1;;1;1;;L'hébergement sous tente n'est pas seulement sympa, il est aussi nettement moins polluant que dans un bâtiment;Couchage en dur;🏠;;;personnes logées en dur;
 Camp marin;Optimist;;10;8;;;;;1;;;L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel;Optimist;⛵️;;;Optimists;1
-Camp marin;Caravelle (dériveur léger);;10;80;;;;;1;;;L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel;Caravelle;⛵️;;;Caravelles (dériveurs légers);1
+Camp marin;Caravelle (dériveur léger);;10;60;;;;;1;;;L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel;Caravelle;⛵️;;;Caravelles (dériveurs légers);1
 Camp marin;dériveur;;10;120;;;;;1;;;L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel;Dériveur;⛵️;;;dériveurs;1
 Camp marin;canot ou Kelt;;10;200;;;;;1;;;L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel;Canot;⛵️;;;canots ou Kelts;1
-Camp marin;Zodiac;;10;150;;;;;1;;;Pour limiter la consommation d’essence, évitez les grosses accélérations et coupez le moteur quand c’est possible.;Zodiac;🚤;;;Zodiacs;1
+Camp marin;Zodiac;;10;60;;;;;1;;;L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel, notamment pour le moteur;Zodiac;🚤;;;Zodiacs;1
+Camp marin;𝓁 d'essence;;150;3.6;;;;;1;;;Pour limiter la consommation d’essence, évitez les grosses accélérations et coupez le moteur quand les conditions de sécurité le permettent.;Essence';⛽️;;;𝓁 d'essence;1
 ;Crédits;;0;0;;;;;;;;;;;;;Crédits;

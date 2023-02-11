@@ -54,6 +54,7 @@ enum SorteEmission: Int {
     case deriveur = 23
     case canot = 24
     case zodiac = 25
+    case essence = 26
 //    case nomCourt = 21
 //    case picto = 22
 }
