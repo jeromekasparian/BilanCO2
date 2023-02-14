@@ -2,16 +2,19 @@ ACTUALISER LIEN APP STORE
 
  AFFICHAGE / mise en page
  - la page d'aide déborde parfois sur toute la largeur de l'écran.
+- Page d'aide : le textView continue à prendre de la place quand il est refermé
 
  Fonctionnalités
  - renvoyer vers des ressources
       - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
       - autres ressources ?
- - activité : voile : valider valeurs / cf questions en cours avec Jérémy Balas
 
  Fonction d'export
       - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
-        
+- le lien app store n'est pas cliquable sur Mac
+- manque le titre du mail sur Mac
+- Implémenter la méthode d'Hervé
+
 
 DÉCLINAISONS AUTRES ÉVÉNEMENTS
 Hervé : En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure. - J’avais fait pour Compétences lite/full.

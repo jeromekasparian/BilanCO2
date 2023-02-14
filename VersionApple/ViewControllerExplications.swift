@@ -111,7 +111,12 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
 //        cell.texte.text = lesTextes[ligne]
 //        cell.texte.textContainerInset.top = 0
 //        cell.texte.textContainerInset.bottom = 0
-        cell.texte.attributedText = (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne ? lesTextesFormattes[ligne] : NSAttributedString(string: "")
+        if (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne {
+            cell.texte.attributedText = lesTextesFormattes[ligne]
+        } else {
+            cell.texte.text = ""
+        }
+//        cell.texte.attributedText = (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne ? lesTextesFormattes[ligne] : NSAttributedString(string: "")
         cell.accessoryType = .none
         return cell
     }

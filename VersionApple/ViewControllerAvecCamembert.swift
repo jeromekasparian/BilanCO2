@@ -120,7 +120,31 @@ class ViewControllerAvecCamembert: UIViewController {
         }
     }
     
-    func dessineCamembert(camembert: UIView, curseurActif: Bool) {
+    func dedoublonnePictosDansEmissions(lesEmissions: [TypeEmission], ligneActive: Int) -> ([TypeEmission], Int) {
+        var tableauCummule: [TypeEmission] = []
+        var ligneActiveCorrigee = ligneActive
+        var compteurLigne = 0
+        for emission in lesEmissions {
+            let emissionCopiee = emission.duplique() //TypeEmission(categorie: emission.categorie, nom: emission.nom, unite: emission.unite, valeurMax: emission.valeurMax, valeur: emission.valeur, facteurEmission: emission.facteurEmission, parPersonne: emission.parPersonne, parKmDistance: emission.parKmDistance, parJour: emission.parJour, echelleLog: emission.echelleLog, valeurEntiere: emission.valeurEntiere, valeurMaxSelonEffectif: emission.valeurMaxSelonEffectif, valeurMaxNbRepas: emission.valeurMaxNbRepas, emission: emission.emission, conseil: emission.conseil, nomCourt: emission.nomCourt, picto: emission.picto, nomsRessources: emission.nomsRessources, liensRessources: emission.liensRessources, nomPluriel: emission.nomPluriel, sectionOptionnelle: emission.sectionOptionnelle)
+            if tableauCummule.isEmpty {
+                tableauCummule.append(emissionCopiee)
+            } else {
+                if tableauCummule.last?.picto == emission.picto && !emission.picto.isEmpty && tableauCummule.last?.categorie == emission.categorie {
+                    tableauCummule.last?.emission = (tableauCummule.last?.emission ?? 0) + emission.emission
+                    if ligneActive >= compteurLigne {
+                        ligneActiveCorrigee -= 1
+                    }
+                } else {
+                    tableauCummule.append(emissionCopiee)
+                }
+            }
+            compteurLigne += 1
+        }
+        
+        return (tableauCummule, ligneActiveCorrigee)
+    }
+    
+    func dessineCamembert(camembert: UIView, curseurActif: Bool, lesEmissions: [TypeEmission], ligneActive: Int) {
         // effacer le camembert existant
         if let sublayers = camembert.layer.sublayers {
             if !sublayers.isEmpty {
@@ -137,12 +161,15 @@ class ViewControllerAvecCamembert: UIViewController {
         let couleurSeparationClaire = UIColor.white
         
         var ligne: Int = 0
-        for emission in lesEmissions {
+            let (lesEmissionsCompact, ligneEnCoursCorrigee) = dedoublonnePictosDansEmissions(lesEmissions: lesEmissions, ligneActive: ligneActive)
+//        print("lignes : ", ligneEnCoursCorrigee, ligneActive)
+//        print(lesEmissions.map({$0.emission}))
+        for emission in lesEmissionsCompact {
             if emission.emission > 0 {
                 camembertVide = false
                 let intervalle = emission.emission / emissionsCalculees
                 let numeroSection = lesSections.firstIndex(where: {$0.nom == emission.categorie}) ?? 0
-                let agrandirSecteur = ligne == ligneEnCours || (ligneEnCours == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) // || (ligneEnCours == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCours == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
+                let agrandirSecteur = ligne == ligneEnCoursCorrigee || (ligneEnCoursCorrigee == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) // || (ligneEnCoursCorrigee == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCoursCorrigee == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
                 let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
                 dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
                 debut = debut + intervalle
@@ -155,7 +182,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 if lesEmissions[SorteEmission.effectif.rawValue].valeur > 0 {
                     afficheSmileyDuCentre(vueDeDestination: camembert, curseurActif: curseurActif)
                 }
-            let emissionsClassees = lesEmissions.count <= 1 ? lesEmissions : lesEmissions.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
+            let emissionsClassees = lesEmissionsCompact.count <= 1 ? lesEmissionsCompact : lesEmissionsCompact.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
             let nombreMaxiLabels = 8 //grandFormat ? 12 : 8
             let limite = emissionsClassees.isEmpty ? 0.0 : emissionsClassees.count >= nombreMaxiLabels ? emissionsClassees[nombreMaxiLabels - 1].emission : emissionsClassees.last?.emission ?? 0.0 // on affiche les 4 postes d'émission les plus importants, à condition qu'ils soient non-nuls
             let pourcentageMini = 0.05 //grandFormat ? 0.03 : 0.05
@@ -165,13 +192,13 @@ class ViewControllerAvecCamembert: UIViewController {
             if limite > 0 {
                 debut = 0.0
                 var ligne: Int = 0
-                for emission in lesEmissions {
+                for emission in lesEmissionsCompact {
                     let intervalle = emission.emission / emissionsCalculees
-                    if ligne == ligneEnCours && emission.facteurEmission > 0 {
+                    if ligne == ligneEnCoursCorrigee && emission.facteurEmission > 0 {
                         positionPourAffichageEnGrand = debut
                         lignePourAffichageEnGrand = ligne
                         intervallePourAffichageEnGrand = intervalle
-                    } else if (emission.emission >= limite && intervalle > pourcentageMini) || ligne == ligneEnCours { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
+                    } else if (emission.emission >= limite && intervalle > pourcentageMini) || ligne == ligneEnCoursCorrigee { // on n'affiche le nom des émissions que si elles sont au moins 5% du total, et seulement les 5 principales
                             let positionAngulaireLabel: Double = 2.0 * .pi * Double(debut + (intervalle / 2.0) - 0.25)
                             dessinePicto(vueDeDestination: camembert,frame: frame, picto: emission.picto, x: CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5) / 2.0, y: (camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5) / 2.0, facteurTaille: 1.0, alpha: 1.0)
                             
@@ -183,7 +210,7 @@ class ViewControllerAvecCamembert: UIViewController {
                     let positionAngulaireLabel = Double (2 * .pi * (positionPourAffichageEnGrand + (intervallePourAffichageEnGrand / 2.0) - 0.25))
                     dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayon * 1.1, debut: positionPourAffichageEnGrand - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut * 1.2, couleurSecteur: couleurSeparationClaire)
                     dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayon * 1.1, debut: positionPourAffichageEnGrand + intervallePourAffichageEnGrand - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut * 1.2, couleurSecteur: couleurSeparationClaire)
-                    dessinePicto(vueDeDestination: camembert,frame: frame, picto: lesEmissions[lignePourAffichageEnGrand].picto, x: CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5) / 2.0, y: (camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5) / 2.0, facteurTaille: 1.5, alpha: 1.0)
+                    dessinePicto(vueDeDestination: camembert,frame: frame, picto: lesEmissionsCompact[lignePourAffichageEnGrand].picto, x: CGFloat(camembert.frame.width + rayon * cos(positionAngulaireLabel) * 1.5) / 2.0, y: (camembert.frame.height + rayon * sin(positionAngulaireLabel) * 1.5) / 2.0, facteurTaille: 1.5, alpha: 1.0)
                 }
             }
         } else { // else : if camembertVide : indispensable de mettre quelque chose pour éviter les crashes lors de la mise en page de la subview

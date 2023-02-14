@@ -1,6 +1,6 @@
 Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt;Picto;TitreRessource;LienRessource;NomPluriel;CategorieOptionnelle
 General information;Duration;days;50;0;1;;;;1;;;If the camp lasts longer, travels will be amortised over more days;;;;;Duration;
-General information;Group size;people;100;0;1;;;;1;;;;;;;;Group size;
+General information;Participants;people;100;0;1;;;;1;;;;;;;;Group size;
 Catering;meal with beef, veal or lamb;;50;6.29;1;;;;1;;2;Meals with beef, veal, or lamb meat emit much greenhouse gases: almost 5 times more than other meats, and 12 times more than a vegetarian meal. This is probably the easiest opportunity to reduce greenhouse gases without affecting the core project or the camp. La Marmite Éclairée helps you design environmentally friendly menus;Red meat;🥩;La Marmite Éclairée;https://lamarmite.edln.org;meals with beef, veal or lamb;
 Catering;meal with pork, poultry, fish;;50;1.35;1;;;;1;;2;Including porc, poultry, rabbit, or fish in a meal doubles its carbon impact as compared to a vegetarian meal. La Marmite Éclairée helps you design environmentally friendly menus;White meat;🍗;La Marmite Éclairée;https://lamarmite.edln.org;meals with pork, poultry, fish;
 Catering;vegetarian meal;;50;0.51;1;;;;1;;2;To further reduce climate impact, prefer fresh, local, seasonal products and minimize packaging. La Marmite Éclairée helps you design environmentally friendly menus;Meals;🌽;La Marmite Éclairée;https://lamarmite.edln.org;vegetarian meals;
@@ -24,6 +24,6 @@ Sea scouting;Optimist;;10;8;;;;;1;;;The impact of a ship mainly stems from its m
 Sea scouting;light dinghy;;10;60;;;;;1;;;The impact of a ship mainly stems from its manufacturing. Maintenance is essential to ensure a long life;Light dinghies;⛵️;;;light dinghies;1
 Sea scouting;dinghy;;10;120;;;;;1;;;The impact of a ship mainly stems from its manufacturing. Maintenance is essential to ensure a long life;Dinghy;⛵️;;;dinghies;1
 Sea scouting;lugger or Kelt;;10;200;;;;;1;;;The impact of a ship mainly stems from its manufacturing. Maintenance is essential to ensure a long life;Luggers;⛵️;;;luggers or Kelts;1
-Sea scouting;inflatable boat;;10;60;;;;;1;;;The impact of a ship mainly stems from its manufacturing. Maintenance is essential to ensure a long life. This is particularly true for the motor;🚤;;;inflatable boats;1
+Sea scouting;inflatable boat;;10;60;;;;;1;;;The impact of a ship mainly stems from its manufacturing. Maintenance is essential to ensure a long life. This is particularly true for the motor;inflatable boat;🚤;;;inflatable boats;1
 Sea scouting;𝓁 of fuel;;150;3.6;;;;;1;;;To reduce gas consumption, avoid sharp accelerations and keep the motor off whenever safety conditions allow it;fuel';⛽️;;;𝓁 of fuel;1
 ;Credits;;0;0;;;;;;;;;;;;;Credits;

@@ -321,7 +321,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.actualiseAffichageEmissions()
-            self.dessineCamembert(camembert: self.camembert, curseurActif: false)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
         }
     }
     
@@ -396,7 +396,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             }
             self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
             self.actualiseAffichageEmissions()
-            self.dessineCamembert(camembert: self.camembert, curseurActif: true)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: true, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
         }  // DispatchQueue.main.async
         //        } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
@@ -419,7 +419,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.tableViewEmissions.reloadData()
-            self.dessineCamembert(camembert: self.camembert, curseurActif: false)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
         }
     }
     
@@ -556,7 +556,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let delai = self.choisitContraintes(size: size) ? 0.01 : 0.00
             DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
                 self.actualiseAffichageEmissions()
-                self.dessineCamembert(camembert: self.camembert, curseurActif: curseurActif)
+                self.dessineCamembert(camembert: self.camembert, curseurActif: curseurActif, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
             }
         }
         if ligneEnCours < 0 { // pour ne pas actualiser le tableView pendant qu'on manipule un curseur
@@ -638,7 +638,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func generePDF() -> URL? {
         let url = Bundle.main.url(forResource: "PageBlanche", withExtension: "pdf")! as CFURL
         let originalPDF:CGPDFDocument=CGPDFDocument(url)!
-        let saveFileURL = NSTemporaryDirectory().appending("/CO2.pdf")
+        let saveFileURL = NSTemporaryDirectory().appending("CO2.pdf")
         guard UIGraphicsBeginPDFContextToFile(saveFileURL, CGRect.zero, nil) else {
             print("oups1", saveFileURL)
             return nil

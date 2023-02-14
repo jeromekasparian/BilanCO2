@@ -105,6 +105,10 @@ class TypeEmission {
         self.nomPluriel = nomPluriel
         self.sectionOptionnelle = sectionOptionnelle
     }
+    
+    func duplique() -> TypeEmission {
+        return TypeEmission(categorie: self.categorie, nom: self.nom, unite: self.unite, valeurMax: self.valeurMax, valeur: self.valeur, facteurEmission: self.facteurEmission, parPersonne: self.parPersonne, parKmDistance: self.parKmDistance, parJour: self.parJour, echelleLog: self.echelleLog, valeurEntiere: self.valeurEntiere, valeurMaxSelonEffectif: self.valeurMaxSelonEffectif, valeurMaxNbRepas: self.valeurMaxNbRepas, emission: self.emission, conseil: self.conseil, nomCourt: self.nomCourt, picto: self.picto, nomsRessources: self.nomsRessources, liensRessources: self.liensRessources, nomPluriel: self.nomPluriel, sectionOptionnelle: self.sectionOptionnelle)
+    }
 }
 
 class Section {

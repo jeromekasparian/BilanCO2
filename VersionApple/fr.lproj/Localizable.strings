@@ -69,7 +69,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
    • Ademe, bilans-ges.ademe.fr
    • Carbone 4, www.carbone4.com/analyse-faq-voiture-electrique";
 
-"texteRemerciements" = "Jérémie Balas, Éléonore Berger, Louise de Boysson, Suzanne Chevrel, Flore-Anne de Clermont, Matthieu Escande, Daniel Hollaar, Hervé Kasparian, Agathe Lafont, Juliette Maupas, Alexia Peyrard, Roxane de Pol, Paul Manguy, Clément Sartron";
+"texteRemerciements" = "Jérémie Balas, Éléonore Berger, Louise de Boysson, Suzanne Chevrel, Flore-Anne de Clermont, Matthieu Escande, Yolène Guihard, Daniel Hollaar, Hervé Kasparian, Agathe Lafont, Thomas Masseran, Juliette Maupas, Alexia Peyrard, Roxane de Pol, Paul Manguy, Clément Sartron";
 
 "Méthodologie & hypothèses" = "Méthodologie & hypothèses";
 "Graphique" = "Graphique";
@@ -102,7 +102,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
-"lienAppStore" = "https://www.eeudf.org";
+"lienAppStore" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
