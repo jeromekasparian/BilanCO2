@@ -154,7 +154,8 @@ func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
     let lignes = data.components(separatedBy: .newlines).dropFirst()
     for ligne in lignes {
         let elements = ligne.components(separatedBy: separateur)
-        if elements.count >= 17 {  // on teste une ligne vide en début ou fin de tableau
+        if elements.count >= 19 {  // on teste une ligne vide en début ou fin de tableau
+            let categorie = NSLocalizedString(elements[0], comment: "")
             let valeurMax = Double(elements[3]) ?? 0
             let facteurEmission = Double(elements[4]) ?? 0
             let parPersonne = Double(elements[5]) ?? 0
@@ -165,12 +166,24 @@ func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
             let valeurMaxSelonEffectif = Double(elements[10]) ?? 0
             let valeurMaxNbRepas = Double(elements[11]) ?? 0
             let valeur = 0.0 //facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
-            let nomsRessources = elements[15].components(separatedBy: ",").filter({!$0.isEmpty})
-            let liensRessources = elements[16].components(separatedBy: ",").filter({!$0.isEmpty})
+            let nomsRessources = NSLocalizedString(elements[15], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
+            let liensRessources = NSLocalizedString(elements[16], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
             let sectionOptionnelle = (Int(elements[18]) ?? 0) == 1
-            lesEmetteursLus.append(TypeEmission(categorie: elements[0], nom: elements[1], unite: elements[2], valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission, parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour, echelleLog: echelleLog, valeurEntiere: valeurEntiere, valeurMaxSelonEffectif: valeurMaxSelonEffectif, valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0, conseil: elements[12].replacingOccurrences(of: "\\n", with: "\n"), nomCourt: elements[13], picto: elements[14], nomsRessources: nomsRessources, liensRessources: liensRessources, nomPluriel: elements[17], sectionOptionnelle: sectionOptionnelle))
-            if lesSections.isEmpty || (lesSections.last?.nom ?? "kzwx") != elements[0] {
-                lesSections.append(Section(nom: elements[0], emissionsSection: 0.0, optionnel: sectionOptionnelle, afficherLaSection: !sectionOptionnelle))
+            lesEmetteursLus.append(TypeEmission(categorie: categorie,
+                                                nom: NSLocalizedString(elements[1], comment: ""),
+                                                unite: NSLocalizedString(elements[2], comment: ""),
+                                                valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission,
+                                                parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour,
+                                                echelleLog: echelleLog, valeurEntiere: valeurEntiere,
+                                                valeurMaxSelonEffectif: valeurMaxSelonEffectif,
+                                                valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0,
+                                                conseil: NSLocalizedString(elements[12], comment: "").replacingOccurrences(of: "\\n", with: "\n"),
+                                                nomCourt: NSLocalizedString(elements[13], comment: ""), picto: elements[14],
+                                                nomsRessources: nomsRessources, liensRessources: liensRessources,
+                                                nomPluriel: NSLocalizedString(elements[17], comment: ""),
+                                                sectionOptionnelle: sectionOptionnelle))
+            if lesSections.isEmpty || (lesSections.last?.nom ?? "kzwx") != categorie {
+                lesSections.append(Section(nom: categorie, emissionsSection: 0.0, optionnel: sectionOptionnelle, afficherLaSection: !sectionOptionnelle))
             }
             if valeur > 0 && sectionOptionnelle {
                 lesSections.last?.afficherLaSection = true

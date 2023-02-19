@@ -14,7 +14,7 @@ protocol CelluleExplicationsDelegate: AnyObject {
 class CelluleExplications: UITableViewCell {
     @IBOutlet var titre: UITextView!
     @IBOutlet var texte: UITextView!
-    
+    @IBOutlet var contrainteEcraserTexte: NSLayoutConstraint!
     weak var delegate: CelluleExplicationsDelegate?
 
     override func prepareForReuse() {

@@ -1,19 +1,20 @@
-ACTUALISER LIEN APP STORE
 
  AFFICHAGE / mise en page
- - la page d'aide déborde parfois sur toute la largeur de l'écran.
-- Page d'aide : le textView continue à prendre de la place quand il est refermé
+- la page d'aide déborde parfois sur toute la largeur de l'écran.
 
  Fonctionnalités
+ - support machines / OS anciens / 32 bits
  - renvoyer vers des ressources
       - Covoiturage : tableur en ligne de Matthieu - https://docs.google.com/spreadsheets/d/1OyeE4IQJVyMqPMOKvIPqD8eIR7lk0HiaE5yOCp02fvg/edit?usp=sharing
       - autres ressources ?
+** - Conseil pour les transports sur place : se faire livrer ? Evaluer d'abord l'impact carbone (Coline Boisson)
+- robustesse à la lecture du fichier : vérifier le nombre de colonnes
 
  Fonction d'export
       - message d'erreur extension pdf / "Extension request contains input items but the extension point does not specify a set of allowed payload classes. The extension point's NSExtensionContext subclass must implement `+_allowedItemPayloadClasses`. This must return the set of allowed NSExtensionItem payload classes. In future, this request will fail with an error." -- https://stackoverflow.com/questions/69528157/nsextension-warnings-when-uiactivityviewcontroller-selects-airdrop
-- le lien app store n'est pas cliquable sur Mac
+- le lien app store n'est pas cliquable dans les fichiers générés sur Mac
 - manque le titre du mail sur Mac
-- Implémenter la méthode d'Hervé
+*** - Implémenter la méthode d'Hervé
 
 
 DÉCLINAISONS AUTRES ÉVÉNEMENTS

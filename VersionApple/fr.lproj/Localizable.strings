@@ -96,7 +96,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg d'équivalent CO₂";
 "\nTotal : %.2f t CO₂" = "\nTotal : %.2f t d'équivalent CO₂";
 "\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app Bilan CO₂ camp scout";
-"Bilan CO2 camp scout" = "Bilan CO₂ camp scout";
+"Bilan CO2 camp scout" = "Bilan CO₂ camp scout";   // doit matcher avec la ligne précédente !!
 " (%.1f t / personne)\n" = " (%.1f t / personne)\n";
 " (%.1f kg / personne)\n" = " (%.1f kg / personne)\n";
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
@@ -108,3 +108,230 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
 
 " : %.0f " = " : %.0f ";
+" : " = " : ";
+
+
+// les textes de la base de données
+"CategorieInformations généralesDurée" = "Informations générales";
+"NomInformations généralesDurée" = "Durée";
+"UnitéInformations généralesDurée" = "jours";
+"ConseilInformations généralesDurée" = "Si le camp est plus long, les transports sont amortis sur plus de jours";
+"TitreRessourceInformations généralesDurée" = "";
+"LienRessourceInformations généralesDurée" = "";
+"NomPlurielInformations généralesDurée" = "Durée";
+
+"CategorieInformations généralesEffectif" = "Informations générales";
+"NomInformations généralesEffectif" = "Effectif";
+"UnitéInformations généralesEffectif" = "personnes";
+"ConseilInformations généralesEffectif" = "";
+"TitreRessourceInformations généralesEffectif" = "";
+"LienRessourceInformations généralesEffectif" = "";
+"NomPlurielInformations généralesEffectif" = "Effectif";
+
+"CategorieRepasrepas avec bœuf, veau ou agneau" = "Repas";
+"NomRepasrepas avec bœuf, veau ou agneau" = "repas avec bœuf, veau ou agneau";
+"UnitéRepasrepas avec bœuf, veau ou agneau" = "";
+"ConseilRepasrepas avec bœuf, veau ou agneau" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. C'est sans doute le poste d'émission le plus facile à réduire sans affecter le projet du camp. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental";
+"TitreRessourceRepasrepas avec bœuf, veau ou agneau" = "La Marmite Éclairée";
+"LienRessourceRepasrepas avec bœuf, veau ou agneau" = "https://lamarmite.edln.org";
+"NomPlurielRepasrepas avec bœuf, veau ou agneau" = "repas avec bœuf, veau ou agneau";
+
+"CategorieRepasrepas avec porc, volaille, poisson" = "Repas";
+"NomRepasrepas avec porc, volaille, poisson" = "repas avec porc, volaille, poisson";
+"UnitéRepasrepas avec porc, volaille, poisson" = "";
+"ConseilRepasrepas avec porc, volaille, poisson" = "La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental";
+"TitreRessourceRepasrepas avec porc, volaille, poisson" = "La Marmite Éclairée";
+"LienRessourceRepasrepas avec porc, volaille, poisson" = "https://lamarmite.edln.org";
+"NomPlurielRepasrepas avec porc, volaille, poisson" = "repas avec porc, volaille, poisson";
+
+"CategorieRepasrepas végétarien" = "Repas";
+"NomRepasrepas végétarien" = "repas végétarien";
+"UnitéRepasrepas végétarien" = "";
+"ConseilRepasrepas végétarien" = "Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental";
+"TitreRessourceRepasrepas végétarien" = "La Marmite Éclairée";
+"LienRessourceRepasrepas végétarien" = "https://lamarmite.edln.org";
+"NomPlurielRepasrepas végétarien" = "repas végétariens";
+
+"CategorieRepasrepas cuisiné au gaz" = "Repas";
+"NomRepasrepas cuisiné au gaz" = "repas cuisiné au gaz";
+"UnitéRepasrepas cuisiné au gaz" = "";
+"ConseilRepasrepas cuisiné au gaz" = "Quelques idées pour réduire votre consommation de gaz : couvrir les casseroles, protéger les tripattes du vent, adapter les quantités chauffées aux besoins et couper le gaz un peu avant la fin de la cuisson, qui va se terminer sur la chaleur accumulée";
+"TitreRessourceRepasrepas cuisiné au gaz" = "";
+"LienRessourceRepasrepas cuisiné au gaz" = "";
+"NomPlurielRepasrepas cuisiné au gaz" = "repas cuisinés au gaz";
+
+"CategorieAller-retour vers le campkm jusqu'au camp" = "Aller-retour vers le camp";
+"NomAller-retour vers le campkm jusqu'au camp" = "km jusqu'au camp";
+"UnitéAller-retour vers le campkm jusqu'au camp" = "";
+"ConseilAller-retour vers le campkm jusqu'au camp" = "Un camp plus proche nécessite moins de déplacements, et permet de choisir des modes de transport moins polluants. Sauf si un camp tout proche se traduit par de nombreux allers-retours en voiture. \n\nAstuce\nSi vous utilisez plusieurs moyens de transport, entrez ici celui qui est utilisé sur la plus grande distance. Le déplacement complémentaire pourra entrer dans la section suivante : \"Déplacements sur place\".";
+"TitreRessourceAller-retour vers le campkm jusqu'au camp" = "";
+"LienRessourceAller-retour vers le campkm jusqu'au camp" = "";
+"NomPlurielAller-retour vers le campkm jusqu'au camp" = "km jusqu'au camp";
+
+"CategorieAller-retour vers le campAR en train ou bateau" = "Aller-retour vers le camp";
+"NomAller-retour vers le campAR en train ou bateau" = "AR en train ou bateau";
+"UnitéAller-retour vers le campAR en train ou bateau" = "pers.";
+"ConseilAller-retour vers le campAR en train ou bateau" = "Le train et le bateau sont de loin les modes de transport les moins polluants. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires. Par ailleurs, Interrail est souvent avantageux pour de longs trajets en Europe.";
+"TitreRessourceAller-retour vers le campAR en train ou bateau" = "Horaires en Europe,Interrail";
+"LienRessourceAller-retour vers le campAR en train ou bateau" = "https://reiseauskunft.bahn.de/bin/query.exe/f,https://www.interrail.eu/fr";
+"NomPlurielAller-retour vers le campAR en train ou bateau" = "personnes en train ou bateau";
+
+"CategorieAller-retour vers le campCar" = "Aller-retour vers le camp";
+"NomAller-retour vers le campCar" = "Car";
+"UnitéAller-retour vers le campCar" = "AR";
+"ConseilAller-retour vers le campCar" = "Un car est intéressant s'il est bien rempli. Pour 10 personnes à bord, il pollue autant qu'une voiture individuelle. Attention également à prendre en compte les éventuels retours à vide";
+"TitreRessourceAller-retour vers le campCar" = "";
+"LienRessourceAller-retour vers le campCar" = "";
+"NomPlurielAller-retour vers le campCar" = "AR de cars";
+
+"CategorieAller-retour vers le campVoiture" = "Aller-retour vers le camp";
+"NomAller-retour vers le campVoiture" = "Voiture";
+"UnitéAller-retour vers le campVoiture" = "AR";
+"ConseilAller-retour vers le campVoiture" = "On peut réduire les trajets en louant sur place plutôt qu'au départ. Si les enfants sont déposés en voiture sur le camp, organisez le covoiturage pour réduire le nombre de trajets";
+"TitreRessourceAller-retour vers le campVoiture" = "Covoiturage";
+"LienRessourceAller-retour vers le campVoiture" = "https://www.covoitribu.fr";
+"NomPlurielAller-retour vers le campVoiture" = "AR de voitures";
+
+"CategorieAller-retour vers le campVoiture électrique" = "Aller-retour vers le camp";
+"NomAller-retour vers le campVoiture électrique" = "Voiture électrique";
+"UnitéAller-retour vers le campVoiture électrique" = "AR";
+"ConseilAller-retour vers le campVoiture électrique" = "La voiture électrique réduit les émissions de moitié par rapport à une voiture thermique. Ça reste beaucoup par rapport à un train ou un car bien rempli. Si les enfants sont déposés en voiture sur le camp, organisez le covoiturage pour réduire le nombre de trajets";
+"TitreRessourceAller-retour vers le campVoiture électrique" = "Covoiturage";
+"LienRessourceAller-retour vers le campVoiture électrique" = "https://www.covoitribu.fr";
+"NomPlurielAller-retour vers le campVoiture électrique" = "AR de voitures électriques";
+
+"CategorieAller-retour vers le campAR en avion" = "Aller-retour vers le camp";
+"NomAller-retour vers le campAR en avion" = "AR en avion";
+"UnitéAller-retour vers le campAR en avion" = "pers.";
+"ConseilAller-retour vers le campAR en avion" = "L'avion est doublement polluant : parce qu'il émet beaucoup de CO₂ par kilomètre, et parce qu'il rend possible des voyages lointains, avec des distances impossibles à réaliser avec un mode de transport moins polluant";
+"TitreRessourceAller-retour vers le campAR en avion" = "";
+"LienRessourceAller-retour vers le campAR en avion" = "";
+"NomPlurielAller-retour vers le campAR en avion" = "personnes en avion";
+
+"CategorieAller-retour vers le campCamion" = "Aller-retour vers le camp";
+"NomAller-retour vers le campCamion" = "Camion";
+"UnitéAller-retour vers le campCamion" = "AR";
+"ConseilAller-retour vers le campCamion" = "Expédier le matériel et le faire livrer sur le camp est en général moins polluant que le transporter soi-même, surtout si le camion n'est pas plein";
+"TitreRessourceAller-retour vers le campCamion" = "";
+"LienRessourceAller-retour vers le campCamion" = "";
+"NomPlurielAller-retour vers le campCamion" = "AR de camions";
+
+"CategorieAller-retour vers le campMatériel expédié" = "Aller-retour vers le camp";
+"NomAller-retour vers le campMatériel expédié" = "Matériel expédié";
+"UnitéAller-retour vers le campMatériel expédié" = "kg";
+"ConseilAller-retour vers le campMatériel expédié" = "Expédier le matériel à l'avance permet d'accepter des délais plus longs : moins cher et moins polluant";
+"TitreRessourceAller-retour vers le campMatériel expédié" = "";
+"LienRessourceAller-retour vers le campMatériel expédié" = "";
+"NomPlurielAller-retour vers le campMatériel expédié" = "Matériel expédié";
+
+"CategorieDéplacements sur placekm en car" = "Déplacements sur place";
+"NomDéplacements sur placekm en car" = "km en car";
+"UnitéDéplacements sur placekm en car" = "";
+"ConseilDéplacements sur placekm en car" = "Le car est efficace s'il est raisonnablement plein";
+"TitreRessourceDéplacements sur placekm en car" = "";
+"LienRessourceDéplacements sur placekm en car" = "";
+"NomPlurielDéplacements sur placekm en car" = "km en car";
+
+"CategorieDéplacements sur placekm en voiture" = "Déplacements sur place";
+"NomDéplacements sur placekm en voiture" = "km en voiture";
+"UnitéDéplacements sur placekm en voiture" = "";
+"ConseilDéplacements sur placekm en voiture" = "Faire les courses près du lieu de camp économise de l'essence, du temps et réduit la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute";
+"TitreRessourceDéplacements sur placekm en voiture" = "";
+"LienRessourceDéplacements sur placekm en voiture" = "";
+"NomPlurielDéplacements sur placekm en voiture" = "km en voiture";
+
+"CategorieDéplacements sur placekm en voiture électrique" = "Déplacements sur place";
+"NomDéplacements sur placekm en voiture électrique" = "km en voiture électrique";
+"UnitéDéplacements sur placekm en voiture électrique" = "";
+"ConseilDéplacements sur placekm en voiture électrique" = "Faire les courses près du lieu de camp économise de l'essence, du temps et réduit la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute";
+"TitreRessourceDéplacements sur placekm en voiture électrique" = "";
+"LienRessourceDéplacements sur placekm en voiture électrique" = "";
+"NomPlurielDéplacements sur placekm en voiture électrique" = "km en voiture électrique";
+
+"CategorieMatériel & hébergementAchats de matériel" = "Matériel & hébergement";
+"NomMatériel & hébergementAchats de matériel" = "Achats de matériel";
+"UnitéMatériel & hébergementAchats de matériel" = "€";
+"ConseilMatériel & hébergementAchats de matériel" = "Du matériel entretenu dure plus longtemps, donc pollue moins";
+"TitreRessourceMatériel & hébergementAchats de matériel" = "";
+"LienRessourceMatériel & hébergementAchats de matériel" = "";
+"NomPlurielMatériel & hébergementAchats de matériel" = "Achats de matériel";
+
+"CategorieMatériel & hébergementtente utilisée" = "Matériel & hébergement";
+"NomMatériel & hébergementtente utilisée" = "tente utilisée";
+"UnitéMatériel & hébergementtente utilisée" = "";
+"ConseilMatériel & hébergementtente utilisée" = "Des tentes entretenues durent plus longtemps, donc polluent moins";
+"TitreRessourceMatériel & hébergementtente utilisée" = "";
+"LienRessourceMatériel & hébergementtente utilisée" = "";
+"NomPlurielMatériel & hébergementtente utilisée" = "tentes utilisées";
+
+"CategorieMatériel & hébergementmarabout utilisé" = "Matériel & hébergement";
+"NomMatériel & hébergementmarabout utilisé" = "marabout utilisé";
+"UnitéMatériel & hébergementmarabout utilisé" = "";
+"ConseilMatériel & hébergementmarabout utilisé" = "Du matériel entretenu dure plus longtemps, donc pollue moins";
+"TitreRessourceMatériel & hébergementmarabout utilisé" = "";
+"LienRessourceMatériel & hébergementmarabout utilisé" = "";
+"NomPlurielMatériel & hébergementmarabout utilisé" = "marabouts utilisés";
+
+"CategorieMatériel & hébergementpersonne logée en dur" = "Matériel & hébergement";
+"NomMatériel & hébergementpersonne logée en dur" = "personne logée en dur";
+"UnitéMatériel & hébergementpersonne logée en dur" = "";
+"ConseilMatériel & hébergementpersonne logée en dur" = "L'hébergement sous tente n'est pas seulement sympa, il est aussi nettement moins polluant que dans un bâtiment";
+"TitreRessourceMatériel & hébergementpersonne logée en dur" = "";
+"LienRessourceMatériel & hébergementpersonne logée en dur" = "";
+"NomPlurielMatériel & hébergementpersonne logée en dur" = "personnes logées en dur";
+
+"CategorieCamp marinOptimist" = "Camp marin";
+"NomCamp marinOptimist" = "Optimist";
+"UnitéCamp marinOptimist" = "";
+"ConseilCamp marinOptimist" = "L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel";
+"TitreRessourceCamp marinOptimist" = "";
+"LienRessourceCamp marinOptimist" = "";
+"NomPlurielCamp marinOptimist" = "Optimists";
+
+"CategorieCamp marinCaravelle (dériveur léger)" = "Camp marin";
+"NomCamp marinCaravelle (dériveur léger)" = "Caravelle (dériveur léger)";
+"UnitéCamp marinCaravelle (dériveur léger)" = "";
+"ConseilCamp marinCaravelle (dériveur léger)" = "L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel";
+"TitreRessourceCamp marinCaravelle (dériveur léger)" = "";
+"LienRessourceCamp marinCaravelle (dériveur léger)" = "";
+"NomPlurielCamp marinCaravelle (dériveur léger)" = "Caravelles (dériveurs légers)";
+
+"CategorieCamp marindériveur" = "Camp marin";
+"NomCamp marindériveur" = "dériveur";
+"UnitéCamp marindériveur" = "";
+"ConseilCamp marindériveur" = "L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel";
+"TitreRessourceCamp marindériveur" = "";
+"LienRessourceCamp marindériveur" = "";
+"NomPlurielCamp marindériveur" = "dériveurs";
+
+"CategorieCamp marincanot ou Kelt" = "Camp marin";
+"NomCamp marincanot ou Kelt" = "canot ou Kelt";
+"UnitéCamp marincanot ou Kelt" = "";
+"ConseilCamp marincanot ou Kelt" = "L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel";
+"TitreRessourceCamp marincanot ou Kelt" = "";
+"LienRessourceCamp marincanot ou Kelt" = "";
+"NomPlurielCamp marincanot ou Kelt" = "canots ou Kelts";
+
+"CategorieCamp marinZodiac" = "Camp marin";
+"NomCamp marinZodiac" = "Zodiac";
+"UnitéCamp marinZodiac" = "";
+"ConseilCamp marinZodiac" = "L'impact d'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel, notamment pour le moteur";
+"TitreRessourceCamp marinZodiac" = "";
+"LienRessourceCamp marinZodiac" = "";
+"NomPlurielCamp marinZodiac" = "Zodiacs";
+
+"CategorieCamp marin𝓁 d'essence pour les bateaux" = "Camp marin";
+"NomCamp marin𝓁 d'essence pour les bateaux" = "𝓁 d'essence pour les bateaux";
+"UnitéCamp marin𝓁 d'essence pour les bateaux" = "";
+"ConseilCamp marin𝓁 d'essence pour les bateaux" = "Pour limiter la consommation d’essence, évitez les grosses accélérations et coupez le moteur quand les conditions de sécurité le permettent.";
+"TitreRessourceCamp marin𝓁 d'essence pour les bateaux" = "";
+"LienRessourceCamp marin𝓁 d'essence pour les bateaux" = "";
+"NomPlurielCamp marin𝓁 d'essence pour les bateaux" = "𝓁 d'essence pour les bateaux";
+
+"CategorieCrédits" = "";
+"NomCrédits" = "Crédits";
+"UnitéCrédits" = "";
+"ConseilCrédits" = "";
+"TitreRessourceCrédits" = "";
+"LienRessourceCrédits" = "";
+"NomPlurielCrédits" = "Crédits";

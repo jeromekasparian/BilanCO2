@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B510EB9F29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */; };
 		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
 		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
 		B51AD1C228CA439700888CDD /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
@@ -24,14 +25,15 @@
 		B56DBCE62974A0BB00AC1DA5 /* PageBlanche.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */; };
 		B56E3204296AB72300276CE8 /* ToDoList.txt in Resources */ = {isa = PBXBuildFile; fileRef = B56E3203296AB72300276CE8 /* ToDoList.txt */; };
 		B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5716E12296C8CC7008EE908 /* CelluleExplications.swift */; };
+		B5BB25D029A2191000B29278 /* DataInternational.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5BB25CF29A2190900B29278 /* DataInternational.csv */; };
 		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
-		B5E0FE8D292A50C5001D0790 /* Data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE8F292A50C5001D0790 /* Data.csv */; };
 		B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
 		B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSubjectActivityItemSource.swift; sourceTree = "<group>"; };
 		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
@@ -52,12 +54,11 @@
 		B56E3203296AB72300276CE8 /* ToDoList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDoList.txt; sourceTree = "<group>"; };
 		B5716E12296C8CC7008EE908 /* CelluleExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleExplications.swift; sourceTree = "<group>"; };
 		B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BilanCO2.entitlements; sourceTree = "<group>"; };
+		B5BB25CF29A2190900B29278 /* DataInternational.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DataInternational.csv; sourceTree = "<group>"; };
 		B5D81F1A28F2126300188489 /* CelluleCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleCredits.swift; sourceTree = "<group>"; };
 		B5E0FE88292A5044001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5E0FE8A292A5049001D0790 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5E0FE8C292A507B001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		B5E0FE8E292A50C5001D0790 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text; name = fr; path = fr.lproj/Data.csv; sourceTree = "<group>"; };
-		B5E0FE90292A50CA001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Data.csv; sourceTree = "<group>"; };
 		B5E2D3312919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E2D3322919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B5FB6498297335D600F50436 /* CelluleVide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleVide.swift; sourceTree = "<group>"; };
@@ -108,12 +109,13 @@
 				B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */,
 				B5215E2B290D3C24008DA009 /* PasUtilise */,
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
+				B5BB25CF29A2190900B29278 /* DataInternational.csv */,
 				B5E0FE89292A5044001D0790 /* Localizable.strings */,
-				B5E0FE8F292A50C5001D0790 /* Data.csv */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
 				B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */,
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
 				B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */,
+				B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
 				B5716E12296C8CC7008EE908 /* CelluleExplications.swift */,
 				B5FB6498297335D600F50436 /* CelluleVide.swift */,
@@ -189,11 +191,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5E0FE8D292A50C5001D0790 /* Data.csv in Resources */,
 				B56DBCE62974A0BB00AC1DA5 /* PageBlanche.pdf in Resources */,
 				B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */,
 				B54DCFA028C5134E00FBBAE3 /* LaunchScreen.storyboard in Resources */,
 				B54DCF9D28C5134E00FBBAE3 /* Assets.xcassets in Resources */,
+				B5BB25D029A2191000B29278 /* DataInternational.csv in Resources */,
 				B56E3204296AB72300276CE8 /* ToDoList.txt in Resources */,
 				B54DCF9B28C5134E00FBBAE3 /* Main.storyboard in Resources */,
 			);
@@ -210,6 +212,7 @@
 				B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */,
 				B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */,
 				B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */,
+				B510EB9F29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift in Sources */,
 				B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */,
 				B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */,
 				B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */,
@@ -253,15 +256,6 @@
 				B5E0FE8A292A5049001D0790 /* fr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		B5E0FE8F292A50C5001D0790 /* Data.csv */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5E0FE8E292A50C5001D0790 /* fr */,
-				B5E0FE90292A50CA001D0790 /* en */,
-			);
-			name = Data.csv;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -391,7 +385,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -431,7 +425,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

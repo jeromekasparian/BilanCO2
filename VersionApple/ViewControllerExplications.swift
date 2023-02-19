@@ -102,19 +102,16 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleExplications
         let ligne = indexPath.row
-//        cell.titre.invalidateIntrinsicContentSize()
-//        cell.titre.isScrollEnabled = false
         cell.titre.textContainer.heightTracksTextView = true
         cell.titre.text = lesParagraphes[ligne]
         cell.titre.font = .boldSystemFont(ofSize: 24)
         cell.titre.textContainer.heightTracksTextView = true
-//        cell.texte.text = lesTextes[ligne]
-//        cell.texte.textContainerInset.top = 0
-//        cell.texte.textContainerInset.bottom = 0
         if (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne {
             cell.texte.attributedText = lesTextesFormattes[ligne]
+            cell.contrainteEcraserTexte.isActive = false
         } else {
             cell.texte.text = ""
+            cell.contrainteEcraserTexte.isActive = true
         }
 //        cell.texte.attributedText = (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne ? lesTextesFormattes[ligne] : NSAttributedString(string: "")
         cell.accessoryType = .none

@@ -64,7 +64,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteLargeurBoutonExporterLarge: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonEffacerEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonExporterEtroit: NSLayoutConstraint!
-    
+        
     override func viewDidLoad() {
 //        if #available(iOS 13, *) {
             boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
@@ -76,7 +76,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         boutonExport.setTitle("", for: .normal)
         
         _ = self.choisitContraintes(size: self.view.frame.size)
-        (lesEmissions, lesSections) = lireFichier(nom: "Data")
+        (lesEmissions, lesSections) = lireFichier(nom: "DataInternational")
         let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
         if !lesValeurs.isEmpty && lesValeurs.count == lesEmissions.count {
             for i in 0...lesValeurs.count - 1 {
@@ -587,42 +587,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
-        //        print("sender", sender)
-        
-        //        let vueAExporter = vueResultats!
-        //        let pdfPageFrame = vueAExporter.bounds
-        //        let pdfData = NSMutableData()
-        //        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
-        //        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
-        //        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
-        //        vueAExporter.layer.render(in: pdfContext)
-        //        UIGraphicsEndPDFContext()
-        //
-        //        let path = URL(fileURLWithPath: NSTemporaryDirectory())
-        //        let saveFileURL = path.appendingPathComponent("/CO2.pdf")
-        //        do{
-        //            try pdfData.write(to: saveFileURL)
-        //        } catch {
-        //            print("error-Grrr")
-        //        }
-        var items: [Any] = []
+        let leTexte = texteListeEmissions(lesEmissions: lesEmissions, pourTexteBrut: true).string
+        var items: [Any] = [EmailSubjectActivityItemSource(subject: NSLocalizedString("Impact climat de mon camp", comment: ""), emailBody: leTexte)]
         if let urlPDFAExporter = generePDF() {
             print("pdf ok")
             items.append(urlPDFAExporter)
             let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil) // "" : le corps du message intégré automatiquement
-#if targetEnvironment(macCatalyst)
-            //"Don't do this !!"
-#else
-            activityViewController.setValue(NSLocalizedString("Impact climat de mon camp", comment: ""), forKey: "subject")
-#endif
-            activityViewController.completionWithItemsHandler = {
-                (activity, success, items, error) in
-                if activity != nil {if activity!.rawValue == "com.apple.UIKit.activity.RemoteOpenInApplication-ByCopy"
-                    {
-                    print("Coquinou")
-                }
-                }
-            }
             if let popover = activityViewController.popoverPresentationController {
                 popover.barButtonItem  = self.navigationItem.rightBarButtonItem
                 popover.permittedArrowDirections = .any
@@ -658,7 +628,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             
             let marge: CGFloat = 40
             let largeurTexte = mediaBox.width - 2 * marge
-            let textePourPdf1 = texteListeEmissions(lesEmissions: lesEmissions)
+            let textePourPdf1 = texteListeEmissions(lesEmissions: lesEmissions, pourTexteBrut: false)
             let hauteurTexte1 = textePourPdf1.hauteur(largeur: largeurTexte)
             let box1 = CGRect(x: mediaBox.minX + marge, y: mediaBox.minY + marge, width: largeurTexte, height: hauteurTexte1 + marge)
             textePourPdf1.draw(in: box1)
@@ -667,6 +637,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             let hauteurEtLargeur = min(hauteurMax2, largeurTexte)
             let box2 = CGRect(x: box1.minX + (largeurTexte - hauteurEtLargeur) / 2 , y: box1.maxY, width: hauteurEtLargeur, height: hauteurEtLargeur)
             camembert.asImage().draw(in: box2)
+            if let imageQRCode = UIImage(named: "QRCodeAppStore") {
+                let tailleQRCode: CGFloat = 50
+                let box2b = CGRect(x: box1.maxX - tailleQRCode, y: box2.minY, width: tailleQRCode, height: tailleQRCode)
+                imageQRCode.draw(in: box2b)
+            }
             destContext.endPage()
         }
         destContext.closePDF()
