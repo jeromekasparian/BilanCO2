@@ -53,6 +53,12 @@ Le cercle vert permet de les comparer avec les émissions acceptables pour prés
 
 "texteEmissionsAcceptables" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour de camp. \n\nLes émissions du camp sont ramenées au nombre de participants et à la durée du camp, puis comparées avec cette référence.";
 
+"texteRessourcesPedagogiques" = "Quelques ressources pour animer une séquence de sensibilisation en s'appuyant sur l'app :
+ 
+   • pour les animateurs et directeurs de camp, ainsi que les responsables régionaux : https://bibli.eeudf.org/?p=8989
+   • pour les jeunes (16-18 ans) : https://bibli.eeudf.org/?p=8975
+   • pour les jeunes (14-16 ans) : https://bibli.eeudf.org/?p=8982";
+
 "texteLimites" = "L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
 
 En particulier, elle ne prend pas en compte :
@@ -74,6 +80,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Méthodologie & hypothèses" = "Méthodologie & hypothèses";
 "Graphique" = "Graphique";
 "Émissions acceptables pour préserver le climat" = "Émissions acceptables pour préserver le climat";
+"Ressources pédagogiques" = "Ressources pédagogiques";
 "Limites" = "Limites";
 "Sources" = "Sources";
 "Remerciements" = "Remerciements";
