@@ -1,0 +1,16 @@
+sips --resampleWidth 20 Icone1024.png --out Icone20.png
+sips --resampleWidth 29 Icone1024.png --out Icone29.png
+sips --resampleWidth 40 Icone1024.png --out Icone40.png
+sips --resampleWidth 58 Icone1024.png --out Icone58.png
+sips --resampleWidth 60 Icone1024.png --out Icone60.png
+sips --resampleWidth 76 Icone1024.png --out Icone76.png
+sips --resampleWidth 80 Icone1024.png --out Icone80.png
+sips --resampleWidth 87 Icone1024.png --out Icone87.png
+sips --resampleWidth 114 Icone1024.png --out Icone114.png
+sips --resampleWidth 120 Icone1024.png --out Icone120.png
+sips --resampleWidth 128 Icone1024.png --out Icone128.png
+sips --resampleWidth 136 Icone1024.png --out Icone136.png
+sips --resampleWidth 152 Icone1024.png --out Icone152.png
+sips --resampleWidth 167 Icone1024.png --out Icone167.png
+sips --resampleWidth 180 Icone1024.png --out Icone180.png
+sips --resampleWidth 192 Icone1024.png --out Icone192.png

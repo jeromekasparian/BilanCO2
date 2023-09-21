@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50375DD2ABCD6A900158EB4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */; };
 		B510EB9F29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */; };
 		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
 		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
@@ -33,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B50375DE2ABCD6A900158EB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B50375E02ABCD6AA00158EB4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSubjectActivityItemSource.swift; sourceTree = "<group>"; };
 		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
 				B5BB25CF29A2190900B29278 /* DataInternational.csv */,
 				B5E0FE89292A5044001D0790 /* Localizable.strings */,
+				B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
 				B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */,
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
@@ -192,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56DBCE62974A0BB00AC1DA5 /* PageBlanche.pdf in Resources */,
+				B50375DD2ABCD6A900158EB4 /* InfoPlist.strings in Resources */,
 				B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */,
 				B54DCFA028C5134E00FBBAE3 /* LaunchScreen.storyboard in Resources */,
 				B54DCF9D28C5134E00FBBAE3 /* Assets.xcassets in Resources */,
@@ -230,6 +235,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B50375DE2ABCD6A900158EB4 /* en */,
+				B50375E02ABCD6AA00158EB4 /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		B54DCF9928C5134E00FBBAE3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -385,7 +399,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -404,7 +418,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = JK.BilanCO2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -425,7 +439,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -444,7 +458,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = JK.BilanCO2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

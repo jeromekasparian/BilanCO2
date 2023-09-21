@@ -1,0 +1,500 @@
+Return-Path: <alexiapey10@lilo.org>
+Delivered-To: jerome.kasparian@eeudf.org
+Received: from mxin5.phpnet.org ([10.52.1.4])
+	by imapbe19.phpnet.org with LMTP
+	id 0JbBCe1v52MK+AEAYmFM7A
+	(envelope-from <alexiapey10@lilo.org>)
+	for <jerome.kasparian@eeudf.org>; Sat, 11 Feb 2023 11:37:33 +0100
+Received: by mxin5.phpnet.org (Postfix, from userid 1001)
+	id 4PDRrF18x2z2vyx; Sat, 11 Feb 2023 11:37:33 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on spamd15.phpnet.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_ZEN_BLOCKED,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,URIBL_DBL_BLOCKED,URIBL_ZEN_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.2
+Received: from msg-4.mailo.com (msg-4.mailo.com [213.182.54.15])
+	by mxin5.phpnet.org (Postfix) with ESMTPS id 4PDRrC4pr8z2vT1
+	for <jerome.kasparian@eeudf.org>; Sat, 11 Feb 2023 11:37:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=lilo.org; s=mailo;
+	t=1676111845; bh=P4xjdsPvvYov2dmXstGV/h6ZowQ0tc/zL03y8d9FTtY=;
+	h=X-EA-Auth:From:To:Cc:Date:Subject:MIME-Version:X-Mailer:
+	 Message-ID:Content-Type:Content-Transfer-Encoding;
+	b=iqoz/xVpxF6erws9otYzUip4xAi0hK7+x/IdLLLEmWEqvdqtTrcciRLufA3YNBEVm
+	 Jtqg6uURC1A4O6Gjh4L6pXogYkvF4ymikGRCROqT/IgIJ0N/GxGu/fBCQgwuMMVFKl
+	 FfO1G3HNheFupKHhMRhjsqMWJKCOXLQHdiH09ZHY=
+Received: by www.mailo.com with http webmail; Sat, 11 Feb 2023
+  11:37:25 +0100 (CET)
+X-EA-Auth: 6LmSWryeuaG3rd3IdSsXVR7AYHAXMTeacfMqgx30cj1x7UnoY31HDYEJKyiLBHPPRMCrW+gdLIJEF0Yvf9jBQuJmM0O3uieZ
+From: alexiapey10@lilo.org
+To: jerome.kasparian@eeudf.org,
+ "=?UTF-8?Q?Cl=C3=A9ment=20Sartron?=" <c.sartron@gmail.com>
+Cc: "=?UTF-8?B?SsOpcsOpbWllIEJBTEFT?=" <jeremie.balas@gmail.com>
+Date: Sat, 11 Feb 2023 11:37:25 +0100 (CET)
+Subject: =?UTF-8?Q?Re:=20Caract=C3=A9ristiques=20des=20bateaux?=
+X-Priority: 3
+MIME-Version: 1.0
+X-Mailer: COMS/EA22.05/r20221103
+Message-ID: <ea-mime-63e76fe5-f1b-30cc1cf7@www.mailo.com>
+Content-Type: text/plain;
+ charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Bonjour J=C3=A9r=C3=B4me,
+
+Apr=C3=A8s concertation et grandes r=C3=A9flexions voici quelques=20
+=C3=A9l=C3=A9ments de r=C3=A9ponses (merci =C3=A0 Cl=C3=A9ment pour sa gra=
+nde=20
+expertise) :
+
+- par unit=C3=A9 d'ain=C3=A9 nous entendions une =C3=A9quipe=20
+
+- Bateau de s=C3=A9cu : uniquement en BC, en fait il est associ=C3=A9 =C3=
+=A0=20
+l'encadrement des escadres (bateaux ensemble =C3=A0 port=C3=A9e=20
+de voix, premi=C3=A8re des securit=C3=A9) de caravelles et optis.=20
+moteur 6 =C3=A0 15cv selon les projets et dispos des groupes.=20
+Un travail d'entretien r=C3=A9gulier permet de p=C3=A9renniser les=20
+moteurs.
+
+- Conso d'essence : c'est variable selon les projets.. Difficile=20
+de donner des chiffres. Pour un camp de 3 semaines sur=20
+canot avec une utilisation des moteurs pour les=20
+manoeuvres de d=C3=A9part et arriv=C3=A9e, et une petite rando sans=20
+grande partie au moteur, ont doit faire environ 60 =C3=A0 80L=20
+d'essence. Il en reste en g=C3=A9n=C3=A9ral =C3=A0 la fin du camp. pour un=
+=20
+encadrement de caravelles et opti sur un camp mousses,=20
+on peut tabler sur 40 =C3=A0 80 litres d'essence.
+On peut se retrouver avec des camps BM avec les canots=20
+sur lac, qui ne consomment presque rien en essence.
+
+- Pour la question sur l'utilisation des moteurs, c'est tr=C3=A8s=20
+variable. Naturellement on ne cherche pas =C3=A0=20
+"sur"consommer, le conseil de couper le moteur ou non,=20
+difficile de pr=C3=A9coniser, c'est tellement variable selon les=20
+conditions m=C3=A9t=C3=A9o, la zone de navigation, l'exp=C3=A9rience des=
+=20
+personnes sur les bateaux. Difficile aussi de donner une=20
+dur=C3=A9e de vie d'un moteur.=20
+
+-  le poids des bateaux : les caravelles font entre 250 et 350=20
+kg pour les plastiques. les alu =C3=A0 mon avis 350kg.
+
+Au sujet des transports :=20
+
+- 8 optis sur 1 remorque
+- la s=C3=A9cu : pli=C3=A9e ou en compl=C3=A9ment d'un autre chargement.=
+=20
+parfois sur sa remorque individuelle, derri=C3=A8re la petite=20
+voiture du responsable.
+- les caravelles : en g=C3=A9n=C3=A9rale 1 par remorque, moins de=20
+500kg
+- les canots : 1 par remorque, et compl=C3=A9ment de=20
+chargement avec du mat=C3=A9riel commun (terrestre ou marin)
+- sur des trajets plus longs et selon les personnes qui=20
+tractent, il y a des optimisations, c'est une logistique=20
+anticip=C3=A9e et m=C3=BBrement r=C3=A9fl=C3=A9chi.=20
+- les kelts sont moins souvent transport=C3=A9s seulement pour=20
+des travaux et donc souvent =C3=A0 l'eau avant les camps.
+
+C'est clair que le bilan ne sera pas des favorables pour les=20
+activit=C3=A9s marines mais on a quand m=C3=AAme le param=C3=A8tre=20
+long=C3=A9vit=C3=A9 et entretien r=C3=A9paration qui donne =C3=A0 nos bate=
+aux et=20
+activit=C3=A9s marines une belle id=C3=A9e de la durabilit=C3=A9 d'un obje=
+t.=20
+
+Bon WE =C3=A0 toi,
+
+Alexia Peyrard
+Pour la COMA
+
+---- Message d'origine ----
+> De : J=C3=A9r=C3=B4me Kasparian - EEUdF=20
+<jerome.kasparian@eeudf.org>
+> =C3=80 : Cl=C3=A9ment Sartron <c.sartron@gmail.com>
+> Sujet : Re: Caract=C3=A9ristiques des bateaux
+> Date : 10/02/2023 19:13:44 Europe/Paris
+> Copie =C3=A0 : Alexia Peyrard <alexiapey10@lilo.org>;
+>       J=C3=A9r=C3=A9mie BALAS <jeremie.balas@gmail.com>
+>=20
+> Bonsoir le Coma !
+>=20
+> Est-ce que vous avez pu v=C3=A9rifier les points ci-dessous ?
+> Merci d'avance !
+> Bon week-end,
+> J=C3=A9r=C3=B4me
+>=20
+> > Le 2 f=C3=A9vr. 2023 =C3=A0 06:13, Cl=C3=A9ment Sartron=20
+<c.sartron@gmail.com> a =C3=A9crit=20
+> :
+> >=20
+> > Bonjour J=C3=A9r=C3=B4me
+> > Nous sommes en r=C3=A9union coma ce we. On va te faire un=20
+retour =C3=A0 ce moment=20
+> (sauf si J=C3=A9r=C3=A9mie est d=C3=A9j=C3=A0 en train de r=C3=A9pondre =
+=F0=9F=98=89)
+> > Bonne fin de semaine=20
+> > Cl=C3=A9ment
+> >=20
+> >=20
+> > Le jeu. 2 f=C3=A9vr. 2023 =C3=A0 00:31, J=C3=A9r=C3=B4me Kasparian - E=
+EUdF=20
+> <jerome.kasparian@eeudf.org=20
+<mailto:jerome.kasparian@eeudf.org>> a =C3=A9crit :
+> >> Bonsoir J=C3=A9r=C3=A9mie,
+> >>=20
+> >> Est-ce que tu as bien re=C3=A7u ces questions=20
+compl=C3=A9mentaires ? Pour=20
+> r=C3=A9sumer :
+> >> - avant de vous contacter, j'avais googl=C3=A9 un peu et=20
+j'avais trouv=C3=A9 210=20
+> kg pour les caravelles. C'est une question de mod=C3=A8les=20
+diff=C3=A9rents ?
+> >>=20
+> >> - Bateau s=C3=A9cu :=20
+> >> 	- il n'y en a qu'en BC ?
+> >> 	- sur un camp, tu consid=C3=A9rerais que le bateau s=C3=A9cu=20
+aura consomm=C3=A9=20
+> combien d'essence ?
+> >> 	- si je conseille, pour limiter les =C3=A9missions de CO2,=20
+de couper le=20
+> moteur quand le bateau est =C3=A0 l'arr=C3=AAt, est-ce pertinent ? Ou=20=
+
+bien par=20
+> exemple il n'y a pas de temps morts, ou bien il y a un=20
+enjeu de s=C3=A9curit=C3=A9=20
+> =C3=A0 avoir le moteur qui tourne pour pouvoir foncer aider un=20
+bateau en=20
+> difficult=C3=A9 ?
+> >>=20
+> >> - As-tu une id=C3=A9e de la consommation d'essence du=20
+canot BM sur un camp ?=20
+> Ou bien c'est 3 fois rien pour la man=C5=93uvre en sortie /=20
+entr=C3=A9e du port ?
+> >>=20
+> >> - j'ai des souvenirs de responsables (notamment=20
+terrestres faisant un=20
+> camp marin) racontant des longs trajets avec des=20
+bateaux. C'est fr=C3=A9quent ?=20
+> J'imagine que dans ce cas c'est
+> >> 	- soit quelques optimist dans un camion
+> >> 	- soit un autre bateau en remorque, un par un ?
+> >>=20
+> >> Si c'est plus simple, on peut discuter vite fait au=20
+t=C3=A9l=C3=A9phone pour se=20
+> caler ensemble sur des estimations raisonnables. Dans=20
+tous les cas, on ne=20
+> parle que d'approximations
+> >>=20
+> >> Merci beaucoup pour ton aide, amicalement,
+> >> J=C3=A9r=C3=B4me
+> >>=20
+> >>=20
+> >>> Le 15 janv. 2023 =C3=A0 08:16, J=C3=A9r=C3=B4me Kasparian - EEUdF=20=
+
+> <jerome.kasparian@eeudf.org=20
+<mailto:jerome.kasparian@eeudf.org>> a =C3=A9crit :
+> >>>=20
+> >>> PS : avant de vous contacter, j'avais googl=C3=A9 un peu et=20
+j'avais trouv=C3=A9=20
+> 210 kg pour les caravelles. C'est une question de=20
+mod=C3=A8les diff=C3=A9rents ?
+> >>> Merci d'avance, amicalement,
+> >>> J=C3=A9r=C3=B4me
+> >>>=20
+> >>>> Le 14 janv. 2023 =C3=A0 11:49, J=C3=A9r=C3=B4me Kasparian - EEUdF=
+=20
+> <jerome.kasparian@eeudf.org=20
+<mailto:jerome.kasparian@eeudf.org>> a =C3=A9crit :
+> >>>>=20
+> >>>> Bonjour J=C3=A9r=C3=A9mie,
+> >>>>=20
+> >>>> J'avance sur les estimations... spoil, l'activit=C3=A9 voile=20
+ne va pas=20
+> =C3=AAtre n=C3=A9gligeable sur le bilan d'un camp, notamment du=20
+fait des =C3=A9missions=20
+> li=C3=A9es =C3=A0 la fabrication et au d=C3=A9mant=C3=A8lement des batea=
+ux,=20
+m=C3=AAme amortis=20
+> sur quelques dizaines d'ann=C3=A9es.
+> >>>> =20
+> >>>> Pour affiner, j'aurais besoin de quelques pr=C3=A9cisions,=20
+concernant=20
+> l'usage des moteurs :
+> >>>> - Bateau s=C3=A9cu : il n'y en a qu'en BC ?
+> >>>> - sur un camp, tu consid=C3=A9rerais que le bateau s=C3=A9cu=20
+aura consomm=C3=A9=20
+> combien d'essence ?
+> >>>> - si je conseille, pour limiter les =C3=A9missions de CO2,=20
+de couper le=20
+> moteur quand le bateau est =C3=A0 l'arr=C3=AAt, est-ce pertinent ? Ou=20=
+
+bien par=20
+> exemple il n'y a pas de temps morts, ou bien il y a un=20
+enjeu de s=C3=A9curit=C3=A9=20
+> =C3=A0 avoir le moteur qui tourne pour pouvoir foncer aider un=20
+bateau en=20
+> difficult=C3=A9 ?
+> >>>>=20
+> >>>> - As-tu une id=C3=A9e de la consommation d'essence du=20
+canot BM sur un camp=20
+> ? Ou bien c'est 3 fois rien pour la man=C5=93uvre en sortie /=20
+entr=C3=A9e du port ?
+> >>>>=20
+> >>>> - j'ai des souvenirs de responsables (notamment=20
+terrestres faisant un=20
+> camp marin) racontant des longs trajets avec des=20
+bateaux. C'est fr=C3=A9quent ?=20
+> J'imagine que dans ce cas c'est
+> >>>> - soit quelques optimist dans un camion
+> >>>> - soit un autre bateau en remorque, un par un ?
+> >>>>=20
+> >>>> Merci beaucoup pour ton aide, amicalement,
+> >>>> J=C3=A9r=C3=B4me
+> >>>>=20
+> >>>>> Le 7 d=C3=A9c. 2022 =C3=A0 18:37, J=C3=A9r=C3=A9mie BALAS=20
+<jeremie.balas@gmail.com=20
+> <mailto:jeremie.balas@gmail.com>> a =C3=A9crit :
+> >>>>>=20
+> >>>>> Bonjour J=C3=A9rome,
+> >>>>> voici un d=C3=A9tail du fonctionnement marin
+> >>>>>=20
+> >>>>> pour une unit=C3=A9 louveteau:
+> >>>>> on utilise une flotte par meute.
+> >>>>> il existe 2 variantes:
+> >>>>> soit c'est une flotte de 8 optimist en aluminium=20
+(environ 50kg par=20
+> bateau), qui tiennent sur une remorque et d'un bateau=20
+s=C3=A9cu =C3=A0 moteur (type =20
+> zodiaq avec un moteur thermique de 6cv) en plastique,=20
+environ 100kg (ne=20
+> prend pas beaucoup de place pli=C3=A9)
+> >>>>> soit une flotte de 5 caravelles en polyester de=20
+400kg chacune et du=20
+> m=C3=AAme bateau s=C3=A9cu =C3=A0 moteur, toujours 100kg
+> >>>>> nous avons aussi des caravelles en aluminium=20
+(plutot 600kg chacune)
+> >>>>>=20
+> >>>>> pour les =C3=A9clais:
+> >>>>> une flotte de 4 canots en plastique d'une tonne=20
+chacun, =C3=A9quip=C3=A9s d'un=20
+> moteur thermique =C3=A0 essence de 4chevaux
+> >>>>>=20
+> >>>>> pour les a=C3=AEn=C3=A9s:
+> >>>>> un bateau par unit=C3=A9 de type kelt 707 en r=C3=A9sine=20
+polyester d'une tonne=20
+>=20
+> >>>>> Ou
+> >>>>> Deux d=C3=A9riveurs "lacustre bordelaise" avec 2=20
+d=C3=A9riveurs (en r=C3=A9sine=20
+> polyester aussi 590 de 600kg
+> >>>>>=20
+> >>>>> les bateaux en aluminium ont une dur=C3=A9e de vie de=20
+50 =C3=A0 70 ans=20
+> d'utilisation
+> >>>>> les zodiaq ont plut=C3=B4t une dur=C3=A9e de vie de 10 ans=20
+> >>>>> les bateaux en r=C3=A9sine ont une dur=C3=A9e de vie de 25 =C3=A0=
+=20
+50 ans=20
+> d'utilisation
+> >>>>> toutes ces dur=C3=A9es supposent un entretien=20
+rigoureux et r=C3=A9gulier
+> >>>>>=20
+> >>>>> J'esp=C3=A8re avoir pu =C3=A9clairer ta lanterne, n'h=C3=A9sites p=
+as=20
+si tu=20
+> souhaites plus de pr=C3=A9cisions.
+> >>>>> A bient=C3=B4t,
+> >>>>>=20
+> >>>>> J=C3=A9r=C3=A9mie Balas, pour la Commission Marine
+> >>>>> Eclaireuses et Eclaireurs Unionistes de France
+> >>>>> Perso: 06 34 37 71 93
+> >>>>> Pro: 06 25 76 97 97
+> >>>>> C23,36 Avenue Saint Barnab=C3=A9=20
+<https://www.google.com/maps/search/36+Ave
+> nue+Saint+Barnab%C3%A9+13012+Marseille?
+entry=3Dgmail&source=3Dg>
+> >>>>> 13012 Marseille=20
+<https://www.google.com/maps/search/36+Avenue+Saint
++Bar
+> nab%C3%A9+13012+Marseille?entry=3Dgmail&source=3Dg>
+> >>>>>=20
+> >>>>>=20
+> >>>>>=20
+> >>>>>=20
+> >>>>>=20
+> >>>>> Le ven. 2 d=C3=A9c. 2022 =C3=A0 17:36, J=C3=A9r=C3=B4me Kasparian =
+-=20
+EEUdF=20
+> <jerome.kasparian@eeudf.org=20
+<mailto:jerome.kasparian@eeudf.org>> a =C3=A9crit :
+> >>>>>> PS : Un param=C3=A8tre que j'ai oubli=C3=A9 de lister : la=20
+dur=C3=A9e de vie=20
+> "typique" des bateaux. ;-)
+> >>>>>> Merci d'avance !
+> >>>>>>=20
+> >>>>>>> Le 2 d=C3=A9c. 2022 =C3=A0 16:28, J=C3=A9r=C3=B4me Kasparian -=
+=20
+EEUdF=20
+> <jerome.kasparian@eeudf.org=20
+<mailto:jerome.kasparian@eeudf.org>> a =C3=A9crit :
+> >>>>>>>=20
+> >>>>>>> C'est parfait ! Merci d'avance !
+> >>>>>>> Amicalement,
+> >>>>>>> J=C3=A9r=C3=B4me
+> >>>>>>>=20
+> >>>>>>>> Le 2 d=C3=A9c. 2022 =C3=A0 15:42, J=C3=A9r=C3=A9mie BALAS=20
+<jeremie.balas@gmail.com=20
+> <mailto:jeremie.balas@gmail.com>> a =C3=A9crit :
+> >>>>>>>>=20
+> >>>>>>>> Bonjour J=C3=A9rome,
+> >>>>>>>> On te pr=C3=A9pare un petit mail r=C3=A9cap d'i=C3=A7i 15j avec=
+=20
+les diff=C3=A9rents=20
+> =C3=A9l=C3=A9ments =C3=A7a te va ?
+> >>>>>>>> A+
+> >>>>>>>> J=C3=A9r=C3=A9mie pour la Coma
+> >>>>>>>>=20
+> >>>>>>>> Le ven. 2 d=C3=A9c. 2022 =C3=A0 15:26, J=C3=A9r=C3=B4me Kaspari=
+an=20
+- EEUdF=20
+> <jerome.kasparian@eeudf.org=20
+<mailto:jerome.kasparian@eeudf.org>> a =C3=A9crit :
+> >>>>>>>>> Bonjour le Coma,
+> >>>>>>>>>=20
+> >>>>>>>>> Suite=C3=A0 une discussion avec les stagiaires de=20
+Modulo =C3=A0 propos du=20
+> bilan carbone des camps, je voulais estimer le bilan=20
+carbone des bateaux =20
+> utilis=C3=A9s aux unionistes.
+> >>>>>>>>>=20
+> >>>>>>>>> Du coup, je suis =C3=A0 la recherche d'informations=20
+sur les bateaux=20
+> typiques. En gros, pour chaque branche, de quelle mati=C3=A8re=20
+le bateau est=20
+> fait (bois, m=C3=A9tal, polyester=E2=80=A6) et son poids approximatif.=
+=20
+Est-ce que vous=20
+> avez l'info, ou une indication sur l'endroit o=C3=B9 je pourrais la=20
+trouver ?
+> >>>>>>>>>=20
+> >>>>>>>>> Merci d'avance, bonne journ=C3=A9e, amicalement,
+> >>>>>>>>> J=C3=A9r=C3=B4me
+> >>>>>>>>>=20
+> >>>>>>>>> -----
+> >>>>>>>>> J=C3=A9r=C3=B4me Kasparian
+> >>>>>>>>>=20
+> >>>>>>>>> Perso :=20
+> >>>>>>>>> 275 route de la Croisette=20
+<https://www.google.com/maps/search/275+r
+>=20
+oute+de+la+Croisette+74160+Collonges+sous+Sal%C3%A
+8ve?entry=3Dgmail&source=3Dg>
+> >>>>>>>>> 74160 Collonges sous Sal=C3=A8ve=20
+<https://www.google.com/maps/search/27
+>=20
+5+route+de+la+Croisette+74160+Collonges+sous+Sal%C3
+%A8ve?entry=3Dgmail&source=3Dg
+> >
+> >>>>>>>>> T=C3=A9l : 04 50 43 19 71
+> >>>>>>>>>=20
+> >>>>>>>=20
+> >>>>>>> -----
+> >>>>>>> J=C3=A9r=C3=B4me Kasparian
+> >>>>>>>=20
+> >>>>>>> Perso :=20
+> >>>>>>> 275 route de la Croisette=20
+<https://www.google.com/maps/search/275+rou
+>=20
+te+de+la+Croisette+74160+Collonges+sous+Sal%C3%A8v
+e?entry=3Dgmail&source=3Dg>
+> >>>>>>> 74160 Collonges sous Sal=C3=A8ve=20
+<https://www.google.com/maps/search/275+
+>=20
+route+de+la+Croisette+74160+Collonges+sous+Sal%C3%A
+8ve?entry=3Dgmail&source=3Dg>
+
+>=20
+> >>>>>>> T=C3=A9l : 04 50 43 19 71
+> >>>>>>>=20
+> >>>>>>=20
+> >>>>>> -----
+> >>>>>> J=C3=A9r=C3=B4me Kasparian
+> >>>>>>=20
+> >>>>>> Perso :=20
+> >>>>>> 275 route de la Croisette=20
+<https://www.google.com/maps/search/275+rout
+>=20
+e+de+la+Croisette+74160+Collonges+sous+Sal%C3%A8ve
+?entry=3Dgmail&source=3Dg>
+> >>>>>> 74160 Collonges sous Sal=C3=A8ve=20
+<https://www.google.com/maps/search/275+r
+>=20
+oute+de+la+Croisette+74160+Collonges+sous+Sal%C3%A
+8ve?entry=3Dgmail&source=3Dg>
+> >>>>>> T=C3=A9l : 04 50 43 19 71
+> >>>>>>=20
+> >>>>=20
+> >>>> -----
+> >>>> J=C3=A9r=C3=B4me Kasparian
+> >>>>=20
+> >>>> Perso :=20
+> >>>> 275 route de la Croisette=20
+<https://www.google.com/maps/search/275+route+
+> de+la+Croisette+74160+Collonges+sous+Sal%C3%A8ve?
+entry=3Dgmail&source=3Dg>
+> >>>> 74160 Collonges sous Sal=C3=A8ve=20
+<https://www.google.com/maps/search/275+rou
+>=20
+te+de+la+Croisette+74160+Collonges+sous+Sal%C3%A8v
+e?entry=3Dgmail&source=3Dg>
+> >>>> T=C3=A9l : 04 50 43 19 71
+> >>>>=20
+> >>>=20
+> >>> -----
+> >>> J=C3=A9r=C3=B4me Kasparian
+> >>>=20
+> >>> Perso :=20
+> >>> 275 route de la Croisette=20
+<https://www.google.com/maps/search/275+route+d
+> e+la+Croisette+74160+Collonges+sous+Sal%C3%A8ve?
+entry=3Dgmail&source=3Dg>
+> >>> 74160 Collonges sous Sal=C3=A8ve=20
+<https://www.google.com/maps/search/275+rout
+>=20
+e+de+la+Croisette+74160+Collonges+sous+Sal%C3%A8ve
+?entry=3Dgmail&source=3Dg>
+> >>> T=C3=A9l : 04 50 43 19 71
+> >>>=20
+> >>=20
+> >> -----
+> >> J=C3=A9r=C3=B4me Kasparian
+> >>=20
+> >> Perso :=20
+> >> 275 route de la Croisette=20
+<https://www.google.com/maps/search/275+route+de
+> +la+Croisette+74160+Collonges+sous+Sal%C3%A8ve?
+entry=3Dgmail&source=3Dg>
+> >> 74160 Collonges sous Sal=C3=A8ve=20
+<https://www.google.com/maps/search/275+route
+>=20
++de+la+Croisette+74160+Collonges+sous+Sal%C3%A8ve?
+entry=3Dgmail&source=3Dg>
+> >> T=C3=A9l : 04 50 43 19 71
+> >>=20
+>=20
+> -----
+> J=C3=A9r=C3=B4me Kasparian
+>=20
+> Perso :=20
+> 275 route de la Croisette
+> 74160 Collonges sous Sal=C3=A8ve
+> T=C3=A9l : 04 50 43 19 71
+>=20
+>=20
+>
+
+
+

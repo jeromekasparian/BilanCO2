@@ -1,0 +1,632 @@
+Return-Path: <jeremie.balas@gmail.com>
+Delivered-To: jerome.kasparian@eeudf.org
+Received: from mxin7.phpnet.org ([10.52.1.13])
+	by imapbe19.phpnet.org with LMTP
+	id 0PO0E0/PkGOBrQAAYmFM7A
+	(envelope-from <jeremie.balas@gmail.com>)
+	for <jerome.kasparian@eeudf.org>; Wed, 07 Dec 2022 18:37:19 +0100
+Received: by mxin7.phpnet.org (Postfix, from userid 1001)
+	id 4NS4H32Fk0z2vR5; Wed,  7 Dec 2022 18:37:17 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on spamd17.phpnet.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-100.2 required=4.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,HTML_MESSAGE,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,RCVD_IN_ZEN_BLOCKED,SPF_HELO_NONE,
+	SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED,URIBL_DBL_BLOCKED,
+	URIBL_ZEN_BLOCKED,USER_IN_WELCOMELIST,USER_IN_WHITELIST autolearn=ham
+	autolearn_force=no version=3.4.2
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+	by mxin7.phpnet.org (Postfix) with ESMTPS id 4NS4H01R4rz2vW2
+	for <jerome.kasparian@eeudf.org>; Wed,  7 Dec 2022 18:37:16 +0100 (CET)
+Received: by mail-lj1-f182.google.com with SMTP id a19so21772538ljk.0
+        for <jerome.kasparian@eeudf.org>; Wed, 07 Dec 2022 09:37:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=WToGNiFIfzN8LK9yDX3RAcF55pk8fNQ0LTQNaBeV1O4=;
+        b=aDHdZF6OWNsZfXnp+2wWBw4/xsrR6UD3KsgblY54u8qhEVeoiMU5MMM04Soi1nkYkv
+         IqT4/eTSwAxMPOmtu78XaGFSXyQO654prU2xX2zSZz5k8/eaoe++/3aPDMCi6iz1vvsS
+         UPezeTYWrzCZdmbb/113GLHroux9RjvH+aYez07VCr4rAiaFv+NVZZ4vs4++Rsxu0nPG
+         sHgoZpzEK8a1IkfCTBYEFYcRKGmqPicQCMIFKKwcrg4pNthmpK0VeteWPJt+g/dnuebQ
+         v9p9iZYRz0VIzBAkYw0uTrNjfTAzcWqgM4ppzFAASTRlHY/sy1dCh7plavxQ6le5XpMc
+         i5Uw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WToGNiFIfzN8LK9yDX3RAcF55pk8fNQ0LTQNaBeV1O4=;
+        b=aVoBcUDvF/d3L+uhzfv8G1efoVbveDlk6kQtzgHfD6rSB90zGh8Wxtj0z2/snLzbAU
+         uj5TEjytTKn6vKpmlmdx8h3fQoO+fWcsME95Jd/FaLzG1RJv8fseNFXHQh1gtgOvPPOz
+         OPR84u0j0kfxy/BriobHeqI1tCzsHfa80b+0CiuAKVDAaojBHMzcIUh1cpX1LHvJtBV+
+         64mnF15OSSVq62ykb3DuJxGk7Q+TJXm9yeKed8rTONZe3/nSvLigl/Xp1vdTAKlSW+xY
+         B4idyrsIsJMZMR5aj+XY7QLBUNjLbpPNcknlPYTAa1+c/ZoujIWoWfE9ztL+dg+lIUZF
+         z1dA==
+X-Gm-Message-State: ANoB5pnpjOm2uK1I7aVHZnm39wWbKPSYazcSkQtRwOev1+j5T6uu6FUY
+	3QB78ZHn7Tiva6IYej9muZj4zQe7ta6wYwRQk4YkszffcvU=
+X-Google-Smtp-Source: AA0mqf71WiVLHl+jeFIl5mryiYaT8og+qDBw/JbqFXZHPHeMP1sK3FFXxJVXtno2IQo9pLeHO/YrMz1J3nSJIWrrqHI=
+X-Received: by 2002:a05:651c:178d:b0:278:a59c:390c with SMTP id
+ bn13-20020a05651c178d00b00278a59c390cmr28694927ljb.512.1670434635381; Wed, 07
+ Dec 2022 09:37:15 -0800 (PST)
+MIME-Version: 1.0
+References: <FD3B7784-C25A-4FF1-9A19-0389ED6E5F62@eeudf.org>
+ <CAAUu2fP7ErpUL54ZW0-4UQJaDXRb14cpooxWoy598Wc1zVtKsQ@mail.gmail.com>
+ <ED9D5FA7-DDA2-4707-9B10-1EFA25D8296A@eeudf.org> <CD5862EA-1604-4CF1-83CB-F1B18B3F4B07@eeudf.org>
+In-Reply-To: <CD5862EA-1604-4CF1-83CB-F1B18B3F4B07@eeudf.org>
+From: =?UTF-8?B?SsOpcsOpbWllIEJBTEFT?= <jeremie.balas@gmail.com>
+Date: Wed, 7 Dec 2022 18:37:05 +0100
+Message-ID: <CAAUu2fM-xxtXeQBGo3s4YQWsM1bk_tY3arVaEqQmQuAbLua=DQ@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_Caract=C3=A9ristiques_des_bateaux?=
+To: =?UTF-8?B?SsOpcsO0bWUgS2FzcGFyaWFuIC0gRUVVZEY=?= <jerome.kasparian@eeudf.org>
+Cc: Alexia Peyrard <alexiapey10@lilo.org>, =?UTF-8?Q?Cl=C3=A9ment_Sartron?= <c.sartron@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000000ffd3505ef405f90"
+
+--0000000000000ffd3505ef405f90
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Bonjour J=C3=A9rome,
+voici un d=C3=A9tail du fonctionnement marin
+
+pour une unit=C3=A9 louveteau:
+on utilise une flotte par meute.
+il existe 2 variantes:
+soit c'est une flotte de 8 optimist en aluminium (environ 50kg par bateau),
+qui tiennent sur une remorque et d'un bateau s=C3=A9cu =C3=A0 moteur (type =
+ zodiaq
+avec un moteur thermique de 6cv) en plastique, environ 100kg (ne prend pas
+beaucoup de place pli=C3=A9)
+soit une flotte de 5 caravelles en polyester de 400kg chacune et du m=C3=AA=
+me
+bateau s=C3=A9cu =C3=A0 moteur, toujours 100kg
+nous avons aussi des caravelles en aluminium (plutot 600kg chacune)
+
+pour les =C3=A9clais:
+une flotte de 4 canots en plastique d'une tonne chacun, =C3=A9quip=C3=A9s d=
+'un moteur
+thermique =C3=A0 essence de 4chevaux
+
+pour les a=C3=AEn=C3=A9s:
+un bateau par unit=C3=A9 de type kelt 707 en r=C3=A9sine polyester d'une to=
+nne
+Ou
+Deux d=C3=A9riveurs "lacustre bordelaise" avec 2 d=C3=A9riveurs (en r=C3=A9=
+sine polyester
+aussi 590 de 600kg
+
+les bateaux en aluminium ont une dur=C3=A9e de vie de 50 =C3=A0 70 ans d'ut=
+ilisation
+les zodiaq ont plut=C3=B4t une dur=C3=A9e de vie de 10 ans
+les bateaux en r=C3=A9sine ont une dur=C3=A9e de vie de 25 =C3=A0 50 ans d'=
+utilisation
+toutes ces dur=C3=A9es supposent un entretien rigoureux et r=C3=A9gulier
+
+J'esp=C3=A8re avoir pu =C3=A9clairer ta lanterne, n'h=C3=A9sites pas si tu =
+souhaites plus
+de pr=C3=A9cisions.
+A bient=C3=B4t,
+
+J=C3=A9r=C3=A9mie Balas, pour la Commission Marine
+Eclaireuses et Eclaireurs Unionistes de France
+Perso: 06 34 37 71 93
+Pro: 06 25 76 97 97
+C23,36 Avenue Saint Barnab=C3=A9
+13012 Marseille
+
+
+
+
+
+Le ven. 2 d=C3=A9c. 2022 =C3=A0 17:36, J=C3=A9r=C3=B4me Kasparian - EEUdF <
+jerome.kasparian@eeudf.org> a =C3=A9crit :
+
+> PS : Un param=C3=A8tre que j'ai oubli=C3=A9 de lister : la dur=C3=A9e de =
+vie "typique"
+> des bateaux. ;-)
+> Merci d'avance !
+>
+> Le 2 d=C3=A9c. 2022 =C3=A0 16:28, J=C3=A9r=C3=B4me Kasparian - EEUdF <
+> jerome.kasparian@eeudf.org> a =C3=A9crit :
+>
+> C'est parfait ! Merci d'avance !
+> Amicalement,
+> J=C3=A9r=C3=B4me
+>
+> Le 2 d=C3=A9c. 2022 =C3=A0 15:42, J=C3=A9r=C3=A9mie BALAS <jeremie.balas@=
+gmail.com> a =C3=A9crit :
+>
+> Bonjour J=C3=A9rome,
+> On te pr=C3=A9pare un petit mail r=C3=A9cap d'i=C3=A7i 15j avec les diff=
+=C3=A9rents =C3=A9l=C3=A9ments
+> =C3=A7a te va ?
+> A+
+> J=C3=A9r=C3=A9mie pour la Coma
+>
+> Le ven. 2 d=C3=A9c. 2022 =C3=A0 15:26, J=C3=A9r=C3=B4me Kasparian - EEUdF=
+ <
+> jerome.kasparian@eeudf.org> a =C3=A9crit :
+>
+>> Bonjour le Coma,
+>>
+>> Suite=C3=A0 une discussion avec les stagiaires de Modulo =C3=A0 propos d=
+u bilan
+>> carbone des camps, je voulais estimer le bilan carbone des bateaux
+>>  utilis=C3=A9s aux unionistes.
+>>
+>> Du coup, je suis =C3=A0 la recherche d'informations sur les bateaux typi=
+ques.
+>> En gros, pour chaque branche, de quelle mati=C3=A8re le bateau est fait =
+(bois,
+>> m=C3=A9tal, polyester=E2=80=A6) et son poids approximatif. Est-ce que vo=
+us avez l'info,
+>> ou une indication sur l'endroit o=C3=B9 je pourrais la trouver ?
+>>
+>> Merci d'avance, bonne journ=C3=A9e, amicalement,
+>> J=C3=A9r=C3=B4me
+>>
+>> -----
+>> J=C3=A9r=C3=B4me Kasparian
+>>
+>> Perso :
+>> 275 route de la Croisette
+>> 74160 Collonges sous Sal=C3=A8ve
+>> T=C3=A9l : 04 50 43 19 71
+>>
+>>
+> -----
+> J=C3=A9r=C3=B4me Kasparian
+>
+> Perso :
+> 275 route de la Croisette
+> 74160 Collonges sous Sal=C3=A8ve
+> T=C3=A9l : 04 50 43 19 71
+>
+>
+> -----
+>
+> J=C3=A9r=C3=B4me Kasparian
+>
+>
+> Perso :
+> 275 route de la Croisette
+> 74160 Collonges sous Sal=C3=A8ve
+>
+> T=C3=A9l : 04 50 43 19 71
+>
+>
+
+--0000000000000ffd3505ef405f90
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Bonjour J=C3=A9rome,<br>voici un d=C3=A9tail du fonct=
+ionnement marin<br><br>pour une unit=C3=A9 louveteau:<br>on utilise une flo=
+tte par meute.<br>il existe 2 variantes:<br>soit c&#39;est une flotte de 8 =
+optimist en aluminium (environ 50kg par bateau), qui tiennent sur une remor=
+que et d&#39;un bateau s=C3=A9cu =C3=A0 moteur (type =C2=A0zodiaq avec un m=
+oteur thermique de 6cv) en plastique, environ 100kg (ne prend pas beaucoup =
+de place pli=C3=A9)<br>soit une flotte de 5 caravelles en polyester de 400k=
+g chacune et du m=C3=AAme bateau s=C3=A9cu =C3=A0 moteur, toujours 100kg</d=
+iv><div>nous avons aussi des caravelles en aluminium (plutot 600kg chacune)=
+<br><br>pour les =C3=A9clais:<br>une flotte de 4 canots en plastique d&#39;=
+une tonne chacun, =C3=A9quip=C3=A9s d&#39;un moteur thermique =C3=A0 essenc=
+e de 4chevaux<br><br>pour les a=C3=AEn=C3=A9s:<br>un bateau par unit=C3=A9 =
+de type kelt 707 en r=C3=A9sine polyester d&#39;une tonne=C2=A0</div><div>O=
+u</div><div>Deux d=C3=A9riveurs=C2=A0&quot;lacustre bordelaise&quot; avec 2=
+ d=C3=A9riveurs (en r=C3=A9sine polyester aussi 590 de 600kg<br><br>les bat=
+eaux en aluminium ont une dur=C3=A9e de vie de 50 =C3=A0 70 ans d&#39;utili=
+sation<br>les zodiaq ont plut=C3=B4t une dur=C3=A9e de vie de 10 ans=C2=A0<=
+br>les bateaux en r=C3=A9sine ont une dur=C3=A9e de vie de 25 =C3=A0 50 ans=
+ d&#39;utilisation<br>toutes ces dur=C3=A9es supposent un entretien rigoure=
+ux et r=C3=A9gulier<br></div><div><br></div><div>J&#39;esp=C3=A8re avoir pu=
+ =C3=A9clairer ta lanterne, n&#39;h=C3=A9sites pas si tu souhaites plus de =
+pr=C3=A9cisions.</div><div>A bient=C3=B4t,</div><div><br></div><div><div><d=
+iv dir=3D"ltr"><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"=
+><div dir=3D"ltr"><div dir=3D"ltr"><div>J=C3=A9r=C3=A9mie Balas, pour la Co=
+mmission Marine<div>Eclaireuses et Eclaireurs Unionistes de France</div><di=
+v>Perso: 06 34 37 71 93</div><div>Pro: 06 25 76 97 97</div><div>C23,36 Aven=
+ue Saint Barnab=C3=A9</div><div>13012 Marseille</div></div></div></div></di=
+v></div></div></div></div></div></div></div><div><div dir=3D"ltr" class=3D"=
+gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div d=
+ir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div><br><div=
+ style=3D"font-size:small"><br></div></div><div><br></div></div></div></div=
+></div></div></div></div><br></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">Le=C2=A0ven. 2 d=C3=A9c. 2022 =C3=A0=C2=A017:=
+36, J=C3=A9r=C3=B4me Kasparian - EEUdF &lt;<a href=3D"mailto:jerome.kaspari=
+an@eeudf.org">jerome.kasparian@eeudf.org</a>&gt; a =C3=A9crit=C2=A0:<br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex"><div>PS : Un param=C3=
+=A8tre que j&#39;ai oubli=C3=A9 de lister : la dur=C3=A9e de vie &quot;typi=
+que&quot; des bateaux. ;-)<div>Merci d&#39;avance !<br><div><br><blockquote=
+ type=3D"cite"><div>Le 2 d=C3=A9c. 2022 =C3=A0 16:28, J=C3=A9r=C3=B4me Kasp=
+arian - EEUdF &lt;<a href=3D"mailto:jerome.kasparian@eeudf.org" target=3D"_=
+blank">jerome.kasparian@eeudf.org</a>&gt; a =C3=A9crit :</div><br><div><div=
+>C&#39;est parfait ! Merci d&#39;avance !<div>Amicalement,</div><div>J=C3=
+=A9r=C3=B4me<br><div><br><blockquote type=3D"cite"><div>Le 2 d=C3=A9c. 2022=
+ =C3=A0 15:42, J=C3=A9r=C3=A9mie BALAS &lt;<a href=3D"mailto:jeremie.balas@=
+gmail.com" target=3D"_blank">jeremie.balas@gmail.com</a>&gt; a =C3=A9crit :=
+</div><br><div><div dir=3D"auto"><div>Bonjour J=C3=A9rome,</div><div dir=3D=
+"auto">On te pr=C3=A9pare un petit mail r=C3=A9cap d&#39;i=C3=A7i 15j avec =
+les diff=C3=A9rents =C3=A9l=C3=A9ments =C3=A7a te va ?</div><div dir=3D"aut=
+o">A+</div><div dir=3D"auto">J=C3=A9r=C3=A9mie pour la Coma<br><br><div cla=
+ss=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_attr">Le ve=
+n. 2 d=C3=A9c. 2022 =C3=A0 15:26, J=C3=A9r=C3=B4me Kasparian - EEUdF &lt;<a=
+ href=3D"mailto:jerome.kasparian@eeudf.org" target=3D"_blank">jerome.kaspar=
+ian@eeudf.org</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
+04,204);padding-left:1ex"><div>Bonjour le Coma,<div><br></div><div>Suite=C3=
+=A0 une discussion avec les stagiaires de Modulo =C3=A0 propos du bilan car=
+bone des camps, je voulais estimer le bilan carbone des bateaux =C2=A0utili=
+s=C3=A9s aux unionistes.</div><div><br></div><div>Du coup, je suis =C3=A0 l=
+a recherche d&#39;informations sur les bateaux typiques. En gros, pour chaq=
+ue branche, de quelle mati=C3=A8re le bateau est fait (bois, m=C3=A9tal, po=
+lyester=E2=80=A6) et son poids approximatif. Est-ce que vous avez l&#39;inf=
+o, ou une indication sur l&#39;endroit o=C3=B9 je pourrais la trouver ?</di=
+v><div><br></div><div>Merci d&#39;avance, bonne journ=C3=A9e, amicalement,<=
+/div><div>J=C3=A9r=C3=B4me</div><div><span style=3D"text-align:-webkit-auto=
+"><br></span></div><div><span style=3D"text-align:-webkit-auto">-----</span=
+></div><div><div><span style=3D"border-collapse:separate;font-variant-ligat=
+ures:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font=
+-weight:normal;line-height:normal;border-spacing:0px"><div style=3D"overflo=
+w-wrap: break-word;"><span style=3D"border-collapse:separate;font-family:He=
+lvetica;font-style:normal;font-variant:normal;font-weight:normal;letter-spa=
+cing:normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text=
+-transform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><di=
+v style=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separ=
+ate;font-family:Helvetica;font-style:normal;font-variant:normal;font-weight=
+:normal;letter-spacing:normal;line-height:normal;text-align:-webkit-auto;te=
+xt-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;borde=
+r-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"bor=
+der-collapse:separate;font-family:Helvetica;font-style:normal;font-variant:=
+normal;font-weight:normal;letter-spacing:normal;line-height:normal;text-ali=
+gn:-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;word=
+-spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;">=
+<span style=3D"border-collapse:separate;font-family:Helvetica;font-style:no=
+rmal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-heig=
+ht:normal;text-align:-webkit-auto;text-indent:0px;text-transform:none;white=
+-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-w=
+rap: break-word;"><span style=3D"border-collapse:separate;font-family:Helve=
+tica;font-style:normal;font-variant:normal;font-weight:normal;letter-spacin=
+g:normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-tr=
+ansform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div s=
+tyle=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate=
+;border-spacing:0px;font-family:Helvetica;font-size:12px;font-style:normal;=
+font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:no=
+rmal;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0p=
+x"><div style=3D"overflow-wrap: break-word;"><span style=3D"border-collapse=
+:separate;border-spacing:0px;font-family:Helvetica;font-size:12px;font-styl=
+e:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-=
+height:normal;text-indent:0px;text-transform:none;white-space:normal;word-s=
+pacing:0px"><span style=3D"border-collapse:separate;border-spacing:0px;font=
+-family:Helvetica;font-size:12px;font-style:normal;font-variant:normal;font=
+-weight:normal;letter-spacing:normal;line-height:normal;text-indent:0px;tex=
+t-transform:none;white-space:normal;word-spacing:0px"><div style=3D"margin:=
+0px"><font face=3D"Helvetica" size=3D"3" style=3D"font-style:normal;font-va=
+riant:normal;font-weight:normal;font-size:12px;line-height:normal;font-fami=
+ly:Helvetica">J=C3=A9r=C3=B4me Kasparian</font></div></span></span></div></=
+span></div></span></div></span></div></span></div></span><div><span style=
+=3D"border-collapse:separate;font-family:Helvetica;font-style:normal;font-v=
+ariant:normal;font-weight:normal;letter-spacing:normal;line-height:normal;t=
+ext-align:-webkit-auto;text-indent:0px;text-transform:none;white-space:norm=
+al;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-=
+word;"><span style=3D"border-collapse:separate;font-family:Helvetica;font-s=
+tyle:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;li=
+ne-height:normal;text-align:-webkit-auto;text-indent:0px;text-transform:non=
+e;white-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D"ove=
+rflow-wrap: break-word;"><span style=3D"border-collapse:separate;font-famil=
+y:Helvetica;font-style:normal;font-variant:normal;font-weight:normal;letter=
+-spacing:normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;=
+text-transform:none;white-space:normal;word-spacing:0px;border-spacing:0px"=
+><div style=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:s=
+eparate;font-family:Helvetica;font-style:normal;font-variant:normal;font-we=
+ight:normal;letter-spacing:normal;line-height:normal;text-align:-webkit-aut=
+o;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;b=
+order-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D=
+"border-collapse:separate;border-spacing:0px;font-family:Helvetica;font-siz=
+e:12px;font-style:normal;font-variant:normal;font-weight:normal;letter-spac=
+ing:normal;line-height:normal;text-indent:0px;text-transform:none;white-spa=
+ce:normal;word-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span=
+ style=3D"border-collapse:separate;border-spacing:0px;font-family:Helvetica=
+;font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;le=
+tter-spacing:normal;line-height:normal;text-indent:0px;text-transform:none;=
+white-space:normal;word-spacing:0px"><span style=3D"border-collapse:separat=
+e;border-spacing:0px;font-family:Helvetica;font-size:12px;font-style:normal=
+;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:n=
+ormal;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0=
+px"><div style=3D"margin:0px"><font face=3D"Helvetica" size=3D"3" style=3D"=
+font-style:normal;font-variant:normal;font-weight:normal;font-size:12px;lin=
+e-height:normal;font-family:Helvetica"><br></font></div><div style=3D"margi=
+n:0px"><font face=3D"Helvetica" size=3D"3" style=3D"font-style:normal;font-=
+variant:normal;font-weight:normal;font-size:12px;line-height:normal;font-fa=
+mily:Helvetica">Perso :=C2=A0</font></div></span></span></div></span></div>=
+</span></div></span></div></span></div></span></div></div></span><div><span=
+ style=3D"font-size:12px">275 route de la Croisette</span></div><div><span =
+style=3D"font-size:12px">74160 Collonges sous Sal=C3=A8ve</span><span style=
+=3D"border-collapse:separate;font-family:Helvetica;font-style:normal;font-v=
+ariant:normal;font-weight:normal;letter-spacing:normal;line-height:normal;t=
+ext-align:-webkit-auto;text-indent:0px;text-transform:none;white-space:norm=
+al;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-=
+word;"><div><span style=3D"border-collapse:separate;font-family:Helvetica;f=
+ont-style:normal;font-variant:normal;font-weight:normal;letter-spacing:norm=
+al;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-transfor=
+m:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div style=
+=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;fon=
+t-family:Helvetica;font-style:normal;font-variant:normal;font-weight:normal=
+;letter-spacing:normal;line-height:normal;text-align:-webkit-auto;text-inde=
+nt:0px;text-transform:none;white-space:normal;word-spacing:0px;border-spaci=
+ng:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"border-col=
+lapse:separate;font-family:Helvetica;font-style:normal;font-variant:normal;=
+font-weight:normal;letter-spacing:normal;line-height:normal;text-align:-web=
+kit-auto;text-indent:0px;text-transform:none;white-space:normal;word-spacin=
+g:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span s=
+tyle=3D"border-collapse:separate;font-family:Helvetica;font-style:normal;fo=
+nt-variant:normal;font-weight:normal;letter-spacing:normal;line-height:norm=
+al;text-align:-webkit-auto;text-indent:0px;text-transform:none;white-space:=
+normal;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: br=
+eak-word;"><span style=3D"border-collapse:separate;border-spacing:0px;font-=
+family:Helvetica;font-size:12px;font-style:normal;font-variant:normal;font-=
+weight:normal;letter-spacing:normal;line-height:normal;text-indent:0px;text=
+-transform:none;white-space:normal;word-spacing:0px"><div style=3D"overflow=
+-wrap: break-word;"><span style=3D"border-collapse:separate;border-spacing:=
+0px;font-family:Helvetica;font-size:12px;font-style:normal;font-variant:nor=
+mal;font-weight:normal;letter-spacing:normal;line-height:normal;text-indent=
+:0px;text-transform:none;white-space:normal;word-spacing:0px"><span style=
+=3D"border-collapse:separate;border-spacing:0px;font-family:Helvetica;font-=
+size:12px;font-style:normal;font-variant:normal;font-weight:normal;letter-s=
+pacing:normal;line-height:normal;text-indent:0px;text-transform:none;white-=
+space:normal;word-spacing:0px"><div style=3D"margin:0px"><font face=3D"Helv=
+etica" size=3D"3" style=3D"font-style:normal;font-variant:normal;font-weigh=
+t:normal;font-size:12px;line-height:normal;font-family:Helvetica">T=C3=A9l =
+: 04 50 43 19 71</font></div></span></span></div></span></div></span></div>=
+</span></div></span></div></span></div></div></span></div></div></span>
+</div>
+<br></div></div></blockquote></div></div></div>
+</div></blockquote></div><br><div>
+<span style=3D"border-collapse:separate;font-family:Helvetica;font-style:no=
+rmal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-heig=
+ht:normal;text-align:-webkit-auto;text-indent:0px;text-transform:none;white=
+-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-w=
+rap: break-word;"><span style=3D"border-collapse:separate;font-family:Helve=
+tica;font-style:normal;font-variant:normal;font-weight:normal;letter-spacin=
+g:normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-tr=
+ansform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div s=
+tyle=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate=
+;font-family:Helvetica;font-style:normal;font-variant:normal;font-weight:no=
+rmal;letter-spacing:normal;line-height:normal;text-align:-webkit-auto;text-=
+indent:0px;text-transform:none;white-space:normal;word-spacing:0px;border-s=
+pacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"border=
+-collapse:separate;font-family:Helvetica;font-style:normal;font-variant:nor=
+mal;font-weight:normal;letter-spacing:normal;line-height:normal;text-align:=
+-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;word-sp=
+acing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><sp=
+an style=3D"border-collapse:separate;font-family:Helvetica;font-style:norma=
+l;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:=
+normal;text-align:-webkit-auto;text-indent:0px;text-transform:none;white-sp=
+ace:normal;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap=
+: break-word;"><span style=3D"border-collapse:separate;font-family:Helvetic=
+a;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:n=
+ormal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-trans=
+form:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div styl=
+e=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;bo=
+rder-spacing:0px;font-family:Helvetica;font-size:12px;font-style:normal;fon=
+t-variant:normal;font-weight:normal;letter-spacing:normal;line-height:norma=
+l;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px">=
+<div style=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:se=
+parate;border-spacing:0px;font-family:Helvetica;font-size:12px;font-style:n=
+ormal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-hei=
+ght:normal;text-indent:0px;text-transform:none;white-space:normal;word-spac=
+ing:0px"><span style=3D"border-collapse:separate;border-spacing:0px;font-fa=
+mily:Helvetica;font-size:12px;font-style:normal;font-variant:normal;font-we=
+ight:normal;letter-spacing:normal;line-height:normal;text-indent:0px;text-t=
+ransform:none;white-space:normal;word-spacing:0px"><div style=3D"margin:0px=
+"><font face=3D"Helvetica" size=3D"3" style=3D"font-style:normal;font-varia=
+nt:normal;font-weight:normal;font-size:12px;line-height:normal;font-family:=
+Helvetica">-----</font></div><div style=3D"margin:0px"><font face=3D"Helvet=
+ica" size=3D"3" style=3D"font-style:normal;font-variant:normal;font-weight:=
+normal;font-size:12px;line-height:normal;font-family:Helvetica">J=C3=A9r=C3=
+=B4me Kasparian</font></div></span></span></div></span></div></span></div><=
+/span></div></span></div></span><div><span style=3D"border-collapse:separat=
+e;font-family:Helvetica;font-style:normal;font-variant:normal;font-weight:n=
+ormal;letter-spacing:normal;line-height:normal;text-align:-webkit-auto;text=
+-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;border-=
+spacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"borde=
+r-collapse:separate;font-family:Helvetica;font-style:normal;font-variant:no=
+rmal;font-weight:normal;letter-spacing:normal;line-height:normal;text-align=
+:-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;word-s=
+pacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><s=
+pan style=3D"border-collapse:separate;font-family:Helvetica;font-style:norm=
+al;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height=
+:normal;text-align:-webkit-auto;text-indent:0px;text-transform:none;white-s=
+pace:normal;word-spacing:0px;border-spacing:0px"><div style=3D"overflow-wra=
+p: break-word;"><span style=3D"border-collapse:separate;font-family:Helveti=
+ca;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:=
+normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-tran=
+sform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div sty=
+le=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;b=
+order-spacing:0px;font-family:Helvetica;font-size:12px;font-style:normal;fo=
+nt-variant:normal;font-weight:normal;letter-spacing:normal;line-height:norm=
+al;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px"=
+><div style=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:s=
+eparate;border-spacing:0px;font-family:Helvetica;font-size:12px;font-style:=
+normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-he=
+ight:normal;text-indent:0px;text-transform:none;white-space:normal;word-spa=
+cing:0px"><span style=3D"border-collapse:separate;border-spacing:0px;font-f=
+amily:Helvetica;font-size:12px;font-style:normal;font-variant:normal;font-w=
+eight:normal;letter-spacing:normal;line-height:normal;text-indent:0px;text-=
+transform:none;white-space:normal;word-spacing:0px"><div style=3D"margin:0p=
+x"><font face=3D"Helvetica" size=3D"3" style=3D"font-style:normal;font-vari=
+ant:normal;font-weight:normal;font-size:12px;line-height:normal;font-family=
+:Helvetica"><br></font></div><div style=3D"margin:0px"><font face=3D"Helvet=
+ica" size=3D"3" style=3D"font-style:normal;font-variant:normal;font-weight:=
+normal;font-size:12px;line-height:normal;font-family:Helvetica">Perso :=C2=
+=A0</font></div></span></span></div></span></div></span></div></span></div>=
+</span></div></span></div></div></span><div><span style=3D"font-size:12px">=
+275 route de la Croisette</span></div><div><span style=3D"font-size:12px">7=
+4160 Collonges sous Sal=C3=A8ve</span><span style=3D"border-collapse:separa=
+te;font-family:Helvetica;font-style:normal;font-variant:normal;font-weight:=
+normal;letter-spacing:normal;line-height:normal;text-align:-webkit-auto;tex=
+t-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;border=
+-spacing:0px"><div style=3D"overflow-wrap: break-word;"><div><span style=3D=
+"border-collapse:separate;font-family:Helvetica;font-style:normal;font-vari=
+ant:normal;font-weight:normal;letter-spacing:normal;line-height:normal;text=
+-align:-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;=
+word-spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-wor=
+d;"><span style=3D"border-collapse:separate;font-family:Helvetica;font-styl=
+e:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-=
+height:normal;text-align:-webkit-auto;text-indent:0px;text-transform:none;w=
+hite-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D"overfl=
+ow-wrap: break-word;"><span style=3D"border-collapse:separate;font-family:H=
+elvetica;font-style:normal;font-variant:normal;font-weight:normal;letter-sp=
+acing:normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;tex=
+t-transform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><d=
+iv style=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:sepa=
+rate;font-family:Helvetica;font-style:normal;font-variant:normal;font-weigh=
+t:normal;letter-spacing:normal;line-height:normal;text-align:-webkit-auto;t=
+ext-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;bord=
+er-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"bo=
+rder-collapse:separate;border-spacing:0px;font-family:Helvetica;font-size:1=
+2px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing=
+:normal;line-height:normal;text-indent:0px;text-transform:none;white-space:=
+normal;word-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span st=
+yle=3D"border-collapse:separate;border-spacing:0px;font-family:Helvetica;fo=
+nt-size:12px;font-style:normal;font-variant:normal;font-weight:normal;lette=
+r-spacing:normal;line-height:normal;text-indent:0px;text-transform:none;whi=
+te-space:normal;word-spacing:0px"><span style=3D"border-collapse:separate;b=
+order-spacing:0px;font-family:Helvetica;font-size:12px;font-style:normal;fo=
+nt-variant:normal;font-weight:normal;letter-spacing:normal;line-height:norm=
+al;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px"=
+><div style=3D"margin:0px"><font face=3D"Helvetica" size=3D"3" style=3D"fon=
+t-style:normal;font-variant:normal;font-weight:normal;font-size:12px;line-h=
+eight:normal;font-family:Helvetica">T=C3=A9l : 04 50 43 19 71</font></div><=
+/span></span></div></span></div></span></div></span></div></span></div></sp=
+an></div></div></span></div></div></span>
+</div>
+<br></div></div></div></blockquote></div><br><div>
+<span style=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helvet=
+ica;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing=
+:normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-tra=
+nsform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div st=
+yle=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;=
+color:rgb(0,0,0);font-family:Helvetica;font-style:normal;font-variant:norma=
+l;font-weight:normal;letter-spacing:normal;line-height:normal;text-align:-w=
+ebkit-auto;text-indent:0px;text-transform:none;white-space:normal;word-spac=
+ing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span=
+ style=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helvetica;f=
+ont-style:normal;font-variant:normal;font-weight:normal;letter-spacing:norm=
+al;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-transfor=
+m:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div style=
+=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;col=
+or:rgb(0,0,0);font-family:Helvetica;font-style:normal;font-variant:normal;f=
+ont-weight:normal;letter-spacing:normal;line-height:normal;text-align:-webk=
+it-auto;text-indent:0px;text-transform:none;white-space:normal;word-spacing=
+:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span st=
+yle=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helvetica;font=
+-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;=
+line-height:normal;text-align:-webkit-auto;text-indent:0px;text-transform:n=
+one;white-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D"o=
+verflow-wrap: break-word;"><span style=3D"border-collapse:separate;color:rg=
+b(0,0,0);font-family:Helvetica;font-style:normal;font-variant:normal;font-w=
+eight:normal;letter-spacing:normal;line-height:normal;text-align:-webkit-au=
+to;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;=
+border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=
+=3D"border-collapse:separate;border-spacing:0px;color:rgb(0,0,0);font-famil=
+y:Helvetica;font-size:12px;font-style:normal;font-variant:normal;font-weigh=
+t:normal;letter-spacing:normal;line-height:normal;text-indent:0px;text-tran=
+sform:none;white-space:normal;word-spacing:0px"><div style=3D"overflow-wrap=
+: break-word;"><span style=3D"border-collapse:separate;border-spacing:0px;c=
+olor:rgb(0,0,0);font-family:Helvetica;font-size:12px;font-style:normal;font=
+-variant:normal;font-weight:normal;letter-spacing:normal;line-height:normal=
+;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px"><=
+span style=3D"border-collapse:separate;border-spacing:0px;color:rgb(0,0,0);=
+font-family:Helvetica;font-size:12px;font-style:normal;font-variant:normal;=
+font-weight:normal;letter-spacing:normal;line-height:normal;text-indent:0px=
+;text-transform:none;white-space:normal;word-spacing:0px"><p style=3D"margi=
+n:0px"><font face=3D"Helvetica" size=3D"3" style=3D"font-style:normal;font-=
+variant:normal;font-weight:normal;font-size:12px;line-height:normal;font-fa=
+mily:Helvetica">-----</font></p><p style=3D"margin:0px"><font face=3D"Helve=
+tica" size=3D"3" style=3D"font-style:normal;font-variant:normal;font-weight=
+:normal;font-size:12px;line-height:normal;font-family:Helvetica">J=C3=A9r=
+=C3=B4me Kasparian</font></p></span></span></div></span></div></span></div>=
+</span></div></span></div></span><div><span style=3D"border-collapse:separa=
+te;color:rgb(0,0,0);font-family:Helvetica;font-style:normal;font-variant:no=
+rmal;font-weight:normal;letter-spacing:normal;line-height:normal;text-align=
+:-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;word-s=
+pacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><s=
+pan style=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helvetic=
+a;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:n=
+ormal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-trans=
+form:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div styl=
+e=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;co=
+lor:rgb(0,0,0);font-family:Helvetica;font-style:normal;font-variant:normal;=
+font-weight:normal;letter-spacing:normal;line-height:normal;text-align:-web=
+kit-auto;text-indent:0px;text-transform:none;white-space:normal;word-spacin=
+g:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span s=
+tyle=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helvetica;fon=
+t-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal=
+;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-transform:=
+none;white-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D"=
+overflow-wrap: break-word;"><span style=3D"border-collapse:separate;border-=
+spacing:0px;color:rgb(0,0,0);font-family:Helvetica;font-size:12px;font-styl=
+e:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-=
+height:normal;text-indent:0px;text-transform:none;white-space:normal;word-s=
+pacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"border=
+-collapse:separate;border-spacing:0px;color:rgb(0,0,0);font-family:Helvetic=
+a;font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;l=
+etter-spacing:normal;line-height:normal;text-indent:0px;text-transform:none=
+;white-space:normal;word-spacing:0px"><span style=3D"border-collapse:separa=
+te;border-spacing:0px;color:rgb(0,0,0);font-family:Helvetica;font-size:12px=
+;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:no=
+rmal;line-height:normal;text-indent:0px;text-transform:none;white-space:nor=
+mal;word-spacing:0px"><p style=3D"margin:0px"><font face=3D"Helvetica" size=
+=3D"3" style=3D"font-style:normal;font-variant:normal;font-weight:normal;fo=
+nt-size:12px;line-height:normal;font-family:Helvetica"><br></font></p><p st=
+yle=3D"margin:0px"><font face=3D"Helvetica" size=3D"3" style=3D"font-style:=
+normal;font-variant:normal;font-weight:normal;font-size:12px;line-height:no=
+rmal;font-family:Helvetica">Perso :=C2=A0</font></p></span></span></div></s=
+pan></div></span></div></span></div></span></div></span></div></div></span>=
+<div><span style=3D"font-size:12px">275 route de la Croisette</span></div><=
+div><span style=3D"font-size:12px">74160 Collonges sous Sal=C3=A8ve</span><=
+span style=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helveti=
+ca;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:=
+normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-tran=
+sform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div sty=
+le=3D"overflow-wrap: break-word;"><div><span style=3D"border-collapse:separ=
+ate;color:rgb(0,0,0);font-family:Helvetica;font-style:normal;font-variant:n=
+ormal;font-weight:normal;letter-spacing:normal;line-height:normal;text-alig=
+n:-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;word-=
+spacing:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><=
+span style=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helveti=
+ca;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:=
+normal;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-tran=
+sform:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div sty=
+le=3D"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;c=
+olor:rgb(0,0,0);font-family:Helvetica;font-style:normal;font-variant:normal=
+;font-weight:normal;letter-spacing:normal;line-height:normal;text-align:-we=
+bkit-auto;text-indent:0px;text-transform:none;white-space:normal;word-spaci=
+ng:0px;border-spacing:0px"><div style=3D"overflow-wrap: break-word;"><span =
+style=3D"border-collapse:separate;color:rgb(0,0,0);font-family:Helvetica;fo=
+nt-style:normal;font-variant:normal;font-weight:normal;letter-spacing:norma=
+l;line-height:normal;text-align:-webkit-auto;text-indent:0px;text-transform=
+:none;white-space:normal;word-spacing:0px;border-spacing:0px"><div style=3D=
+"overflow-wrap: break-word;"><span style=3D"border-collapse:separate;border=
+-spacing:0px;color:rgb(0,0,0);font-family:Helvetica;font-size:12px;font-sty=
+le:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line=
+-height:normal;text-indent:0px;text-transform:none;white-space:normal;word-=
+spacing:0px"><div style=3D"overflow-wrap: break-word;"><span style=3D"borde=
+r-collapse:separate;border-spacing:0px;color:rgb(0,0,0);font-family:Helveti=
+ca;font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;=
+letter-spacing:normal;line-height:normal;text-indent:0px;text-transform:non=
+e;white-space:normal;word-spacing:0px"><span style=3D"border-collapse:separ=
+ate;border-spacing:0px;color:rgb(0,0,0);font-family:Helvetica;font-size:12p=
+x;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:n=
+ormal;line-height:normal;text-indent:0px;text-transform:none;white-space:no=
+rmal;word-spacing:0px"><p style=3D"margin:0px"><font face=3D"Helvetica" siz=
+e=3D"3" style=3D"font-style:normal;font-variant:normal;font-weight:normal;f=
+ont-size:12px;line-height:normal;font-family:Helvetica">T=C3=A9l : 04 50 43=
+ 19 71</font></p></span></span></div></span></div></span></div></span></div=
+></span></div></span></div></div></span></div></div></span>
+</div>
+<br></div></div></blockquote></div>
+
+--0000000000000ffd3505ef405f90--
