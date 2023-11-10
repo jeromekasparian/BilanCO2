@@ -48,18 +48,18 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     @IBOutlet var tableViewEmissions: UITableView!
-    @IBOutlet var vueResultats: UIView!
     @IBOutlet var boutonEffacerDonnees: UIButton!
     @IBOutlet var boutonExport: UIButton!
+    @IBOutlet var stackViewPrincipal: UIStackView!
     
-    @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
-    @IBOutlet var contrainteTableViewDroitePortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteTableViewDroitePaysage: NSLayoutConstraint!
-    
-    @IBOutlet var contrainteVueResultatsGauchePortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteVueResultatsBasPaysage: NSLayoutConstraint!
-    @IBOutlet var contrainteVueResultatGauchePaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteTableViewDroitePortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteTableViewDroitePaysage: NSLayoutConstraint!
+//    
+//    @IBOutlet var contrainteVueResultatsGauchePortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteVueResultatsBasPaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteVueResultatGauchePaysage: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonEffacerLarge: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonExporterLarge: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonEffacerEtroit: NSLayoutConstraint!
@@ -489,25 +489,27 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //            orientationGlobale = nouvelleOrientation
         //            print("choisit contraintes, orientation", nouvelleOrientation)
         //            if estModePortrait {  // on désactive avant d'activer pour éviter les conflits
-        if nouvelleOrientation == .portrait && self.contrainteTableViewHautPaysage.isActive {
-            self.contrainteTableViewHautPaysage.isActive = false
-            self.contrainteTableViewDroitePaysage.isActive = false
-            self.contrainteVueResultatsBasPaysage.isActive = false
-            self.contrainteVueResultatGauchePaysage.isActive = false
-            
-            self.contrainteTableViewHautPortrait.isActive = true
-            self.contrainteTableViewDroitePortrait.isActive = true
-            self.contrainteVueResultatsGauchePortrait.isActive = true
+        if nouvelleOrientation == .portrait && self.stackViewPrincipal.axis != .vertical { //self.contrainteTableViewHautPaysage.isActive {
+            self.stackViewPrincipal.axis = .vertical
+//            self.contrainteTableViewHautPaysage.isActive = false
+//            self.contrainteTableViewDroitePaysage.isActive = false
+//            self.contrainteVueResultatsBasPaysage.isActive = false
+//            self.contrainteVueResultatGauchePaysage.isActive = false
+//            
+//            self.contrainteTableViewHautPortrait.isActive = true
+//            self.contrainteTableViewDroitePortrait.isActive = true
+//            self.contrainteVueResultatsGauchePortrait.isActive = true
             change = true
-        } else if nouvelleOrientation == .paysage && self.contrainteTableViewHautPortrait.isActive {
-            self.contrainteTableViewHautPortrait.isActive = false
-            self.contrainteTableViewDroitePortrait.isActive = false
-            self.contrainteVueResultatsGauchePortrait.isActive = false
-            
-            self.contrainteTableViewHautPaysage.isActive = true
-            self.contrainteTableViewDroitePaysage.isActive = true
-            self.contrainteVueResultatsBasPaysage.isActive = true
-            self.contrainteVueResultatGauchePaysage.isActive = true
+        } else if nouvelleOrientation == .paysage && self.stackViewPrincipal.axis != .horizontal {  // self.contrainteTableViewHautPortrait.isActive {
+            self.stackViewPrincipal.axis = .horizontal
+//            self.contrainteTableViewHautPortrait.isActive = false
+//            self.contrainteTableViewDroitePortrait.isActive = false
+//            self.contrainteVueResultatsGauchePortrait.isActive = false
+//            
+//            self.contrainteTableViewHautPaysage.isActive = true
+//            self.contrainteTableViewDroitePaysage.isActive = true
+//            self.contrainteVueResultatsBasPaysage.isActive = true
+//            self.contrainteVueResultatGauchePaysage.isActive = true
             change = true
         }
         //        }

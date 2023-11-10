@@ -17,17 +17,19 @@ class ViewControllerAvecCamembert: UIViewController {
     //    @IBOutlet var affichageEmissionsSoutenables: UILabel!
     @IBOutlet var camembert: UIView!
     //    @IBOutlet var boutonAideGraphique: UIButton!
-    
-    @IBOutlet var contrainteAffichageEmissionsDroitePortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteAffichageEmissionsDroitePaysage: NSLayoutConstraint!
-    @IBOutlet var contrainteAffichageEmissionsBasPortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteAffichageEmissionsBasPaysage: NSLayoutConstraint!
-    @IBOutlet var contrainteAffichageEmissionHauteurPortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteCamembertDroitePaysage: NSLayoutConstraint!
+//    @IBOutlet var stackViewResultats: UIStackView!
+    @IBOutlet var vueResultats: UIStackView!
+
+//    @IBOutlet var contrainteAffichageEmissionsDroitePortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteAffichageEmissionsDroitePaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteAffichageEmissionsBasPortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteAffichageEmissionsBasPaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteAffichageEmissionHauteurPortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteCamembertDroitePaysage: NSLayoutConstraint!
     //    @IBOutlet var contrainteCamembertGauchePortrait: NSLayoutConstraint!
     //    @IBOutlet var contrainteCamembertHautPaysage: NSLayoutConstraint!
-    @IBOutlet var contrainteCamembertCentreHPortrait: NSLayoutConstraint!
-    @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
+//    @IBOutlet var contrainteCamembertCentreHPortrait: NSLayoutConstraint!
+//    @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
     
     //    var orientationResultats: Orientation = .inconnu
 //    let soutenabiliteDansDonnut:Bool = true
@@ -44,31 +46,33 @@ class ViewControllerAvecCamembert: UIViewController {
         //        if nouvelleOrientation != orientationResultats {
         //            orientationResultats = nouvelleOrientation
         //            let estModePortrait = nouvelleOrientation == .portrait
-        if nouvelleOrientation == .portrait && self.contrainteAffichageEmissionsDroitePaysage.isActive {
-            self.contrainteAffichageEmissionsDroitePaysage.isActive = false
-            self.contrainteAffichageEmissionsBasPaysage.isActive = false
-            //                self.contrainteCamembertHautPaysage.isActive = false
-            self.contrainteCamembertDroitePaysage.isActive = false
-            self.contrainteCamembertCentreVPaysage.isActive = false
-            self.contrainteAffichageEmissionsDroitePortrait.isActive = true
-            self.contrainteAffichageEmissionsBasPortrait.isActive = true
-            self.contrainteAffichageEmissionHauteurPortrait.isActive = true
-            self.contrainteCamembertCentreHPortrait.isActive = true
+        if nouvelleOrientation == .portrait && self.vueResultats.axis != .vertical { // self.contrainteAffichageEmissionsDroitePaysage.isActive {
+            self.vueResultats.axis = .vertical
+//            self.contrainteAffichageEmissionsDroitePaysage.isActive = false
+//            self.contrainteAffichageEmissionsBasPaysage.isActive = false
+//            //                self.contrainteCamembertHautPaysage.isActive = false
+//            self.contrainteCamembertDroitePaysage.isActive = false
+//            self.contrainteCamembertCentreVPaysage.isActive = false
+//            self.contrainteAffichageEmissionsDroitePortrait.isActive = true
+//            self.contrainteAffichageEmissionsBasPortrait.isActive = true
+//            self.contrainteAffichageEmissionHauteurPortrait.isActive = true
+//            self.contrainteCamembertCentreHPortrait.isActive = true
             //                self.contrainteCamembertGauchePortrait.isActive = true
             self.affichageEmissions.textAlignment = .center
             //                print("choisit contraintes fin portrait true")
             return true
-        } else if nouvelleOrientation == .paysage && self.contrainteAffichageEmissionsDroitePortrait.isActive {
-            self.contrainteAffichageEmissionsDroitePortrait.isActive = false
-            self.contrainteAffichageEmissionsBasPortrait.isActive = false
-            self.contrainteAffichageEmissionHauteurPortrait.isActive = false
-            self.contrainteCamembertCentreHPortrait.isActive = false
-            //                self.contrainteCamembertGauchePortrait.isActive = false
-            self.contrainteAffichageEmissionsDroitePaysage.isActive = true
-            self.contrainteAffichageEmissionsBasPaysage.isActive = true
-            //                self.contrainteCamembertHautPaysage.isActive = true
-            self.contrainteCamembertDroitePaysage.isActive = true
-            self.contrainteCamembertCentreVPaysage.isActive = true
+        } else if nouvelleOrientation == .paysage &&  self.vueResultats.axis != .horizontal { // self.contrainteAffichageEmissionsDroitePortrait.isActive {
+            self.vueResultats.axis = .horizontal
+//            self.contrainteAffichageEmissionsDroitePortrait.isActive = false
+//            self.contrainteAffichageEmissionsBasPortrait.isActive = false
+//            self.contrainteAffichageEmissionHauteurPortrait.isActive = false
+//            self.contrainteCamembertCentreHPortrait.isActive = false
+//            //                self.contrainteCamembertGauchePortrait.isActive = false
+//            self.contrainteAffichageEmissionsDroitePaysage.isActive = true
+//            self.contrainteAffichageEmissionsBasPaysage.isActive = true
+//            //                self.contrainteCamembertHautPaysage.isActive = true
+//            self.contrainteCamembertDroitePaysage.isActive = true
+//            self.contrainteCamembertCentreVPaysage.isActive = true
             self.affichageEmissions.textAlignment = .left
             //                print("choisit contraintes fin paysage true")
             return true
