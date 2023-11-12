@@ -63,7 +63,6 @@
 		B5E0FE8A292A5049001D0790 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5E0FE8C292A507B001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E2D3312919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		B5E2D3322919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B5FB6498297335D600F50436 /* CelluleVide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleVide.swift; sourceTree = "<group>"; };
 		B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -258,7 +257,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				B54DCF9F28C5134E00FBBAE3 /* Base */,
-				B5E2D3322919BCE1001FEC93 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

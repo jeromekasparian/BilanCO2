@@ -467,7 +467,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     func dessineBoutons(ecranLarge: Bool){
-        let taille: CGFloat = ecranLarge ? 20 : 14
+        let taille: CGFloat = ecranLarge ? 20 : 16
         if #available(iOS 13.0, *) {
             boutonExport.setImage(UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
             boutonEffacerDonnees.setImage(UIImage(systemName: "delete.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
