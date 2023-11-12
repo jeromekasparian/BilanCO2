@@ -3,4 +3,54 @@
    uuid = "F014ACEF-0CCC-47AE-AF87-763E7169422D"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A91255E-32BF-4BC2-9F61-BBC687A7FC09"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VersionApple/ViewControllerAvecCamembert.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "choisitContraintes(size:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1A91255E-32BF-4BC2-9F61-BBC687A7FC09 - be006323d56e94e2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bilan_CO2_camp_scout.ViewControllerAvecCamembert.choisitContraintes(size: __C.CGSize) -&gt; Swift.Bool"
+                  moduleName = "Bilan CO2 camp scout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jkaspari/Documents/Perso/Divers/Programmation/BilanCO2/VersionApple/ViewControllerAvecCamembert.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "1880">
+               </Location>
+               <Location
+                  uuid = "1A91255E-32BF-4BC2-9F61-BBC687A7FC09 - be006323d56e94cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bilan_CO2_camp_scout.ViewControllerAvecCamembert.choisitContraintes(size: __C.CGSize) -&gt; Swift.Bool"
+                  moduleName = "Bilan CO2 camp scout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jkaspari/Documents/Perso/Divers/Programmation/BilanCO2/VersionApple/ViewControllerAvecCamembert.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "1844">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

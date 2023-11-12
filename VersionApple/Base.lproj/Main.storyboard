@@ -61,28 +61,44 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="274"/>
                                         <subviews>
                                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="faL-l2-rgA">
-                                                <rect key="frame" x="0.0" y="0.0" width="274" height="274"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="274"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="faL-l2-rgA" secondAttribute="height" multiplier="1:1" id="gdK-y5-fFm"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-uP-kb1">
-                                                <rect key="frame" x="274" y="0.0" width="46" height="274"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbY-ph-BJI">
+                                                <rect key="frame" x="160" y="0.0" width="160" height="274"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-uP-kb1">
+                                                        <rect key="frame" x="20" y="20" width="120" height="234"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="oVZ-RY-t5P"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="CO2  : 15 t">
+                                                                <attributes>
+                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                    <font key="NSFont" metaFont="system" size="17"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="oVZ-RY-t5P"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ly2-uP-kb1" secondAttribute="bottom" constant="20" symbolic="YES" id="0NO-Ye-cpa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ly2-uP-kb1" secondAttribute="trailing" constant="20" symbolic="YES" id="cEp-ga-SKy"/>
+                                                    <constraint firstItem="ly2-uP-kb1" firstAttribute="leading" secondItem="JbY-ph-BJI" secondAttribute="leading" constant="20" symbolic="YES" id="fHE-vO-vWU"/>
+                                                    <constraint firstItem="ly2-uP-kb1" firstAttribute="top" secondItem="JbY-ph-BJI" secondAttribute="top" constant="20" symbolic="YES" id="sb6-gd-pOn"/>
                                                 </constraints>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="CO2  : 15 t">
-                                                        <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" metaFont="system" size="17"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="JbY-ph-BJI" firstAttribute="height" secondItem="faL-l2-rgA" secondAttribute="height" id="A87-X2-chz"/>
+                                            <constraint firstItem="JbY-ph-BJI" firstAttribute="width" secondItem="faL-l2-rgA" secondAttribute="width" id="lVJ-UD-7yu"/>
+                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFl-5X-2e1">
                                         <rect key="frame" x="0.0" y="274" width="320" height="274"/>
