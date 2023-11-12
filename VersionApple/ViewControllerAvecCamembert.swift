@@ -152,7 +152,7 @@ class ViewControllerAvecCamembert: UIViewController {
         // effacer le camembert existant
         if let sublayers = camembert.layer.sublayers {
             if !sublayers.isEmpty {
-                sublayers.forEach({ $0.removeFromSuperlayer() })
+                sublayers.forEach({$0.removeFromSuperlayer() })
             }
         } else {
             print("sublayers nil")

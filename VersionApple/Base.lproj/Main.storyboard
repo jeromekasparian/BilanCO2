@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,10 +24,68 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMj-6g-7bB">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                         <subviews>
-                                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="faL-l2-rgA">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oT-gX-dZB">
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THa-eh-R9K">
+                                                        <rect key="frame" x="3" y="3" width="24" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="3Qu-WP-ls7"/>
+                                                            <constraint firstAttribute="width" constant="24" id="OgE-GB-I3A"/>
+                                                            <constraint firstAttribute="width" secondItem="THa-eh-R9K" secondAttribute="height" id="iOx-Pa-D7E"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="⌫"/>
+                                                        <buttonConfiguration key="configuration" style="plain" imagePadding="0.0">
+                                                            <imageReference key="image" image="delete.left" catalog="system" symbolScale="large"/>
+                                                        </buttonConfiguration>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="3Qu-WP-ls7"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <connections>
+                                                            <action selector="alerteConfirmationReset" destination="BYZ-38-t0r" eventType="touchUpInside" id="s5I-NC-aVO"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaZ-LP-cnI">
+                                                        <rect key="frame" x="133" y="3" width="24" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="8Pd-3u-mER"/>
+                                                            <constraint firstAttribute="width" secondItem="KaZ-LP-cnI" secondAttribute="height" id="Hzg-Wd-ROb"/>
+                                                            <constraint firstAttribute="width" constant="24" id="JMn-tF-YX8"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain">
+                                                            <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="large"/>
+                                                        </buttonConfiguration>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="8Pd-3u-mER"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <connections>
+                                                            <action selector="exportAsPdfFromViewWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JDg-1P-nJg"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="faL-l2-rgA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="faL-l2-rgA" secondAttribute="height" multiplier="1:1" id="gdK-y5-fFm"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="faL-l2-rgA" secondAttribute="height" multiplier="1:1" id="gdK-y5-fFm"/>
+                                                    <constraint firstAttribute="width" secondItem="3oT-gX-dZB" secondAttribute="height" multiplier="1:1" id="7NA-nf-cvT"/>
+                                                    <constraint firstItem="THa-eh-R9K" firstAttribute="top" secondItem="3oT-gX-dZB" secondAttribute="top" constant="3" id="EuJ-uU-cT2"/>
+                                                    <constraint firstItem="THa-eh-R9K" firstAttribute="leading" secondItem="3oT-gX-dZB" secondAttribute="leading" constant="3" id="JAs-RY-Gba"/>
+                                                    <constraint firstAttribute="trailing" secondItem="faL-l2-rgA" secondAttribute="trailing" id="JWP-R6-Nu6"/>
+                                                    <constraint firstItem="KaZ-LP-cnI" firstAttribute="top" secondItem="3oT-gX-dZB" secondAttribute="top" constant="3" id="QNy-Nq-p8L"/>
+                                                    <constraint firstItem="faL-l2-rgA" firstAttribute="leading" secondItem="3oT-gX-dZB" secondAttribute="leading" id="TiM-Cb-WCQ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="faL-l2-rgA" secondAttribute="bottom" id="Yqi-Rw-rVo"/>
+                                                    <constraint firstAttribute="trailing" secondItem="KaZ-LP-cnI" secondAttribute="trailing" constant="3" id="eha-y4-tlI"/>
+                                                    <constraint firstItem="faL-l2-rgA" firstAttribute="top" secondItem="3oT-gX-dZB" secondAttribute="top" id="i3K-g0-P3h"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbY-ph-BJI">
@@ -59,8 +118,8 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="JbY-ph-BJI" firstAttribute="height" secondItem="faL-l2-rgA" secondAttribute="height" id="A87-X2-chz"/>
-                                            <constraint firstItem="JbY-ph-BJI" firstAttribute="width" secondItem="faL-l2-rgA" secondAttribute="width" id="lVJ-UD-7yu"/>
+                                            <constraint firstItem="JbY-ph-BJI" firstAttribute="width" secondItem="3oT-gX-dZB" secondAttribute="width" id="0EM-pK-6al"/>
+                                            <constraint firstItem="JbY-ph-BJI" firstAttribute="height" secondItem="3oT-gX-dZB" secondAttribute="height" id="gPr-D0-pt5"/>
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFl-5X-2e1">
@@ -250,59 +309,18 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="KFl-5X-2e1" firstAttribute="width" secondItem="HMj-6g-7bB" secondAttribute="width" id="5bb-pW-clI"/>
+                                    <constraint firstItem="KFl-5X-2e1" firstAttribute="width" relation="greaterThanOrEqual" secondItem="HMj-6g-7bB" secondAttribute="width" id="5bb-pW-clI"/>
                                     <constraint firstItem="KFl-5X-2e1" firstAttribute="height" relation="greaterThanOrEqual" secondItem="HMj-6g-7bB" secondAttribute="height" id="dPC-Vz-YLb"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THa-eh-R9K">
-                                <rect key="frame" x="8" y="23" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="3Qu-WP-ls7"/>
-                                    <constraint firstAttribute="width" constant="24" id="OgE-GB-I3A"/>
-                                    <constraint firstAttribute="width" secondItem="THa-eh-R9K" secondAttribute="height" id="iOx-Pa-D7E"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="⌫"/>
-                                <buttonConfiguration key="configuration" style="plain" image="delete.left" catalog="system" imagePadding="0.0"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="OgE-GB-I3A"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="alerteConfirmationReset" destination="BYZ-38-t0r" eventType="touchUpInside" id="s5I-NC-aVO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaZ-LP-cnI">
-                                <rect key="frame" x="122" y="23" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="8Pd-3u-mER"/>
-                                    <constraint firstAttribute="width" secondItem="KaZ-LP-cnI" secondAttribute="height" id="Hzg-Wd-ROb"/>
-                                    <constraint firstAttribute="width" constant="24" id="JMn-tF-YX8"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="JMn-tF-YX8"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="exportAsPdfFromViewWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JDg-1P-nJg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="C7I-I6-jRA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8mI-Rt-aPV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C7I-I6-jRA" secondAttribute="bottom" id="REW-gS-cYA"/>
-                            <constraint firstItem="C7I-I6-jRA" firstAttribute="centerX" secondItem="KaZ-LP-cnI" secondAttribute="trailing" constant="8" id="aGT-4f-UKJ"/>
                             <constraint firstItem="C7I-I6-jRA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cnL-x4-ofQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C7I-I6-jRA" secondAttribute="trailing" id="hzG-vj-icB"/>
-                            <constraint firstItem="KaZ-LP-cnI" firstAttribute="centerY" secondItem="THa-eh-R9K" secondAttribute="centerY" id="pFx-f5-01M"/>
-                            <constraint firstItem="THa-eh-R9K" firstAttribute="leading" secondItem="C7I-I6-jRA" secondAttribute="leading" constant="8" id="sCo-T2-sRC"/>
-                            <constraint firstItem="THa-eh-R9K" firstAttribute="top" secondItem="C7I-I6-jRA" secondAttribute="top" constant="3" id="x71-ZM-oBh"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="320" height="568"/>

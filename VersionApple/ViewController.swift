@@ -318,6 +318,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         
         DispatchQueue.main.async {
             self.tableViewEmissions.reloadData()
+            self.tableViewEmissions.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.actualiseAffichageEmissions()
@@ -466,17 +468,17 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     //    }
     
     
-    func dessineBoutons(ecranLarge: Bool){
-        let taille: CGFloat = ecranLarge ? 20 : 16
-        if #available(iOS 13.0, *) {
-            boutonExport.setImage(UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-            boutonEffacerDonnees.setImage(UIImage(systemName: "delete.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-        } else {
-            boutonExport.setImage(UIImage(named: "square.and.arrow.up"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-           boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
-        }
-    }
-    
+//    func dessineBoutons(ecranLarge: Bool){
+//        let taille: CGFloat = ecranLarge ? 20 : 16
+//        if #available(iOS 13.0, *) {
+//            boutonExport.setImage(UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+//            boutonEffacerDonnees.setImage(UIImage(systemName: "delete.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+//        } else {
+//            boutonExport.setImage(UIImage(named: "square.and.arrow.up"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+//           boutonEffacerDonnees.setImage(UIImage(named: "delete.left"), for: .normal) //, withConfiguration: UIImage.SymbolConfiguration(pointSize: taille)), for: .normal)
+//        }
+//    }
+//    
     
     override func choisitContraintes(size: CGSize) -> Bool {
         //        print("choisitContraintes")
@@ -513,22 +515,22 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             change = true
         }
         //        }
-        let ecranLarge = self.vueResultats.frame.width >= 600
-        if ecranLarge && !self.contrainteLargeurBoutonEffacerLarge.isActive {  // réduire la taille des boutons si on a un écran étroit.
-            self.contrainteLargeurBoutonEffacerEtroit.isActive = false
-            self.contrainteLargeurBoutonExporterEtroit.isActive = false
-            self.contrainteLargeurBoutonEffacerLarge.isActive = true
-            self.contrainteLargeurBoutonExporterLarge.isActive = true
-            dessineBoutons(ecranLarge: ecranLarge)
-            change3 = true
-        } else if !ecranLarge && !self.contrainteLargeurBoutonEffacerEtroit.isActive {
-            self.contrainteLargeurBoutonEffacerLarge.isActive = false
-            self.contrainteLargeurBoutonExporterLarge.isActive = false
-            self.contrainteLargeurBoutonEffacerEtroit.isActive = true
-            self.contrainteLargeurBoutonExporterEtroit.isActive = true
-            dessineBoutons(ecranLarge: ecranLarge)
-            change3 = true
-        }
+//        let ecranLarge = self.vueResultats.frame.width >= 600
+//        if ecranLarge && !self.contrainteLargeurBoutonEffacerLarge.isActive {  // réduire la taille des boutons si on a un écran étroit.
+//            self.contrainteLargeurBoutonEffacerEtroit.isActive = false
+//            self.contrainteLargeurBoutonExporterEtroit.isActive = false
+//            self.contrainteLargeurBoutonEffacerLarge.isActive = true
+//            self.contrainteLargeurBoutonExporterLarge.isActive = true
+//            dessineBoutons(ecranLarge: ecranLarge)
+//            change3 = true
+//        } else if !ecranLarge && !self.contrainteLargeurBoutonEffacerEtroit.isActive {
+//            self.contrainteLargeurBoutonEffacerLarge.isActive = false
+//            self.contrainteLargeurBoutonExporterLarge.isActive = false
+//            self.contrainteLargeurBoutonEffacerEtroit.isActive = true
+//            self.contrainteLargeurBoutonExporterEtroit.isActive = true
+//            dessineBoutons(ecranLarge: ecranLarge)
+//            change3 = true
+//        }
         //        print("largeurResultats", self.vueResultats.frame.width)
         let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
         return change || change2 || change3
