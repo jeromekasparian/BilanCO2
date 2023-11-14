@@ -76,7 +76,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         boutonExport.setTitle("", for: .normal)
         
         _ = self.choisitContraintes(size: self.view.frame.size)
-        (lesEmissions, lesSections) = lireFichier(nom: "DataInternational")
+        (lesEmissions, lesSections) = lireFichier(nom: nomFichierData)
         let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
         if !lesValeurs.isEmpty && lesValeurs.count == lesEmissions.count {
             for i in 0...lesValeurs.count - 1 {

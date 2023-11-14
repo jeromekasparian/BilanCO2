@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bilan_CO2_camp_scout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bilan_CO2_Congres" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +128,7 @@
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MyB-cA-vRv">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="388"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleEmission" rowHeight="103" id="EFk-PJ-bem" customClass="CelluleEmission" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleEmission" rowHeight="103" id="EFk-PJ-bem" customClass="CelluleEmission" customModule="Bilan_CO2_Congres" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="320" height="103"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EFk-PJ-bem" id="aB8-26-4VT">
@@ -202,7 +202,7 @@
                                                             <outlet property="labelValeur" destination="Heu-Mu-uuU" id="4Jv-O1-E8X"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleCredits" id="rYD-LR-4Zd" customClass="CelluleCredits" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleCredits" id="rYD-LR-4Zd" customClass="CelluleCredits" customModule="Bilan_CO2_Congres" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="153" width="320" height="126"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rYD-LR-4Zd" id="oy6-Wm-3j9">
@@ -272,7 +272,7 @@
                                                             <outlet property="boutonOuvrirWeb" destination="OR5-bd-q4u" id="FSd-pl-laB"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleVide" id="wXc-6e-1qp" customClass="CelluleVide" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleVide" id="wXc-6e-1qp" customClass="CelluleVide" customModule="Bilan_CO2_Congres" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="279" width="320" height="0.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wXc-6e-1qp" id="x8n-IJ-aiQ">
@@ -345,7 +345,7 @@
         <!--Explications-->
         <scene sceneID="7c4-pH-m39">
             <objects>
-                <viewController id="ayv-sl-y9x" customClass="Explications" customModule="Bilan_CO2_camp_scout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ayv-sl-y9x" customClass="Explications" customModule="Bilan_CO2_Congres" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e5a-zK-6Ux">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -399,7 +399,7 @@
                                 <rect key="frame" x="31" y="77" width="258" height="418"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celluleExplications" rowHeight="200" id="yXs-Tb-ny3" customClass="CelluleExplications" customModule="Bilan_CO2_camp_scout" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celluleExplications" rowHeight="200" id="yXs-Tb-ny3" customClass="CelluleExplications" customModule="Bilan_CO2_Congres" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="258" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXs-Tb-ny3" id="iws-oA-0sK">

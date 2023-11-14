@@ -9,6 +9,30 @@
 /* Begin PBXBuildFile section */
 		B50375DD2ABCD6A900158EB4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */; };
 		B510EB9F29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */; };
+		B5154B032B0423D50075D50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5154B022B0423D50075D50A /* Assets.xcassets */; };
+		B5154B062B0423D50075D50A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5154B042B0423D50075D50A /* LaunchScreen.storyboard */; };
+		B5154B0D2B0424E80075D50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */; };
+		B5154B0E2B0424FF0075D50A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9928C5134E00FBBAE3 /* Main.storyboard */; };
+		B5154B0F2B0425050075D50A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */; };
+		B5154B102B0425050075D50A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFA728C5172500FBBAE3 /* Data.swift */; };
+		B5154B112B0425050075D50A /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
+		B5154B122B0425050075D50A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */; };
+		B5154B132B0425050075D50A /* ViewControllerExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E27290C7493008DA009 /* ViewControllerExplications.swift */; };
+		B5154B142B0425050075D50A /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
+		B5154B152B0425050075D50A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9728C5134E00FBBAE3 /* ViewController.swift */; };
+		B5154B162B0425050075D50A /* CouleursEEUdF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DCA1A28DFA03F00DAA900 /* CouleursEEUdF.swift */; };
+		B5154B172B0425050075D50A /* CelluleEmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */; };
+		B5154B182B0425050075D50A /* CelluleExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5716E12296C8CC7008EE908 /* CelluleExplications.swift */; };
+		B5154B192B0425050075D50A /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
+		B5154B1A2B0425050075D50A /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
+		B5154B1B2B0425050075D50A /* EmailSubjectActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */; };
+		B5154B1C2B0425850075D50A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
+		B5154B1D2B0425850075D50A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */; };
+		B5154B1E2B0425950075D50A /* PageBlanche.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */; };
+		B5154B222B0427F20075D50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5154B212B0427DB0075D50A /* Assets.xcassets */; };
+		B5154B232B0428360075D50A /* DataInternationalCongres.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */; };
+		B5154B252B04289C0075D50A /* ParametresCongres.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5154B242B04289C0075D50A /* ParametresCongres.swift */; };
+		B5154B272B0428C10075D50A /* ParametresCamps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5154B262B0428C10075D50A /* ParametresCamps.swift */; };
 		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
 		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
 		B51AD1C228CA439700888CDD /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
@@ -24,9 +48,8 @@
 		B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFA728C5172500FBBAE3 /* Data.swift */; };
 		B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */; };
 		B56DBCE62974A0BB00AC1DA5 /* PageBlanche.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */; };
-		B56E3204296AB72300276CE8 /* ToDoList.txt in Resources */ = {isa = PBXBuildFile; fileRef = B56E3203296AB72300276CE8 /* ToDoList.txt */; };
 		B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5716E12296C8CC7008EE908 /* CelluleExplications.swift */; };
-		B5BB25D029A2191000B29278 /* DataInternational.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5BB25CF29A2190900B29278 /* DataInternational.csv */; };
+		B5BB25D029A2191000B29278 /* DataInternationalCamps.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */; };
 		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
@@ -37,6 +60,19 @@
 		B50375DE2ABCD6A900158EB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B50375E02ABCD6AA00158EB4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSubjectActivityItemSource.swift; sourceTree = "<group>"; };
+		B5154AF72B0423D30075D50A /* Bilan CO2 Congres.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilan CO2 Congres.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5154AF92B0423D30075D50A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5154AFB2B0423D30075D50A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B5154AFD2B0423D30075D50A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5154B002B0423D40075D50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5154B022B0423D50075D50A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5154B052B0423D50075D50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5154B072B0423D50075D50A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5154B0B2B04240A0075D50A /* Bilan CO2 Congres.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bilan CO2 Congres.entitlements"; sourceTree = "<group>"; };
+		B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = DataInternationalCongres.csv; sourceTree = "<group>"; };
+		B5154B212B0427DB0075D50A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5154B242B04289C0075D50A /* ParametresCongres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametresCongres.swift; sourceTree = "<group>"; };
+		B5154B262B0428C10075D50A /* ParametresCamps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametresCamps.swift; sourceTree = "<group>"; };
 		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
@@ -57,7 +93,7 @@
 		B56E3203296AB72300276CE8 /* ToDoList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDoList.txt; sourceTree = "<group>"; };
 		B5716E12296C8CC7008EE908 /* CelluleExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleExplications.swift; sourceTree = "<group>"; };
 		B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BilanCO2.entitlements; sourceTree = "<group>"; };
-		B5BB25CF29A2190900B29278 /* DataInternational.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DataInternational.csv; sourceTree = "<group>"; };
+		B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DataInternationalCamps.csv; sourceTree = "<group>"; };
 		B5D81F1A28F2126300188489 /* CelluleCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleCredits.swift; sourceTree = "<group>"; };
 		B5E0FE88292A5044001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5E0FE8A292A5049001D0790 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -68,6 +104,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B5154AF42B0423D30075D50A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B54DCF8D28C5134E00FBBAE3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,6 +121,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5154AF82B0423D30075D50A /* Bilan CO2 Congres */ = {
+			isa = PBXGroup;
+			children = (
+				B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */,
+				B5154B0B2B04240A0075D50A /* Bilan CO2 Congres.entitlements */,
+				B5154AF92B0423D30075D50A /* AppDelegate.swift */,
+				B5154AFB2B0423D30075D50A /* SceneDelegate.swift */,
+				B5154AFD2B0423D30075D50A /* ViewController.swift */,
+				B5154B242B04289C0075D50A /* ParametresCongres.swift */,
+				B5154AFF2B0423D40075D50A /* Main.storyboard */,
+				B5154B022B0423D50075D50A /* Assets.xcassets */,
+				B5154B042B0423D50075D50A /* LaunchScreen.storyboard */,
+				B5154B072B0423D50075D50A /* Info.plist */,
+			);
+			path = "Bilan CO2 Congres";
+			sourceTree = "<group>";
+		};
+		B5154B202B0427C60075D50A /* Bilan CO2 Camps */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */,
+				B5154B212B0427DB0075D50A /* Assets.xcassets */,
+				B5154B262B0428C10075D50A /* ParametresCamps.swift */,
+			);
+			path = "Bilan CO2 Camps";
+			sourceTree = "<group>";
+		};
 		B5215E2B290D3C24008DA009 /* PasUtilise */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				B54DCF9028C5134E00FBBAE3 /* Bilan CO2 camp scout.app */,
+				B5154AF72B0423D30075D50A /* Bilan CO2 Congres.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,11 +178,12 @@
 		B54DCF9228C5134E00FBBAE3 /* VersionApple */ = {
 			isa = PBXGroup;
 			children = (
+				B5154AF82B0423D30075D50A /* Bilan CO2 Congres */,
+				B5154B202B0427C60075D50A /* Bilan CO2 Camps */,
 				B56E3203296AB72300276CE8 /* ToDoList.txt */,
 				B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */,
 				B5215E2B290D3C24008DA009 /* PasUtilise */,
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
-				B5BB25CF29A2190900B29278 /* DataInternational.csv */,
 				B5E0FE89292A5044001D0790 /* Localizable.strings */,
 				B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
@@ -138,6 +210,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B5154AF62B0423D30075D50A /* Bilan CO2 Congres */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5154B082B0423D50075D50A /* Build configuration list for PBXNativeTarget "Bilan CO2 Congres" */;
+			buildPhases = (
+				B5154AF32B0423D30075D50A /* Sources */,
+				B5154AF42B0423D30075D50A /* Frameworks */,
+				B5154AF52B0423D30075D50A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bilan CO2 Congres";
+			productName = "Bilan CO2 Congres";
+			productReference = B5154AF72B0423D30075D50A /* Bilan CO2 Congres.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B54DCF8F28C5134E00FBBAE3 /* Bilan CO2 camp scout */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B54DCFA428C5134E00FBBAE3 /* Build configuration list for PBXNativeTarget "Bilan CO2 camp scout" */;
@@ -162,9 +251,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					B5154AF62B0423D30075D50A = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					B54DCF8F28C5134E00FBBAE3 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -185,11 +277,27 @@
 			projectRoot = "";
 			targets = (
 				B54DCF8F28C5134E00FBBAE3 /* Bilan CO2 camp scout */,
+				B5154AF62B0423D30075D50A /* Bilan CO2 Congres */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B5154AF52B0423D30075D50A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5154B1C2B0425850075D50A /* Localizable.strings in Resources */,
+				B5154B232B0428360075D50A /* DataInternationalCongres.csv in Resources */,
+				B5154B1E2B0425950075D50A /* PageBlanche.pdf in Resources */,
+				B5154B1D2B0425850075D50A /* InfoPlist.strings in Resources */,
+				B5154B062B0423D50075D50A /* LaunchScreen.storyboard in Resources */,
+				B5154B0D2B0424E80075D50A /* Assets.xcassets in Resources */,
+				B5154B032B0423D50075D50A /* Assets.xcassets in Resources */,
+				B5154B0E2B0424FF0075D50A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B54DCF8E28C5134E00FBBAE3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,8 +307,8 @@
 				B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */,
 				B54DCFA028C5134E00FBBAE3 /* LaunchScreen.storyboard in Resources */,
 				B54DCF9D28C5134E00FBBAE3 /* Assets.xcassets in Resources */,
-				B5BB25D029A2191000B29278 /* DataInternational.csv in Resources */,
-				B56E3204296AB72300276CE8 /* ToDoList.txt in Resources */,
+				B5BB25D029A2191000B29278 /* DataInternationalCamps.csv in Resources */,
+				B5154B222B0427F20075D50A /* Assets.xcassets in Resources */,
 				B54DCF9B28C5134E00FBBAE3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +316,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B5154AF32B0423D30075D50A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5154B142B0425050075D50A /* CelluleVide.swift in Sources */,
+				B5154B162B0425050075D50A /* CouleursEEUdF.swift in Sources */,
+				B5154B172B0425050075D50A /* CelluleEmission.swift in Sources */,
+				B5154B122B0425050075D50A /* AppDelegate.swift in Sources */,
+				B5154B192B0425050075D50A /* ViewControllerAvecCamembert.swift in Sources */,
+				B5154B112B0425050075D50A /* Graphique.swift in Sources */,
+				B5154B1B2B0425050075D50A /* EmailSubjectActivityItemSource.swift in Sources */,
+				B5154B0F2B0425050075D50A /* SceneDelegate.swift in Sources */,
+				B5154B1A2B0425050075D50A /* CelluleCredits.swift in Sources */,
+				B5154B152B0425050075D50A /* ViewController.swift in Sources */,
+				B5154B182B0425050075D50A /* CelluleExplications.swift in Sources */,
+				B5154B252B04289C0075D50A /* ParametresCongres.swift in Sources */,
+				B5154B132B0425050075D50A /* ViewControllerExplications.swift in Sources */,
+				B5154B102B0425050075D50A /* Data.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B54DCF8C28C5134E00FBBAE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,6 +355,7 @@
 				B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */,
 				B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */,
 				B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */,
+				B5154B272B0428C10075D50A /* ParametresCamps.swift in Sources */,
 				B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */,
 				B52DCA1B28DFA03F00DAA900 /* CouleursEEUdF.swift in Sources */,
 			);
@@ -241,6 +371,22 @@
 				B50375E02ABCD6AA00158EB4 /* fr */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B5154AFF2B0423D40075D50A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5154B002B0423D40075D50A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B5154B042B0423D50075D50A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5154B052B0423D50075D50A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		B54DCF9928C5134E00FBBAE3 /* Main.storyboard */ = {
@@ -273,6 +419,85 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B5154B092B0423D50075D50A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "VersionApple/Bilan CO2 Congres/Bilan CO2 Congres.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6WS674AGSY;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "VersionApple/Bilan CO2 Congres/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.unige.bilan-co-congres";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5154B0A2B0423D50075D50A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "VersionApple/Bilan CO2 Congres/Bilan CO2 Congres.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6WS674AGSY;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "VersionApple/Bilan CO2 Congres/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bilan CO₂";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.unige.bilan-co-congres";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B54DCFA228C5134E00FBBAE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -472,6 +697,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B5154B082B0423D50075D50A /* Build configuration list for PBXNativeTarget "Bilan CO2 Congres" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5154B092B0423D50075D50A /* Debug */,
+				B5154B0A2B0423D50075D50A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan CO2 camp scout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
