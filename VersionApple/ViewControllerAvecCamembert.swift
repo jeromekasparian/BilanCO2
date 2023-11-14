@@ -42,7 +42,7 @@ class ViewControllerAvecCamembert: UIViewController {
     // désactiver les contraintes inutiles avant d'activer les nouvelles
     func choisitContraintes(size: CGSize) -> Bool {
         //        print("choisit contraintes Camembert debut")
-        let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
+        let nouvelleOrientation: Orientation = size.width <= size.height * 1.1 ? .portrait : .paysage
         //        if nouvelleOrientation != orientationResultats {
         //            orientationResultats = nouvelleOrientation
         //            let estModePortrait = nouvelleOrientation == .portrait

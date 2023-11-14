@@ -484,7 +484,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        print("choisitContraintes")
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
         var change = false
-        var change3 = false
+//        var change3 = false
         
         //        if nouvelleOrientation != orientationGlobale {
         //            let estModePortrait = nouvelleOrientation == .portrait
@@ -533,7 +533,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //        }
         //        print("largeurResultats", self.vueResultats.frame.width)
         let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
-        return change || change2 || change3
+        return change || change2 //|| change3
     }
     
     @objc func ouvrirWeb(adresse: String) {
