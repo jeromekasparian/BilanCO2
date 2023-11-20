@@ -80,7 +80,14 @@ class CelluleEmission: UITableViewCell {
             return ("", .black)
         } else {
             let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
-            let texte = String(format: NSLocalizedString("%.0f kg eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission, pourcentage)
+            var texte = ""
+            if typeEmission.emission < 1000.0 {
+                texte = String(format: NSLocalizedString("%.0f kg eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission, pourcentage)
+            } else if typeEmission.emission < 20000.0 {
+                texte = String(format: NSLocalizedString("%.1f t eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission / 1000.0, pourcentage)
+            } else {
+                texte = String(format: NSLocalizedString("%.0f t eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission / 1000, pourcentage)
+            }
             var couleur: UIColor = .gray
             if pourcentage > 10.0 {couleur = .black}
             if pourcentage > 20.0 {couleur = rougeVif}

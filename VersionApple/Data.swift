@@ -27,36 +27,9 @@ let separateur = ";" // le séparateur dans les fichiers de données
 //    }
 //}
 
-enum SorteEmission: Int {
-    case duree = 0
-    case effectif = 1
-    case repasViandeRouge = 2
-    case repasViandeBlanche = 3
-    case repasVegetarien = 4
-    case repasGaz = 5
-    case distance = 6
-    case voyageTrain = 7
-    case voyageCar = 8
-    case voyageVoiture = 9
-    case voyageVoitureElectrique = 10
-    case voyageAvion = 11
-    case voyageCamion = 12
-    case voyageMaterielExpedie = 13
-    case deplacementsCar = 14
-    case deplacementsVoiture = 15
-    case deplacementsVoitureElectrique = 16
-    case achatsMateriel = 17
-    case hebergementTentes = 18
-    case hebergementMarabout = 19
-    case hebergementDur = 20
-    case optimist = 21
-    case caravelle = 22
-    case deriveur = 23
-    case canot = 24
-    case zodiac = 25
-    case essence = 26
-//    case nomCourt = 21
-//    case picto = 22
+enum Evenement: Int {
+    case camp
+    case congres
 }
 
 class TypeEmission {
@@ -72,7 +45,7 @@ class TypeEmission {
     var echelleLog: Bool
     var valeurEntiere: Bool
     var valeurMaxSelonEffectif: Double
-    var valeurMaxNbRepas: Double
+    var valeurMaxParJour: Double
     var emission: Double
     var conseil: String
     var nomCourt: String
@@ -82,7 +55,7 @@ class TypeEmission {
     var nomPluriel: String
     var sectionOptionnelle: Bool
     
-    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxNbRepas: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String], nomPluriel: String, sectionOptionnelle: Bool) {
+    init(categorie: String, nom: String, unite: String, valeurMax: Double, valeur: Double, facteurEmission: Double, parPersonne: Double, parKmDistance: Double, parJour: Double, echelleLog: Bool, valeurEntiere: Bool, valeurMaxSelonEffectif: Double, valeurMaxParJour: Double, emission: Double, conseil: String, nomCourt: String, picto: String, nomsRessources: [String], liensRessources: [String], nomPluriel: String, sectionOptionnelle: Bool) {
         self.categorie = categorie
         self.nom = nom
         self.unite = unite
@@ -95,7 +68,7 @@ class TypeEmission {
         self.echelleLog = echelleLog
         self.valeurEntiere = valeurEntiere
         self.valeurMaxSelonEffectif = valeurMaxSelonEffectif
-        self.valeurMaxNbRepas = valeurMaxNbRepas
+        self.valeurMaxParJour = valeurMaxParJour
         self.emission = emission
         self.conseil = conseil
         self.nomCourt = nomCourt.isEmpty ? nom : nomCourt
@@ -107,7 +80,7 @@ class TypeEmission {
     }
     
     func duplique() -> TypeEmission {
-        return TypeEmission(categorie: self.categorie, nom: self.nom, unite: self.unite, valeurMax: self.valeurMax, valeur: self.valeur, facteurEmission: self.facteurEmission, parPersonne: self.parPersonne, parKmDistance: self.parKmDistance, parJour: self.parJour, echelleLog: self.echelleLog, valeurEntiere: self.valeurEntiere, valeurMaxSelonEffectif: self.valeurMaxSelonEffectif, valeurMaxNbRepas: self.valeurMaxNbRepas, emission: self.emission, conseil: self.conseil, nomCourt: self.nomCourt, picto: self.picto, nomsRessources: self.nomsRessources, liensRessources: self.liensRessources, nomPluriel: self.nomPluriel, sectionOptionnelle: self.sectionOptionnelle)
+        return TypeEmission(categorie: self.categorie, nom: self.nom, unite: self.unite, valeurMax: self.valeurMax, valeur: self.valeur, facteurEmission: self.facteurEmission, parPersonne: self.parPersonne, parKmDistance: self.parKmDistance, parJour: self.parJour, echelleLog: self.echelleLog, valeurEntiere: self.valeurEntiere, valeurMaxSelonEffectif: self.valeurMaxSelonEffectif, valeurMaxParJour: self.valeurMaxParJour, emission: self.emission, conseil: self.conseil, nomCourt: self.nomCourt, picto: self.picto, nomsRessources: self.nomsRessources, liensRessources: self.liensRessources, nomPluriel: self.nomPluriel, sectionOptionnelle: self.sectionOptionnelle)
     }
 }
 
@@ -127,15 +100,25 @@ class Section {
 }
 
 func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
-    emissionsSoutenables = emissionsSoutenablesAnnuelles / 365 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
+    emissionsSoutenables = emissionsSoutenablesAnnuelles / 365.25 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
     var total: Double = 0.0
     for typeEmission in typesEmissions {
-        if typeEmission.facteurEmission > 0 {
-            var multiplicateur: Double = 1
-            multiplicateur = typeEmission.parPersonne == 0 ? multiplicateur : multiplicateur * typeEmission.parPersonne * typesEmissions[SorteEmission.effectif.rawValue].valeur
-            multiplicateur = typeEmission.parKmDistance == 0 ? multiplicateur : multiplicateur * typeEmission.parKmDistance * typesEmissions[SorteEmission.distance.rawValue].valeur
-            multiplicateur = typeEmission.parJour == 0 ? multiplicateur : multiplicateur * typeEmission.parJour * typesEmissions[SorteEmission.duree.rawValue].valeur
+        if typeEmission.facteurEmission != 0 {
+            var multiplicateur: Double = 1.0
+            if typeEmission.parPersonne != 0 {
+                multiplicateur = multiplicateur * typeEmission.parPersonne * typesEmissions[SorteEmission.effectif.rawValue].valeur
+            }
+//            print("personne", multiplicateur)
+            if typeEmission.parKmDistance != 0 && SorteEmission.distance.rawValue >= 0 {
+                multiplicateur = multiplicateur * typeEmission.parKmDistance * typesEmissions[SorteEmission.distance.rawValue].valeur
+            }
+//            print("km", multiplicateur)
+            if typeEmission.parJour != 0 {
+                multiplicateur = multiplicateur * typeEmission.parJour * typesEmissions[SorteEmission.duree.rawValue].valeur
+            }
+//            print("jour", multiplicateur)
             typeEmission.emission = typeEmission.valeur * typeEmission.facteurEmission * multiplicateur
+            print(typeEmission.nom, typeEmission.emission)
             total = total + typeEmission.emission
         }
     }
@@ -164,7 +147,8 @@ func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
             let echelleLog = (Int(elements[8]) ?? 0) == 1
             let valeurEntiere = (Int(elements[9]) ?? 0) == 1
             let valeurMaxSelonEffectif = Double(elements[10]) ?? 0
-            let valeurMaxNbRepas = Double(elements[11]) ?? 0
+            let valeurMaxParJour = Double(elements[11]) ?? 0
+//            print("valeurMaxParJour", valeurMaxParJour)
             let valeur = 0.0 //facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
             let nomsRessources = NSLocalizedString(elements[15], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
             let liensRessources = NSLocalizedString(elements[16], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
@@ -176,7 +160,7 @@ func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
                                                 parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour,
                                                 echelleLog: echelleLog, valeurEntiere: valeurEntiere,
                                                 valeurMaxSelonEffectif: valeurMaxSelonEffectif,
-                                                valeurMaxNbRepas: valeurMaxNbRepas, emission: 0.0,
+                                                valeurMaxParJour: valeurMaxParJour, emission: 0.0,
                                                 conseil: NSLocalizedString(elements[12], comment: "").replacingOccurrences(of: "\\n", with: "\n"),
                                                 nomCourt: NSLocalizedString(elements[13], comment: ""), picto: elements[14],
                                                 nomsRessources: nomsRessources, liensRessources: liensRessources,
@@ -233,24 +217,30 @@ func texteNomValeurUnite(emission: TypeEmission) -> String { //, afficherPictos:
     }
 }
 
-func actualiseValeursMax() {
-    actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-    ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-    actualiseValeurMaxBateaux()
-}
 
-func ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
+func ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
     let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
-    actualiseValeursMaxRepas(valeurMax: nombreJours)
-    lesEmissions[priorite1.rawValue].valeur = min(lesEmissions[priorite1.rawValue].valeur, nombreJours * 2)
-    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur)
-    lesEmissions[priorite3.rawValue].valeur = nombreJours * 2 - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
+    let valeurMaxi = lesEmissions[priorite1.rawValue].valeurMaxParJour == 0 ? lesEmissions[priorite1.rawValue].valeurMax : nombreJours * lesEmissions[priorite1.rawValue].valeurMaxParJour
+    actualiseValeursMaxSelonJours(valeurMax: valeurMaxi)
+    lesEmissions[priorite1.rawValue].valeur = min(lesEmissions[priorite1.rawValue].valeur, valeurMaxi)
+    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, valeurMaxi - lesEmissions[priorite1.rawValue].valeur)
+    lesEmissions[priorite3.rawValue].valeur = valeurMaxi - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
 }
 
-func actualiseValeurMaxBateaux(){
-    let trajetsCamionsMaxTheorique = 3 + ceil(lesEmissions[SorteEmission.optimist.rawValue].valeur / 3) + 2 * (lesEmissions[SorteEmission.caravelle.rawValue].valeur +  lesEmissions[SorteEmission.deriveur.rawValue].valeur +  lesEmissions[SorteEmission.canot.rawValue].valeur +  lesEmissions[SorteEmission.zodiac.rawValue].valeur)
-    lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax = max(lesEmissions[SorteEmission.voyageCamion.rawValue].valeur, trajetsCamionsMaxTheorique)
-//    lesEmissions[SorteEmission.voyageCamion.rawValue].valeur = min(lesEmissions[SorteEmission.voyageCamion.rawValue].valeur, lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax)
+func ajusteMaxEtTotalNLignes(priorites: [SorteEmission]) {
+    guard !priorites.isEmpty  else {return}
+    let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
+    let valeurMaxi = lesEmissions[priorites.first!.rawValue].valeurMaxParJour == 0 ? lesEmissions[priorites.first!.rawValue].valeurMax : nombreJours * lesEmissions[priorites.first!.rawValue].valeurMaxParJour
+    actualiseValeursMaxSelonJours(valeurMax: valeurMaxi)
+    lesEmissions[priorites.first!.rawValue].valeur = min(lesEmissions[priorites.first!.rawValue].valeur, valeurMaxi)
+    guard priorites.count > 2 else {return}
+    var cumul = lesEmissions[priorites.first!.rawValue].valeur
+    for i in 1...(priorites.count - 1) {
+        lesEmissions[priorites[i].rawValue].valeur = min(lesEmissions[priorites[i].rawValue].valeur, valeurMaxi - cumul)
+        cumul = cumul + lesEmissions[priorites[i].rawValue].valeur
+    }
+//    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, valeurMaxi - lesEmissions[priorite1.rawValue].valeur)
+//    lesEmissions[priorite3.rawValue].valeur = valeurMaxi - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
 }
 
 func actualiseValeursMaxEffectif(valeurMax: Double) {
@@ -267,11 +257,11 @@ func actualiseValeursMaxEffectif(valeurMax: Double) {
     }
 }
 
-func actualiseValeursMaxRepas(valeurMax: Double) {
+func actualiseValeursMaxSelonJours(valeurMax: Double) {
     for i in 0...lesEmissions.count-1 {
-        if lesEmissions[i].valeurMaxNbRepas > 0 {
+        if lesEmissions[i].valeurMaxParJour > 0 {
             let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
-            lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxNbRepas
+            lesEmissions[i].valeurMax = valeurMax //* lesEmissions[i].valeurMaxParJour
             if collerAuMax {
                 lesEmissions[i].valeur = lesEmissions[i].valeurMax
             } else {

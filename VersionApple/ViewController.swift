@@ -181,7 +181,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func creeCelluleVide (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierVide, for: indexPath) as! CelluleVide
         cell.selectionStyle = .none
-        cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.backgroundColor = couleurs5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
         cell.delegate = self
         return cell
     }
@@ -213,7 +213,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.actualiseEmissionIndividuelle(typeEmission: emission)
         cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
         cell.boutonInfo.isHidden = emission.conseil.isEmpty
-        cell.backgroundColor = couleursEEUdF5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.backgroundColor = couleurs5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
         cell.boutonInfo.setTitle("\u{2007}", for: .normal)
         return cell
     }
@@ -234,12 +234,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let hauteurLabel = CGFloat(24.0)
         let headerView = UIView() //frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: hauteurLabel + 2 * margeVerticale))
         //        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
-        headerView.backgroundColor = couleursEEUdF5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
+        headerView.backgroundColor = couleurs5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
         headerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline).withSize(21) //  .boldSystemFont(ofSize: 24) // UIFont(name: "Verdana", size: 20)
         var blanc: CGFloat = 0
         var alpha: CGFloat = 0
-        couleursEEUdF5[section].getWhite(&blanc, alpha: &alpha)
+        couleurs5[section].getWhite(&blanc, alpha: &alpha)
         //        print("blanc \(blanc)")
         headerLabel.textColor = blanc > 0.5 ? .black : .white
         headerLabel.text = titreSection // self.tableView(self.tableView, titleForHeaderInSection: section)
@@ -384,7 +384,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                 lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
             }
         }
-        self.ajusteQuantitesLiees(ligne: ligne)
+        ajusteQuantitesLiees(ligne: ligne)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne]) //, afficherPictos: afficherPictos)
         DispatchQueue.main.async{
@@ -425,24 +425,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-    func ajusteQuantitesLiees(ligne: Int) {
-        switch ligne {
-        case SorteEmission.duree.rawValue:
-            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-        case SorteEmission.repasViandeRouge.rawValue:
-            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-        case SorteEmission.repasViandeBlanche.rawValue:
-            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
-        case SorteEmission.repasVegetarien.rawValue:
-            ajusteMaxEtQuantiteRepasParType(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
-        case SorteEmission.effectif.rawValue:
-            actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-        case SorteEmission.optimist.rawValue, SorteEmission.caravelle.rawValue, SorteEmission.deriveur.rawValue, SorteEmission.canot.rawValue, SorteEmission.zodiac.rawValue:
-            actualiseValeurMaxBateaux()
-        default: let dummy = 1
-        }
-        
-    }
     
     
     func activerModeZoomGlissiere(ligne: Int, cellule: CelluleEmission, echelleLog: Bool) {

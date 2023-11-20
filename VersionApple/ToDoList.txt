@@ -22,11 +22,8 @@ Hervé : En ajoutant un tag dans les infos de la target, ensuite dans ton code t
 Concrètement : https://stackoverflow.com/questions/24369272/swift-ios-deployment-target-command-line-flag
 
 Conférences scientifiques
-cf graphistes Unige / Jacques Erard
-- Ecran de démarrage
-- Icone : Blanc sur rose / sceau en bas à droite
-- gamme de couleurs pour les rubriques
-
+- data
+- ajuster les réglages automatiques par système
 - picto : pas assez lisibles - contours seuls ? Monochromes ?
 
 ********************************************

@@ -14,18 +14,13 @@ func couleur(rouge: Double, vert: Double, bleu: Double) -> UIColor {
     return UIColor(red: CGFloat(rouge / 255.0), green: CGFloat(vert / 255.0), blue: CGFloat(bleu / 255.0), alpha: 1.0)
 }
 
-let vert2 = couleur(rouge: 58, vert: 170, bleu: 53)
-let vert1 = couleur(rouge: 149, vert: 193, bleu: 31)
-let vert3 = couleur(rouge: 222, vert: 220, bleu: 0)
-let jaune = couleur(rouge: 255, vert: 229, bleu: 0)
-let orange = couleur(rouge: 243, vert: 146, bleu: 0)
+
+// couleurs génériques
+let vert2 = couleur(rouge: 58, vert: 170, bleu: 53) // la couleur "bien" // aussi utilisée dans les couleurs unionistes
+let orange = couleur(rouge: 243, vert: 146, bleu: 0)  // la couleur "moyen"
 let rougeVif = couleur(rouge: 228, vert: 31, bleu: 19)
-let rouge = couleur(rouge: 190, vert: 22, bleu: 34)
-let bleuCiel = couleur(rouge: 159, vert: 197, bleu: 232)
-let grisTresClair = couleur(rouge: 229, vert: 229, bleu: 234)   // équivalent du systemGray5 en mode clair. Cf https://noahgilmore.com/blog/dark-mode-uicolor-compatibility/
-let bleuMarine = couleur(rouge: 0, vert: 62, bleu: 98)
-//let couleursEEUdF5 = [grisTresClair, jaune, vert3, vert1, vert2, .white]
-let couleursEEUdF5 = [grisTresClair, jaune, vert3, vert1, vert2, bleuMarine, .white]
+let rouge = couleur(rouge: 190, vert: 22, bleu: 34) // la couleur "mal"
+//let bleuCiel = couleur(rouge: 159, vert: 197, bleu: 232)
 
 func couleurIntermediaire(couleur1: UIColor, couleur2: UIColor, ratio: Double) -> UIColor {
     if ratio < 0 {

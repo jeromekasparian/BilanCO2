@@ -129,7 +129,7 @@ class ViewControllerAvecCamembert: UIViewController {
         var ligneActiveCorrigee = ligneActive
         var compteurLigne = 0
         for emission in lesEmissions {
-            let emissionCopiee = emission.duplique() //TypeEmission(categorie: emission.categorie, nom: emission.nom, unite: emission.unite, valeurMax: emission.valeurMax, valeur: emission.valeur, facteurEmission: emission.facteurEmission, parPersonne: emission.parPersonne, parKmDistance: emission.parKmDistance, parJour: emission.parJour, echelleLog: emission.echelleLog, valeurEntiere: emission.valeurEntiere, valeurMaxSelonEffectif: emission.valeurMaxSelonEffectif, valeurMaxNbRepas: emission.valeurMaxNbRepas, emission: emission.emission, conseil: emission.conseil, nomCourt: emission.nomCourt, picto: emission.picto, nomsRessources: emission.nomsRessources, liensRessources: emission.liensRessources, nomPluriel: emission.nomPluriel, sectionOptionnelle: emission.sectionOptionnelle)
+            let emissionCopiee = emission.duplique() //TypeEmission(categorie: emission.categorie, nom: emission.nom, unite: emission.unite, valeurMax: emission.valeurMax, valeur: emission.valeur, facteurEmission: emission.facteurEmission, parPersonne: emission.parPersonne, parKmDistance: emission.parKmDistance, parJour: emission.parJour, echelleLog: emission.echelleLog, valeurEntiere: emission.valeurEntiere, valeurMaxSelonEffectif: emission.valeurMaxSelonEffectif, valeurMaxParJour: emission.valeurMaxParJour, emission: emission.emission, conseil: emission.conseil, nomCourt: emission.nomCourt, picto: emission.picto, nomsRessources: emission.nomsRessources, liensRessources: emission.liensRessources, nomPluriel: emission.nomPluriel, sectionOptionnelle: emission.sectionOptionnelle)
             if tableauCummule.isEmpty {
                 tableauCummule.append(emissionCopiee)
             } else {
@@ -175,7 +175,7 @@ class ViewControllerAvecCamembert: UIViewController {
                 let numeroSection = lesSections.firstIndex(where: {$0.nom == emission.categorie}) ?? 0
                 let agrandirSecteur = ligne == ligneEnCoursCorrigee || (ligneEnCoursCorrigee == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) // || (ligneEnCoursCorrigee == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCoursCorrigee == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
                 let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
-                dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleursEEUdF5[numeroSection])
+                dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurs5[numeroSection])
                 debut = debut + intervalle
                 dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurSeparationNoire)
             } // if emission.valeur > 0
