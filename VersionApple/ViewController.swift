@@ -187,7 +187,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     func creeCelluleNormale (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let emission = lesEmissions[numeroDeLigne(indexPath: indexPath)]
+        let ligne = numeroDeLigne(indexPath: indexPath)
+        let emission = lesEmissions[ligne]
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
         cell.delegate = self
         cell.selectionStyle = .none
@@ -209,6 +210,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
         cell.labelNom.text = texteNomValeurUnite(emission: emission) //, afficherPictos: afficherPictos)
         cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
+        let mettreTitreCelluleEnRouge = (ligne == SorteEmission.duree.rawValue || ligne == SorteEmission.effectif.rawValue) && lesEmissions[ligne].valeur == 0
+        cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
+
         cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
         cell.actualiseEmissionIndividuelle(typeEmission: emission)
         cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
@@ -387,6 +391,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         ajusteQuantitesLiees(ligne: ligne)
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne]) //, afficherPictos: afficherPictos)
+        let mettreTitreCelluleEnRouge = (ligne == SorteEmission.duree.rawValue || ligne == SorteEmission.effectif.rawValue) && lesEmissions[ligne].valeur == 0
+        cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
+
         DispatchQueue.main.async{
             self.boutonExport.isHidden = emissionsCalculees == 0
             self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0

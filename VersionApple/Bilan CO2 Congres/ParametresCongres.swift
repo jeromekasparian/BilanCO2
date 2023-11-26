@@ -19,19 +19,33 @@ enum SorteEmission: Int {
     case pausesCafe
     case voyageTrain
     case voyageAvionMCEco
-    case voyageAvionMCBusiness
     case voyageAvionLCEco
+    case voyageAvionMCBusiness
     case voyageAvionLCBusiness
+    case voyageZoom
     case taxiAeroport
     case taxiLocal
-    case centreCongres
     case hotelEco
     case hotelMoyen
     case hotelLuxe
+    case centreCongres
     case goodie
     case cleUSB
     case impression
     case distance = -1
+    
+//    static func > (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
+//        return premier.rawValue > deuxieme.rawValue
+//    }
+//    static func < (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
+//        return premier.rawValue < deuxieme.rawValue
+//    }
+//    static func >= (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
+//        return premier.rawValue >= deuxieme.rawValue
+//    }
+//    static func <= (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
+//        return premier.rawValue <= deuxieme.rawValue
+//    }
 }
 
 // couleurs Unige
@@ -73,17 +87,20 @@ func ajusteQuantitesLiees(ligne: Int) {
         ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelMoyen, priorite2: SorteEmission.hotelEco, priorite3: SorteEmission.hotelLuxe)
     case SorteEmission.hotelLuxe.rawValue:
         ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelLuxe, priorite2: SorteEmission.hotelMoyen, priorite3: SorteEmission.hotelEco)
+
     case SorteEmission.voyageTrain.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
     case SorteEmission.voyageAvionMCEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness])
-    case SorteEmission.voyageAvionMCBusiness.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
     case SorteEmission.voyageAvionLCEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
+    case SorteEmission.voyageAvionMCBusiness.rawValue:
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
     case SorteEmission.voyageAvionLCBusiness.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCEco])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageZoom])
 //        ajusteMaxEtQuantiteHotelParType
+    case SorteEmission.voyageZoom.rawValue:
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageZoom, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness])
     default: let dummy = 1
     }
     

@@ -217,7 +217,7 @@ func texteNomValeurUnite(emission: TypeEmission) -> String { //, afficherPictos:
     }
 }
 
-
+// pourrait être fusionné avec la version à n lignes
 func ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
     let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
     let valeurMaxi = lesEmissions[priorite1.rawValue].valeurMaxParJour == 0 ? lesEmissions[priorite1.rawValue].valeurMax : nombreJours * lesEmissions[priorite1.rawValue].valeurMaxParJour
@@ -235,10 +235,12 @@ func ajusteMaxEtTotalNLignes(priorites: [SorteEmission]) {
     lesEmissions[priorites.first!.rawValue].valeur = min(lesEmissions[priorites.first!.rawValue].valeur, valeurMaxi)
     guard priorites.count > 2 else {return}
     var cumul = lesEmissions[priorites.first!.rawValue].valeur
-    for i in 1...(priorites.count - 1) {
+    for i in 1...(priorites.count - 2) {
         lesEmissions[priorites[i].rawValue].valeur = min(lesEmissions[priorites[i].rawValue].valeur, valeurMaxi - cumul)
         cumul = cumul + lesEmissions[priorites[i].rawValue].valeur
     }
+    lesEmissions[priorites.last!.rawValue].valeur = valeurMaxi - cumul
+//    print("ajuste", priorites.last!,  lesEmissions[priorites.last!.rawValue].valeur)
 //    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, valeurMaxi - lesEmissions[priorite1.rawValue].valeur)
 //    lesEmissions[priorite3.rawValue].valeur = valeurMaxi - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
 }

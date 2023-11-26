@@ -18,19 +18,7 @@
 
 // ViewControllerExplications
 
-//"texteMethodo" = "L'app estime les émissions de gaz à effet de serre (converties en équivalent CO₂) en se basant sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout
-//
-//## blablabla
-//
-//- Repas : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaire, etc.
-//- Cuisson : l'estimation est basée sur un temps de cuisson moyen, il ne prend pas en compte le détail des pratiques : usage des couvercles, protection contre le vent, tailles des casseroles, arrêt du gaz avant la fin de cuisson.
-//     Les repas qui ne sont pas cuisinés au gaz sont supposés cuits au feu de bois, avec un impact carbone nul. On considère en effet que dans une forêt gérée durablement, les arbres repoussent et stockent du carbone au même rythme qu'on en libère par la combustion du bois. À noter que ce raisonnement n'est valable qu'à long terme (30 ans). À court terme la combustion du bois dégage du CO₂.
-//- Transports et déplacements : les estimations considèrent des véhicules de taille moyenne dans leur catégorie.
-//     Si un trajet en train est complété par un car entre la gare et le lieu de camp, comptez ce dernier dans les déplacements sur place. De manière générale, si vous utilisez plusieurs moyens de transport, entrez celui qui est utilisé sur la plus grande distance en tant que trajet vers le camp, et l'autre comme un déplacement sur place.
-//- Hébergement : les estimations prend en compte un amortissement des tentes sur 5 ans et des marabouts sur 8 ans, sur la base de compositions typiques de chaque type de tente (tente de patrouille et marabouts de 12 m). Les locaux en dur sont supposés utilisés 4 mois par an (centre de vacances).
-//- Matériel : les émissions sont estimées sur la base des type de matériel généralement utilisé (outillage, matériel collectif de cuisine). L'essentiel des émissions provient du matériel en métal. Contrairement aux tentes, il n'est pas compté d'amortissement : les émissions des achats faits pour un camp sont attribuées à ce camp.";
-//
-//
+
 "texteMethodo" = "L'app estime les émissions de gaz à effet de serre, converties en équivalent CO₂. Elle se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout.
 
    • ***Repas*** : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaire, etc.
@@ -344,3 +332,59 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "TitreRessourceCrédits" = "";
 "LienRessourceCrédits" = "";
 "NomPlurielCrédits" = "Crédits";
+
+
+// version Congrès
+"Alimentation"  = "Alimentation";
+"Voyages" = "Voyages";
+"Déplacements sur place" = "Déplacements sur place";
+"Hébergement & bâtiments" = "Hébergement & bâtiments";
+"Matériel" = "Matériel";
+"Repas avec bœuf, veau ou agneau" = "Repas avec bœuf, veau ou agneau";
+"Repas avec porc, volaille, poisson" = "Repas avec porc, volaille, poisson";
+"Repas végétarien" = "Repas végétarien";
+"pause café / jour" = "pause café / jour";
+"pauses café / jour" = "pauses café / jour";
+"Train" = "Train";
+"Avion moyen-courrier classe économique" = "Avion moyen-courrier classe économique";
+"Avion long-courrier classe économique" = "Avion long-courrier classe économique";
+"Avion moyen-courrier business" = "Avion moyen-courrier business";
+"Avion long-courrier business" = "Avion long-courrier business";
+"Participation à distance" = "Participation à distance";
+"Taxi domicile ↔︎ gare ou aéroport" = "Taxi domicile ↔︎ gare ou aéroport";
+"Taxi sur place" = "Taxi sur place";
+"Auberge de jeunesse / AirBNB / Hotel économique" = "Auberge de jeunesse / AirBNB / Hotel économique";
+"Hotel ⭐️ ⭐️" = "Hotel ⭐️ ⭐️";
+"Hotel ⭐️ ⭐️ ⭐️ ⭐️" = "Hotel ⭐️ ⭐️ ⭐️ ⭐️";
+"Centre de congrès" = "Centre de congrès";
+"goodie / participant" = "goodie / participant";
+"goodies / participant" = "goodies / participant";
+"clé usb / participant" = "clé usb / participant";
+"clés usb / participant" = "clés usb / participant";
+"Documents" = "Documents";
+"%% des participants" = "%% des participants";
+"m2" = "m²";
+"page / participant" = "page / participant";
+"pages / participant" = "pages / participant";
+
+"ConseilDureeCongres" = "Si le congrès est plus long, les transports sont amortis sur plus de jours";
+"ConseilBoeufCongres" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. Si vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
+"ConseilPouletCongres" = "La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. Si vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
+"ConseilVegeCongres" = "Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. Si vous organisez les repas, vous pouvez en tenir compte dans la conception des menus. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre locale et de saison à proximité.";
+"Conseil train" = "Le train est (avec le bateau) de loin le mode de transport le moins polluant. En tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires.";
+"TitreRessourceTrain" = "Horaires en Europe";
+"LienRessourceTrain" = "https://reiseauskunft.bahn.de/bin/query.exe/f";
+"ConseilAvionMCEco" = "Sur un même trajet, l'avion émet au moins 100 fois plus de CO₂ que le train. En tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train.";
+"TitreRessourceMCEco" = "Horaires en Europe";
+"LienRessourceMCEco" = "https://reiseauskunft.bahn.de/bin/query.exe/f";
+"ConseilAvionLCEco" = "Les voyages en avion sont particulièrement émetteurs de CO₂. Pour de courtes interventinos, la visioconférence peut constituer une alternative.";
+"ConseilAvionMCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
+"ConseilAvionLCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
+"ConseilVisio" = "Pour les participants dont la présence physique n'est pas indispensable, la diffusion en direct peut constituer une alternative";
+"ConseilTaxiMaison" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train";
+"ConseilTaxiLocal" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train. En tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
+"ConseilHotel" = "Les émissions de CO₂ d'une chambre d'hôtel sont essentiellement liées à sa surface";
+"ConseilCentreCongres" = "Les émissions de CO₂ des locaux utilisés sont essentiellement liées à leur surface : vous pouvez maîtriser ces émissions en adaptant les locaux aux besoins";
+"ConseilGoodies" = "Le textile et l'électronique sont particulièrement émetteurs de CO₂, sans parler des autres impacts environnementaux. Vous pouvez interroger leur utilité et inciter les exposants à faire de même";
+"ConseilUSB" = "Une clé USB correspond à autant d'émissions de CO₂ que l'impression de 40 pages. La disponibilité en ligne du programme peut constituer une alternative.";
+"ConseilImpression" = "L'impression de 40 pages produit autant d'émissions de CO₂ que la fabrication d'une clé USB. La disponibilité en ligne du programme peut constituer une alternative.";
