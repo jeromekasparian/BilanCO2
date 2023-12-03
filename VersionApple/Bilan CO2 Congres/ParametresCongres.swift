@@ -13,6 +13,7 @@ let nomFichierData = "DataInternationalCongres"
 enum SorteEmission: Int {
     case duree
     case effectif
+    case participationZoom
     case repasViandeRouge
     case repasViandeBlanche
     case repasVegetarien
@@ -22,7 +23,6 @@ enum SorteEmission: Int {
     case voyageAvionLCEco
     case voyageAvionMCBusiness
     case voyageAvionLCBusiness
-    case voyageZoom
     case taxiAeroport
     case taxiLocal
     case hotelEco
@@ -69,6 +69,8 @@ let couleurs5 = [violet2, violet1, orange1, vertA, vertB, marron, .white]
 let evenement = Evenement.congres
 
 func ajusteQuantitesLiees(ligne: Int) {
+    let ligneVisio = SorteEmission.participationZoom.rawValue
+    let valeurVisio = ligneVisio > 0 ? lesEmissions[ligneVisio].valeur : 0
     switch ligne {
     case SorteEmission.duree.rawValue:
         ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
@@ -81,26 +83,28 @@ func ajusteQuantitesLiees(ligne: Int) {
         ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
     case SorteEmission.effectif.rawValue:
         actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
+
     case SorteEmission.hotelEco.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelEco, priorite2: SorteEmission.hotelMoyen, priorite3: SorteEmission.hotelLuxe)
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco, SorteEmission.hotelMoyen, SorteEmission.hotelLuxe], valeurDesAlternatives: valeurVisio)
     case SorteEmission.hotelMoyen.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelMoyen, priorite2: SorteEmission.hotelEco, priorite3: SorteEmission.hotelLuxe)
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelMoyen, SorteEmission.hotelEco, SorteEmission.hotelLuxe], valeurDesAlternatives: valeurVisio)
     case SorteEmission.hotelLuxe.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelLuxe, priorite2: SorteEmission.hotelMoyen, priorite3: SorteEmission.hotelEco)
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelLuxe, SorteEmission.hotelEco, SorteEmission.hotelMoyen], valeurDesAlternatives: valeurVisio)
 
     case SorteEmission.voyageTrain.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
     case SorteEmission.voyageAvionMCEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
     case SorteEmission.voyageAvionLCEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
     case SorteEmission.voyageAvionMCBusiness.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageZoom])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
     case SorteEmission.voyageAvionLCBusiness.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageZoom])
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness], valeurDesAlternatives: valeurVisio)
 //        ajusteMaxEtQuantiteHotelParType
-    case SorteEmission.voyageZoom.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageZoom, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness])
+    case SorteEmission.participationZoom.rawValue:
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco, SorteEmission.hotelMoyen, SorteEmission.hotelLuxe], valeurDesAlternatives: valeurVisio)
     default: let dummy = 1
     }
     
@@ -113,3 +117,7 @@ func actualiseValeursMax() {
     ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelEco, priorite2: SorteEmission.hotelMoyen, priorite3: SorteEmission.hotelLuxe)
 //        actualiseValeurMaxBateaux()
 }
+
+let pictoBien = "👍"
+let pictoBof = "🫳"
+let pictoMal = "👎"

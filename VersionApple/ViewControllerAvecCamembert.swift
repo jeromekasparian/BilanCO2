@@ -219,24 +219,24 @@ class ViewControllerAvecCamembert: UIViewController {
         let taillePicto: CGFloat = 1.8
         let frame = vueDeDestination.frame
         if ratioSoutenabilite > seuilHaut {
-            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
         } else if ratioSoutenabilite < seuilBas {
-            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
         } else if curseurActif {
             if ratioSoutenabilite > seuilMilieu {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilHaut - ratioSoutenabilite) / (seuilHaut - seuilMilieu))
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilMilieu) / (seuilHaut - seuilMilieu))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilHaut - ratioSoutenabilite) / (seuilHaut - seuilMilieu))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilMilieu) / (seuilHaut - seuilMilieu))
             } else {  // entre 1 et le seuil bas
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilMilieu - ratioSoutenabilite) / (seuilMilieu - seuilBas))
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilBas) / (seuilMilieu - seuilBas))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilMilieu - ratioSoutenabilite) / (seuilMilieu - seuilBas))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilBas) / (seuilMilieu - seuilBas))
             }
         } else {
             if ratioSoutenabilite > seuilMilieu + ((seuilHaut - seuilMilieu) / 2.0 ) {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "😀", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
             } else if ratioSoutenabilite < seuilMilieu - ((seuilMilieu - seuilBas) / 2.0 ) {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "☹️", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
             } else {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: "😐", x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
             }
         }
     }

@@ -38,6 +38,7 @@ enum SorteEmission: Int {
     case canot
     case zodiac
     case essence
+    case participationZoom = -1
 }
 
 
@@ -83,3 +84,7 @@ func actualiseValeurMaxBateaux(){
     lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax = max(lesEmissions[SorteEmission.voyageCamion.rawValue].valeur, trajetsCamionsMaxTheorique)
 //    lesEmissions[SorteEmission.voyageCamion.rawValue].valeur = min(lesEmissions[SorteEmission.voyageCamion.rawValue].valeur, lesEmissions[SorteEmission.voyageCamion.rawValue].valeurMax)
 }
+
+let pictoBien = "😀"
+let pictoBof = "😐"
+let pictoMal = "☹️"

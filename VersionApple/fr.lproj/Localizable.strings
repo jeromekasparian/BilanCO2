@@ -416,7 +416,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAvionLCEco" = "Les voyages en avion sont particulièrement émetteurs de CO₂. Pour de courtes interventinos, la visioconférence peut constituer une alternative.";
 "ConseilAvionMCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
 "ConseilAvionLCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
-"ConseilVisio" = "Pour les participants dont la présence physique n'est pas indispensable, la diffusion en direct peut constituer une alternative";
+"ConseilVisio" = "Pour les participants dont la présence physique n'est pas indispensable, la diffusion en direct peut constituer une alternative pour réduire l'impact des transports, mais aussi de l'hébergement";
 "ConseilTaxiMaison" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train";
 "ConseilTaxiLocal" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train. \nEn tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
 "ConseilHotel" = "Les émissions de CO₂ d'une chambre d'hôtel sont essentiellement liées à sa surface";

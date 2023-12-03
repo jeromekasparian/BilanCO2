@@ -5,5 +5,5 @@
   Created by Jérôme Kasparian on 21/09/2023.
   
 */
-"CFBundleDisplayName" = "CO₂ budget";
+"CFBundleDisplayName" = "CO₂ budget";  // le CFBundleDisplayName du info.plist (ou de l'onglet info du target) doit être égal au nom du target pour qu'il accepte de prendre en compte les valeurs localisées de CFBundleDisplayName dans InfoPlist.strings dans l'affichage du nom de l'app dans le finder sous MacOS
 "CFBundleName" = "Scouting camp CO₂ budget";

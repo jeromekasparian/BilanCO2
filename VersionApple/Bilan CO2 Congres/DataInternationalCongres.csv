@@ -1,16 +1,16 @@
 Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt;Picto;TitreRessource;LienRessource;NomPluriel;CategorieOptionnelle
 CategorieInformations généralesDurée;NomInformations généralesDurée;UnitéInformations généralesDurée;21;0;1;;;;1;;;ConseilDureeCongres;;;;;NomPlurielInformations généralesDurée;
 CategorieInformations généralesEffectif;NomInformations généralesEffectif;UnitéInformations généralesEffectif;10000;0;1;;;1;1;;;;;;;;NomPlurielInformations généralesEffectif;
+CategorieInformations généralesEffectif;Participation à distance;%%;100;1;0.01;;1;;;;;ConseilVisio;Visio;🎥;;;;
 Alimentation;Repas avec bœuf, veau ou agneau;%%;100;6.29;0.01;;2;;;;;ConseilBoeufCongres;Viande rouge;🥩;;;;
 Alimentation;Repas avec porc, volaille, poisson;%%;100;1.35;0.01;;2;;;;;ConseilPouletCongres;Viande blanche;🍗;;;;
 Alimentation;Repas végétarien;%%;100;0.51;0.01;;2;;;;;ConseilVegeCongres;Vege;🌽;;;;
 Alimentation;pause café / jour;;4;0.11;1;;1;;1;;;;Café;☕️;;;pauses café / jour;
 Voyages;Train;%%;100;2;0.01;;;;;;;ConseilTrain;Train;🚆;TitreRessourceTrain;LienRessourceTrain;;
-Voyages;Avion moyen-courrier classe économique;%%;100;580;0.01;;;;;;;ConseilAvionMCEco;Avion;✈️;TitreRessourceMCEco;LienRessourceMCEco;;
-Voyages;Avion long-courrier classe économique;%%;100;2860;0.01;;;;;;;ConseilAvionLCEco;Avion;🛫;;;;
-Voyages;Avion moyen-courrier business;%%;100;1320;0.01;;;;;;;ConseilAvionMCBusiness;Avion;🛩️;;;;
-Voyages;Avion long-courrier business;%%;100;6630;0.01;;;;;;;ConseilAvionLCBusiness;Avion;🛩️;;;;
-Voyages;Participation à distance;%%;100;1;0.01;;1;;;;;ConseilVisio;Visio;🎥;;;;
+Voyages;Avion moyen-courrier classe économique;%%;100;580;0.01;;;;;;;ConseilAvionMCEco;Avion;🛩️;TitreRessourceMCEco;LienRessourceMCEco;;
+Voyages;Avion long-courrier classe économique;%%;100;2860;0.01;;;;;;;ConseilAvionLCEco;Avion;✈️;;;;
+Voyages;Avion moyen-courrier business;%%;100;1320;0.01;;;;;;;ConseilAvionMCBusiness;Avion;🛩️฿;;;;
+Voyages;Avion long-courrier business;%%;100;6630;0.01;;;;;;;ConseilAvionLCBusiness;Avion;✈️฿;;;;
 Déplacements sur place;Taxi domicile ↔︎ gare ou aéroport;%% des participants;100;12;0.01;;;;;;;ConseilTaxiMaison;;🚕;;;;
 Déplacements sur place;Taxi sur place;%% des participants;100;4;0.01;;1;;;;;ConseilTaxiLocal;;🚖;;;;
 Hébergement & bâtiments;Auberge de jeunesse / AirBNB / Hotel économique;%%;100;7;0.01;;1;;;;;ConseilHotel;Hotel eco;🛏️;;;;
