@@ -9,13 +9,16 @@ import Foundation
 import UIKit
 
 protocol CelluleCreditsDelegate: AnyObject {
-    func ouvrirWebEEUdF()
+    func ouvrirWebCredits()
 //    func finMouvementGlissiere(cell: CelluleEmission)
 //    func afficheConseil(cell: CelluleEmission)
 }
 
 class CelluleCredits: UITableViewCell {
     @IBOutlet var boutonOuvrirWeb: UIButton!
+    @IBOutlet var labelCopyright: UILabel!
+    @IBOutlet var boutonAdresseWeb: UIButton!
+    @IBOutlet var imageLogo: UIImageView!
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
 //        
@@ -37,7 +40,8 @@ class CelluleCredits: UITableViewCell {
     }
     
 
-    @IBAction func ouvrirWebEEUdF() {
-        self.delegate?.ouvrirWebEEUdF()
+    @IBAction func ouvrirWebCredits() {
+        self.delegate?.ouvrirWebCredits()
     }
+    
 }

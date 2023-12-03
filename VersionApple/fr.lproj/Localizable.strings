@@ -11,6 +11,8 @@
 "Un conseil" = "Un conseil";
 "OK" = "OK";
 "https://www.eeudf.org" = "https://www.eeudf.org";
+"www.eeudf.org" = "www.eeudf.org";
+"© 2023 Jérôme Kasparian, EEUdF" = "© 2023 Jérôme Kasparian, EEUdF";
 "Initialisation" = "Réinitialisation";
 "Effacer les données ?" = "Effacer les données ?";
 "Annuler" = "Annuler";
@@ -19,7 +21,7 @@
 // ViewControllerExplications
 
 
-"texteMethodo" = "L'app estime les émissions de gaz à effet de serre, converties en équivalent CO₂. Elle se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout.
+"texteMethodoCamp" = "L'app estime les émissions de gaz à effet de serre, converties en équivalent CO₂. Elle se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un camp scout.
 
    • ***Repas*** : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaire, etc.
 
@@ -36,10 +38,10 @@
 
     • ***Activités spécifiques*** : L'impact des activités marines est essentiellement lié au transport des bateaux et à leur amortissement sur 30 ans, sauf les Optimists (50 ans) et les Zodiacs (10 ans). La plupart des autres activités d'un camp scout peuvent être considérées comme incluses dans les achats de matériel";
 
-"texteGraphique" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au camp.
+"texteGraphiqueCamp" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au camp.
 Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour de camp.";
 
-"texteEmissionsAcceptables" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour de camp. \n\nLes émissions du camp sont ramenées au nombre de participants et à la durée du camp, puis comparées avec cette référence.";
+"texteEmissionsAcceptablesCamp" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour de camp. \n\nLes émissions du camp sont ramenées au nombre de participants et à la durée du camp, puis comparées avec cette référence.";
 
 "texteRessourcesPedagogiques" = "Quelques ressources pour animer une séquence de sensibilisation en s'appuyant sur l'app :
  
@@ -47,7 +49,7 @@ Le cercle vert permet de les comparer avec les émissions acceptables pour prés
    • pour les jeunes (16-18 ans) : https://bibli.eeudf.org/?p=8975
    • pour les jeunes (14-16 ans) : https://bibli.eeudf.org/?p=8982";
 
-"texteLimites" = "L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
+"texteLimitesCamp" = "L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un camp scout : transports, alimentation, matériel collectif.
 
 En particulier, elle ne prend pas en compte :
    • les déchets
@@ -59,11 +61,11 @@ En particulier, elle ne prend pas en compte :
 
 Pour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.";
 
-"texteSources" = "   • climatmundi, bilan carbone EEUdF, 2008
+"texteSourcesCamp" = "   • climatmundi, bilan carbone EEUdF, 2008
    • Ademe, bilans-ges.ademe.fr
    • Carbone 4, www.carbone4.com/analyse-faq-voiture-electrique";
 
-"texteRemerciements" = "Jérémie Balas, Éléonore Berger, Louise de Boysson, Suzanne Chevrel, Flore-Anne de Clermont, Matthieu Escande, Yolène Guihard, Daniel Hollaar, Hervé Kasparian, Agathe Lafont, Thomas Masseran, Juliette Maupas, Alexia Peyrard, Roxane de Pol, Paul Manguy, Clément Sartron";
+"texteRemerciementsCamp" = "Jérémie Balas, Éléonore Berger, Louise de Boysson, Suzanne Chevrel, Flore-Anne de Clermont, Matthieu Escande, Yolène Guihard, Daniel Hollaar, Hervé Kasparian, Agathe Lafont, Thomas Masseran, Juliette Maupas, Alexia Peyrard, Roxane de Pol, Paul Manguy, Clément Sartron";
 
 "Méthodologie & hypothèses" = "Méthodologie & hypothèses";
 "Graphique" = "Graphique";
@@ -90,14 +92,14 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 ", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t éq. CO₂ (%.0f%%)\n";
 "\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg d'équivalent CO₂";
 "\nTotal : %.2f t CO₂" = "\nTotal : %.2f t d'équivalent CO₂";
-"\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app " = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app Bilan CO₂ camp scout";
+"\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app Camp" = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app Bilan CO₂ camp scout";
 "Bilan CO2 camp scout" = "Bilan CO₂ camp scout";   // doit matcher avec la ligne précédente !!
 " (%.1f t / personne)\n" = " (%.1f t / personne)\n";
 " (%.1f kg / personne)\n" = " (%.1f kg / personne)\n";
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
 "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
-"lienAppStore" = "https://itunes.apple.com/app/id1645719853";
+"lienAppStoreCamp" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
@@ -335,6 +337,40 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 
 
 // version Congrès
+
+// methodo
+"texteMethodoCongres" = "L'app estime les émissions de gaz à effet de serre, converties en équivalent CO₂. Elle se base sur des facteurs d'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un congrès.
+
+   • ***Repas*** : l'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d'intermédiaires, etc.
+
+   • ***Transports et déplacements*** : les estimations considèrent des valeurs moyennes pour chaque mode de transport.
+
+   • ***Matériel*** : les émissions sont estimées sur la base d'objets typiques dans leur catégorie.";
+
+"texteGraphiqueCongres" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au congrès.
+Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour.";
+
+"texteEmissionsAcceptablesCongres" = "On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour. \n\nLes émissions du congrès sont ramenées au nombre de participants et à la durée du congrès, puis comparées avec cette référence.";
+
+"texteLimitesCongres" = "L'app permet d'estimer l'ordre de grandeur des principales émissions de gaz à effet de serre d'un congrès : transports, alimentation, hébergement.
+
+En particulier, elle ne prend pas en compte :
+   • les déchets
+   • les activités spécifiques
+   • les émissions liées au matériel individuel des participants
+   • les émissions des participants qui ne sont pas liées au congrès mais qui se poursuivent pendant celui-ci : leur domicile notamment.
+
+Pour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.";
+
+"texteSourcesCongres" = "   • Ademe, bilans-ges.ademe.fr
+   • Ademe, impactco2.fr
+   • developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/
+   • www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/";
+
+"texteRemerciementsCongres" = "Remerciemnts à Emeline Bolmont et Hervé Kasparian";
+
+
+// Données
 "Alimentation"  = "Alimentation";
 "Voyages" = "Voyages";
 "Déplacements sur place" = "Déplacements sur place";
@@ -360,21 +396,21 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "goodie / participant" = "goodie / participant";
 "goodies / participant" = "goodies / participant";
 "clé usb / participant" = "clé usb / participant";
-"clés usb / participant" = "clés usb / participant";
+"clés USB / participant" = "clés usb / participant";
 "Documents" = "Documents";
 "%% des participants" = "%% des participants";
 "m2" = "m²";
-"page / participant" = "page / participant";
+"page / participant" = "pages / participant";
 "pages / participant" = "pages / participant";
 
 "ConseilDureeCongres" = "Si le congrès est plus long, les transports sont amortis sur plus de jours";
-"ConseilBoeufCongres" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. Si vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
-"ConseilPouletCongres" = "La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. Si vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
-"ConseilVegeCongres" = "Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. Si vous organisez les repas, vous pouvez en tenir compte dans la conception des menus. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre locale et de saison à proximité.";
-"Conseil train" = "Le train est (avec le bateau) de loin le mode de transport le moins polluant. En tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires.";
+"ConseilBoeufCongres" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
+"ConseilPouletCongres" = "La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
+"ConseilVegeCongres" = "Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. \nSi vous organisez les repas, vous pouvez en tenir compte dans la conception des menus. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre locale et de saison à proximité.";
+"ConseilTrain" = "Le train est (avec le bateau) de loin le mode de transport le moins polluant. \nEn tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires.";
 "TitreRessourceTrain" = "Horaires en Europe";
 "LienRessourceTrain" = "https://reiseauskunft.bahn.de/bin/query.exe/f";
-"ConseilAvionMCEco" = "Sur un même trajet, l'avion émet au moins 100 fois plus de CO₂ que le train. En tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train.";
+"ConseilAvionMCEco" = "Sur un même trajet, l'avion émet au moins 100 fois plus de CO₂ que le train. \nEn tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train.";
 "TitreRessourceMCEco" = "Horaires en Europe";
 "LienRessourceMCEco" = "https://reiseauskunft.bahn.de/bin/query.exe/f";
 "ConseilAvionLCEco" = "Les voyages en avion sont particulièrement émetteurs de CO₂. Pour de courtes interventinos, la visioconférence peut constituer une alternative.";
@@ -382,9 +418,29 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAvionLCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
 "ConseilVisio" = "Pour les participants dont la présence physique n'est pas indispensable, la diffusion en direct peut constituer une alternative";
 "ConseilTaxiMaison" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train";
-"ConseilTaxiLocal" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train. En tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
+"ConseilTaxiLocal" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train. \nEn tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
 "ConseilHotel" = "Les émissions de CO₂ d'une chambre d'hôtel sont essentiellement liées à sa surface";
 "ConseilCentreCongres" = "Les émissions de CO₂ des locaux utilisés sont essentiellement liées à leur surface : vous pouvez maîtriser ces émissions en adaptant les locaux aux besoins";
 "ConseilGoodies" = "Le textile et l'électronique sont particulièrement émetteurs de CO₂, sans parler des autres impacts environnementaux. Vous pouvez interroger leur utilité et inciter les exposants à faire de même";
 "ConseilUSB" = "Une clé USB correspond à autant d'émissions de CO₂ que l'impression de 40 pages. La disponibilité en ligne du programme peut constituer une alternative.";
 "ConseilImpression" = "L'impression de 40 pages produit autant d'émissions de CO₂ que la fabrication d'une clé USB. La disponibilité en ligne du programme peut constituer une alternative.";
+
+// interface
+"https://www.unige.ch" = "https://www.unige.ch";
+"www.unige.ch" = "www.unige.ch";
+"© 2023 Jérôme Kasparian, Université de Genève" = "© 2023 Jérôme Kasparian, Université de Genève";
+
+// affichage des résultats
+"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
+"Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre";
+"Les émissions de CO₂ de mon congrès" = "Impact climatique de mon congrès";
+"Impact climat de mon congrès" = "Impact climatique de mon congrès";
+
+"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
+"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
+"lienAppStoreCongres" = "https://itunes.apple.com/app/id6450590075";
+"\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres" = "\n\nEstimez et réduisez l'impact climatique de votre congrès avec l'app Bilan CO₂ congrès";
+"Bilan CO2 congrès" = "Bilan CO₂ congrès";   // doit matcher avec la ligne précédente !!

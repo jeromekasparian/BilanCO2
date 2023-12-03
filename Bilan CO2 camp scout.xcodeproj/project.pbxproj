@@ -27,7 +27,6 @@
 		B5154B1A2B0425050075D50A /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5154B1B2B0425050075D50A /* EmailSubjectActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */; };
 		B5154B1C2B0425850075D50A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
-		B5154B1D2B0425850075D50A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */; };
 		B5154B1E2B0425950075D50A /* PageBlanche.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */; };
 		B5154B222B0427F20075D50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5154B212B0427DB0075D50A /* Assets.xcassets */; };
 		B5154B232B0428360075D50A /* DataInternationalCongres.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */; };
@@ -36,6 +35,8 @@
 		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
 		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
 		B51AD1C228CA439700888CDD /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
+		B51FD8EC2B17935000F54E55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B51FD8EE2B17935000F54E55 /* InfoPlist.strings */; };
+		B51FD8F32B18CDE200F54E55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */; };
 		B5215E28290C7493008DA009 /* ViewControllerExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E27290C7493008DA009 /* ViewControllerExplications.swift */; };
 		B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E29290D3BD5008DA009 /* CreationPDF.swift */; };
 		B52DCA1B28DFA03F00DAA900 /* Couleurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DCA1A28DFA03F00DAA900 /* Couleurs.swift */; };
@@ -73,6 +74,10 @@
 		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
 		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
+		B51FD8ED2B17935000F54E55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B51FD8EF2B17935100F54E55 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B51FD8F12B18CD6C00F54E55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5215E27290C7493008DA009 /* ViewControllerExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExplications.swift; sourceTree = "<group>"; };
 		B5215E29290D3BD5008DA009 /* CreationPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationPDF.swift; sourceTree = "<group>"; };
 		B52DCA1A28DFA03F00DAA900 /* Couleurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couleurs.swift; sourceTree = "<group>"; };
@@ -121,6 +126,8 @@
 		B5154AF82B0423D30075D50A /* Bilan CO2 Congres */ = {
 			isa = PBXGroup;
 			children = (
+				B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */,
+				B51FD8EE2B17935000F54E55 /* InfoPlist.strings */,
 				B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */,
 				B5154B0B2B04240A0075D50A /* Bilan CO2 Congres.entitlements */,
 				B5154B242B04289C0075D50A /* ParametresCongres.swift */,
@@ -135,6 +142,8 @@
 		B5154B202B0427C60075D50A /* Bilan CO2 Camps */ = {
 			isa = PBXGroup;
 			children = (
+				B51FD8F02B18CD6C00F54E55 /* LaunchScreen.storyboard */,
+				B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */,
 				B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */,
 				B5154B212B0427DB0075D50A /* Assets.xcassets */,
 				B5154B262B0428C10075D50A /* ParametresCamps.swift */,
@@ -179,7 +188,6 @@
 				B5215E2B290D3C24008DA009 /* PasUtilise */,
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
 				B5E0FE89292A5044001D0790 /* Localizable.strings */,
-				B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
 				B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */,
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
@@ -281,10 +289,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B51FD8F32B18CDE200F54E55 /* LaunchScreen.storyboard in Resources */,
 				B5154B1C2B0425850075D50A /* Localizable.strings in Resources */,
+				B51FD8EC2B17935000F54E55 /* InfoPlist.strings in Resources */,
 				B5154B232B0428360075D50A /* DataInternationalCongres.csv in Resources */,
 				B5154B1E2B0425950075D50A /* PageBlanche.pdf in Resources */,
-				B5154B1D2B0425850075D50A /* InfoPlist.strings in Resources */,
 				B5154B062B0423D50075D50A /* LaunchScreen.storyboard in Resources */,
 				B5154B0D2B0424E80075D50A /* Assets.xcassets in Resources */,
 				B5154B032B0423D50075D50A /* Assets.xcassets in Resources */,
@@ -383,6 +392,23 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		B51FD8EE2B17935000F54E55 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B51FD8ED2B17935000F54E55 /* en */,
+				B51FD8EF2B17935100F54E55 /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B51FD8F02B18CD6C00F54E55 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B51FD8F12B18CD6C00F54E55 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		B54DCF9928C5134E00FBBAE3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -422,7 +448,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "VersionApple/Bilan CO2 Congres/Bilan CO2 Congres.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 6WS674AGSY;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -441,7 +467,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.unige.bilan-co-congres";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -462,7 +488,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "VersionApple/Bilan CO2 Congres/Bilan CO2 Congres.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 6WS674AGSY;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -481,7 +507,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.unige.bilan-co-congres";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -616,7 +642,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -656,7 +682,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

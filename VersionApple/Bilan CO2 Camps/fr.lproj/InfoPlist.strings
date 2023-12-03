@@ -6,4 +6,5 @@
   
 */
 "CFBundleDisplayName" = "Bilan CO₂";
-"CFBundleName" = "Bilan CO₂ camp scout";
+"CFBundleName" = "Bilan CO₂ Camp scout";
+//"CFBundleExecutable" = "Bilan CO₂ Camp scout";

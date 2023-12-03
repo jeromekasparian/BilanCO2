@@ -64,7 +64,7 @@ let marron = couleur(rouge: 0xbc, vert: 0xba, bleu: 0xa9)
 ////let couleursEEUdF5 = [grisTresClair, jaune, vert3, vert1, vert2, .white]
 
 
-let couleurs5 = [violet1, violet2, orange1, vertA, vertB, marron, .white]
+let couleurs5 = [violet2, violet1, orange1, vertA, vertB, marron, .white]
 
 let evenement = Evenement.congres
 

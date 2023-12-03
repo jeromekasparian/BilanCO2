@@ -40,46 +40,35 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     // désactiver les contraintes inutiles avant d'activer les nouvelles
-    func choisitContraintes(size: CGSize) -> Bool {
-        //        print("choisit contraintes Camembert debut")
-        let nouvelleOrientation: Orientation = size.width <= size.height * 1.1 ? .portrait : .paysage
-        //        if nouvelleOrientation != orientationResultats {
-        //            orientationResultats = nouvelleOrientation
-        //            let estModePortrait = nouvelleOrientation == .portrait
+    func choisitContraintes(size: CGSize, orientationGlobale: Orientation) -> Bool {
+        var nouvelleOrientation: Orientation = .paysage // size.width <= size.height * 1.1 ? .portrait : .paysage
+        if orientationGlobale == .portrait {
+            let tailleImageSiVertical = min(size.width, size.height / 4.0)
+            let tauxOccupationSiVertical = tailleImageSiVertical * tailleImageSiVertical / (size.width * min(size.width, size.height / 4.0))
+            let tailleImageSiHorizontal = min(size.width / 2.0, size.height / 2.0)
+            let tauxOccupationSiHorizontal = tailleImageSiHorizontal * tailleImageSiHorizontal / (size.width / 2.0 * min(tailleImageSiHorizontal, size.height / 2.0))
+            if tauxOccupationSiVertical > tauxOccupationSiHorizontal {
+                nouvelleOrientation = .portrait
+            }
+        } else {  // orientationGlobale == .paysage
+            let tailleImageSiVertical = min(size.width / 2, size.height / 2.0)
+            let tauxOccupationSiVertical = tailleImageSiVertical * tailleImageSiVertical / (size.width / 2.0 * min(tailleImageSiVertical, size.height / 2.0))
+            let tailleImageSiHorizontal = min(size.width / 4.0, size.height)
+            let tauxOccupationSiHorizontal = tailleImageSiHorizontal * tailleImageSiHorizontal / (size.height * min(size.height, size.width / 4.0)) // (size.width / 2.0 * min(tailleImageSiHorizontal, size.height / 2.0))
+            if tauxOccupationSiVertical > tauxOccupationSiHorizontal {
+                nouvelleOrientation = .portrait
+            }
+        }
         if nouvelleOrientation == .portrait && self.vueResultats.axis != .vertical { // self.contrainteAffichageEmissionsDroitePaysage.isActive {
             self.vueResultats.axis = .vertical
-//            self.contrainteAffichageEmissionsDroitePaysage.isActive = false
-//            self.contrainteAffichageEmissionsBasPaysage.isActive = false
-//            //                self.contrainteCamembertHautPaysage.isActive = false
-//            self.contrainteCamembertDroitePaysage.isActive = false
-//            self.contrainteCamembertCentreVPaysage.isActive = false
-//            self.contrainteAffichageEmissionsDroitePortrait.isActive = true
-//            self.contrainteAffichageEmissionsBasPortrait.isActive = true
-//            self.contrainteAffichageEmissionHauteurPortrait.isActive = true
-//            self.contrainteCamembertCentreHPortrait.isActive = true
-            //                self.contrainteCamembertGauchePortrait.isActive = true
             self.affichageEmissions.textAlignment = .center
-            //                print("choisit contraintes fin portrait true")
             return true
         } else if nouvelleOrientation == .paysage &&  self.vueResultats.axis != .horizontal { // self.contrainteAffichageEmissionsDroitePortrait.isActive {
             self.vueResultats.axis = .horizontal
-//            self.contrainteAffichageEmissionsDroitePortrait.isActive = false
-//            self.contrainteAffichageEmissionsBasPortrait.isActive = false
-//            self.contrainteAffichageEmissionHauteurPortrait.isActive = false
-//            self.contrainteCamembertCentreHPortrait.isActive = false
-//            //                self.contrainteCamembertGauchePortrait.isActive = false
-//            self.contrainteAffichageEmissionsDroitePaysage.isActive = true
-//            self.contrainteAffichageEmissionsBasPaysage.isActive = true
-//            //                self.contrainteCamembertHautPaysage.isActive = true
-//            self.contrainteCamembertDroitePaysage.isActive = true
-//            self.contrainteCamembertCentreVPaysage.isActive = true
             self.affichageEmissions.textAlignment = .left
-            //                print("choisit contraintes fin paysage true")
             return true
         }
-        //        }
         else {
-            //            print("choisit contraintes fin false")
             return false
         }
     }
@@ -281,11 +270,26 @@ class ViewControllerAvecCamembert: UIViewController {
                 let dureeEquivalenteSoutenableMois = dureeEquivalenteSoutenableAns * 12
                 let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
                 if dureeEquivalenteSoutenableJours <= 60 {
-                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    switch evenement {
+                    case .camp:
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    case .congres:
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    }
                 } else if dureeEquivalenteSoutenableMois < 24 {
-                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    switch evenement {
+                    case .camp:
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    case .congres:
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    }
                 } else {
-                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    switch evenement {
+                    case .camp:
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    case .congres:
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                    }
                 }
                 let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
                 couleur = couleurSoutenabilite(ratioSoutenabilite: ratio)
@@ -297,7 +301,12 @@ class ViewControllerAvecCamembert: UIViewController {
             return NSAttributedString(attributedString: texte) //
         } else {
             //            if boutonExport.isEnabled {boutonExport.isEnabled = false}
-            return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
+            switch evenement {
+            case .camp:
+                return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
+            case .congres:
+                return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
+            }
         }
     }
     
@@ -309,7 +318,7 @@ class ViewControllerAvecCamembert: UIViewController {
         let paragraphStyleCentre: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyleCentre.alignment = NSTextAlignment.center
         paragraphStyleCentre.lineBreakMode = NSLineBreakMode.byWordWrapping
-        let contenu = pourTexteBrut ? "" : NSLocalizedString("Les émissions de CO₂ de mon camp", comment: "") + "\n"
+        let contenu = pourTexteBrut ? "" : (evenement == .camp ? NSLocalizedString("Les émissions de CO₂ de mon camp", comment: "") : NSLocalizedString("Les émissions de CO₂ de mon congrès", comment: "")) + "\n"
         let texte = NSMutableAttributedString(string: contenu, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTitre), NSAttributedString.Key.paragraphStyle: paragraphStyleCentre]) //NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
 //        texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
 
@@ -341,22 +350,42 @@ class ViewControllerAvecCamembert: UIViewController {
             let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
             let couleur = couleurSoutenabilite(ratioSoutenabilite: ratio)
             
-            if dureeEquivalenteSoutenableJours <= 60 {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
-            } else if dureeEquivalenteSoutenableMois < 24 {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
-            } else {
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+            switch evenement {
+            case .camp:
+                if dureeEquivalenteSoutenableJours <= 60 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+                } else if dureeEquivalenteSoutenableMois < 24 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+                } else {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+                }
+                texte.append(NSAttributedString(string: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app Camp", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
+        //        texte.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+                texte.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+        //        texte.addAttribute(.underlineStyle, value: NSUnderlineStyle.single, range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+                texte.addAttribute(.link, value: NSLocalizedString("lienAppStoreCamp", comment: ""), range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+                if pourTexteBrut {
+                    texte.append(NSAttributedString(string: NSLocalizedString(" : ", comment: "") + NSLocalizedString("lienAppStore", comment: "")))
+                }
+            case .congres:
+                if dureeEquivalenteSoutenableJours <= 60 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+                } else if dureeEquivalenteSoutenableMois < 24 {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+                } else {
+                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+                }
+                texte.append(NSAttributedString(string: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
+        //        texte.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+                texte.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 congrès", comment: "")))
+        //        texte.addAttribute(.underlineStyle, value: NSUnderlineStyle.single, range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
+                texte.addAttribute(.link, value: NSLocalizedString("lienAppStoreCongres", comment: ""), range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 congrès", comment: "")))
+                if pourTexteBrut {
+                    texte.append(NSAttributedString(string: NSLocalizedString(" : ", comment: "") + NSLocalizedString("lienAppStoreCongres", comment: "")))
+                }
             }
         }
-        texte.append(NSAttributedString(string: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app ", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
-//        texte.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
-        texte.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
-//        texte.addAttribute(.underlineStyle, value: NSUnderlineStyle.single, range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
-        texte.addAttribute(.link, value: NSLocalizedString("lienAppStore", comment: ""), range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
-        if pourTexteBrut {
-            texte.append(NSAttributedString(string: NSLocalizedString(" : ", comment: "") + NSLocalizedString("lienAppStore", comment: "")))
-        }
+
         return texte
     }
 }

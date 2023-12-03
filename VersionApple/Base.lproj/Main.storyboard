@@ -216,13 +216,13 @@
                                                                         <constraint firstAttribute="width" constant="85" id="yGk-IT-OvA"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2023 Jérôme Kasparian, EEUdF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m5u-95-qHn">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="© 2023 Jérôme Kasparian, EEUdF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m5u-95-qHn">
                                                                     <rect key="frame" x="113.5" y="60" width="190.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YwT-b9-pSW">
+                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YwT-b9-pSW">
                                                                     <rect key="frame" x="113.5" y="3" width="190.5" height="34.5"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" title="Pour en savoir plus"/>
@@ -235,27 +235,29 @@
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                                     <connections>
-                                                                        <action selector="ouvrirWebEEUdF" destination="rYD-LR-4Zd" eventType="touchUpInside" id="mEO-7s-cH9"/>
+                                                                        <action selector="ouvrirWebCredits" destination="rYD-LR-4Zd" eventType="touchUpInside" id="2BI-dt-AvD"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-G3-IjY">
+                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-G3-IjY">
                                                                     <rect key="frame" x="113.5" y="88.5" width="190.5" height="34.5"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" title="www.eeudf.org">
                                                                         <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
                                                                     </buttonConfiguration>
                                                                     <connections>
-                                                                        <action selector="ouvrirWebEEUdF" destination="rYD-LR-4Zd" eventType="touchUpInside" id="qaI-ea-G1G"/>
+                                                                        <action selector="ouvrirWebCredits" destination="rYD-LR-4Zd" eventType="touchUpInside" id="qvY-qX-DFk"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="m5u-95-qHn" firstAttribute="leading" secondItem="VfD-G3-IjY" secondAttribute="leading" id="1dS-Q4-be6"/>
+                                                                <constraint firstItem="m5u-95-qHn" firstAttribute="leading" secondItem="OR5-bd-q4u" secondAttribute="trailing" constant="8" symbolic="YES" id="3IE-za-HuB"/>
                                                                 <constraint firstItem="OR5-bd-q4u" firstAttribute="trailing" secondItem="YZ7-zo-gEK" secondAttribute="trailing" id="4C6-QH-pEa"/>
                                                                 <constraint firstItem="m5u-95-qHn" firstAttribute="trailing" secondItem="VfD-G3-IjY" secondAttribute="trailing" id="7Ux-Qq-Pf2"/>
                                                                 <constraint firstItem="m5u-95-qHn" firstAttribute="leading" secondItem="YwT-b9-pSW" secondAttribute="leading" id="80x-hs-crb"/>
                                                                 <constraint firstItem="YZ7-zo-gEK" firstAttribute="top" secondItem="oy6-Wm-3j9" secondAttribute="top" constant="3" id="8u6-QC-HFC"/>
                                                                 <constraint firstItem="VfD-G3-IjY" firstAttribute="bottom" secondItem="OR5-bd-q4u" secondAttribute="bottom" id="Fqn-gd-AcL"/>
+                                                                <constraint firstItem="OR5-bd-q4u" firstAttribute="leading" secondItem="oy6-Wm-3j9" secondAttribute="leading" constant="20" symbolic="YES" id="Lko-x6-aEV"/>
                                                                 <constraint firstItem="VfD-G3-IjY" firstAttribute="top" secondItem="m5u-95-qHn" secondAttribute="bottom" constant="8" symbolic="YES" id="RdN-xT-o7N"/>
                                                                 <constraint firstItem="YwT-b9-pSW" firstAttribute="top" secondItem="YZ7-zo-gEK" secondAttribute="top" id="SHU-aE-C5X"/>
                                                                 <constraint firstItem="OR5-bd-q4u" firstAttribute="bottom" secondItem="YZ7-zo-gEK" secondAttribute="bottom" id="Thn-d0-ES5"/>
@@ -264,12 +266,16 @@
                                                                 <constraint firstAttribute="bottom" secondItem="YZ7-zo-gEK" secondAttribute="bottom" constant="3" id="ivn-On-0Ey"/>
                                                                 <constraint firstItem="m5u-95-qHn" firstAttribute="leading" secondItem="YZ7-zo-gEK" secondAttribute="trailing" constant="8" symbolic="YES" id="jS1-sg-vu9"/>
                                                                 <constraint firstItem="YZ7-zo-gEK" firstAttribute="leading" secondItem="oy6-Wm-3j9" secondAttribute="leading" constant="20" symbolic="YES" id="lha-CN-ByO"/>
-                                                                <constraint firstItem="OR5-bd-q4u" firstAttribute="top" secondItem="YZ7-zo-gEK" secondAttribute="top" id="nDb-1i-b5E"/>
+                                                                <constraint firstItem="OR5-bd-q4u" firstAttribute="top" secondItem="YwT-b9-pSW" secondAttribute="top" id="nDb-1i-b5E"/>
+                                                                <constraint firstItem="m5u-95-qHn" firstAttribute="top" secondItem="YwT-b9-pSW" secondAttribute="bottom" constant="8" symbolic="YES" id="txO-Xi-4I9"/>
                                                                 <constraint firstItem="m5u-95-qHn" firstAttribute="trailing" secondItem="YwT-b9-pSW" secondAttribute="trailing" id="y77-U8-vsr"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="boutonAdresseWeb" destination="VfD-G3-IjY" id="raQ-J4-YmW"/>
                                                             <outlet property="boutonOuvrirWeb" destination="OR5-bd-q4u" id="FSd-pl-laB"/>
+                                                            <outlet property="imageLogo" destination="YZ7-zo-gEK" id="zlM-QP-tdK"/>
+                                                            <outlet property="labelCopyright" destination="m5u-95-qHn" id="PHx-rs-O8V"/>
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="CelluleVide" id="wXc-6e-1qp" customClass="CelluleVide" customModule="Bilan_CO2_Congres" customModuleProvider="target">

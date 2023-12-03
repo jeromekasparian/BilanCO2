@@ -75,7 +75,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //        }
         boutonExport.setTitle("", for: .normal)
         
-        _ = self.choisitContraintes(size: self.view.frame.size)
+//        _ = self.choisitContraintes(size: self.view.frame.size)
         (lesEmissions, lesSections) = lireFichier(nom: nomFichierData)
         let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
         if !lesValeurs.isEmpty && lesValeurs.count == lesEmissions.count {
@@ -174,7 +174,16 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
         cell.selectionStyle = .none
         cell.delegate = self
+        cell.labelCopyright.text = evenement == .camp ? NSLocalizedString("© 2023 Jérôme Kasparian, EEUdF", comment: "") : NSLocalizedString("© 2023 Jérôme Kasparian, Université de Genève", comment: "")
+        let adresseWeb = evenement == .camp ? NSLocalizedString("www.eeudf.org", comment: "") : NSLocalizedString("www.unige.ch", comment: "")
+        cell.boutonAdresseWeb.setTitle(adresseWeb, for: .normal)
         cell.boutonOuvrirWeb.setTitle("", for: .normal)
+        let image = evenement == .camp ? UIImage(named: "logo eeudf coul") : UIImage(named: "Unige")
+        cell.imageLogo.image = image
+//        cell.boutonOuvrirWeb.contentHorizontalAlignment = .fill
+//        cell.boutonOuvrirWeb.contentVerticalAlignment = .fill
+//        cell.boutonOuvrirWeb.imageView?.contentMode = .scaleAspectFit
+//        cell.boutonOuvrirWeb.setImage(image, for: .normal)
         return cell
     }
     
@@ -211,7 +220,12 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.labelNom.text = texteNomValeurUnite(emission: emission) //, afficherPictos: afficherPictos)
         cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
         let mettreTitreCelluleEnRouge = (ligne == SorteEmission.duree.rawValue || ligne == SorteEmission.effectif.rawValue) && lesEmissions[ligne].valeur == 0
-        cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
+        if #available(iOS 13.0, *) {
+            cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
+        } else {
+            cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .black
+            // Fallback on earlier versions
+        }
 
         cell.labelValeur.isHidden = true // l'emplacement de la loupe qui indique le zoom
         cell.actualiseEmissionIndividuelle(typeEmission: emission)
@@ -392,18 +406,28 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
         cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne]) //, afficherPictos: afficherPictos)
         let mettreTitreCelluleEnRouge = (ligne == SorteEmission.duree.rawValue || ligne == SorteEmission.effectif.rawValue) && lesEmissions[ligne].valeur == 0
-        cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
+        if #available(iOS 13.0, *) {
+            cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
+        } else {
+            cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .black
+            // Fallback on earlier versions
+        }
 
         DispatchQueue.main.async{
             self.boutonExport.isHidden = emissionsCalculees == 0
             self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
             cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])  // Bizarre, devrait être déjà inclus dans le reloadRows
-            var lesIndexPathAActualiser: [IndexPath] = []
-            if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
-                lesIndexPathAActualiser = [indexPathAActualiser]
-                print(lesIndexPathAActualiser.count, "à actualiser")
-            }
-            self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
+//            var lesIndexPathAActualiser: [IndexPath] = []
+//            if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
+////                let section = indexPathAActualiser.section
+////                for i in 0...self.tableView(self.tableViewEmissions, numberOfRowsInSection: section) - 1 {
+////                    lesIndexPathAActualiser.append(IndexPath(row: i, section: section))
+////                }
+////                print("les index path", lesIndexPathAActualiser)
+//                lesIndexPathAActualiser = [indexPathAActualiser]
+//                print(lesIndexPathAActualiser.count, "à actualiser")
+//            }
+//            self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
             self.actualiseAffichageEmissions()
             self.dessineCamembert(camembert: self.camembert, curseurActif: true, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
         }  // DispatchQueue.main.async
@@ -469,59 +493,18 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //    }
 //    
     
-    override func choisitContraintes(size: CGSize) -> Bool {
+    override func choisitContraintes(size: CGSize, orientationGlobale: Orientation) -> Bool {
         //        print("choisitContraintes")
         let nouvelleOrientation: Orientation = size.width <= size.height ? .portrait : .paysage
         var change = false
-//        var change3 = false
-        
-        //        if nouvelleOrientation != orientationGlobale {
-        //            let estModePortrait = nouvelleOrientation == .portrait
-        //            orientationGlobale = nouvelleOrientation
-        //            print("choisit contraintes, orientation", nouvelleOrientation)
-        //            if estModePortrait {  // on désactive avant d'activer pour éviter les conflits
         if nouvelleOrientation == .portrait && self.stackViewPrincipal.axis != .vertical { //self.contrainteTableViewHautPaysage.isActive {
             self.stackViewPrincipal.axis = .vertical
-//            self.contrainteTableViewHautPaysage.isActive = false
-//            self.contrainteTableViewDroitePaysage.isActive = false
-//            self.contrainteVueResultatsBasPaysage.isActive = false
-//            self.contrainteVueResultatGauchePaysage.isActive = false
-//            
-//            self.contrainteTableViewHautPortrait.isActive = true
-//            self.contrainteTableViewDroitePortrait.isActive = true
-//            self.contrainteVueResultatsGauchePortrait.isActive = true
             change = true
         } else if nouvelleOrientation == .paysage && self.stackViewPrincipal.axis != .horizontal {  // self.contrainteTableViewHautPortrait.isActive {
             self.stackViewPrincipal.axis = .horizontal
-//            self.contrainteTableViewHautPortrait.isActive = false
-//            self.contrainteTableViewDroitePortrait.isActive = false
-//            self.contrainteVueResultatsGauchePortrait.isActive = false
-//            
-//            self.contrainteTableViewHautPaysage.isActive = true
-//            self.contrainteTableViewDroitePaysage.isActive = true
-//            self.contrainteVueResultatsBasPaysage.isActive = true
-//            self.contrainteVueResultatGauchePaysage.isActive = true
             change = true
         }
-        //        }
-//        let ecranLarge = self.vueResultats.frame.width >= 600
-//        if ecranLarge && !self.contrainteLargeurBoutonEffacerLarge.isActive {  // réduire la taille des boutons si on a un écran étroit.
-//            self.contrainteLargeurBoutonEffacerEtroit.isActive = false
-//            self.contrainteLargeurBoutonExporterEtroit.isActive = false
-//            self.contrainteLargeurBoutonEffacerLarge.isActive = true
-//            self.contrainteLargeurBoutonExporterLarge.isActive = true
-//            dessineBoutons(ecranLarge: ecranLarge)
-//            change3 = true
-//        } else if !ecranLarge && !self.contrainteLargeurBoutonEffacerEtroit.isActive {
-//            self.contrainteLargeurBoutonEffacerLarge.isActive = false
-//            self.contrainteLargeurBoutonExporterLarge.isActive = false
-//            self.contrainteLargeurBoutonEffacerEtroit.isActive = true
-//            self.contrainteLargeurBoutonExporterEtroit.isActive = true
-//            dessineBoutons(ecranLarge: ecranLarge)
-//            change3 = true
-//        }
-        //        print("largeurResultats", self.vueResultats.frame.width)
-        let change2 = super.choisitContraintes(size: self.vueResultats.frame.size)
+        let change2 = super.choisitContraintes(size: self.vueResultats.frame.size, orientationGlobale: nouvelleOrientation)
         return change || change2 //|| change3
     }
     
@@ -535,21 +518,19 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
     }
     
-    func ouvrirWebEEUdF() {
-        ouvrirWeb(adresse: NSLocalizedString("https://www.eeudf.org", comment: ""))
+    func ouvrirWebCredits() {
+        let adresse = evenement == .camp ? NSLocalizedString("https://www.eeudf.org", comment: "") : NSLocalizedString("https://www.unige.ch", comment: "")
+        ouvrirWeb(adresse: adresse)
     }
-    //        print("web")
-    //        let adresse = NSLocalizedString("https://www.eeudf.org", comment: "")
-    //
-    //    }
     
     
     func redessineResultats(size: CGSize, curseurActif: Bool) {
         DispatchQueue.main.async {
-            let delai = self.choisitContraintes(size: size) ? 0.01 : 0.00
+            self.actualiseAffichageEmissions()
+            let delai = self.choisitContraintes(size: size, orientationGlobale: .inconnu) ? 0.01 : 0.00
             DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
-                self.actualiseAffichageEmissions()
                 self.dessineCamembert(camembert: self.camembert, curseurActif: curseurActif, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
+//                _ = self.choisitContraintes(size: size)
             }
         }
         if ligneEnCours < 0 { // pour ne pas actualiser le tableView pendant qu'on manipule un curseur

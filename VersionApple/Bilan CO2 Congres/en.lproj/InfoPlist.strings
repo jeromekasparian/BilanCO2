@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Bilan CO2 camp scout
+
+  Created by Jérôme Kasparian on 29/11/2023.
+  
+*/
+
+"CFBundleDisplayName" = "CO₂ budget";
+"CFBundleName" = "Congress CO₂ budget";
+// "CFBundleExecutable" = "Congress CO₂ budget";
