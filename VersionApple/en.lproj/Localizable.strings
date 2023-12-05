@@ -81,9 +81,9 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "CO₂ : " = "CO₂: ";
 "\n%.1f t / personne\n" = "\n%.1f ton / person\n";
 "\n%.0f kg / personne\n" = "\n%.0f kg / person\n";
-"En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much as %.0f days of climate-compatible emissions";
-"En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much as %.0f months of climate-compatible emissions";
-"En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much as %.0f years of climate-compatible emissions";
+//"En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much as %.0f days of climate-compatible emissions";
+//"En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much as %.0f months of climate-compatible emissions";
+//"En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much as %.0f years of climate-compatible emissions";
 "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Use sliders to parametrize you camp and evaluate its greenhouse gas emissions";
 "Les émissions de CO₂ de mon camp" = "Climate impact of my camp";
 "Impact climat de mon camp" = "Climate impact of my camp";
@@ -95,9 +95,9 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Bilan CO2 camp scout" = "Scouting camp CO₂ budget";  // doit matcher avec la ligne précédente !!
 " (%.1f t / personne)\n" = " (%.1f t / person)\n";
 " (%.1f kg / personne)\n" = " (%.1f kg / person)\n";
-"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much greenhouse gases as %.0f days of climate-compatible emissions";
-"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much greenhouse gases as %.0f months of climate-compatible emissions";
-"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much greenhouse gases as %.0f years of climate-compatible emissions";
+//"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much greenhouse gases as %.0f days of climate-compatible emissions";
+//"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much greenhouse gases as %.0f months of climate-compatible emissions";
+//"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this camp emits as much greenhouse gases as %.0f years of climate-compatible emissions";
 "lienAppStoreCamp" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
@@ -404,6 +404,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "ConseilBoeufCongres" = "Meals with beef, veal, or lamb meat emit much greenhouse gases: almost 5 times more than other meats, and 12 times more than a vegetarian meal. \nIf you organize the catering, you can offer attractive vegetarian options. If participants eat on their own, you may put forward vegetarian offers in the neighborhood.";
 "ConseilPouletCongres" = "Including porc, poultry, rabbit, or fish in a meal doubles its carbon impact as compared to a vegetarian meal. \nIf you organize the catering, you can offer attractive vegetarian options. If participants eat on their own, you may put forward vegetarian offers in the neighborhood.";
 "ConseilVegeCongres" = "To further reduce climate impact, prefer fresh, local, seasonal products and minimize packaging. \nIf you organize catering, you can take these aspects into account when designing menus. If participants eat on their own, you may put forward local and seasonal offers in the neighborhood.";
+"ConseilCafeCongres" = "Coffee, like other exotic products and especially those cultivated on deforested land, implies strong greenhouse gas emissions";
 "ConseilTrain" = "Train (and boat) are by far the less carbon-intensive means of transportation. \nAs an organizer, you can help participants to use the train by choosing an adequate venue and adapted schedule, as well as by providing relevant information. For complex trips across Europe, German Railways provide excellent timetable information.";
 "TitreRessourceTrain" = "Timetable in Europe";
 "LienRessourceTrain" = "https://reiseauskunft.bahn.de/bin/query.exe/en";
@@ -428,16 +429,26 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "© 2023 Jérôme Kasparian, Université de Genève" = "© 2023 Jérôme Kasparian, University of Geneva";
 
 // affichage des résultats
-"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f days of climate-compatible emissions";
-"En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f months of climate-compatible emissions";
-"En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f years of climate-compatible emissions";
+//"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f days of climate-compatible emissions";
+//"En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f months of climate-compatible emissions";
+//"En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f years of climate-compatible emissions";
 "Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre" = "Use sliders to parametrize you congress and evaluate its greenhouse gas emissions";
 "Les émissions de CO₂ de mon congrès" = "Climate impact of my congress";
 "Impact climat de mon congrès" = "Climate impact of my congress";
 
-"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f days of climate-compatible emissions";
-"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f months of climate-compatible emissions";
-"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f years of climate-compatible emissions";
+//"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f days of climate-compatible emissions";
+//"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f months of climate-compatible emissions";
+//"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f years of climate-compatible emissions";
+"ce camp" = "this camp";
+"ce congrès" = "this congress";
+"En %.0f jours, " = "In %.0f days, ";
+" produit autant que %.0f " = " emits as much as %.0f ";
+" produit autant de gaz à effet de serre que %.0f " = " emits as much greenhouse gases as %.0f ";
+"jours" = "days";
+"mois" = "months";
+"ans" = "years";
+" d'émissions acceptables pour préserver le climat" =  " of climate-compatible emissions";
+
 "lienAppStoreCongres" = "https://itunes.apple.com/app/id6450590075";
 "\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres" = "\n\nEstimate and reduce the climate impact of your congress with the Congress CO₂ budget app";
 "Bilan CO2 congrès" = "Congress CO₂ budget";   // doit matcher avec la ligne précédente !!

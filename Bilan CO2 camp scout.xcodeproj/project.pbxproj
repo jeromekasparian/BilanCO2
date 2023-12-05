@@ -10,7 +10,6 @@
 		B50375DD2ABCD6A900158EB4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B50375DF2ABCD6A900158EB4 /* InfoPlist.strings */; };
 		B510EB9F29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */; };
 		B5154B032B0423D50075D50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5154B022B0423D50075D50A /* Assets.xcassets */; };
-		B5154B062B0423D50075D50A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5154B042B0423D50075D50A /* LaunchScreen.storyboard */; };
 		B5154B0D2B0424E80075D50A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */; };
 		B5154B0E2B0424FF0075D50A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9928C5134E00FBBAE3 /* Main.storyboard */; };
 		B5154B0F2B0425050075D50A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */; };
@@ -45,12 +44,12 @@
 		B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9728C5134E00FBBAE3 /* ViewController.swift */; };
 		B54DCF9B28C5134E00FBBAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9928C5134E00FBBAE3 /* Main.storyboard */; };
 		B54DCF9D28C5134E00FBBAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */; };
-		B54DCFA028C5134E00FBBAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54DCF9E28C5134E00FBBAE3 /* LaunchScreen.storyboard */; };
 		B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFA728C5172500FBBAE3 /* Data.swift */; };
 		B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */; };
 		B56DBCE62974A0BB00AC1DA5 /* PageBlanche.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */; };
 		B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5716E12296C8CC7008EE908 /* CelluleExplications.swift */; };
 		B5BB25D029A2191000B29278 /* DataInternationalCamps.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */; };
+		B5BE1CB02B1F4F6D0059A76A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51FD8F02B18CD6C00F54E55 /* LaunchScreen.storyboard */; };
 		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
@@ -62,9 +61,7 @@
 		B50375E02ABCD6AA00158EB4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSubjectActivityItemSource.swift; sourceTree = "<group>"; };
 		B5154AF72B0423D30075D50A /* Bilan CO2 Congres.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilan CO2 Congres.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5154B002B0423D40075D50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5154B022B0423D50075D50A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B5154B052B0423D50075D50A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5154B072B0423D50075D50A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5154B0B2B04240A0075D50A /* Bilan CO2 Congres.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bilan CO2 Congres.entitlements"; sourceTree = "<group>"; };
 		B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = DataInternationalCongres.csv; sourceTree = "<group>"; };
@@ -87,7 +84,6 @@
 		B54DCF9728C5134E00FBBAE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B54DCF9A28C5134E00FBBAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B54DCF9F28C5134E00FBBAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B54DCFA128C5134E00FBBAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54DCFA728C5172500FBBAE3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleEmission.swift; sourceTree = "<group>"; };
@@ -131,9 +127,7 @@
 				B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */,
 				B5154B0B2B04240A0075D50A /* Bilan CO2 Congres.entitlements */,
 				B5154B242B04289C0075D50A /* ParametresCongres.swift */,
-				B5154AFF2B0423D40075D50A /* Main.storyboard */,
 				B5154B022B0423D50075D50A /* Assets.xcassets */,
-				B5154B042B0423D50075D50A /* LaunchScreen.storyboard */,
 				B5154B072B0423D50075D50A /* Info.plist */,
 			);
 			path = "Bilan CO2 Congres";
@@ -203,7 +197,6 @@
 				B54DCF9728C5134E00FBBAE3 /* ViewController.swift */,
 				B54DCF9928C5134E00FBBAE3 /* Main.storyboard */,
 				B54DCF9C28C5134E00FBBAE3 /* Assets.xcassets */,
-				B54DCF9E28C5134E00FBBAE3 /* LaunchScreen.storyboard */,
 				B54DCFA128C5134E00FBBAE3 /* Info.plist */,
 			);
 			path = VersionApple;
@@ -294,7 +287,6 @@
 				B51FD8EC2B17935000F54E55 /* InfoPlist.strings in Resources */,
 				B5154B232B0428360075D50A /* DataInternationalCongres.csv in Resources */,
 				B5154B1E2B0425950075D50A /* PageBlanche.pdf in Resources */,
-				B5154B062B0423D50075D50A /* LaunchScreen.storyboard in Resources */,
 				B5154B0D2B0424E80075D50A /* Assets.xcassets in Resources */,
 				B5154B032B0423D50075D50A /* Assets.xcassets in Resources */,
 				B5154B0E2B0424FF0075D50A /* Main.storyboard in Resources */,
@@ -305,10 +297,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5BE1CB02B1F4F6D0059A76A /* LaunchScreen.storyboard in Resources */,
 				B56DBCE62974A0BB00AC1DA5 /* PageBlanche.pdf in Resources */,
 				B50375DD2ABCD6A900158EB4 /* InfoPlist.strings in Resources */,
 				B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */,
-				B54DCFA028C5134E00FBBAE3 /* LaunchScreen.storyboard in Resources */,
 				B54DCF9D28C5134E00FBBAE3 /* Assets.xcassets in Resources */,
 				B5BB25D029A2191000B29278 /* DataInternationalCamps.csv in Resources */,
 				B5154B222B0427F20075D50A /* Assets.xcassets in Resources */,
@@ -376,22 +368,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		B5154AFF2B0423D40075D50A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5154B002B0423D40075D50A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B5154B042B0423D50075D50A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5154B052B0423D50075D50A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		B51FD8EE2B17935000F54E55 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -419,14 +395,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		B54DCF9E28C5134E00FBBAE3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B54DCF9F28C5134E00FBBAE3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		B5E0FE89292A5044001D0790 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -448,7 +416,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "VersionApple/Bilan CO2 Congres/Bilan CO2 Congres.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 6WS674AGSY;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -461,6 +429,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -488,7 +457,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "VersionApple/Bilan CO2 Congres/Bilan CO2 Congres.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 6WS674AGSY;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -501,6 +470,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -642,7 +612,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -682,7 +652,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

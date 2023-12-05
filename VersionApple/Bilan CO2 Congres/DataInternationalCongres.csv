@@ -5,7 +5,7 @@ CategorieInformations généralesEffectif;Participation à distance;%%;100;1;0.0
 Alimentation;Repas avec bœuf, veau ou agneau;%%;100;6.29;0.01;;2;;;;;ConseilBoeufCongres;Viande rouge;🥩;;;;
 Alimentation;Repas avec porc, volaille, poisson;%%;100;1.35;0.01;;2;;;;;ConseilPouletCongres;Viande blanche;🍗;;;;
 Alimentation;Repas végétarien;%%;100;0.51;0.01;;2;;;;;ConseilVegeCongres;Vege;🌽;;;;
-Alimentation;pause café / jour;;4;0.11;1;;1;;1;;;;Café;☕️;;;pauses café / jour;
+Alimentation;pause café / jour;;4;0.11;1;;1;;1;;;ConseilCafeCongres;Café;☕️;;;pauses café / jour;
 Voyages;Train;%%;100;2;0.01;;;;;;;ConseilTrain;Train;🚆;TitreRessourceTrain;LienRessourceTrain;;
 Voyages;Avion moyen-courrier classe économique;%%;100;580;0.01;;;;;;;ConseilAvionMCEco;Avion;🛩️;TitreRessourceMCEco;LienRessourceMCEco;;
 Voyages;Avion long-courrier classe économique;%%;100;2860;0.01;;;;;;;ConseilAvionLCEco;Avion;✈️;;;;

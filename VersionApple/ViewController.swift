@@ -562,7 +562,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
         let leTexte = texteListeEmissions(lesEmissions: lesEmissions, pourTexteBrut: true).string
-        var items: [Any] = [EmailSubjectActivityItemSource(subject: NSLocalizedString("Impact climat de mon camp", comment: ""), emailBody: leTexte)]
+        let sujet = evenement == .camp ? NSLocalizedString("Impact climat de mon camp", comment: "") : NSLocalizedString("Impact climat de mon congrès", comment: "")
+        var items: [Any] = [EmailSubjectActivityItemSource(subject: sujet, emailBody: leTexte)]
         if let urlPDFAExporter = generePDF() {
             print("pdf ok")
             items.append(urlPDFAExporter)

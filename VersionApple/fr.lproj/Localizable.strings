@@ -82,9 +82,9 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "CO₂ : " = "CO₂ : ";
 "\n%.1f t / personne\n" = "\n%.1f t / personne\n";
 "\n%.0f kg / personne\n" = "\n%.0f kg / personne\n";
-"En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
 "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre";
 "Les émissions de CO₂ de mon camp" = "Impact climatique de mon camp";
 "Impact climat de mon camp" = "Impact climatique de mon camp";
@@ -96,9 +96,9 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Bilan CO2 camp scout" = "Bilan CO₂ camp scout";   // doit matcher avec la ligne précédente !!
 " (%.1f t / personne)\n" = " (%.1f t / personne)\n";
 " (%.1f kg / personne)\n" = " (%.1f kg / personne)\n";
-"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce camp produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
 "lienAppStoreCamp" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
@@ -367,7 +367,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
    • developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/
    • www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/";
 
-"texteRemerciementsCongres" = "Remerciemnts à Emeline Bolmont et Hervé Kasparian";
+"texteRemerciementsCongres" = "Remerciements à Emeline Bolmont et Hervé Kasparian";
 
 
 // Données
@@ -407,6 +407,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilBoeufCongres" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
 "ConseilPouletCongres" = "La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
 "ConseilVegeCongres" = "Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. \nSi vous organisez les repas, vous pouvez en tenir compte dans la conception des menus. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre locale et de saison à proximité.";
+"ConseilCafeCongres" = "Le café, comme les autres produits exotiques notament ceux cultivés sur des zones forestières défrichées, est fortement émetteur de gaz à effet de serre";
 "ConseilTrain" = "Le train est (avec le bateau) de loin le mode de transport le moins polluant. \nEn tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires.";
 "TitreRessourceTrain" = "Horaires en Europe";
 "LienRessourceTrain" = "https://reiseauskunft.bahn.de/bin/query.exe/f";
@@ -431,16 +432,27 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "© 2023 Jérôme Kasparian, Université de Genève" = "© 2023 Jérôme Kasparian, Université de Genève";
 
 // affichage des résultats
-"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat";
 "Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre";
 "Les émissions de CO₂ de mon congrès" = "Impact climatique de mon congrès";
 "Impact climat de mon congrès" = "Impact climatique de mon congrès";
 
-"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
-"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f jours d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f mois d'émissions acceptables pour préserver le climat";
+//"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
+"ce camp" = "ce camp";
+"ce congrès" = "ce congrès";
+"En %.0f jours, " = "En %.0f jours, ";
+" produit autant que %.0f " = " produit autant que %.0f ";
+" produit autant de gaz à effet de serre que %.0f " = " produit autant de gaz à effet de serre que %.0f ";
+"jours" = "jours";
+"mois" = "mois";
+"ans" = "ans";
+" d'émissions acceptables pour préserver le climat" =  " d'émissions acceptables pour préserver le climat";
+
+
 "lienAppStoreCongres" = "https://itunes.apple.com/app/id6450590075";
 "\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres" = "\n\nEstimez et réduisez l'impact climatique de votre congrès avec l'app Bilan CO₂ congrès";
 "Bilan CO2 congrès" = "Bilan CO₂ congrès";   // doit matcher avec la ligne précédente !!
