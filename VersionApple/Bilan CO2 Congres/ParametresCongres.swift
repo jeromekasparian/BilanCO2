@@ -6,47 +6,7 @@
 //
 
 import Foundation
-
-let nomFichierData = "DataInternationalCongres"
-
-
-enum SorteEmission: Int {
-    case duree
-    case effectif
-    case participationZoom
-    case repasViandeRouge
-    case repasViandeBlanche
-    case repasVegetarien
-    case pausesCafe
-    case voyageTrain
-    case voyageAvionMCEco
-    case voyageAvionLCEco
-    case voyageAvionMCBusiness
-    case voyageAvionLCBusiness
-    case taxiAeroport
-    case taxiLocal
-    case hotelEco
-    case hotelMoyen
-    case hotelLuxe
-    case centreCongres
-    case goodie
-    case cleUSB
-    case impression
-    case distance = -1
-    
-//    static func > (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
-//        return premier.rawValue > deuxieme.rawValue
-//    }
-//    static func < (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
-//        return premier.rawValue < deuxieme.rawValue
-//    }
-//    static func >= (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
-//        return premier.rawValue >= deuxieme.rawValue
-//    }
-//    static func <= (premier: SorteEmission, deuxieme: SorteEmission) -> Bool {
-//        return premier.rawValue <= deuxieme.rawValue
-//    }
-}
+import UIKit
 
 // couleurs Unige
 let violet1 = couleur(rouge: 0x9e, vert: 0x05, bleu: 0x74)
@@ -56,68 +16,175 @@ let vertA = couleur(rouge: 0x17, vert: 0x6b, bleu: 0x87)
 let vertB = couleur(rouge: 0x69, vert: 0xc3, bleu: 0xc6)
 let marron = couleur(rouge: 0xbc, vert: 0xba, bleu: 0xa9)
 
-//let vert1 = couleur(rouge: 149, vert: 193, bleu: 31)
-//let vert3 = couleur(rouge: 222, vert: 220, bleu: 0)
-//let jaune = couleur(rouge: 255, vert: 229, bleu: 0)
-//let grisTresClair = couleur(rouge: 229, vert: 229, bleu: 234)   // équivalent du systemGray5 en mode clair. Cf https://noahgilmore.com/blog/dark-mode-uicolor-compatibility/
-//let bleuMarine = couleur(rouge: 0, vert: 62, bleu: 98)
-////let couleursEEUdF5 = [grisTresClair, jaune, vert3, vert1, vert2, .white]
+let leCongres = Congres() as DescriptionEvenement
+let leCongresIndividuel = CongresIndividuel() as DescriptionEvenement
 
+var lEvenement = leCongres
 
-let couleurs5 = [violet2, violet1, orange1, vertA, vertB, marron, .white]
+let texteMethodo = NSLocalizedString("texteMethodoCongres", comment: "")
+let texteGraphique = NSLocalizedString("texteGraphiqueCongres", comment: "")
+let texteEmissionsAcceptables = NSLocalizedString("texteEmissionsAcceptablesCongres", comment: "")
+let texteRessourcesPedagogiques = NSLocalizedString("texteRessourcesPedagogiques", comment: "")
+let texteLimites = NSLocalizedString("texteLimitesCongres", comment: "")
+let texteSources = NSLocalizedString("texteSourcesCongres", comment: "")
+let texteRemerciements = NSLocalizedString("texteRemerciementsCongres", comment: "")
+let lesTextes = [texteMethodo, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
+let lesParagraphes =  [NSLocalizedString("Méthodologie & hypothèses", comment: ""),
+                       NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""),
+                       NSLocalizedString("Limites", comment: ""),
+                       NSLocalizedString("Sources", comment: ""),
+                       NSLocalizedString("Remerciements", comment: "")]
 
-let evenement = Evenement.congres
-
-func ajusteQuantitesLiees(ligne: Int) {
-    let ligneVisio = SorteEmission.participationZoom.rawValue
-    let valeurVisio = ligneVisio > 0 ? lesEmissions[ligneVisio].valeur : 0
-    switch ligne {
-    case SorteEmission.duree.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelEco, priorite2: SorteEmission.hotelMoyen, priorite3: SorteEmission.hotelLuxe)
-    case SorteEmission.repasViandeRouge.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-    case SorteEmission.repasViandeBlanche.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasViandeBlanche, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasVegetarien)
-    case SorteEmission.repasVegetarien.rawValue:
-        ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasVegetarien, priorite2: SorteEmission.repasViandeRouge, priorite3: SorteEmission.repasViandeBlanche)
-    case SorteEmission.effectif.rawValue:
-        actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-
-    case SorteEmission.hotelEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco, SorteEmission.hotelMoyen, SorteEmission.hotelLuxe], valeurDesAlternatives: valeurVisio)
-    case SorteEmission.hotelMoyen.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelMoyen, SorteEmission.hotelEco, SorteEmission.hotelLuxe], valeurDesAlternatives: valeurVisio)
-    case SorteEmission.hotelLuxe.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelLuxe, SorteEmission.hotelEco, SorteEmission.hotelMoyen], valeurDesAlternatives: valeurVisio)
-
-    case SorteEmission.voyageTrain.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
-    case SorteEmission.voyageAvionMCEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
-    case SorteEmission.voyageAvionLCEco.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCEco, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
-    case SorteEmission.voyageAvionMCBusiness.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
-    case SorteEmission.voyageAvionLCBusiness.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCBusiness, SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness], valeurDesAlternatives: valeurVisio)
-//        ajusteMaxEtQuantiteHotelParType
-    case SorteEmission.participationZoom.rawValue:
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain, SorteEmission.voyageAvionMCEco, SorteEmission.voyageAvionLCEco, SorteEmission.voyageAvionMCBusiness, SorteEmission.voyageAvionLCBusiness], valeurDesAlternatives: valeurVisio)
-        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco, SorteEmission.hotelMoyen, SorteEmission.hotelLuxe], valeurDesAlternatives: valeurVisio)
-    default: let dummy = 1
+class Congres: DescriptionEvenement, DescriptionEvenementDelegate {
+    init() {
+        super.init(nomFichierData: "DataInternationalCongres", pictoBien: "👍", pictoBof: "🫳", pictoMal: "👎", evenement: .congresCollectif, couleurs5: [violet2, violet1, orange1, vertA, vertB, marron, .white], texteCetEvenement: "ce congrès", texteEmissionsDeMonEvenement: NSLocalizedString("Les émissions de CO₂ de mon congrès", comment: ""), texteNomApp: NSLocalizedString("Bilan CO2 congrès", comment: ""), texteLienAppStore: NSLocalizedString("lienAppStoreCongres", comment: ""), texteCopyright: NSLocalizedString("© 2023 Jérôme Kasparian, Université de Genève", comment: ""), texteAdresseWeb: NSLocalizedString("www.unige.ch", comment: ""), texteLienWeb: NSLocalizedString("https://www.unige.ch", comment: ""), texteImpactClimat: NSLocalizedString("Impact climat de mon congrès", comment: ""), texteAnalysezReduisez: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres", comment: ""), texteIndiquezCaracteristiques: NSLocalizedString("Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre", comment: ""), keyData: "keyDataCongres", logo: UIImage(named: "Unige"), numeroItemDuree: SorteEmission.duree.rawValue, numeroItemEffectif: SorteEmission.effectif.rawValue, numeroItemDistance: SorteEmission.distance.rawValue)
+        self.delegate = self
     }
+    
+    enum SorteEmission: Int {
+        case duree
+        case effectif
+        case participationZoom
+        case repasViandeRouge
+        case repasViandeBlanche
+        case repasVegetarien
+        case pausesCafe
+        case voyageTrain
+        case voyageAvionMCEco
+        case voyageAvionLCEco
+        case voyageAvionMCBusiness
+        case voyageAvionLCBusiness
+        case taxiAeroport
+        case taxiLocal
+        case hotelEco
+        case hotelMoyen
+        case hotelLuxe
+        case centreCongres
+        case goodie
+        case cleUSB
+        case impression
+        case distance = -1
+    }
+        
+    func ajusterQuantitesLiees(ligne: Int) {
+        //    typealias SorteEmission = SorteEmission
+        
+        let ligneVisio = SorteEmission.participationZoom.rawValue
+        let valeurVisio = ligneVisio > 0 ? lesEmissions[ligneVisio].valeur : 0
+        switch ligne {
+        case SorteEmission.duree.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.repasViandeRouge.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        case SorteEmission.repasViandeBlanche.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        case SorteEmission.repasVegetarien.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasVegetarien.rawValue, SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        case SorteEmission.effectif.rawValue:
+            actualiseValeursMaxEffectif()
+            
+        case SorteEmission.hotelEco.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.hotelMoyen.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelEco.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.hotelLuxe.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelLuxe.rawValue, SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+
+        case SorteEmission.voyageTrain.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageAvionMCBusiness.rawValue, SorteEmission.voyageAvionLCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.voyageAvionMCEco.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageAvionMCBusiness.rawValue, SorteEmission.voyageAvionLCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.voyageAvionLCEco.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageAvionMCBusiness.rawValue, SorteEmission.voyageAvionLCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.voyageAvionMCBusiness.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionMCBusiness.rawValue, SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageAvionLCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.voyageAvionLCBusiness.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionLCBusiness.rawValue, SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageAvionMCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+            //        ajusteMaxEtQuantiteHotelParType
+        case SorteEmission.participationZoom.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageAvionMCBusiness.rawValue, SorteEmission.voyageAvionLCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        default: let dummy = 1
+        }
+    }
+    
+    
+    func actualiserValeursMax() {
+        actualiseValeursMaxEffectif()
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+    }
+
+}
+
+class CongresIndividuel: DescriptionEvenement, DescriptionEvenementDelegate {
+    init() {
+        super.init(nomFichierData: "DataInternationalCongresIndividuel", pictoBien: "👍", pictoBof: "🫳", pictoMal: "👎", evenement: .congresCollectif, couleurs5: [violet2, violet1, orange1, vertA, vertB, marron, .white], texteCetEvenement: "ma participation à ce congrès", texteEmissionsDeMonEvenement: NSLocalizedString("Les émissions de CO₂ de ma participation au congrès", comment: ""), texteNomApp: NSLocalizedString("Bilan CO2 congrès", comment: ""), texteLienAppStore: NSLocalizedString("lienAppStoreCongres", comment: ""), texteCopyright: NSLocalizedString("© 2023 Jérôme Kasparian, Université de Genève", comment: ""), texteAdresseWeb: NSLocalizedString("www.unige.ch", comment: ""), texteLienWeb: NSLocalizedString("https://www.unige.ch", comment: ""), texteImpactClimat: NSLocalizedString("Impact climat de ma participation au congrès", comment: ""), texteAnalysezReduisez: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres", comment: ""), texteIndiquezCaracteristiques: NSLocalizedString("Indiquez les caractéristiques de votre voyage pour évaluer ses émissions de gaz à effet de serre", comment: ""), keyData: "keyDataCongresIndividuel", logo: UIImage(named: "Unige"), numeroItemDuree: SorteEmission.duree.rawValue, numeroItemEffectif: SorteEmission.effectif.rawValue, numeroItemDistance: SorteEmission.distance.rawValue)
+        self.delegate = self
+    }
+    
+    enum SorteEmission: Int {
+        case duree
+        case repasViandeRouge
+        case repasViandeBlanche
+        case repasVegetarien
+        case pausesCafe
+        case distance
+        case participationZoom
+        case voyageTrain
+        case voyageAvionEco
+        case voyageAvionBusiness
+        case taxiAeroport
+        case taxiLocal
+        case hotelEco
+        case hotelMoyen
+        case hotelLuxe
+        case goodie
+        case cleUSB
+        case impression
+        case effectif = -1
+    }
+
+    func ajusterQuantitesLiees(ligne: Int) {
+        switch ligne {
+        case SorteEmission.duree.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.repasViandeRouge.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        case SorteEmission.repasViandeBlanche.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        case SorteEmission.repasVegetarien.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasVegetarien.rawValue, SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+            
+        case SorteEmission.hotelEco.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.hotelMoyen.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelEco.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.hotelLuxe.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelLuxe.rawValue, SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+            
+        case SorteEmission.voyageTrain.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionEco.rawValue, SorteEmission.voyageAvionBusiness.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.voyageAvionEco.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionEco.rawValue, SorteEmission.voyageTrain.rawValue,  SorteEmission.voyageAvionBusiness.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.voyageAvionBusiness.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageAvionBusiness.rawValue, SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionEco.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        default: let dummy = 1
+        }
+    }
+    
+    func actualiserValeursMax() {
+        actualiseValeursMaxEffectif()
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.repasViandeRouge.rawValue, SorteEmission.repasViandeBlanche.rawValue, SorteEmission.repasVegetarien.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: true)
+        ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+    }
+
     
 }
 
 
-func actualiseValeursMax() {
-    actualiseValeursMaxEffectif(valeurMax: lesEmissions[SorteEmission.effectif.rawValue].valeur)
-    ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.repasViandeRouge, priorite2: SorteEmission.repasViandeBlanche, priorite3: SorteEmission.repasVegetarien)
-    ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission.hotelEco, priorite2: SorteEmission.hotelMoyen, priorite3: SorteEmission.hotelLuxe)
-//        actualiseValeurMaxBateaux()
+func switchCollectifIndividuel(mode: Int) {
+    lEvenement = mode == 0 ? leCongres : leCongresIndividuel
 }
-
-let pictoBien = "👍"
-let pictoBof = "🫳"
-let pictoMal = "👎"

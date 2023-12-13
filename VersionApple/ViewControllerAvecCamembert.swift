@@ -118,7 +118,7 @@ class ViewControllerAvecCamembert: UIViewController {
         var ligneActiveCorrigee = ligneActive
         var compteurLigne = 0
         for emission in lesEmissions {
-            let emissionCopiee = emission.duplique() //TypeEmission(categorie: emission.categorie, nom: emission.nom, unite: emission.unite, valeurMax: emission.valeurMax, valeur: emission.valeur, facteurEmission: emission.facteurEmission, parPersonne: emission.parPersonne, parKmDistance: emission.parKmDistance, parJour: emission.parJour, echelleLog: emission.echelleLog, valeurEntiere: emission.valeurEntiere, valeurMaxSelonEffectif: emission.valeurMaxSelonEffectif, valeurMaxParJour: emission.valeurMaxParJour, emission: emission.emission, conseil: emission.conseil, nomCourt: emission.nomCourt, picto: emission.picto, nomsRessources: emission.nomsRessources, liensRessources: emission.liensRessources, nomPluriel: emission.nomPluriel, sectionOptionnelle: emission.sectionOptionnelle)
+            let emissionCopiee = emission.duplique()
             if tableauCummule.isEmpty {
                 tableauCummule.append(emissionCopiee)
             } else {
@@ -161,10 +161,10 @@ class ViewControllerAvecCamembert: UIViewController {
             if emission.emission > 0 {
                 camembertVide = false
                 let intervalle = emission.emission / emissionsCalculees
-                let numeroSection = lesSections.firstIndex(where: {$0.nom == emission.categorie}) ?? 0
-                let agrandirSecteur = ligne == ligneEnCoursCorrigee || (ligneEnCoursCorrigee == SorteEmission.distance.rawValue && emission.parKmDistance > 0.0) // || (ligneEnCoursCorrigee == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCoursCorrigee == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
+                let numeroSection = lEvenement.sections.firstIndex(where: {$0.nom == emission.categorie}) ?? 0
+                let agrandirSecteur = ligne == ligneEnCoursCorrigee || (ligneEnCoursCorrigee == lEvenement.numeroItemDistance && emission.parKmDistance > 0.0) // || (ligneEnCoursCorrigee == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCoursCorrigee == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
                 let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
-                dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurs5[numeroSection])
+                dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: lEvenement.couleurs5[numeroSection])
                 debut = debut + intervalle
                 dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut - 0.0025, etendue: 0.005, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: couleurSeparationNoire)
             } // if emission.valeur > 0
@@ -172,9 +172,9 @@ class ViewControllerAvecCamembert: UIViewController {
         } // for
         
         if !camembertVide {
-                if lesEmissions[SorteEmission.effectif.rawValue].valeur > 0 {
+//            if lesEmissions[lEvenement.numeroItemEffectif].valeur > 0 {
                     afficheSmileyDuCentre(vueDeDestination: camembert, curseurActif: curseurActif)
-                }
+//                }
             let emissionsClassees = lesEmissionsCompact.count <= 1 ? lesEmissionsCompact : lesEmissionsCompact.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
             let nombreMaxiLabels = 8 //grandFormat ? 12 : 8
             let limite = emissionsClassees.isEmpty ? 0.0 : emissionsClassees.count >= nombreMaxiLabels ? emissionsClassees[nombreMaxiLabels - 1].emission : emissionsClassees.last?.emission ?? 0.0 // on affiche les 4 postes d'émission les plus importants, à condition qu'ils soient non-nuls
@@ -212,43 +212,45 @@ class ViewControllerAvecCamembert: UIViewController {
     }
     
     func afficheSmileyDuCentre(vueDeDestination: UIView, curseurActif: Bool) {
-        let ratioSoutenabilite = emissionsSoutenables * lesEmissions[SorteEmission.effectif.rawValue].valeur / emissionsCalculees
+        let effectif = lEvenement.numeroItemEffectif >= 0 ? lEvenement.lesEmissions[lEvenement.numeroItemEffectif].valeur : 1
+        let ratioSoutenabilite = emissionsSoutenables * effectif / emissionsCalculees
         let seuilHaut = 1.3
         let seuilMilieu = 1.0
         let seuilBas = 0.7
         let taillePicto: CGFloat = 1.8
         let frame = vueDeDestination.frame
         if ratioSoutenabilite > seuilHaut {
-            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
         } else if ratioSoutenabilite < seuilBas {
-            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+            dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
         } else if curseurActif {
             if ratioSoutenabilite > seuilMilieu {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilHaut - ratioSoutenabilite) / (seuilHaut - seuilMilieu))
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilMilieu) / (seuilHaut - seuilMilieu))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilHaut - ratioSoutenabilite) / (seuilHaut - seuilMilieu))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilMilieu) / (seuilHaut - seuilMilieu))
             } else {  // entre 1 et le seuil bas
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilMilieu - ratioSoutenabilite) / (seuilMilieu - seuilBas))
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilBas) / (seuilMilieu - seuilBas))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (seuilMilieu - ratioSoutenabilite) / (seuilMilieu - seuilBas))
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: (ratioSoutenabilite - seuilBas) / (seuilMilieu - seuilBas))
             }
         } else {
             if ratioSoutenabilite > seuilMilieu + ((seuilHaut - seuilMilieu) / 2.0 ) {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoBien, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
             } else if ratioSoutenabilite < seuilMilieu - ((seuilMilieu - seuilBas) / 2.0 ) {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoMal, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
             } else {
-                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
+                dessinePicto(vueDeDestination: vueDeDestination, frame: frame, picto: lEvenement.pictoBof, x: camembert.frame.width / 2.0, y: camembert.frame.height / 2.0, facteurTaille: taillePicto, alpha: 1)
             }
         }
     }
     
     @objc func actualiseAffichageEmissions() {
         DispatchQueue.main.async{
-            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lesEmissions)
+            self.affichageEmissions.attributedText = self.texteEmissions(typesEmissions: lEvenement.lesEmissions)
         }
     }
     
     func texteEmissions(typesEmissions: [TypeEmission]) -> NSAttributedString { //}(String, UIColor) {
-        let emissionsParPersonne = emissionsCalculees / typesEmissions[SorteEmission.effectif.rawValue].valeur
+        let effectif = lEvenement.numeroItemEffectif >= 0 ? typesEmissions[lEvenement.numeroItemEffectif].valeur : 1.0
+        let emissionsParPersonne = emissionsCalculees / effectif
         var couleur: UIColor = .black
         let texte = NSMutableAttributedString(string: "")
         let tailleTextePrincipal: CGFloat =  max(0.5, 3.0 * sqrt(affichageEmissions.frame.width * affichageEmissions.frame.height) / 200.0)  //grandFormat ? 3 : 2
@@ -258,49 +260,35 @@ class ViewControllerAvecCamembert: UIViewController {
             let formatTexteValeurEmissionsTotales = emissionsCalculees < 1000.0 ? NSLocalizedString("%.0f kg", comment: "") : emissionsCalculees < 100000.0 ? NSLocalizedString("%.1f t", comment: "") : NSLocalizedString("%.0f t", comment: "")
             let emissionsPourAffichage = emissionsCalculees >= 1000 ? emissionsCalculees / 1000.0 : emissionsCalculees
             texte.append(NSMutableAttributedString(string: String(format: NSLocalizedString("CO₂ : ", comment: "") + formatTexteValeurEmissionsTotales, emissionsPourAffichage), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTextePrincipal, weight: .regular)]))
-            if typesEmissions[SorteEmission.effectif.rawValue].valeur > 0 {
-                if emissionsParPersonne >= 1000 {
-                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.1f t / personne\n", comment: ""), emissionsParPersonne / 1000.0), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire, weight: .regular)]))
+            if effectif > 0 {
+                if effectif != 1 {
+                    if emissionsParPersonne >= 1000 {
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.1f t / personne\n", comment: ""), emissionsParPersonne / 1000.0), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire, weight: .regular)]))
+                    } else {
+                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.0f kg / personne\n", comment: ""), emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire, weight: .regular)]))
+                        
+                    }
                 } else {
-                    texte.append(NSAttributedString(string: String(format: NSLocalizedString("\n%.0f kg / personne\n", comment: ""), emissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire, weight: .regular)]))
-                    
+                    texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSecondaire, weight: .regular)]))
                 }
                 //
                 let dureeEquivalenteSoutenableAns = emissionsParPersonne / emissionsSoutenablesAnnuelles
                 let dureeEquivalenteSoutenableMois = dureeEquivalenteSoutenableAns * 12
                 let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
-                let nomEvenement = evenement == .camp ? NSLocalizedString("ce camp", comment: "") : NSLocalizedString("ce congrès", comment: "")
+                let nomEvenement = lEvenement.texteCetEvenement
                 var uniteDuree = ""
                 var dureeEquivalenteSoutenable: Double = 0.0
                 if dureeEquivalenteSoutenableJours <= 60 {
                     dureeEquivalenteSoutenable = dureeEquivalenteSoutenableJours
                     uniteDuree = NSLocalizedString("jours", comment: "")
-//                    switch evenement {
-//                    case .camp:
-//                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
-//                    case .congres:
-//                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableJours), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
-//                    }
                 } else if dureeEquivalenteSoutenableMois < 24 {
                     dureeEquivalenteSoutenable = dureeEquivalenteSoutenableMois
                     uniteDuree = NSLocalizedString("mois", comment: "")
-//                    switch evenement {
-//                    case .camp:
-//                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
-//                    case .congres:
-//                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant que %.0f mois d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableMois), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
-//                    }
                 } else {
                     dureeEquivalenteSoutenable = dureeEquivalenteSoutenableAns
                     uniteDuree = NSLocalizedString("ans", comment: "")
-//                    switch evenement {
-//                    case .camp:
-//                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce camp produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
-//                    case .congres:
-//                        texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ce congrès produit autant que %.0f ans d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenableAns), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
-//                    }
                 }
-                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ", comment: "") + nomEvenement + NSLocalizedString(" produit autant que %.0f ", comment: "") + uniteDuree + NSLocalizedString(" d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenable), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
+                texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ", comment: "") + nomEvenement + NSLocalizedString(" produit autant que %.0f ", comment: "") + uniteDuree + NSLocalizedString(" d'émissions acceptables pour préserver le climat", comment: ""), typesEmissions[lEvenement.numeroItemDuree].valeur, dureeEquivalenteSoutenable), attributes: [NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite, weight: .regular)]))
                 let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
                 couleur = couleurSoutenabilite(ratioSoutenabilite: ratio)
             } else {
@@ -322,10 +310,12 @@ class ViewControllerAvecCamembert: UIViewController {
                 couleur = .black
                 // Fallback on earlier versions
             }
-            switch evenement {
+            return NSAttributedString(string: lEvenement.texteIndiquezCaracteristiques, attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
+
+            switch lEvenement.evenement {
             case .camp:
                 return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
-            case .congres:
+            case .congresIndividuel, .congresCollectif:
                 return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
             }
         }
@@ -339,7 +329,7 @@ class ViewControllerAvecCamembert: UIViewController {
         let paragraphStyleCentre: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyleCentre.alignment = NSTextAlignment.center
         paragraphStyleCentre.lineBreakMode = NSLineBreakMode.byWordWrapping
-        let contenu = pourTexteBrut ? "" : (evenement == .camp ? NSLocalizedString("Les émissions de CO₂ de mon camp", comment: "") : NSLocalizedString("Les émissions de CO₂ de mon congrès", comment: "")) + "\n"
+        let contenu = pourTexteBrut ? "" : (lEvenement.texteEmissionsDeMonEvenement) + "\n"
         let texte = NSMutableAttributedString(string: contenu, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTitre), NSAttributedString.Key.paragraphStyle: paragraphStyleCentre]) //NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
 //        texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
 
@@ -369,9 +359,13 @@ class ViewControllerAvecCamembert: UIViewController {
         let texteTotalEmissions = emissionsCalculees < 2000.0 ? NSLocalizedString("\nTotal : %.0f kg CO₂", comment: "") : NSLocalizedString("\nTotal : %.2f t CO₂", comment: "")
         let facteurTotalEmissions = emissionsCalculees < 2000.0 ? 1.0 : 1000.0
             texte.append(NSAttributedString(string: String(format: texteTotalEmissions, emissionsCalculees / facteurTotalEmissions), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre)]))
-        let emissionsParPersonne = emissionsCalculees / lesEmissions[SorteEmission.effectif.rawValue].valeur
-        if lesEmissions[SorteEmission.effectif.rawValue].valeur > 0 {
-            let texteEmissionsParPersonne = emissionsParPersonne < 2000 ? NSLocalizedString(" (%.1f kg / personne)\n", comment: "") : NSLocalizedString(" (%.1f t / personne)\n", comment: "")
+        let effectif = lEvenement.numeroItemEffectif >= 0 ? lesEmissions[lEvenement.numeroItemEffectif].valeur : 1.0
+        let emissionsParPersonne = emissionsCalculees / effectif
+        if effectif > 0.0 {
+            var texteEmissionsParPersonne = "\n"
+            if effectif != 1.0 {
+                texteEmissionsParPersonne = emissionsParPersonne < 2000 ? NSLocalizedString(" (%.1f kg / personne)\n", comment: "") : NSLocalizedString(" (%.1f t / personne)\n", comment: "")
+            }
             let facteurEmissionsParPersonne = emissionsParPersonne < 2000.0 ? 1.0 : 1000.0
             texte.append(NSAttributedString(string: String(format: texteEmissionsParPersonne, emissionsParPersonne / facteurEmissionsParPersonne), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular)]))
             let dureeEquivalenteSoutenableAns = emissionsParPersonne / emissionsSoutenablesAnnuelles
@@ -379,7 +373,7 @@ class ViewControllerAvecCamembert: UIViewController {
             let dureeEquivalenteSoutenableJours = dureeEquivalenteSoutenableAns * 365
             let ratio = emissionsParPersonne == 0 ? 0.0 : emissionsParPersonne / emissionsSoutenables
             let couleur = couleurSoutenabilite(ratioSoutenabilite: ratio)
-            let nomEvenement = evenement == .camp ? NSLocalizedString("ce camp", comment: "") : NSLocalizedString("ce congrès", comment: "")
+            let nomEvenement = lEvenement.texteCetEvenement
             var uniteDuree = ""
             var dureeEquivalenteSoutenable: Double = 0.0
                 if dureeEquivalenteSoutenableJours <= 60 {
@@ -393,11 +387,11 @@ class ViewControllerAvecCamembert: UIViewController {
                     uniteDuree = NSLocalizedString("ans", comment: "")
                 }
             
-            texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ", comment: "") + nomEvenement + NSLocalizedString(" produit autant de gaz à effet de serre que %.0f ", comment: "") + uniteDuree + NSLocalizedString(" d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[SorteEmission.duree.rawValue].valeur, dureeEquivalenteSoutenable), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
-                texte.append(NSAttributedString(string: NSLocalizedString("\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app Camp", comment: ""), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
+            texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ", comment: "") + nomEvenement + NSLocalizedString(" produit autant de gaz à effet de serre que %.0f ", comment: "") + uniteDuree + NSLocalizedString(" d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[lEvenement.numeroItemDuree].valeur, dureeEquivalenteSoutenable), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
+            texte.append(NSAttributedString(string: lEvenement.texteAnalysezReduisez, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
         //        texte.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
-            let nomApp = evenement == .camp ? NSLocalizedString("Bilan CO2 camp scout", comment: "") : NSLocalizedString("Bilan CO2 congrès", comment: "")
-            let lienAppSotre = evenement == .camp ? NSLocalizedString("lienAppStoreCamp", comment: "") : NSLocalizedString("lienAppStoreCongres", comment: "")
+            let nomApp = lEvenement.texteNomApp
+            let lienAppSotre = lEvenement.texteLienAppStore
                 texte.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: (texte.string as NSString).range(of: nomApp))
         //        texte.addAttribute(.underlineStyle, value: NSUnderlineStyle.single, range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
                 texte.addAttribute(.link, value: lienAppSotre, range: (texte.string as NSString).range(of: nomApp))

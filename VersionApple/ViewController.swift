@@ -16,9 +16,9 @@ let facteurZoomGlissiere: Float = 10.0
 let notificationBackground = "notificationBackground"
 var emissionsCalculees: Double = .nan
 var emissionsSoutenables: Double = .nan
-var lesSections: [Section] = []
+//var lesSections: [Section] = []
 let userDefaults = UserDefaults.standard
-var lesEmissions: [TypeEmission] = []
+//var lesEmissions: [TypeEmission] = []
 //var afficherPictos: Bool = true
 
 enum Orientation {
@@ -33,7 +33,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     // UIPopoverPresentationControllerDelegate, ConseilDelegate
     
-    let keyValeursUtilisateurs = "keyValeursUtilisateurs"
+//    let keyValeursUtilisateurs = "keyValeursUtilisateurs"
+    let keyModeCongres = "keyModeCongres"
     
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
@@ -51,7 +52,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var boutonEffacerDonnees: UIButton!
     @IBOutlet var boutonExport: UIButton!
     @IBOutlet var stackViewPrincipal: UIStackView!
-    
+    @IBOutlet var segmentModeCongres: UISegmentedControl!
+
 //    @IBOutlet var contrainteTableViewHautPortrait: NSLayoutConstraint!
 //    @IBOutlet var contrainteTableViewHautPaysage: NSLayoutConstraint!
 //    @IBOutlet var contrainteTableViewDroitePortrait: NSLayoutConstraint!
@@ -64,7 +66,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     @IBOutlet var contrainteLargeurBoutonExporterLarge: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonEffacerEtroit: NSLayoutConstraint!
     @IBOutlet var contrainteLargeurBoutonExporterEtroit: NSLayoutConstraint!
-        
+    
+    @IBOutlet var contrainteBasTableViewCamp: NSLayoutConstraint!
+    @IBOutlet var contrainteBasTableViewCongres: NSLayoutConstraint!
+    
     override func viewDidLoad() {
 //        if #available(iOS 13, *) {
             boutonEffacerDonnees.setTitle("", for: .normal) // ⌫  "\u{0232B}"
@@ -74,18 +79,32 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //            boutonEffacerDonnees.setTitle("\u{0232B}", for: .normal) // ⌫  "\u{0232B}"
 //        }
         boutonExport.setTitle("", for: .normal)
-        
-//        _ = self.choisitContraintes(size: self.view.frame.size)
-        (lesEmissions, lesSections) = lireFichier(nom: nomFichierData)
-        let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
-        if !lesValeurs.isEmpty && lesValeurs.count == lesEmissions.count {
-            for i in 0...lesValeurs.count - 1 {
-                lesEmissions[i].valeur = lesValeurs[i]
-            }
+        segmentModeCongres.isHidden = lEvenement.evenement == .camp
+        segmentModeCongres.setTitle(NSLocalizedString("Organisateur", comment: ""), forSegmentAt: 0)
+        segmentModeCongres.setTitle(NSLocalizedString("Participant", comment: ""), forSegmentAt: 1)
+        var modeCongres = userDefaults.value(forKey: keyModeCongres) as? Int ?? 0
+        if modeCongres >= 0 && modeCongres < segmentModeCongres.numberOfSegments {
+            segmentModeCongres.selectedSegmentIndex = modeCongres
+        } else {
+            modeCongres = segmentModeCongres.selectedSegmentIndex
         }
+        switchCollectifIndividuel(mode: modeCongres)
+        contrainteBasTableViewCamp.isActive = lEvenement.evenement == .camp
+        if lEvenement.evenement != .camp {
+            contrainteBasTableViewCongres = NSLayoutConstraint(item: tableViewEmissions!, attribute: .bottom, relatedBy: .equal, toItem: segmentModeCongres, attribute: .top, multiplier: 1.0, constant: -8.0)
+            contrainteBasTableViewCongres.isActive = true
+        }
+//        _ = self.choisitContraintes(size: self.view.frame.size)
+//        (lEvenement.lesEmissions, lEvenement.sections) = lireFichier(nom: nomFichierData)
+//        let lesValeurs = userDefaults.value(forKey: keyValeursUtilisateurs) as? [Double] ?? []
+//        if !lesValeurs.isEmpty && lesValeurs.count == lEvenement.lesEmissions.count {
+//            for i in 0...lesValeurs.count - 1 {
+//                lEvenement.lesEmissions[i].valeur = lesValeurs[i]
+//            }
+//        }
         
-        actualiseValeursMax()
-        emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        lEvenement.actualiseValeursMax()
+        emissionsCalculees = lEvenement.calculeEmissions(typesEmissions: lEvenement.lesEmissions)
         boutonExport.isHidden = emissionsCalculees == 0
         boutonEffacerDonnees.isHidden = emissionsCalculees == 0
         tableViewEmissions.delegate = self
@@ -100,6 +119,17 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         
         super.viewDidLoad()
     }  // viewDidLoad
+    
+    @IBAction func modeCongresChange() {
+        let modeCongres = segmentModeCongres.selectedSegmentIndex
+        switchCollectifIndividuel(mode: modeCongres)
+        tableViewEmissions.reloadData()
+//        lEvenement = modeCongres == 0 ? leCongres : leCongresIndividuel
+        userDefaults.set(modeCongres, forKey: keyModeCongres)
+        emissionsCalculees = lEvenement.calculeEmissions(typesEmissions: lEvenement.lesEmissions)
+        actualiseAffichageEmissions()
+        dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lEvenement.lesEmissions, ligneActive: 0)
+    }
     
     @objc func sectionTapped(sender: UITapGestureRecognizer) {
         print("tap")
@@ -116,8 +146,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
                     if sectionHeaderArea.contains(tapLocation) {
                         // do something with the section
                         print("tapped on section at index: \(i)")
-                        if !lesSections[i].afficherLaSection || (lesSections[i].afficherLaSection && lesSections[i].emissionsSection == 0 && lesSections[i].optionnel) {
-                            lesSections[i].afficherLaSection.toggle()
+                        if !lEvenement.sections[i].afficherLaSection || (lEvenement.sections[i].afficherLaSection && lEvenement.sections[i].emissionsSection == 0 && lEvenement.sections[i].optionnel) {
+                            lEvenement.sections[i].afficherLaSection.toggle()
                             tableViewEmissions.reloadData()
                         }
                     }
@@ -133,24 +163,24 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return lesSections.count
+        return lEvenement.sections.count
     }
     
     
     //// gestion des tableView
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        let nombreDeLignesDansLaSection = lesEmissions.filter({$0.categorie == lesSections[section]}).count
-        //        let sectionOptionnelle = lesEmissions.filter({$0.categorie == lesSections[section]}).first?.sectionOptionnelle ?? false
+        //        let nombreDeLignesDansLaSection = lEvenement.lesEmissions.filter({$0.categorie == lEvenement.sections[section]}).count
+        //        let sectionOptionnelle = lEvenement.lesEmissions.filter({$0.categorie == lEvenement.sections[section]}).first?.sectionOptionnelle ?? false
         //        let afficherLaSection = !sectionOptionnelle || calculeEmissionsSection(section: section) > 0
         //        return afficherLaSection ? nombreDeLignesDansLaSection : 0
-        return lesEmissions.filter({$0.categorie == lesSections[section].nom}).count
+        return lEvenement.lesEmissions.filter({$0.categorie == lEvenement.sections[section].nom}).count
     }
     
     func numeroDeLigne(indexPath: IndexPath) -> Int {
         var compteur: Int = 0
-        let nomDeSection = lesSections[indexPath.section].nom
-        while lesEmissions[compteur].categorie != nomDeSection {compteur = compteur + 1}
+        let nomDeSection = lEvenement.sections[indexPath.section].nom
+        while lEvenement.lesEmissions[compteur].categorie != nomDeSection {compteur = compteur + 1}
         return compteur + indexPath.row
     }
     
@@ -159,8 +189,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a new cell if needed or reuse an old one
         //        print("Cell for row at index path \(indexPath)")
-        if indexPath.section < lesSections.count - 1 {  // les vraies données
-            if lesSections[indexPath.section].afficherLaSection {
+        if indexPath.section < lEvenement.sections.count - 1 {  // les vraies données
+            if lEvenement.sections[indexPath.section].afficherLaSection {
                 return creeCelluleNormale(tableView, cellForRowAt: indexPath)
             } else {
                 return creeCelluleVide(tableView, cellForRowAt: indexPath)
@@ -174,11 +204,11 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierCredits, for: indexPath) as! CelluleCredits
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.labelCopyright.text = evenement == .camp ? NSLocalizedString("© 2023 Jérôme Kasparian, EEUdF", comment: "") : NSLocalizedString("© 2023 Jérôme Kasparian, Université de Genève", comment: "")
-        let adresseWeb = evenement == .camp ? NSLocalizedString("www.eeudf.org", comment: "") : NSLocalizedString("www.unige.ch", comment: "")
+        cell.labelCopyright.text = lEvenement.texteCopyright
+        let adresseWeb = lEvenement.texteAdresseWeb
         cell.boutonAdresseWeb.setTitle(adresseWeb, for: .normal)
         cell.boutonOuvrirWeb.setTitle("", for: .normal)
-        let image = evenement == .camp ? UIImage(named: "logo eeudf coul") : UIImage(named: "Unige")
+        let image = lEvenement.logo
         cell.imageLogo.image = image
 //        cell.boutonOuvrirWeb.contentHorizontalAlignment = .fill
 //        cell.boutonOuvrirWeb.contentVerticalAlignment = .fill
@@ -190,14 +220,14 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func creeCelluleVide (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifierVide, for: indexPath) as! CelluleVide
         cell.selectionStyle = .none
-        cell.backgroundColor = couleurs5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.backgroundColor = lEvenement.couleurs5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lEvenement.sections.count).withAlphaComponent(0.5)
         cell.delegate = self
         return cell
     }
     
     func creeCelluleNormale (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ligne = numeroDeLigne(indexPath: indexPath)
-        let emission = lesEmissions[ligne]
+        let emission = lEvenement.lesEmissions[ligne]
         let cell = tableViewEmissions.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleEmission
         cell.delegate = self
         cell.selectionStyle = .none
@@ -219,7 +249,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.glissiere.isContinuous = true  // pour que le slider reçoive des mises à jour même s'il ne bouge pas : comportement par défaut sur MacOS, mais pas sur iOS
         cell.labelNom.text = texteNomValeurUnite(emission: emission) //, afficherPictos: afficherPictos)
         cell.labelNom.font = .monospacedDigitSystemFont(ofSize: cell.labelNom.font.pointSize, weight: .regular)
-        let mettreTitreCelluleEnRouge = (ligne == SorteEmission.duree.rawValue || ligne == SorteEmission.effectif.rawValue) && lesEmissions[ligne].valeur == 0
+        let mettreTitreCelluleEnRouge = indexPath.section == 0 && lEvenement.lesEmissions[ligne].facteurEmission == 0.0 && lEvenement.lesEmissions[ligne].valeur == 0
         if #available(iOS 13.0, *) {
             cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
         } else {
@@ -231,33 +261,33 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         cell.actualiseEmissionIndividuelle(typeEmission: emission)
         cell.labelEmissionIndividuelle.font = .monospacedDigitSystemFont(ofSize: cell.labelEmissionIndividuelle.font.pointSize, weight: .regular)
         cell.boutonInfo.isHidden = emission.conseil.isEmpty
-        cell.backgroundColor = couleurs5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lesSections.count).withAlphaComponent(0.5)
+        cell.backgroundColor = lEvenement.couleurs5[indexPath.section].withAlphaComponent(0.3) // UIColor(morgenStemningNumber: indexPath.section, MorgenStemningScaleSize: lEvenement.sections.count).withAlphaComponent(0.5)
         cell.boutonInfo.setTitle("\u{2007}", for: .normal)
         return cell
     }
     
     //    func calculeEmissionsSection(section: Int) -> Double {
-    //        let titreSection = lesSections[section]
-    //        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
-    //        return lesEmissionsDeLaSection.reduce(0.0, +)
+    //        let titreSection = lEvenement.sections[section]
+    //        let lEvenement.lesEmissionsDeLaSection = lEvenement.lesEmissions.filter({$0.categorie == titreSection}).map({$0.emission})
+    //        return lEvenement.lesEmissionsDeLaSection.reduce(0.0, +)
     //    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var titreSection = lesSections[section].nom
-        if lesSections[section].emissionsSection > 0 {
-            titreSection = titreSection + String(format: " (%.0f %%)", lesSections[section].emissionsSection / emissionsCalculees * 100.0)
+        var titreSection = lEvenement.sections[section].nom
+        if lEvenement.sections[section].emissionsSection > 0 {
+            titreSection = titreSection + String(format: " (%.0f %%)", lEvenement.sections[section].emissionsSection / emissionsCalculees * 100.0)
         }
         let margeVerticale = CGFloat(12.0)
         let margeHorizontale = CGFloat(20.0)
         let hauteurLabel = CGFloat(24.0)
         let headerView = UIView() //frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: hauteurLabel + 2 * margeVerticale))
         //        headerView.frame.size.height = hauteurLabel + 2 * margeVerticale
-        headerView.backgroundColor = couleurs5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lesSections.count) //.withAlphaComponent(0.7)
+        headerView.backgroundColor = lEvenement.couleurs5[section] //UIColor(morgenStemningNumber: section, MorgenStemningScaleSize: lEvenement.sections.count) //.withAlphaComponent(0.7)
         let headerLabel = UILabel(frame: CGRect(x: margeHorizontale, y: margeVerticale, width: tableView.bounds.size.width - 2 * margeHorizontale, height: hauteurLabel))
         headerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline).withSize(21) //  .boldSystemFont(ofSize: 24) // UIFont(name: "Verdana", size: 20)
         var blanc: CGFloat = 0
         var alpha: CGFloat = 0
-        couleurs5[section].getWhite(&blanc, alpha: &alpha)
+        lEvenement.couleurs5[section].getWhite(&blanc, alpha: &alpha)
         //        print("blanc \(blanc)")
         headerLabel.textColor = blanc > 0.5 ? .black : .white
         headerLabel.text = titreSection // self.tableView(self.tableView, titleForHeaderInSection: section)
@@ -278,7 +308,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     //    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if lesSections[section].nom == "" {
+        if lEvenement.sections[section].nom == "" {
             return CGFloat(0.0)
         } else {
             let headerHeight: CGFloat = 48
@@ -298,9 +328,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func afficheConseil(cell: CelluleEmission){
         //        var message = ""
         if let indexPathDeLaCellule = tableViewEmissions.indexPath(for: cell) {
-            let message = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
-            let nomsRessources = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].nomsRessources
-            let liensRessources = lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].liensRessources
+            let message = lEvenement.lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].conseil //  cell.labelConseil.text
+            let nomsRessources = lEvenement.lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].nomsRessources
+            let liensRessources = lEvenement.lesEmissions[numeroDeLigne(indexPath:  indexPathDeLaCellule)].liensRessources
             let alerte = UIAlertController(title: NSLocalizedString("Un conseil", comment: ""), message: message, preferredStyle: .alert)
             if !nomsRessources.isEmpty && !liensRessources.isEmpty {
                 print("nom ressource : ", nomsRessources, "liens ressources", liensRessources)
@@ -323,16 +353,16 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     
     func effacerDonnees() {
-        for i in 0...lesEmissions.count - 1 {
-            lesEmissions[i].valeur = 0.0 // lesEmissions[i].facteurEmission > 0 ? //0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
+        for i in 0...lEvenement.lesEmissions.count - 1 {
+            lEvenement.lesEmissions[i].valeur = 0.0 // lEvenement.lesEmissions[i].facteurEmission > 0 ? //0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
         }
-        actualiseValeursMax()
-        emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
+        lEvenement.actualiseValeursMax()
+        emissionsCalculees = lEvenement.calculeEmissions(typesEmissions: lEvenement.lesEmissions)
         boutonExport.isHidden = emissionsCalculees == 0
         boutonEffacerDonnees.isHidden = emissionsCalculees == 0
         //        print("emissions Calculées : ", emissionsCalculees)
-        let lesValeurs = lesEmissions.map({$0.valeur})
-        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+        let lesValeurs = lEvenement.lesEmissions.map({$0.valeur})
+        userDefaults.set(lesValeurs, forKey: lEvenement.keyData)
         
         DispatchQueue.main.async {
             self.tableViewEmissions.reloadData()
@@ -341,7 +371,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.actualiseAffichageEmissions()
-            self.dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lEvenement.lesEmissions, ligneActive: ligneEnCours)
         }
     }
     
@@ -367,13 +397,13 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     func lancerTimerZoom(cell: CelluleEmission, ligne: Int) {
-        if !self.glissiereModeZoom && ((cell.glissiere.maximumValue - cell.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || lesEmissions[ligne].echelleLog) {
+        if !self.glissiereModeZoom && ((cell.glissiere.maximumValue - cell.glissiere.minimumValue) / facteurZoomGlissiere >= 3 || lEvenement.lesEmissions[ligne].echelleLog) {
             let valeur = cell.glissiere.value
             let compteurAuDebutDuTimer = self.compteurMouvementsGlissiere
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if compteurAuDebutDuTimer == self.compteurMouvementsGlissiere && abs(valeur - cell.glissiere.value) < 0.02 * (cell.glissiere.maximumValue - cell.glissiere.minimumValue) && !self.glissiereModeZoom {
                     //                    print("zoom", compteurAuDebutDuTimer, self.compteurMouvementsGlissiere, ligne)
-                    self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: lesEmissions[ligne].echelleLog)
+                    self.activerModeZoomGlissiere(ligne: ligne, cellule: cell, echelleLog: lEvenement.lesEmissions[ligne].echelleLog)
                 }
             }
         }
@@ -386,26 +416,26 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         }
         //        if ligneEnCours >= 0 && celluleEnCours != nil {
         let ligne = numeroDeLigne(indexPath: indexPath)
-        let emission = lesEmissions[ligne]
+        let emission = lEvenement.lesEmissions[ligne]
         //        print("glissiereBougee", cell.glissiere.value, ligne, emission.nom, compteurMouvementsGlissiere)
         lancerTimerZoom(cell: cell, ligne: ligne)
         self.valeurPrecedente = cell.glissiere.value
         if emission.echelleLog {
             if cell.glissiere.value == self.minValueNonZoomee { //  cellule!.glissiere.minimumValue {
-                lesEmissions[ligne].valeur = 0.0
+                lEvenement.lesEmissions[ligne].valeur = 0.0
             } else {
-                lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
+                lEvenement.lesEmissions[ligne].valeur = arrondi(exp(Double(cell.glissiere.value)))
             }
         } else {
-            lesEmissions[ligne].valeur = Double(cell.glissiere.value)
+            lEvenement.lesEmissions[ligne].valeur = Double(cell.glissiere.value)
             if emission.valeurEntiere {
-                lesEmissions[ligne].valeur = round(lesEmissions[ligne].valeur)
+                lEvenement.lesEmissions[ligne].valeur = round(lEvenement.lesEmissions[ligne].valeur)
             }
         }
-        ajusteQuantitesLiees(ligne: ligne)
-        emissionsCalculees = calculeEmissions(typesEmissions: lesEmissions)
-        cell.labelNom.text = texteNomValeurUnite(emission: lesEmissions[ligne]) //, afficherPictos: afficherPictos)
-        let mettreTitreCelluleEnRouge = (ligne == SorteEmission.duree.rawValue || ligne == SorteEmission.effectif.rawValue) && lesEmissions[ligne].valeur == 0
+        lEvenement.ajusteQuantitesLiees(ligne: ligne)
+        emissionsCalculees = lEvenement.calculeEmissions(typesEmissions: lEvenement.lesEmissions)
+        cell.labelNom.text = texteNomValeurUnite(emission: lEvenement.lesEmissions[ligne]) //, afficherPictos: afficherPictos)
+        let mettreTitreCelluleEnRouge = indexPath.section == 0 && lEvenement.lesEmissions[ligne].facteurEmission == 0.0 && lEvenement.lesEmissions[ligne].valeur == 0
         if #available(iOS 13.0, *) {
             cell.labelNom.textColor = mettreTitreCelluleEnRouge ? .red : .label
         } else {
@@ -416,7 +446,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         DispatchQueue.main.async{
             self.boutonExport.isHidden = emissionsCalculees == 0
             self.boutonEffacerDonnees.isHidden = emissionsCalculees == 0
-            cell.actualiseEmissionIndividuelle(typeEmission: lesEmissions[ligne])  // Bizarre, devrait être déjà inclus dans le reloadRows
+            cell.actualiseEmissionIndividuelle(typeEmission: lEvenement.lesEmissions[ligne])  // Bizarre, devrait être déjà inclus dans le reloadRows
 //            var lesIndexPathAActualiser: [IndexPath] = []
 //            if let indexPathAActualiser = self.tableViewEmissions.indexPathForSelectedRow {
 ////                let section = indexPathAActualiser.section
@@ -429,7 +459,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
 //            }
 //            self.tableViewEmissions.reloadRows(at: lesIndexPathAActualiser, with: .automatic)
             self.actualiseAffichageEmissions()
-            self.dessineCamembert(camembert: self.camembert, curseurActif: true, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: true, lesEmissions: lEvenement.lesEmissions, ligneActive: ligneEnCours)
         }  // DispatchQueue.main.async
         //        } // if ligneEnCours >= 0 && celluleEnCours != nil
     }
@@ -440,8 +470,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         glissiereBougee(cell: cell)
         ligneEnCours = -1
         self.compteurMouvementsGlissiere = self.compteurMouvementsGlissiere + 1
-        let lesValeurs = lesEmissions.map({$0.valeur})
-        userDefaults.set(lesValeurs, forKey: keyValeursUtilisateurs)
+        let lesValeurs = lEvenement.lesEmissions.map({$0.valeur})
+        userDefaults.set(lesValeurs, forKey: lEvenement.keyData)
         //        cell.glissiere.minimumValue = minValueNonZoomee
         //        cell.glissiere.maximumValue = maxValueNonZoomee
         //       self.celluleEnCours = nil
@@ -452,7 +482,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         //        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.tableViewEmissions.reloadData()
-            self.dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
+            self.dessineCamembert(camembert: self.camembert, curseurActif: false, lesEmissions: lEvenement.lesEmissions, ligneActive: ligneEnCours)
         }
     }
     
@@ -519,7 +549,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     func ouvrirWebCredits() {
-        let adresse = evenement == .camp ? NSLocalizedString("https://www.eeudf.org", comment: "") : NSLocalizedString("https://www.unige.ch", comment: "")
+        let adresse = lEvenement.texteLienWeb
         ouvrirWeb(adresse: adresse)
     }
     
@@ -527,9 +557,9 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func redessineResultats(size: CGSize, curseurActif: Bool) {
         DispatchQueue.main.async {
             self.actualiseAffichageEmissions()
-            let delai = self.choisitContraintes(size: size, orientationGlobale: .inconnu) ? 0.01 : 0.00
+            let delai = self.choisitContraintes(size: size, orientationGlobale: .inconnu) ? 0.05 : 0.00
             DispatchQueue.main.asyncAfter(deadline: .now() + delai) {
-                self.dessineCamembert(camembert: self.camembert, curseurActif: curseurActif, lesEmissions: lesEmissions, ligneActive: ligneEnCours)
+                self.dessineCamembert(camembert: self.camembert, curseurActif: curseurActif, lesEmissions: lEvenement.lesEmissions, ligneActive: ligneEnCours)
 //                _ = self.choisitContraintes(size: size)
             }
         }
@@ -561,8 +591,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
     // https://stackoverflow.com/questions/5443166/how-to-convert-uiview-to-pdf-within-ios
     @IBAction func exportAsPdfFromView(sender: UIButton) {
-        let leTexte = texteListeEmissions(lesEmissions: lesEmissions, pourTexteBrut: true).string
-        let sujet = evenement == .camp ? NSLocalizedString("Impact climat de mon camp", comment: "") : NSLocalizedString("Impact climat de mon congrès", comment: "")
+        let leTexte = texteListeEmissions(lesEmissions: lEvenement.lesEmissions, pourTexteBrut: true).string
+        let sujet = lEvenement.texteImpactClimat
         var items: [Any] = [EmailSubjectActivityItemSource(subject: sujet, emailBody: leTexte)]
         if let urlPDFAExporter = generePDF() {
             print("pdf ok")
@@ -603,7 +633,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
             
             let marge: CGFloat = 40
             let largeurTexte = mediaBox.width - 2 * marge
-            let textePourPdf1 = texteListeEmissions(lesEmissions: lesEmissions, pourTexteBrut: false)
+            let textePourPdf1 = texteListeEmissions(lesEmissions: lEvenement.lesEmissions, pourTexteBrut: false)
             let hauteurTexte1 = textePourPdf1.hauteur(largeur: largeurTexte)
             let box1 = CGRect(x: mediaBox.minX + marge, y: mediaBox.minY + marge, width: largeurTexte, height: hauteurTexte1 + marge)
             textePourPdf1.draw(in: box1)

@@ -50,6 +50,7 @@
 		B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5716E12296C8CC7008EE908 /* CelluleExplications.swift */; };
 		B5BB25D029A2191000B29278 /* DataInternationalCamps.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */; };
 		B5BE1CB02B1F4F6D0059A76A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51FD8F02B18CD6C00F54E55 /* LaunchScreen.storyboard */; };
+		B5D576002B26027F00ACA991 /* DataInternationalCongresIndividuel.csv in Resources */ = {isa = PBXBuildFile; fileRef = B5D575FF2B26027F00ACA991 /* DataInternationalCongresIndividuel.csv */; };
 		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
@@ -92,6 +93,7 @@
 		B5716E12296C8CC7008EE908 /* CelluleExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleExplications.swift; sourceTree = "<group>"; };
 		B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BilanCO2.entitlements; sourceTree = "<group>"; };
 		B5BB25CF29A2190900B29278 /* DataInternationalCamps.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DataInternationalCamps.csv; sourceTree = "<group>"; };
+		B5D575FF2B26027F00ACA991 /* DataInternationalCongresIndividuel.csv */ = {isa = PBXFileReference; lastKnownFileType = text; name = DataInternationalCongresIndividuel.csv; path = DonneesConferences/DataInternationalCongresIndividuel.csv; sourceTree = SOURCE_ROOT; };
 		B5D81F1A28F2126300188489 /* CelluleCredits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleCredits.swift; sourceTree = "<group>"; };
 		B5E0FE88292A5044001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5E0FE8A292A5049001D0790 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */,
 				B51FD8EE2B17935000F54E55 /* InfoPlist.strings */,
 				B5154B1F2B0425C00075D50A /* DataInternationalCongres.csv */,
+				B5D575FF2B26027F00ACA991 /* DataInternationalCongresIndividuel.csv */,
 				B5154B0B2B04240A0075D50A /* Bilan CO2 Congres.entitlements */,
 				B5154B242B04289C0075D50A /* ParametresCongres.swift */,
 				B5154B022B0423D50075D50A /* Assets.xcassets */,
@@ -288,6 +291,7 @@
 				B5154B232B0428360075D50A /* DataInternationalCongres.csv in Resources */,
 				B5154B1E2B0425950075D50A /* PageBlanche.pdf in Resources */,
 				B5154B0D2B0424E80075D50A /* Assets.xcassets in Resources */,
+				B5D576002B26027F00ACA991 /* DataInternationalCongresIndividuel.csv in Resources */,
 				B5154B032B0423D50075D50A /* Assets.xcassets in Resources */,
 				B5154B0E2B0424FF0075D50A /* Main.storyboard in Resources */,
 			);
@@ -612,7 +616,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;
@@ -652,7 +656,7 @@
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = L3A73K7T3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VersionApple/Info.plist;

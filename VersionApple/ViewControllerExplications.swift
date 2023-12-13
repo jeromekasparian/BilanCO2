@@ -10,35 +10,12 @@ import UIKit
 
 var ligneExplicationsSelectionnee: Int = -1
 
-let texteMethodo = evenement == .camp ? NSLocalizedString("texteMethodoCamp", comment: "") : NSLocalizedString("texteMethodoCongres", comment: "")
 
-let texteGraphique = evenement == .camp ? NSLocalizedString("texteGraphiqueCamp", comment: "") : NSLocalizedString("texteGraphiqueCongres", comment: "")
-
-let texteEmissionsAcceptables = evenement == .camp ? NSLocalizedString("texteEmissionsAcceptablesCamp", comment: "") : NSLocalizedString("texteEmissionsAcceptablesCongres", comment: "")
-
-let texteRessourcesPedagogiques = NSLocalizedString("texteRessourcesPedagogiques", comment: "")
-
-let texteLimites = evenement == .camp ? NSLocalizedString("texteLimitesCamp", comment: "") : NSLocalizedString("texteLimitesCongres", comment: "")
-
-let texteSources = evenement == .camp ? NSLocalizedString("texteSourcesCamp", comment: "") : NSLocalizedString("texteSourcesCongres", comment: "")
-
-let texteRemerciements = evenement == .camp ? NSLocalizedString("texteRemerciementsCamp", comment: "") : NSLocalizedString("texteRemerciementsCongres", comment: "")
 
 
 class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource, CelluleExplicationsDelegate {
 //    let lesParagraphes = [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Graphique", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""), NSLocalizedString("Limites", comment: ""), NSLocalizedString("Sources", comment: ""), NSLocalizedString("Remerciements", comment: "")]
 //    let lesTextes = [texteMethodo, texteGraphique, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
-    let lesTextes = evenement == .camp ? [texteMethodo, texteEmissionsAcceptables, texteRessourcesPedagogiques, texteLimites, texteSources, texteRemerciements] : [texteMethodo, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
-    let lesParagraphes = evenement == .camp ? [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""),
-        NSLocalizedString("Ressources pédagogiques", comment: ""),
-        NSLocalizedString("Limites", comment: ""),
-        NSLocalizedString("Sources", comment: ""),
-       NSLocalizedString("Remerciements", comment: "")] :
-    [NSLocalizedString("Méthodologie & hypothèses", comment: ""),
-     NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""),
-     NSLocalizedString("Limites", comment: ""),
-     NSLocalizedString("Sources", comment: ""),
-     NSLocalizedString("Remerciements", comment: "")]
 
     let cellReuseIdentifier = "celluleExplications"
     var lesTextesFormattes: [NSAttributedString] = []

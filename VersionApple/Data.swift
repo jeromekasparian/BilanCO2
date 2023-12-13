@@ -17,9 +17,9 @@ let separateur = ";" // le séparateur dans les fichiers de données
 //    var effectif: Int = 25
 //    var distance: Double = 150 // distance entre le lieu de camp et le local
 //    var duree: Int = 15 // en jours
-//    
+//
 //    init() {}
-//    
+//
 //    init(effectif: Int, distance: Double, duree: Int) {
 //        self.effectif = effectif
 //        self.distance = distance
@@ -29,7 +29,243 @@ let separateur = ";" // le séparateur dans les fichiers de données
 
 enum Evenement: Int {
     case camp
-    case congres
+    case congresCollectif
+    case congresIndividuel
+}
+
+protocol DescriptionEvenementDelegate: AnyObject {
+    func actualiserValeursMax()
+    func ajusterQuantitesLiees(ligne: Int)
+}
+
+class DescriptionEvenement {
+    var lesEmissions: [TypeEmission] = []
+    var sections: [Section] = []
+    var nomFichierData: String = ""
+    var pictoBien: String = ""
+    var pictoBof: String = ""
+    var pictoMal: String = ""
+    var couleurs5: [UIColor] = []
+    var evenement: Evenement
+    var texteCetEvenement: String = ""
+    var texteEmissionsDeMonEvenement: String = ""
+    var texteNomApp: String = ""
+    var texteLienAppStore: String = ""
+    var texteCopyright: String = ""
+    var texteAdresseWeb: String = ""
+    var texteLienWeb: String = ""
+    var texteImpactClimat: String = ""
+    var texteAnalysezReduisez: String = ""
+    var texteIndiquezCaracteristiques: String = ""
+
+    var keyData: String = ""
+
+    var logo: UIImage? = nil
+
+    var numeroItemDuree: Int = -1
+    var numeroItemEffectif: Int = -1
+    var numeroItemDistance: Int = -1
+    
+    weak var delegate: DescriptionEvenementDelegate?
+    
+    init(nomFichierData: String, pictoBien: String, pictoBof: String, pictoMal: String, evenement: Evenement, couleurs5: [UIColor], texteCetEvenement: String, texteEmissionsDeMonEvenement: String, texteNomApp: String, texteLienAppStore: String, texteCopyright: String, texteAdresseWeb: String, texteLienWeb: String, texteImpactClimat: String, texteAnalysezReduisez: String, texteIndiquezCaracteristiques : String, keyData: String, logo: UIImage?, numeroItemDuree: Int, numeroItemEffectif: Int, numeroItemDistance: Int) {
+        self.evenement = evenement
+        self.nomFichierData = nomFichierData
+        (self.lesEmissions, self.sections) = lireFichier(nom: nomFichierData)
+        self.pictoBien = pictoBien
+        self.pictoBof = pictoBof
+        self.pictoMal = pictoMal
+        self.couleurs5 = couleurs5
+        
+        self.texteCetEvenement = texteCetEvenement
+        self.texteEmissionsDeMonEvenement = texteEmissionsDeMonEvenement
+        self.texteNomApp = texteNomApp
+        self.texteLienAppStore = texteLienAppStore
+        self.texteCopyright = texteCopyright
+        self.texteAdresseWeb = texteAdresseWeb
+        self.texteLienWeb = texteLienWeb
+        self.texteImpactClimat = texteImpactClimat
+        self.texteAnalysezReduisez = texteAnalysezReduisez
+        self.texteIndiquezCaracteristiques = texteIndiquezCaracteristiques
+        self.keyData = keyData
+        
+        self.logo = logo
+
+        self.numeroItemDuree = numeroItemDuree
+        self.numeroItemDistance = numeroItemDistance
+        self.numeroItemEffectif = numeroItemEffectif
+        
+        let lesValeurs = userDefaults.value(forKey: keyData) as? [Double] ?? []
+        if !lesValeurs.isEmpty && lesValeurs.count == self.lesEmissions.count {
+            for i in 0...lesValeurs.count - 1 {
+                self.lesEmissions[i].valeur = lesValeurs[i]
+            }
+        }
+
+    }
+    
+    func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
+        var lesEmetteursLus: [TypeEmission] = []
+        var lesSections: [Section] = []
+        let lignes = data.components(separatedBy: .newlines).dropFirst()
+        for ligne in lignes {
+            let elements = ligne.components(separatedBy: separateur)
+            if elements.count >= 19 {  // on teste une ligne vide en début ou fin de tableau
+                let categorie = NSLocalizedString(elements[0], comment: "")
+                let valeurMax = Double(elements[3]) ?? 0
+                let facteurEmission = Double(elements[4]) ?? 0
+                let parPersonne = Double(elements[5]) ?? 0
+                let parKmParcouru = Double(elements[6]) ?? 0
+                let parJour = Double(elements[7]) ?? 0
+                let echelleLog = (Int(elements[8]) ?? 0) == 1
+                let valeurEntiere = (Int(elements[9]) ?? 0) == 1
+                let valeurMaxSelonEffectif = Double(elements[10]) ?? 0
+                let valeurMaxParJour = Double(elements[11]) ?? 0
+                //            print("valeurMaxParJour", valeurMaxParJour)
+                let valeur = 0.0 //facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
+                let nomsRessources = NSLocalizedString(elements[15], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
+                let liensRessources = NSLocalizedString(elements[16], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
+                let sectionOptionnelle = (Int(elements[18]) ?? 0) == 1
+                lesEmetteursLus.append(TypeEmission(categorie: categorie,
+                                                    nom: NSLocalizedString(elements[1], comment: ""),
+                                                    unite: NSLocalizedString(elements[2], comment: ""),
+                                                    valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission,
+                                                    parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour,
+                                                    echelleLog: echelleLog, valeurEntiere: valeurEntiere,
+                                                    valeurMaxSelonEffectif: valeurMaxSelonEffectif,
+                                                    valeurMaxParJour: valeurMaxParJour, emission: 0.0,
+                                                    conseil: NSLocalizedString(elements[12], comment: "").replacingOccurrences(of: "\\n", with: "\n"),
+                                                    nomCourt: NSLocalizedString(elements[13], comment: ""), picto: elements[14],
+                                                    nomsRessources: nomsRessources, liensRessources: liensRessources,
+                                                    nomPluriel: NSLocalizedString(elements[17], comment: ""),
+                                                    sectionOptionnelle: sectionOptionnelle))
+                if lesSections.isEmpty || (lesSections.last?.nom ?? "kzwx") != categorie {
+                    lesSections.append(Section(nom: categorie, emissionsSection: 0.0, optionnel: sectionOptionnelle, afficherLaSection: !sectionOptionnelle))
+                }
+                if valeur > 0 && sectionOptionnelle {
+                    lesSections.last?.afficherLaSection = true
+                }
+            } // si ligne correcte
+        } // for
+        return (lesEmetteursLus, lesSections)
+    }
+    
+    func lireFichier(nom: String) -> ([TypeEmission], [Section]) {
+        // dans le DocumentDirectory si on est en train de charger un géonames monde entier et qu'on dédoublonne
+        if let url = Bundle.main.url(forResource: nom, withExtension: "csv") {
+            do {
+                let dataString = try String(contentsOf: url, encoding: .utf8)
+                return decodeCSV(data: dataString)
+            }
+            catch (let erreur) {
+                print ("csv data conversion error")
+                print(erreur)
+                return ([], [])
+            }
+        } else {
+            print("erreur à l'ouverture du fichier", nom.appending(".csv"))
+            return ([], [])
+        }
+    }
+    
+    
+    func actualiseValeursMaxEffectif() {
+        if self.numeroItemEffectif >= 0 {
+            let effectif = lesEmissions[numeroItemEffectif].valeur
+            for i in 0...lesEmissions.count-1 {
+                if lesEmissions[i].valeurMaxSelonEffectif > 0 {
+                    let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
+                    lesEmissions[i].valeurMax = effectif * lesEmissions[i].valeurMaxSelonEffectif
+                    if collerAuMax {
+                        lesEmissions[i].valeur = lesEmissions[i].valeurMax
+                    } else {
+                        lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+                    }
+                }
+            }
+        }
+    }
+    
+    func actualiseValeursMaxSelonJours() {
+        if self.numeroItemDuree >= 0 {
+            let nombreJours = lesEmissions[numeroItemDuree].valeur
+            for i in 0...lesEmissions.count-1 {
+                if lesEmissions[i].valeurMaxParJour > 0 {
+                    let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
+                    lesEmissions[i].valeurMax = nombreJours * lesEmissions[i].valeurMaxParJour
+                    if collerAuMax {
+                        lesEmissions[i].valeur = lesEmissions[i].valeurMax
+                    } else {
+                        lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
+                    }
+                }
+            }
+        }
+    }
+    
+    func actualiseValeursMax() {
+        self.delegate?.actualiserValeursMax()
+    }
+    
+    func ajusteQuantitesLiees(ligne: Int) {
+        self.delegate?.ajusterQuantitesLiees(ligne: ligne)
+    }
+    
+    func ajusteMaxEtTotalNLignes(priorites: [Int], valeurDesAlternatives: Double, forcerDerniereValeur: Bool) {
+        guard !priorites.isEmpty else {return}
+        //        let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
+        let valeurMaxi = (lesEmissions[priorites.first!].valeurMaxParJour == 0 ? lesEmissions[priorites.first!].valeurMax : lesEmissions[numeroItemDuree].valeur * lesEmissions[priorites.first!].valeurMaxParJour) - valeurDesAlternatives
+        actualiseValeursMaxSelonJours()
+        lesEmissions[priorites.first!].valeur = min(lesEmissions[priorites.first!].valeur, valeurMaxi)
+        guard priorites.count > 2 else {return}
+        var cumul = lesEmissions[priorites.first!].valeur
+        for i in 1...(priorites.count - 1) {
+            if i == priorites.count - 1 && forcerDerniereValeur {
+                lesEmissions[priorites[i]].valeur = valeurMaxi - cumul
+            } else {
+                lesEmissions[priorites[i]].valeur = min(lesEmissions[priorites[i]].valeur, valeurMaxi - cumul)
+                cumul = cumul + lesEmissions[priorites[i]].valeur
+            }
+        }
+    }
+    
+    func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
+        let nombreJours = lesEmissions[numeroItemDuree].valeur
+        let distance = numeroItemDistance >= 0 ? lesEmissions[numeroItemDistance].valeur : -1.0
+        emissionsSoutenables = emissionsSoutenablesAnnuelles / 365.25 * nombreJours // kg eq CO₂ par personne
+        var total: Double = 0.0
+        for typeEmission in typesEmissions {
+            if typeEmission.facteurEmission != 0 {
+                var multiplicateur: Double = 1.0
+                if typeEmission.parPersonne != 0 && numeroItemEffectif >= 0 {
+                    multiplicateur = multiplicateur * typeEmission.parPersonne * lesEmissions[numeroItemEffectif].valeur
+                }
+//                print(typeEmission.nom, "par personne", multiplicateur)
+                //            print("personne", multiplicateur)
+                if typeEmission.parKmDistance != 0 && distance >= 0 {
+                    multiplicateur = multiplicateur * typeEmission.parKmDistance * distance
+                }
+//                print(typeEmission.nom, "par km", multiplicateur)
+                //            print("km", multiplicateur)
+                if typeEmission.parJour != 0 {
+                    multiplicateur = multiplicateur * typeEmission.parJour * nombreJours   //            print("jour", multiplicateur)
+                }
+//                print(typeEmission.nom, "par jour", multiplicateur)
+                    typeEmission.emission = typeEmission.valeur * typeEmission.facteurEmission * multiplicateur
+                    //            print(typeEmission.nom, typeEmission.emission)
+                    total = total + typeEmission.emission
+            }
+            for i in 0...sections.count - 1 {
+                let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == sections[i].nom}).map({$0.emission})
+                sections[i].emissionsSection = lesEmissionsDeLaSection.reduce(0.0, +)
+                if sections[i].emissionsSection > 0 {
+                    sections[i].afficherLaSection = true
+                }
+            }
+        }
+        return total
+    }
+    
 }
 
 class TypeEmission {
@@ -79,6 +315,7 @@ class TypeEmission {
         self.sectionOptionnelle = sectionOptionnelle
     }
     
+    
     func duplique() -> TypeEmission {
         return TypeEmission(categorie: self.categorie, nom: self.nom, unite: self.unite, valeurMax: self.valeurMax, valeur: self.valeur, facteurEmission: self.facteurEmission, parPersonne: self.parPersonne, parKmDistance: self.parKmDistance, parJour: self.parJour, echelleLog: self.echelleLog, valeurEntiere: self.valeurEntiere, valeurMaxSelonEffectif: self.valeurMaxSelonEffectif, valeurMaxParJour: self.valeurMaxParJour, emission: self.emission, conseil: self.conseil, nomCourt: self.nomCourt, picto: self.picto, nomsRessources: self.nomsRessources, liensRessources: self.liensRessources, nomPluriel: self.nomPluriel, sectionOptionnelle: self.sectionOptionnelle)
     }
@@ -99,102 +336,8 @@ class Section {
     
 }
 
-func calculeEmissions(typesEmissions: [TypeEmission]) -> Double {
-    emissionsSoutenables = emissionsSoutenablesAnnuelles / 365.25 * typesEmissions[SorteEmission.duree.rawValue].valeur // kg eq CO₂ par personne
-    var total: Double = 0.0
-    for typeEmission in typesEmissions {
-        if typeEmission.facteurEmission != 0 {
-            var multiplicateur: Double = 1.0
-            if typeEmission.parPersonne != 0 {
-                multiplicateur = multiplicateur * typeEmission.parPersonne * typesEmissions[SorteEmission.effectif.rawValue].valeur
-            }
-//            print("personne", multiplicateur)
-            if typeEmission.parKmDistance != 0 && SorteEmission.distance.rawValue >= 0 {
-                multiplicateur = multiplicateur * typeEmission.parKmDistance * typesEmissions[SorteEmission.distance.rawValue].valeur
-            }
-//            print("km", multiplicateur)
-            if typeEmission.parJour != 0 {
-                multiplicateur = multiplicateur * typeEmission.parJour * typesEmissions[SorteEmission.duree.rawValue].valeur
-            }
-//            print("jour", multiplicateur)
-            typeEmission.emission = typeEmission.valeur * typeEmission.facteurEmission * multiplicateur
-//            print(typeEmission.nom, typeEmission.emission)
-            total = total + typeEmission.emission
-        }
-    }
-    for i in 0...lesSections.count - 1 {
-        let lesEmissionsDeLaSection = lesEmissions.filter({$0.categorie == lesSections[i].nom}).map({$0.emission})
-        lesSections[i].emissionsSection = lesEmissionsDeLaSection.reduce(0.0, +)
-        if lesSections[i].emissionsSection > 0 {lesSections[i].afficherLaSection = true}
-    }
-    return total
-}
 
 
-func decodeCSV(data: String) -> ([TypeEmission], [Section]) {
-    var lesEmetteursLus: [TypeEmission] = []
-    var lesSections: [Section] = []
-    let lignes = data.components(separatedBy: .newlines).dropFirst()
-    for ligne in lignes {
-        let elements = ligne.components(separatedBy: separateur)
-        if elements.count >= 19 {  // on teste une ligne vide en début ou fin de tableau
-            let categorie = NSLocalizedString(elements[0], comment: "")
-            let valeurMax = Double(elements[3]) ?? 0
-            let facteurEmission = Double(elements[4]) ?? 0
-            let parPersonne = Double(elements[5]) ?? 0
-            let parKmParcouru = Double(elements[6]) ?? 0
-            let parJour = Double(elements[7]) ?? 0
-            let echelleLog = (Int(elements[8]) ?? 0) == 1
-            let valeurEntiere = (Int(elements[9]) ?? 0) == 1
-            let valeurMaxSelonEffectif = Double(elements[10]) ?? 0
-            let valeurMaxParJour = Double(elements[11]) ?? 0
-//            print("valeurMaxParJour", valeurMaxParJour)
-            let valeur = 0.0 //facteurEmission > 0 ? 0.0 : 1.0  // pour la durée et l'effectif, on met 1 par défaut, pas zéro
-            let nomsRessources = NSLocalizedString(elements[15], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
-            let liensRessources = NSLocalizedString(elements[16], comment: "").components(separatedBy: ",").filter({!$0.isEmpty})
-            let sectionOptionnelle = (Int(elements[18]) ?? 0) == 1
-            lesEmetteursLus.append(TypeEmission(categorie: categorie,
-                                                nom: NSLocalizedString(elements[1], comment: ""),
-                                                unite: NSLocalizedString(elements[2], comment: ""),
-                                                valeurMax: valeurMax, valeur: valeur, facteurEmission: facteurEmission,
-                                                parPersonne: parPersonne, parKmDistance: parKmParcouru, parJour: parJour,
-                                                echelleLog: echelleLog, valeurEntiere: valeurEntiere,
-                                                valeurMaxSelonEffectif: valeurMaxSelonEffectif,
-                                                valeurMaxParJour: valeurMaxParJour, emission: 0.0,
-                                                conseil: NSLocalizedString(elements[12], comment: "").replacingOccurrences(of: "\\n", with: "\n"),
-                                                nomCourt: NSLocalizedString(elements[13], comment: ""), picto: elements[14],
-                                                nomsRessources: nomsRessources, liensRessources: liensRessources,
-                                                nomPluriel: NSLocalizedString(elements[17], comment: ""),
-                                                sectionOptionnelle: sectionOptionnelle))
-            if lesSections.isEmpty || (lesSections.last?.nom ?? "kzwx") != categorie {
-                lesSections.append(Section(nom: categorie, emissionsSection: 0.0, optionnel: sectionOptionnelle, afficherLaSection: !sectionOptionnelle))
-            }
-            if valeur > 0 && sectionOptionnelle {
-                lesSections.last?.afficherLaSection = true
-            }
-        } // si ligne correcte
-    } // for
-    return (lesEmetteursLus, lesSections)
-}
-
-func lireFichier(nom: String) -> ([TypeEmission], [Section]) {
-    // dans le DocumentDirectory si on est en train de charger un géonames monde entier et qu'on dédoublonne
-    if let url = Bundle.main.url(forResource: nom, withExtension: "csv") {
-        do {
-            let dataString = try String(contentsOf: url, encoding: .utf8)
-            return decodeCSV(data: dataString)
-        }
-        catch (let erreur) {
-            print ("csv data conversion error")
-            print(erreur)
-            return ([], [])
-        }
-    } else {
-        print("erreur à l'ouverture du fichier", nom.appending(".csv"))
-        return ([], [])
-    }
-}
-        
 
 func arrondi(_ nombre: Double) -> Double { // arrondi à deux chiffres significatifs
     if nombre < 100 {
@@ -208,8 +351,14 @@ func arrondi(_ nombre: Double) -> Double { // arrondi à deux chiffres significa
 
 func texteNomValeurUnite(emission: TypeEmission) -> String { //, afficherPictos: Bool) -> String {
     let nom = emission.valeur <= 1 ? emission.nom : emission.nomPluriel
-    let texteNomValeur = emission.unite.isEmpty ? String(format: "%.0f " + nom, emission.valeur) : emission.nom + String(format: NSLocalizedString(" : %.0f ", comment: "") + emission.unite, emission.valeur)
-//    if afficherPictos && !emission.picto.isEmpty {
+    var texteNomValeur = ""
+    if emission.unite.isEmpty {
+        texteNomValeur = String(format: "%.0f " + nom, emission.valeur)
+    } else {
+        let unite = emission.valeur > 1 && !emission.nomPluriel.isEmpty ? emission.nomPluriel : emission.unite
+        texteNomValeur = emission.nom + String(format: NSLocalizedString(" : %.0f ", comment: "") + unite, emission.valeur)
+    }
+    //    if afficherPictos && !emission.picto.isEmpty {
     if emission.picto.isEmpty {
         return texteNomValeur
     } else {
@@ -217,58 +366,3 @@ func texteNomValeurUnite(emission: TypeEmission) -> String { //, afficherPictos:
     }
 }
 
-// pourrait être fusionné avec la version à n lignes
-func ajusteMaxEtTotalTroisLignes(priorite1: SorteEmission, priorite2: SorteEmission, priorite3: SorteEmission) {
-    let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
-    let valeurMaxi = lesEmissions[priorite1.rawValue].valeurMaxParJour == 0 ? lesEmissions[priorite1.rawValue].valeurMax : nombreJours * lesEmissions[priorite1.rawValue].valeurMaxParJour
-    actualiseValeursMaxSelonJours(valeurMax: valeurMaxi)
-    lesEmissions[priorite1.rawValue].valeur = min(lesEmissions[priorite1.rawValue].valeur, valeurMaxi)
-    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, valeurMaxi - lesEmissions[priorite1.rawValue].valeur)
-    lesEmissions[priorite3.rawValue].valeur = valeurMaxi - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
-}
-
-func ajusteMaxEtTotalNLignes(priorites: [SorteEmission], valeurDesAlternatives: Double) {
-    guard !priorites.isEmpty  else {return}
-    let nombreJours = lesEmissions[SorteEmission.duree.rawValue].valeur
-    let valeurMaxi = (lesEmissions[priorites.first!.rawValue].valeurMaxParJour == 0 ? lesEmissions[priorites.first!.rawValue].valeurMax : nombreJours * lesEmissions[priorites.first!.rawValue].valeurMaxParJour) - valeurDesAlternatives
-    actualiseValeursMaxSelonJours(valeurMax: valeurMaxi)
-    lesEmissions[priorites.first!.rawValue].valeur = min(lesEmissions[priorites.first!.rawValue].valeur, valeurMaxi)
-    guard priorites.count > 2 else {return}
-    var cumul = lesEmissions[priorites.first!.rawValue].valeur
-    for i in 1...(priorites.count - 1) {
-        lesEmissions[priorites[i].rawValue].valeur = min(lesEmissions[priorites[i].rawValue].valeur, valeurMaxi - cumul)
-        cumul = cumul + lesEmissions[priorites[i].rawValue].valeur
-    }
-//    lesEmissions[priorites.last!.rawValue].valeur = valeurMaxi - cumul
-//    print("ajuste", priorites.last!,  lesEmissions[priorites.last!.rawValue].valeur)
-//    lesEmissions[priorite2.rawValue].valeur = min(lesEmissions[priorite2.rawValue].valeur, valeurMaxi - lesEmissions[priorite1.rawValue].valeur)
-//    lesEmissions[priorite3.rawValue].valeur = valeurMaxi - lesEmissions[priorite1.rawValue].valeur - lesEmissions[priorite2.rawValue].valeur
-}
-
-func actualiseValeursMaxEffectif(valeurMax: Double) {
-    for i in 0...lesEmissions.count-1 {
-        if lesEmissions[i].valeurMaxSelonEffectif > 0 {
-            let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
-            lesEmissions[i].valeurMax = valeurMax * lesEmissions[i].valeurMaxSelonEffectif
-            if collerAuMax {
-                lesEmissions[i].valeur = lesEmissions[i].valeurMax
-            } else {
-                lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
-            }
-        }
-    }
-}
-
-func actualiseValeursMaxSelonJours(valeurMax: Double) {
-    for i in 0...lesEmissions.count-1 {
-        if lesEmissions[i].valeurMaxParJour > 0 {
-            let collerAuMax = lesEmissions[i].valeur == lesEmissions[i].valeurMax && lesEmissions[i].valeurMax > 0.0
-            lesEmissions[i].valeurMax = valeurMax //* lesEmissions[i].valeurMaxParJour
-            if collerAuMax {
-                lesEmissions[i].valeur = lesEmissions[i].valeurMax
-            } else {
-                lesEmissions[i].valeur = min(lesEmissions[i].valeur, lesEmissions[i].valeurMax)
-            }
-        }
-    }
-}

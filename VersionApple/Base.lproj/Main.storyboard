@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -304,13 +304,25 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="k6R-wK-X6o">
+                                                <rect key="frame" x="60.5" y="349" width="199" height="32"/>
+                                                <segments>
+                                                    <segment title="Organisateur"/>
+                                                    <segment title="Participant"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="modeCongresChange" destination="BYZ-38-t0r" eventType="valueChanged" id="7AP-9N-RgJ"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="MyB-cA-vRv" firstAttribute="leading" secondItem="KFl-5X-2e1" secondAttribute="leading" id="8rG-qn-zMF"/>
                                             <constraint firstAttribute="trailing" secondItem="MyB-cA-vRv" secondAttribute="trailing" id="FKl-FV-NBm"/>
+                                            <constraint firstAttribute="bottom" secondItem="k6R-wK-X6o" secondAttribute="bottom" constant="8" id="JdJ-Kd-pIy"/>
                                             <constraint firstItem="MyB-cA-vRv" firstAttribute="top" secondItem="KFl-5X-2e1" secondAttribute="top" id="MzK-MN-33d"/>
                                             <constraint firstAttribute="bottom" secondItem="MyB-cA-vRv" secondAttribute="bottom" id="xrd-vH-4DR"/>
+                                            <constraint firstItem="k6R-wK-X6o" firstAttribute="centerX" secondItem="KFl-5X-2e1" secondAttribute="centerX" id="zs0-ZF-i9A"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -335,10 +347,12 @@
                         <outlet property="boutonEffacerDonnees" destination="THa-eh-R9K" id="iaj-XB-Zsu"/>
                         <outlet property="boutonExport" destination="KaZ-LP-cnI" id="QGt-GI-FG8"/>
                         <outlet property="camembert" destination="faL-l2-rgA" id="Nhd-oW-R7h"/>
+                        <outlet property="contrainteBasTableViewCamp" destination="xrd-vH-4DR" id="0Xj-hm-B2J"/>
                         <outlet property="contrainteLargeurBoutonEffacerEtroit" destination="OgE-GB-I3A" id="u8E-r3-11B"/>
                         <outlet property="contrainteLargeurBoutonEffacerLarge" destination="3Qu-WP-ls7" id="b8j-QA-iO4"/>
                         <outlet property="contrainteLargeurBoutonExporterEtroit" destination="JMn-tF-YX8" id="KIs-nQ-tMd"/>
                         <outlet property="contrainteLargeurBoutonExporterLarge" destination="8Pd-3u-mER" id="2AK-J9-pNk"/>
+                        <outlet property="segmentModeCongres" destination="k6R-wK-X6o" id="By7-Cu-R1g"/>
                         <outlet property="stackViewPrincipal" destination="C7I-I6-jRA" id="8Ci-9l-K8l"/>
                         <outlet property="tableViewEmissions" destination="MyB-cA-vRv" id="qZq-ie-xNk"/>
                         <outlet property="vueResultats" destination="HMj-6g-7bB" id="SDe-ag-IxO"/>

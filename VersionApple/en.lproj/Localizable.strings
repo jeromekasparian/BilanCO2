@@ -111,19 +111,19 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 // Data
 "CategorieInformations généralesDurée" = "General information";
 "NomInformations généralesDurée" = "Duration";
-"UnitéInformations généralesDurée" = "days";
+"UnitéInformations généralesDurée" = "day";
 "ConseilInformations généralesDurée" = "If the camp lasts longer, travels will be amortised over more days";
 "TitreRessourceInformations généralesDurée" = "";
 "LienRessourceInformations généralesDurée" = "";
-"NomPlurielInformations généralesDurée" = "Duration";
+"NomPlurielInformations généralesDurée" = "days";
 
 "CategorieInformations généralesEffectif" = "General information";
 "NomInformations généralesEffectif" = "Participants";
-"UnitéInformations généralesEffectif" = "people";
+"UnitéInformations généralesEffectif" = "person";
 "ConseilInformations généralesEffectif" = "";
 "TitreRessourceInformations généralesEffectif" = "";
 "LienRessourceInformations généralesEffectif" = "";
-"NomPlurielInformations généralesEffectif" = "Group size";
+"NomPlurielInformations généralesEffectif" = "people";
 
 "CategorieRepasrepas avec bœuf, veau ou agneau" = "Catering";
 "NomRepasrepas avec bœuf, veau ou agneau" = "meal with beef, veal or lamb";
@@ -166,7 +166,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "NomPlurielAller-retour vers le campkm jusqu'au camp" = "km to camp site";
 
 "CategorieAller-retour vers le campAR en train ou bateau" = "Trip to the camp and back";
-"NomAller-retour vers le campAR en train ou bateau" = "people in train or boat";
+"NomAller-retour vers le campAR en train ou bateau" = "person in train or boat";
 "UnitéAller-retour vers le campAR en train ou bateau" = "";
 "ConseilAller-retour vers le campAR en train ou bateau" = "Train and boat are by far the less carbon-intensive means of transportation. For complex trips across Europe, German Railways provide excellent timetable information. Also, Interrail is often cost-effective for long travels in Europe";
 "TitreRessourceAller-retour vers le campAR en train ou bateau" = "European timetable,Interrail";
@@ -198,7 +198,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "NomPlurielAller-retour vers le campVoiture électrique" = "return trips of electric cars";
 
 "CategorieAller-retour vers le campAR en avion" = "Trip to the camp and back";
-"NomAller-retour vers le campAR en avion" = "people in airplane";
+"NomAller-retour vers le campAR en avion" = "person in airplane";
 "UnitéAller-retour vers le campAR en avion" = "";
 "ConseilAller-retour vers le campAR en avion" = "Airplane is doubly polluting: because it emits much CO₂ per kilometer, and because it allows long-haul travel that would be impossible otherwise.";
 "TitreRessourceAller-retour vers le campAR en avion" = "";
@@ -219,7 +219,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "ConseilAller-retour vers le campMatériel expédié" = "Shipping in advance allows to use slower transport: less expensive and less polluting.";
 "TitreRessourceAller-retour vers le campMatériel expédié" = "";
 "LienRessourceAller-retour vers le campMatériel expédié" = "";
-"NomPlurielAller-retour vers le campMatériel expédié" = "Freight";
+"NomPlurielAller-retour vers le campMatériel expédié" = "";
 
 "CategorieDéplacements sur placekm en car" = "On-site mobility";
 "NomDéplacements sur placekm en car" = "km by bus";
@@ -246,12 +246,12 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "NomPlurielDéplacements sur placekm en voiture électrique" = "km by electric car";
 
 "CategorieMatériel & hébergementAchats de matériel" = "Gear & housing";
-"NomMatériel & hébergementAchats de matériel" = "Purchase of material";
+"NomMatériel & hébergementAchats de matériel" = "Purchase of gear";
 "UnitéMatériel & hébergementAchats de matériel" = "€";
 "ConseilMatériel & hébergementAchats de matériel" = "Well-maintained gear lasts longer, and therefore pollutes less.";
 "TitreRessourceMatériel & hébergementAchats de matériel" = "";
 "LienRessourceMatériel & hébergementAchats de matériel" = "";
-"NomPlurielMatériel & hébergementAchats de matériel" = "Purchase of material";
+"NomPlurielMatériel & hébergementAchats de matériel" = "";
 
 "CategorieMatériel & hébergementtente utilisée" = "Gear & housing";
 "NomMatériel & hébergementtente utilisée" = "tent used";
@@ -270,7 +270,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "NomPlurielMatériel & hébergementmarabout utilisé" = "heavy tents used";
 
 "CategorieMatériel & hébergementpersonne logée en dur" = "Gear & housing";
-"NomMatériel & hébergementpersonne logée en dur" = "people in building";
+"NomMatériel & hébergementpersonne logée en dur" = "person in building";
 "UnitéMatériel & hébergementpersonne logée en dur" = "";
 "ConseilMatériel & hébergementpersonne logée en dur" = "Sleeping in tents is not only more fun, it also pollutes less than using buildings.";
 "TitreRessourceMatériel & hébergementpersonne logée en dur" = "";
@@ -375,7 +375,13 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Matériel" = "Accessories";
 "Repas avec bœuf, veau ou agneau" = "Meals with beef, veal, or lamb";
 "Repas avec porc, volaille, poisson" = "Meals with porc, poultry, or Fish";
-"Repas végétarien" = "Vegetarian meals";
+"Repas végétarien" = "Vegetarian meal";
+"Repas végétariens" = "Vegetarian meals";
+"repas avec bœuf, veau ou agneau" = "meals with beef, veal, or lamb";
+"repas avec porc, volaille, poisson" = "ùeals with porc, poultry, or Fish";
+"repas végétarien" = "vegetarian meals";
+"repas végétariens" = "vegetarian meal";
+
 "pause café / jour" = "coffee break / day";
 "pauses café / jour" = "coffee breaks / day";
 "Train" = "Train";
@@ -383,6 +389,13 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Avion long-courrier classe économique" = "Long-haul flights, economy class";
 "Avion moyen-courrier business" = "Medium-haul flights, business class";
 "Avion long-courrier business" = "Long-haul flights, business class";
+"trajet en train" = "train trip";
+"trajets en train (1 AR)" = "train trips (return trip)";
+"trajet en avion classe éco" = "airplane trip, economy class";
+"trajets en avion classe éco (1 AR)" = "airplane trips, economy class (return trip)";
+"trajet en avion business" = "airplane trip, business class";
+"trajets en avion business (1 AR)" = "airplane trips, business class";
+
 "Participation à distance" = "On-line participants";
 "Taxi domicile ↔︎ gare ou aéroport" = "Taxi home ↔︎ train station or airport";
 "Taxi sur place" = "On-site taxi";
@@ -392,13 +405,19 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Centre de congrès" = "Congress center";
 "goodie / participant" = "goodie / participant";
 "goodies / participant" = "goodies / participant";
-"clé usb / participant" = "usb stick / participant";
-"clés USB / participant" = "usb sticks / participant";
+"goodie" = "goodie";
+"goodies" = "goodies";
+"clé usb / participant" = "USB stick / participant";
+"clés USB / participant" = "USB sticks / participant";
+"clé usb" = "USB stick";
+"clés USB" = "USB sticks";
 "Documents" = "Documents";
 "%% des participants" = "%% of participants";
 "m2" = "m²";
-"page / participant" = "pages / participant";
+"page / participant" = "page / participant";
 "pages / participant" = "pages / participant";
+"page" = "page";
+"pages" = "pages";
 
 "ConseilDureeCongres" = "If the congress lasts longer, travels will be amortised over more days";
 "ConseilBoeufCongres" = "Meals with beef, veal, or lamb meat emit much greenhouse gases: almost 5 times more than other meats, and 12 times more than a vegetarian meal. \nIf you organize the catering, you can offer attractive vegetarian options. If participants eat on their own, you may put forward vegetarian offers in the neighborhood.";
@@ -414,14 +433,28 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "ConseilAvionLCEco" = "Air travel is particularly strong CO₂ emission sources. For short presentations, videoconferencing may be an alternative.";
 "ConseilAvionMCBusiness" = "Traveling in business class emits at least twice as much CO₂ as in economy class";
 "ConseilAvionLCBusiness" = "Traveling in business class emits at least twice as much CO₂ as in economy class";
-"ConseilVisio" = "For participants on-site participation is not required, videoconferencing may be an alternative to reduce the impact of travels, but also of accommodation";
+"ConseilVisio" = "For participants whose on-site participation is not required, videoconferencing may be an alternative to reduce the impact of travels, but also of accommodation";
 "ConseilTaxiMaison" = "Taxi emits twice as much CO₂ than bus and 100 times more than subway or train";
 "ConseilTaxiLocal" = "Taxi emits twice as much CO₂ than bus and 100 times more than subway or train. \nAs an organizer, you may inform participants on how to reach the venue by public transport and offer a public transport card with the registration";
 "ConseilHotel" = "CO₂ emissions of a hotel room are directly related to its size";
 "ConseilCentreCongres" = "CO₂ emissions of the congress center are directly related to the surface used. You may reduce these emissions by scaling the buildign use to the actual needs";
 "ConseilGoodies" = "Textile and electronics are particularly CO₂ emitting, let aside other environmental impacts. You may question the need for these objects, and push exhibitors to do so as well";
 "ConseilUSB" = "A USB stick implies as much CO₂ emissions than printing 40 pages. On-line program availability may be an alternative.";
-"ConseilImpression" = "Printing 40 pages implies as much CO₂ emissions than a USB stick. On-line program availability may be an alternative.";
+"ConseilImpression" = "Printing 40 pages implies as much CO₂ emissions as a USB stick. On-line program availability may be an alternative.";
+
+// conseils individuels
+"ConseilDureeCongresIndividuel" = "Staying longer at destination by coupling travels limits transportation cost, time, and CO₂ emissions ";
+"ConseilBoeufCongresIndividuel" = "Meals with beef, veal, or lamb meat emit much greenhouse gases: almost 5 times more than other meats, and 12 times more than a vegetarian meal.";
+"ConseilPouletCongresIndividuel" = "Including porc, poultry, rabbit, or fish in a meal doubles its carbon impact as compared to a vegetarian meal.";
+"ConseilVegeCongresIndividuel" = "To further reduce climate impact, prefer fresh, local, seasonal products and minimize packaging.";
+"ConseilVisioIndividuel" = "If your on-site participation is not required, videoconferencing may be an alternative to reduce the impact of travels, but also of accommodation";
+"ConseilTrainIndividuel" = "Train (and boat) are by far the less carbon-intensive means of transportation. \nFor complex trips across Europe, German Railways provide excellent timetable information.";
+"ConseilAvionEco" = "For a given distance, air travel emits at least 100 times more CO₂ than train. \nFor complex trips across Europe, German Railways provide excellent timetable information. Remote participation may also provide an alternative";
+"ConseilAvionBusiness" = "Traveling in business class emits at least twice as much CO₂ as in economy class";
+"ConseilTaxiLocalIndividuel" = "Taxi emits twice as much CO₂ than bus and 100 times more than subway or train.";
+"ConseilGoodiesIndividuel" = "Textile and electronics are particularly CO₂ emitting, let aside other environmental impacts. Ask yourself if you really need them.";
+"ConseilUSBIndividuel" = "A USB stick implies as much CO₂ emissions than printing 40 pages. Accessing the program on-line may be an alternative.";
+"ConseilImpressionIndividuel" = "40 printed pages imply as much CO₂ emissions as a USB stick. Accessing the program on-line may be an alternative.";
 
 // interface
 "https://www.unige.ch" = "https://www.unige.ch";
@@ -441,6 +474,8 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 //"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much greenhouse gases as %.0f years of climate-compatible emissions";
 "ce camp" = "this camp";
 "ce congrès" = "this congress";
+"ma participation à ce congrès" = "my participation in this congress";
+
 "En %.0f jours, " = "In %.0f days, ";
 " produit autant que %.0f " = " emits as much as %.0f ";
 " produit autant de gaz à effet de serre que %.0f " = " emits as much greenhouse gases as %.0f ";
@@ -452,3 +487,11 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "lienAppStoreCongres" = "https://itunes.apple.com/app/id6450590075";
 "\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres" = "\n\nEstimate and reduce the climate impact of your congress with the Congress CO₂ budget app";
 "Bilan CO2 congrès" = "Congress CO₂ budget";   // doit matcher avec la ligne précédente !!
+"Organisateur" = "Organizer";
+"Participant" = "Participant";
+
+
+// congrès - individuel
+"Les émissions de CO₂ de ma participation au congrès" = "Climate impact of my participation to this congress";
+"Impact climat de ma participation au congrès" = "Climate impact of my participation to this congress";
+"Indiquez les caractéristiques de votre voyage pour évaluer ses émissions de gaz à effet de serre" = "Use sliders to parametrize you travel and evaluate its greenhouse gas emissions";

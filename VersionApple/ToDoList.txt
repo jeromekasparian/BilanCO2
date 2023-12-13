@@ -14,7 +14,6 @@
 - le lien app store n'est pas cliquable dans les fichiers pdf générés sur Mac
 
 
-
 DÉCLINAISONS AUTRES ÉVÉNEMENTS
 Hervé : En ajoutant un tag dans les infos de la target, ensuite dans ton code tu indiques que tel bout de code n’est à compiler que si la target à tel tag. Et pour les fichiers de ressources (images, logo...) tu indiques dans quelle(s) target il fait les inclure. - J’avais fait pour Compétences lite/full.
  - Conférence

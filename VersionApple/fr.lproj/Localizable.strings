@@ -113,19 +113,19 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 // les textes de la base de données
 "CategorieInformations généralesDurée" = "Informations générales";
 "NomInformations généralesDurée" = "Durée";
-"UnitéInformations généralesDurée" = "jours";
+"UnitéInformations généralesDurée" = "jour";
 "ConseilInformations généralesDurée" = "Si le camp est plus long, les transports sont amortis sur plus de jours";
 "TitreRessourceInformations généralesDurée" = "";
 "LienRessourceInformations généralesDurée" = "";
-"NomPlurielInformations généralesDurée" = "Durée";
+"NomPlurielInformations généralesDurée" = "jours";
 
 "CategorieInformations généralesEffectif" = "Informations générales";
 "NomInformations généralesEffectif" = "Effectif";
-"UnitéInformations généralesEffectif" = "personnes";
+"UnitéInformations généralesEffectif" = "personne";
 "ConseilInformations généralesEffectif" = "";
 "TitreRessourceInformations généralesEffectif" = "";
 "LienRessourceInformations généralesEffectif" = "";
-"NomPlurielInformations généralesEffectif" = "Effectif";
+"NomPlurielInformations généralesEffectif" = "personnes";
 
 "CategorieRepasrepas avec bœuf, veau ou agneau" = "Repas";
 "NomRepasrepas avec bœuf, veau ou agneau" = "repas avec bœuf, veau ou agneau";
@@ -173,7 +173,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campAR en train ou bateau" = "Le train et le bateau sont de loin les modes de transport les moins polluants. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires. Par ailleurs, Interrail est souvent avantageux pour de longs trajets en Europe.";
 "TitreRessourceAller-retour vers le campAR en train ou bateau" = "Horaires en Europe,Interrail";
 "LienRessourceAller-retour vers le campAR en train ou bateau" = "https://reiseauskunft.bahn.de/bin/query.exe/f,https://www.interrail.eu/fr";
-"NomPlurielAller-retour vers le campAR en train ou bateau" = "personnes en train ou bateau";
+"NomPlurielAller-retour vers le campAR en train ou bateau" = "";
 
 "CategorieAller-retour vers le campCar" = "Aller-retour vers le camp";
 "NomAller-retour vers le campCar" = "Car";
@@ -181,7 +181,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campCar" = "Un car est intéressant s'il est bien rempli. Pour 10 personnes à bord, il pollue autant qu'une voiture individuelle. Attention également à prendre en compte les éventuels retours à vide";
 "TitreRessourceAller-retour vers le campCar" = "";
 "LienRessourceAller-retour vers le campCar" = "";
-"NomPlurielAller-retour vers le campCar" = "AR de cars";
+"NomPlurielAller-retour vers le campCar" = "";
 
 "CategorieAller-retour vers le campVoiture" = "Aller-retour vers le camp";
 "NomAller-retour vers le campVoiture" = "Voiture";
@@ -189,7 +189,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campVoiture" = "On peut réduire les trajets en louant sur place plutôt qu'au départ. Si les enfants sont déposés en voiture sur le camp, organisez le covoiturage pour réduire le nombre de trajets";
 "TitreRessourceAller-retour vers le campVoiture" = "Covoiturage";
 "LienRessourceAller-retour vers le campVoiture" = "https://www.covoitribu.fr";
-"NomPlurielAller-retour vers le campVoiture" = "AR de voitures";
+"NomPlurielAller-retour vers le campVoiture" = "";
 
 "CategorieAller-retour vers le campVoiture électrique" = "Aller-retour vers le camp";
 "NomAller-retour vers le campVoiture électrique" = "Voiture électrique";
@@ -197,7 +197,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campVoiture électrique" = "La voiture électrique réduit les émissions de moitié par rapport à une voiture thermique. Ça reste beaucoup par rapport à un train ou un car bien rempli. Si les enfants sont déposés en voiture sur le camp, organisez le covoiturage pour réduire le nombre de trajets";
 "TitreRessourceAller-retour vers le campVoiture électrique" = "Covoiturage";
 "LienRessourceAller-retour vers le campVoiture électrique" = "https://www.covoitribu.fr";
-"NomPlurielAller-retour vers le campVoiture électrique" = "AR de voitures électriques";
+"NomPlurielAller-retour vers le campVoiture électrique" = "";
 
 "CategorieAller-retour vers le campAR en avion" = "Aller-retour vers le camp";
 "NomAller-retour vers le campAR en avion" = "AR en avion";
@@ -205,7 +205,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campAR en avion" = "L'avion est doublement polluant : parce qu'il émet beaucoup de CO₂ par kilomètre, et parce qu'il rend possible des voyages lointains, avec des distances impossibles à réaliser avec un mode de transport moins polluant";
 "TitreRessourceAller-retour vers le campAR en avion" = "";
 "LienRessourceAller-retour vers le campAR en avion" = "";
-"NomPlurielAller-retour vers le campAR en avion" = "personnes en avion";
+"NomPlurielAller-retour vers le campAR en avion" = "";
 
 "CategorieAller-retour vers le campCamion" = "Aller-retour vers le camp";
 "NomAller-retour vers le campCamion" = "Camion";
@@ -213,7 +213,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campCamion" = "Expédier le matériel et le faire livrer sur le camp est en général moins polluant que le transporter soi-même, surtout si le camion n'est pas plein";
 "TitreRessourceAller-retour vers le campCamion" = "";
 "LienRessourceAller-retour vers le campCamion" = "";
-"NomPlurielAller-retour vers le campCamion" = "AR de camions";
+"NomPlurielAller-retour vers le campCamion" = "";
 
 "CategorieAller-retour vers le campMatériel expédié" = "Aller-retour vers le camp";
 "NomAller-retour vers le campMatériel expédié" = "Matériel expédié";
@@ -221,7 +221,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAller-retour vers le campMatériel expédié" = "Expédier le matériel à l'avance permet d'accepter des délais plus longs : moins cher et moins polluant";
 "TitreRessourceAller-retour vers le campMatériel expédié" = "";
 "LienRessourceAller-retour vers le campMatériel expédié" = "";
-"NomPlurielAller-retour vers le campMatériel expédié" = "Matériel expédié";
+"NomPlurielAller-retour vers le campMatériel expédié" = "";
 
 "CategorieDéplacements sur placekm en car" = "Déplacements sur place";
 "NomDéplacements sur placekm en car" = "km en car";
@@ -253,7 +253,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilMatériel & hébergementAchats de matériel" = "Du matériel entretenu dure plus longtemps, donc pollue moins";
 "TitreRessourceMatériel & hébergementAchats de matériel" = "";
 "LienRessourceMatériel & hébergementAchats de matériel" = "";
-"NomPlurielMatériel & hébergementAchats de matériel" = "Achats de matériel";
+"NomPlurielMatériel & hébergementAchats de matériel" = "";
 
 "CategorieMatériel & hébergementtente utilisée" = "Matériel & hébergement";
 "NomMatériel & hébergementtente utilisée" = "tente utilisée";
@@ -378,14 +378,25 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Matériel" = "Matériel";
 "Repas avec bœuf, veau ou agneau" = "Repas avec bœuf, veau ou agneau";
 "Repas avec porc, volaille, poisson" = "Repas avec porc, volaille, poisson";
-"Repas végétarien" = "Repas végétarien";
+"Repas végétarien" = "Repas végétariens";
+"Repas végétariens" = "Repas végétariens";
+"repas avec bœuf, veau ou agneau" = "repas avec bœuf, veau ou agneau";
+"repas avec porc, volaille, poisson" = "repas avec porc, volaille, poisson";
+"repas végétarien" = "repas végétariens";
+"repas végétariens" = "repas végétariens";
 "pause café / jour" = "pause café / jour";
 "pauses café / jour" = "pauses café / jour";
 "Train" = "Train";
-"Avion moyen-courrier classe économique" = "Avion moyen-courrier classe économique";
-"Avion long-courrier classe économique" = "Avion long-courrier classe économique";
+"Avion moyen-courrier classe économique" = "Avion moyen-courrier classe éco";
+"Avion long-courrier classe économique" = "Avion long-courrier classe éco";
 "Avion moyen-courrier business" = "Avion moyen-courrier business";
 "Avion long-courrier business" = "Avion long-courrier business";
+"trajet en train" = "trajet en train";
+"trajets en train (1 AR)" = "trajets en train (1 AR)";
+"trajet en avion classe éco" = "trajet en avion classe éco";
+"trajets en avion classe éco (1 AR)" = "trajets en avion classe éco (1 AR)";
+"trajet en avion business" = "trajet en avion business";
+"trajets en avion business (1 AR)" = "trajets en avion business (1 AR)";
 "Participation à distance" = "Participation à distance";
 "Taxi domicile ↔︎ gare ou aéroport" = "Taxi domicile ↔︎ gare ou aéroport";
 "Taxi sur place" = "Taxi sur place";
@@ -395,13 +406,19 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Centre de congrès" = "Centre de congrès";
 "goodie / participant" = "goodie / participant";
 "goodies / participant" = "goodies / participant";
-"clé usb / participant" = "clé usb / participant";
-"clés USB / participant" = "clés usb / participant";
+"goodie" = "goodie";
+"goodies" = "goodies";
+"clé usb / participant" = "clé USB / participant";
+"clés USB / participant" = "clés USB / participant";
+"clé usb" = "clé USB";
+"clés USB" = "clés USB";
 "Documents" = "Documents";
 "%% des participants" = "%% des participants";
 "m2" = "m²";
-"page / participant" = "pages / participant";
+"page / participant" = "page / participant";
 "pages / participant" = "pages / participant";
+"page" = "page";
+"pages" = "pages";
 
 "ConseilDureeCongres" = "Si le congrès est plus long, les transports sont amortis sur plus de jours";
 "ConseilBoeufCongres" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
@@ -426,6 +443,20 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilUSB" = "Une clé USB correspond à autant d'émissions de CO₂ que l'impression de 40 pages. La disponibilité en ligne du programme peut constituer une alternative.";
 "ConseilImpression" = "L'impression de 40 pages produit autant d'émissions de CO₂ que la fabrication d'une clé USB. La disponibilité en ligne du programme peut constituer une alternative.";
 
+// Conseils individuels
+"ConseilDureeCongresIndividuel" = "En couplant des déplacements et en restant plus longtemps sur place vous réduisez les transports : autant de coûts, de temps et de CO₂ en moins";
+"ConseilBoeufCongresIndividuel" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien.";
+"ConseilPouletCongresIndividuel" = "La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien.";
+"ConseilVegeCongresIndividuel" = "Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas.";
+"ConseilVisioIndividuel" = "Si votre présence physique n'est pas indispensable, participer à distance peut constituer une alternative pour réduire l'impact des transports, mais aussi de l'hébergement";
+"ConseilTrainIndividuel" = "Le train est (avec le bateau) de loin le mode de transport le moins polluant. \nPour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires.";
+"ConseilAvionEco" = "Sur un même trajet, l'avion émet au moins 100 fois plus de CO₂ que le train. \nPour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires. Une participation à distance est parfois une alternative pertinente";
+"ConseilAvionBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
+"ConseilTaxiLocalIndividuel" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train.";
+"ConseilGoodiesIndividuel" = "Le textile et l'électronique sont particulièrement émetteurs de CO₂, sans parler des autres impacts environnementaux. En avez-vous vraiment besoin ?";
+"ConseilUSBIndividuel" = "Une clé USB correspond à autant d'émissions de CO₂ que l'impression de 40 pages. La consultation en ligne du programme peut constituer une alternative.";
+"ConseilImpressionIndividuel" = "L'impression de 40 pages produit autant d'émissions de CO₂ que la fabrication d'une clé USB. La consultation en ligne du programme peut constituer une alternative.";
+
 // interface
 "https://www.unige.ch" = "https://www.unige.ch";
 "www.unige.ch" = "www.unige.ch";
@@ -444,6 +475,8 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 //"En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant de gaz à effet de serre que %.0f ans d'émissions acceptables pour préserver le climat";
 "ce camp" = "ce camp";
 "ce congrès" = "ce congrès";
+"ma participation à ce congrès" = "ma participation à ce congrès";
+
 "En %.0f jours, " = "En %.0f jours, ";
 " produit autant que %.0f " = " produit autant que %.0f ";
 " produit autant de gaz à effet de serre que %.0f " = " produit autant de gaz à effet de serre que %.0f ";
@@ -456,3 +489,11 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "lienAppStoreCongres" = "https://itunes.apple.com/app/id6450590075";
 "\n\nAnalysez et réduisez l'impact climatique de votre congrès avec l'app Congres" = "\n\nEstimez et réduisez l'impact climatique de votre congrès avec l'app Bilan CO₂ congrès";
 "Bilan CO2 congrès" = "Bilan CO₂ congrès";   // doit matcher avec la ligne précédente !!
+"Organisateur" = "Organisateur";
+"Participant" = "Participant";
+
+
+// congrès - individuel
+"Les émissions de CO₂ de ma participation au congrès" = "Les émissions de CO₂ de ma participation au congrès";
+"Impact climat de ma participation au congrès" = "Impact climat de ma participation au congrès";
+"Indiquez les caractéristiques de votre voyage pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre voyage pour évaluer ses émissions de gaz à effet de serre";
