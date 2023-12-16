@@ -126,12 +126,12 @@ class CongresIndividuel: DescriptionEvenement, DescriptionEvenementDelegate {
     
     enum SorteEmission: Int {
         case duree
+        case distance
+        case participationZoom
         case repasViandeRouge
         case repasViandeBlanche
         case repasVegetarien
         case pausesCafe
-        case distance
-        case participationZoom
         case voyageTrain
         case voyageAvionEco
         case voyageAvionBusiness

@@ -120,12 +120,12 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "NomPlurielInformations généralesDurée" = "jours";
 
 "CategorieInformations généralesEffectif" = "Informations générales";
-"NomInformations généralesEffectif" = "Effectif";
-"UnitéInformations généralesEffectif" = "personne";
+"NomInformations généralesEffectif" = "participant";
+"UnitéInformations généralesEffectif" = "";
 "ConseilInformations généralesEffectif" = "";
 "TitreRessourceInformations généralesEffectif" = "";
 "LienRessourceInformations généralesEffectif" = "";
-"NomPlurielInformations généralesEffectif" = "personnes";
+"NomPlurielInformations généralesEffectif" = "participants";
 
 "CategorieRepasrepas avec bœuf, veau ou agneau" = "Repas";
 "NomRepasrepas avec bœuf, veau ou agneau" = "repas avec bœuf, veau ou agneau";
@@ -375,7 +375,8 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Voyages" = "Voyages";
 "Déplacements sur place" = "Déplacements sur place";
 "Hébergement & bâtiments" = "Hébergement & bâtiments";
-"Matériel" = "Matériel";
+"Matériel" = "Objets offerts";
+"Matériel reçu" = "Objets reçus";
 "Repas avec bœuf, veau ou agneau" = "Repas avec bœuf, veau ou agneau";
 "Repas avec porc, volaille, poisson" = "Repas avec porc, volaille, poisson";
 "Repas végétarien" = "Repas végétariens";
@@ -412,7 +413,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "clés USB / participant" = "clés USB / participant";
 "clé usb" = "clé USB";
 "clés USB" = "clés USB";
-"Documents" = "Documents";
+"Documents" = "Impressions";
 "%% des participants" = "%% des participants";
 "m2" = "m²";
 "page / participant" = "page / participant";
@@ -491,7 +492,10 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Bilan CO2 congrès" = "Bilan CO₂ congrès";   // doit matcher avec la ligne précédente !!
 "Organisateur" = "Organisateur";
 "Participant" = "Participant";
+"participant" = "participant";
 
+"Évaluez l'impact climatique global d'un congrès, en tant qu'organisateur, ou bien votre impact individuel en tant que participant.\n\nVous pourrez modifier ce choix par la suite grâce au sélecteur situé sous le tableau principal" = "Évaluez l'impact climatique global d'un congrès, en tant qu'organisateur, ou bien votre impact individuel en tant que participant.\n\nVous pourrez modifier ce choix par la suite grâce au sélecteur situé sous le tableau principal";
+"Bienvenue" = "Bienvenue";
 
 // congrès - individuel
 "Les émissions de CO₂ de ma participation au congrès" = "Les émissions de CO₂ de ma participation au congrès";

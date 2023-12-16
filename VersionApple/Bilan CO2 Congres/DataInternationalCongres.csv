@@ -1,6 +1,6 @@
 Catégorie;Nom;Unité;Valeur Maxi;Facteur d'émission;ParPersonne;ParKmDistance;Par jour;EchelleLog;Entier;valeurMaxiEffectif;valeurMaxiDurée;Conseils;NomCourt;Picto;TitreRessource;LienRessource;NomPluriel;CategorieOptionnelle
 CategorieInformations généralesDurée;NomInformations généralesDurée;UnitéInformations généralesDurée;21;0;1;;;;1;;;ConseilDureeCongres;;;;;NomPlurielInformations généralesDurée;
-CategorieInformations généralesEffectif;NomInformations généralesEffectif;UnitéInformations généralesEffectif;10000;0;1;;;1;1;;;;;;;;NomPlurielInformations généralesEffectif;
+CategorieInformations généralesEffectif;participant;;10000;0;1;;;1;1;;;;;;;;participants;
 CategorieInformations généralesEffectif;Participation à distance;%%;100;1;0.01;;1;;;;;ConseilVisio;Visio;🎥;;;;
 Alimentation;Repas avec bœuf, veau ou agneau;%%;100;6.29;0.01;;2;;;;;ConseilBoeufCongres;Viande rouge;🥩;;;;
 Alimentation;Repas avec porc, volaille, poisson;%%;100;1.35;0.01;;2;;;;;ConseilPouletCongres;Viande blanche;🍗;;;;

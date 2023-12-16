@@ -118,12 +118,12 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "NomPlurielInformations généralesDurée" = "days";
 
 "CategorieInformations généralesEffectif" = "General information";
-"NomInformations généralesEffectif" = "Participants";
-"UnitéInformations généralesEffectif" = "person";
+"NomInformations généralesEffectif" = "participant";
+"UnitéInformations généralesEffectif" = "";
 "ConseilInformations généralesEffectif" = "";
 "TitreRessourceInformations généralesEffectif" = "";
 "LienRessourceInformations généralesEffectif" = "";
-"NomPlurielInformations généralesEffectif" = "people";
+"NomPlurielInformations généralesEffectif" = "participants";
 
 "CategorieRepasrepas avec bœuf, veau ou agneau" = "Catering";
 "NomRepasrepas avec bœuf, veau ou agneau" = "meal with beef, veal or lamb";
@@ -372,7 +372,8 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Voyages" = "Travel";
 "Déplacements sur place" = "Local transit";
 "Hébergement & bâtiments" = "Housing & buildings";
-"Matériel" = "Accessories";
+"Matériel" = "Accessories offered";
+"Matériel reçu" = "Accessories received";
 "Repas avec bœuf, veau ou agneau" = "Meals with beef, veal, or lamb";
 "Repas avec porc, volaille, poisson" = "Meals with porc, poultry, or Fish";
 "Repas végétarien" = "Vegetarian meal";
@@ -411,7 +412,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "clés USB / participant" = "USB sticks / participant";
 "clé usb" = "USB stick";
 "clés USB" = "USB sticks";
-"Documents" = "Documents";
+"Documents" = "Printing";
 "%% des participants" = "%% of participants";
 "m2" = "m²";
 "page / participant" = "page / participant";
@@ -489,7 +490,10 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Bilan CO2 congrès" = "Congress CO₂ budget";   // doit matcher avec la ligne précédente !!
 "Organisateur" = "Organizer";
 "Participant" = "Participant";
+"participant" = "participant";
 
+"Évaluez l'impact climatique global d'un congrès, en tant qu'organisateur, ou bien votre impact individuel en tant que participant.\n\nVous pourrez modifier ce choix par la suite grâce au sélecteur situé sous le tableau principal" = "Estimate either the total climat impact of a congress, as an organizer, or your own impact as a participant\n\nYou will be able to change this choice later with the switch located below the main table";
+"Bienvenue" = "Welcome";
 
 // congrès - individuel
 "Les émissions de CO₂ de ma participation au congrès" = "Climate impact of my participation to this congress";

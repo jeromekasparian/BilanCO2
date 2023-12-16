@@ -35,7 +35,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     
 //    let keyValeursUtilisateurs = "keyValeursUtilisateurs"
     let keyModeCongres = "keyModeCongres"
-    
     let cellReuseIdentifier = "CelluleEmission"
     let cellReuseIdentifierCredits = "CelluleCredits"
     let cellReuseIdentifierVide = "CelluleVide"
@@ -46,7 +45,8 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     var valeurPrecedente: Float = .nan
     var couleurDefautThumb: UIColor = .white
     var glissiereModeZoom: Bool = false
-    
+    var premierLancement: Bool = true
+
     
     @IBOutlet var tableViewEmissions: UITableView!
     @IBOutlet var boutonEffacerDonnees: UIButton!
@@ -82,13 +82,15 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         segmentModeCongres.isHidden = lEvenement.evenement == .camp
         segmentModeCongres.setTitle(NSLocalizedString("Organisateur", comment: ""), forSegmentAt: 0)
         segmentModeCongres.setTitle(NSLocalizedString("Participant", comment: ""), forSegmentAt: 1)
-        var modeCongres = userDefaults.value(forKey: keyModeCongres) as? Int ?? 0
+        var modeCongres = userDefaults.value(forKey: keyModeCongres) as? Int ?? -1
         if modeCongres >= 0 && modeCongres < segmentModeCongres.numberOfSegments {
+            premierLancement = false
             segmentModeCongres.selectedSegmentIndex = modeCongres
-        } else {
+            switchCollectifIndividuel(mode: modeCongres)
+        } else if lEvenement.evenement == .congresCollectif || lEvenement.evenement == .congresIndividuel {
+            premierLancement = true
             modeCongres = segmentModeCongres.selectedSegmentIndex
         }
-        switchCollectifIndividuel(mode: modeCongres)
         contrainteBasTableViewCamp.isActive = lEvenement.evenement == .camp
         if lEvenement.evenement != .camp {
             contrainteBasTableViewCongres = NSLayoutConstraint(item: tableViewEmissions!, attribute: .bottom, relatedBy: .equal, toItem: segmentModeCongres, attribute: .top, multiplier: 1.0, constant: -8.0)
@@ -120,6 +122,7 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         super.viewDidLoad()
     }  // viewDidLoad
     
+
     @IBAction func modeCongresChange() {
         let modeCongres = segmentModeCongres.selectedSegmentIndex
         switchCollectifIndividuel(mode: modeCongres)
@@ -157,7 +160,23 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        if premierLancement && lEvenement.evenement == .congresCollectif || lEvenement.evenement == .congresIndividuel {
+            super.viewDidAppear(animated)
+            let alerte = UIAlertController(title: NSLocalizedString("Bienvenue", comment: ""), message: NSLocalizedString("Évaluez l'impact climatique global d'un congrès, en tant qu'organisateur, ou bien votre impact individuel en tant que participant.\n\nVous pourrez modifier ce choix par la suite grâce au sélecteur situé sous le tableau principal", comment: ""), preferredStyle: .alert)
+            alerte.addAction(UIAlertAction(title: NSLocalizedString("Organisateur", comment: ""), style: .default, handler: {_ in
+                switchCollectifIndividuel(mode: 0)
+                self.segmentModeCongres.selectedSegmentIndex = 0
+                self.modeCongresChange()
+            }))
+            alerte.addAction(UIAlertAction(title: NSLocalizedString("Participant", comment: ""), style: .default, handler: {_ in
+                switchCollectifIndividuel(mode: 1)
+                self.segmentModeCongres.selectedSegmentIndex = 1
+                self.modeCongresChange()
+            }))
+            DispatchQueue.main.async{
+                self.present(alerte, animated: true)
+            }
+        }
         self.redessineResultats(size: self.view.frame.size, curseurActif: false)
     }
     
