@@ -88,6 +88,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre";
 "Les émissions de CO₂ de mon camp" = "Impact climatique de mon camp";
 "Impact climat de mon camp" = "Impact climatique de mon camp";
+", %.0f g CO₂ (%.0f%%)\n" = ", %.0f g éq. CO₂ (%.0f%%)\n";
 ", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg éq. CO₂ (%.0f%%)\n";
 ", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t éq. CO₂ (%.0f%%)\n";
 "\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg d'équivalent CO₂";
@@ -102,6 +103,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "lienAppStoreCamp" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
+"%.0f g eq. CO₂ (%.0f%%)" = "%.0f g eq. CO₂ (%.0f%%)";
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
 "%.1f t eq. CO₂ (%.0f%%)" = "%.1f t eq. CO₂ (%.0f%%)";
 "%.0f t eq. CO₂ (%.0f%%)" = "%.0f t eq. CO₂ (%.0f%%)";
@@ -345,7 +347,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 
    • ***Transports et déplacements*** : les estimations considèrent des valeurs moyennes pour chaque mode de transport.
 
-   • ***Matériel*** : les émissions sont estimées sur la base d'objets typiques dans leur catégorie.";
+   • ***Objets reçus et offerts*** : les émissions sont estimées sur la base d'objets typiques dans leur catégorie.";
 
 "texteGraphiqueCongres" = "Le graphique représente la répartition des émisssions de gaz à effet de serre dues au congrès.
 Le cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour.";
@@ -367,7 +369,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
    • developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/
    • www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/";
 
-"texteRemerciementsCongres" = "Remerciements à Emeline Bolmont et Hervé Kasparian";
+"texteRemerciementsCongres" = "Remerciements à Emeline Bolmont, Hervé Kasparian et Marlyne Sahakian";
 
 
 // Données
@@ -399,7 +401,9 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "trajet en avion business" = "trajet en avion business";
 "trajets en avion business (1 AR)" = "trajets en avion business (1 AR)";
 "Participation à distance" = "Participation à distance";
+"Transports publics domicile ↔︎ gare ou aéroport" = "Transports publics domicile ↔︎ gare ou aéroport";
 "Taxi domicile ↔︎ gare ou aéroport" = "Taxi domicile ↔︎ gare ou aéroport";
+"Transports publics sur place" = "Transports publics sur place";
 "Taxi sur place" = "Taxi sur place";
 "Auberge de jeunesse / AirBNB / Hotel économique" = "Auberge de jeunesse / AirBNB / Hotel économique";
 "Hotel ⭐️ ⭐️" = "Hotel ⭐️ ⭐️";
@@ -436,8 +440,11 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "ConseilAvionMCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
 "ConseilAvionLCBusiness" = "Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique";
 "ConseilVisio" = "Pour les participants dont la présence physique n'est pas indispensable, la diffusion en direct peut constituer une alternative pour réduire l'impact des transports, mais aussi de l'hébergement";
+"ConseilTPMaison" = "Les tranports publics émettent beaucoup moins de CO₂ que la voiture ou le taxi";
 "ConseilTaxiMaison" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train";
-"ConseilTaxiLocal" = "Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train. \nEn tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
+"ConseilTPLocalIndividuel" = "Les tranports publics émettent beaucoup moins de CO₂ que la voiture ou le taxi";
+"ConseilTPLocal" = "Les tranports publics émettent beaucoup moins de CO₂ que la voiture ou le taxi.\nEn tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
+"ConseilTaxiLocal" = "Le taxi émet au moins 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu'en métro ou en train. \nEn tant qu'organisateur vous pouvez informer les participants sur l'accès à la conférence en transports publics, voire fournir une carte de transports avec l'inscription.";
 "ConseilHotel" = "Les émissions de CO₂ d'une chambre d'hôtel sont essentiellement liées à sa surface";
 "ConseilCentreCongres" = "Les émissions de CO₂ des locaux utilisés sont essentiellement liées à leur surface : vous pouvez maîtriser ces émissions en adaptant les locaux aux besoins";
 "ConseilGoodies" = "Le textile et l'électronique sont particulièrement émetteurs de CO₂, sans parler des autres impacts environnementaux. Vous pouvez interroger leur utilité et inciter les exposants à faire de même";

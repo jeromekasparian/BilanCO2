@@ -54,7 +54,9 @@ class Congres: DescriptionEvenement, DescriptionEvenementDelegate {
         case voyageAvionLCEco
         case voyageAvionMCBusiness
         case voyageAvionLCBusiness
+        case TPAeroport
         case taxiAeroport
+        case TPLocal
         case taxiLocal
         case hotelEco
         case hotelMoyen
@@ -105,6 +107,18 @@ class Congres: DescriptionEvenement, DescriptionEvenementDelegate {
         case SorteEmission.participationZoom.rawValue:
             ajusteMaxEtTotalNLignes(priorites: [SorteEmission.voyageTrain.rawValue, SorteEmission.voyageAvionMCEco.rawValue, SorteEmission.voyageAvionLCEco.rawValue, SorteEmission.voyageAvionMCBusiness.rawValue, SorteEmission.voyageAvionLCBusiness.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
             ajusteMaxEtTotalNLignes(priorites: [SorteEmission.hotelEco.rawValue, SorteEmission.hotelMoyen.rawValue, SorteEmission.hotelLuxe.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.TPAeroport.rawValue, SorteEmission.taxiAeroport.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+
+        case SorteEmission.TPAeroport.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.TPAeroport.rawValue, SorteEmission.taxiAeroport.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+        case SorteEmission.taxiAeroport.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.taxiAeroport.rawValue, SorteEmission.TPAeroport.rawValue], valeurDesAlternatives: valeurVisio, forcerDerniereValeur: false)
+
+        case SorteEmission.TPLocal.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.TPLocal.rawValue, SorteEmission.taxiLocal.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+        case SorteEmission.taxiLocal.rawValue:
+            ajusteMaxEtTotalNLignes(priorites: [SorteEmission.taxiLocal.rawValue, SorteEmission.TPLocal.rawValue], valeurDesAlternatives: 0.0, forcerDerniereValeur: false)
+
         default: let dummy = 1
         }
     }
@@ -135,7 +149,9 @@ class CongresIndividuel: DescriptionEvenement, DescriptionEvenementDelegate {
         case voyageTrain
         case voyageAvionEco
         case voyageAvionBusiness
+        case TPAeroport
         case taxiAeroport
+        case TPLocal
         case taxiLocal
         case hotelEco
         case hotelMoyen

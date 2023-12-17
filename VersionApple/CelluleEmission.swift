@@ -81,7 +81,9 @@ class CelluleEmission: UITableViewCell {
         } else {
             let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
             var texte = ""
-            if typeEmission.emission < 1000.0 {
+            if typeEmission.emission < 2.0 {
+                texte = String(format: NSLocalizedString("%.0f g eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission * 1000.0 , pourcentage)
+            } else if typeEmission.emission < 1000.0 {
                 texte = String(format: NSLocalizedString("%.0f kg eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission, pourcentage)
             } else if typeEmission.emission < 20000.0 {
                 texte = String(format: NSLocalizedString("%.1f t eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission / 1000.0, pourcentage)

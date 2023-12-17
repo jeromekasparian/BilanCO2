@@ -217,7 +217,7 @@ class DescriptionEvenement {
         let valeurMaxi = (lesEmissions[priorites.first!].valeurMaxParJour == 0 ? lesEmissions[priorites.first!].valeurMax : lesEmissions[numeroItemDuree].valeur * lesEmissions[priorites.first!].valeurMaxParJour) - valeurDesAlternatives
         actualiseValeursMaxSelonJours()
         lesEmissions[priorites.first!].valeur = min(lesEmissions[priorites.first!].valeur, valeurMaxi)
-        guard priorites.count > 2 else {return}
+        guard priorites.count >= 2 else {return}
         var cumul = lesEmissions[priorites.first!].valeur
         for i in 1...(priorites.count - 1) {
             if i == priorites.count - 1 && forcerDerniereValeur {

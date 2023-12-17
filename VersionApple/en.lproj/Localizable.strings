@@ -87,6 +87,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Use sliders to parametrize you camp and evaluate its greenhouse gas emissions";
 "Les émissions de CO₂ de mon camp" = "Climate impact of my camp";
 "Impact climat de mon camp" = "Climate impact of my camp";
+", %.0f g CO₂ (%.0f%%)\n" = ", %.0f g of CO₂ equivalent (%.0f%%)\n";
 ", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg of CO₂ equivalent (%.0f%%)\n";
 ", %.2f t CO₂ (%.0f%%)\n" = ", %.2f ton of CO₂ equivalent (%.0f%%)\n";
 "\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg of CO₂ equivalent";
@@ -101,6 +102,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "lienAppStoreCamp" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
+"%.0f g eq. CO₂ (%.0f%%)" = "%.0f g eq. CO₂ (%.0f%%)";
 "%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
 "%.1f t eq. CO₂ (%.0f%%)" = "%.1f ton eq. CO₂ (%.0f%%)";
 "%.0f t eq. CO₂ (%.0f%%)" = "%.0f ton eq. CO₂ (%.0f%%)";
@@ -342,7 +344,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 
    • ***Transports and local transit***: estimations rely on average-sized vehicles.
 
-   • ***Accessories***: Emissions are estimated based on typical values for objects in each category.";
+   • ***Accessories offered or received***: Emissions are estimated based on typical values for objects in each category.";
 
 "texteGraphiqueCongres" = "The graph displays the shares of greenhouse gases emitted by the congress.
 The green circle allows to compare them with acceptable emissions, i.e., emissions compatible with climate preservation. They amount to 5.5 kg CO₂-equivalent per person and per day.";
@@ -364,7 +366,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
    • developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/
    • www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/";
 
-"texteRemerciementsCongres" = "Thanks to Emeline Bolmont and Hervé Kasparian";
+"texteRemerciementsCongres" = "Thanks to Emeline Bolmont, Hervé Kasparian, and Marlyne Sahakian";
 
 
 // Données
@@ -398,7 +400,9 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "trajets en avion business (1 AR)" = "airplane trips, business class";
 
 "Participation à distance" = "On-line participants";
+"Transports publics domicile ↔︎ gare ou aéroport" = "Public transit home ↔︎ train station or airport";
 "Taxi domicile ↔︎ gare ou aéroport" = "Taxi home ↔︎ train station or airport";
+"Transports publics sur place" = "On-site public transit";
 "Taxi sur place" = "On-site taxi";
 "Auberge de jeunesse / AirBNB / Hotel économique" = "Youth hostel, economy hotel, rented flat";
 "Hotel ⭐️ ⭐️" = "Hotel ⭐️ ⭐️";
@@ -435,7 +439,10 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "ConseilAvionMCBusiness" = "Traveling in business class emits at least twice as much CO₂ as in economy class";
 "ConseilAvionLCBusiness" = "Traveling in business class emits at least twice as much CO₂ as in economy class";
 "ConseilVisio" = "For participants whose on-site participation is not required, videoconferencing may be an alternative to reduce the impact of travels, but also of accommodation";
+"ConseilTPMaison" = "Public transit emits much less CO₂ than the same trip by taxi or by car";
 "ConseilTaxiMaison" = "Taxi emits twice as much CO₂ than bus and 100 times more than subway or train";
+"ConseilTPLocalIndividuel" = "Public transit emits much less CO₂ than the same trip by taxi or by car";
+"ConseilTPLocal" = "Public transit emits much less CO₂ than the same trip by taxi or by car.\nAs an organizer, you may inform participants on how to reach the venue by public transport and offer a public transport card with the registration.";
 "ConseilTaxiLocal" = "Taxi emits twice as much CO₂ than bus and 100 times more than subway or train. \nAs an organizer, you may inform participants on how to reach the venue by public transport and offer a public transport card with the registration";
 "ConseilHotel" = "CO₂ emissions of a hotel room are directly related to its size";
 "ConseilCentreCongres" = "CO₂ emissions of the congress center are directly related to the surface used. You may reduce these emissions by scaling the buildign use to the actual needs";

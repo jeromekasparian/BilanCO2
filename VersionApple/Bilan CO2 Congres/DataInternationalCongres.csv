@@ -11,7 +11,9 @@ Voyages;Avion moyen-courrier classe économique;%%;100;580;0.01;;;;;;;ConseilAvi
 Voyages;Avion long-courrier classe économique;%%;100;2860;0.01;;;;;;;ConseilAvionLCEco;Avion;✈️;;;;
 Voyages;Avion moyen-courrier business;%%;100;1320;0.01;;;;;;;ConseilAvionMCBusiness;Avion;🛩️฿;;;;
 Voyages;Avion long-courrier business;%%;100;6630;0.01;;;;;;;ConseilAvionLCBusiness;Avion;✈️฿;;;;
+Déplacements sur place;Transports publics domicile ↔︎ gare ou aéroport;%% des participants;100;3;0.01;;;;;;;ConseilTPMaison;;🚎;;;;
 Déplacements sur place;Taxi domicile ↔︎ gare ou aéroport;%% des participants;100;12;0.01;;;;;;;ConseilTaxiMaison;;🚕;;;;
+Déplacements sur place;Transports publics sur place;%% des participants;100;4;0.01;;1;;;;;ConseilTPLocal;;🚇;;;;
 Déplacements sur place;Taxi sur place;%% des participants;100;4;0.01;;1;;;;;ConseilTaxiLocal;;🚖;;;;
 Hébergement & bâtiments;Auberge de jeunesse / AirBNB / Hotel économique;%%;100;7;0.01;;1;;;;;ConseilHotel;Hotel eco;🛏️;;;;
 Hébergement & bâtiments;Hotel ⭐️ ⭐️;%%;100;12;0.01;;1;;;;;ConseilHotel;Hotel ⭐️ ⭐️;🏠;;;;

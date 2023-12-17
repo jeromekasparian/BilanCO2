@@ -6,10 +6,12 @@ Alimentation;repas avec bœuf, veau ou agneau;;100;6.29;;;;;;;2;ConseilBoeufCong
 Alimentation;repas avec porc, volaille, poisson;;100;1.35;;;;;;;2;ConseilPouletCongresIndividuel;Viande blanche;🍗;;;repas avec porc, volaille, poisson;
 Alimentation;repas végétarien;;100;0.51;;;;;;;2;ConseilVegeCongresIndividuel;Vege;🌽;;;repas végétariens;
 Alimentation;pause café / jour;;4;0.11;;;1;;1;;;ConseilCafeCongres;Café;☕️;;;pauses café / jour;
-Voyages;trajet en train;;2;0.002;;1;;;1;;;ConseilTrainIndividuel;Train;🚆;TitreRessourceTrain;LienRessourceTrain;trajets en train (1 AR);
-Voyages;trajet en avion classe éco;;2;0.25;;1;;;1;;;ConseilAvionEco;Avion;🛩️;TitreRessourceMCEco;LienRessourceMCEco;trajets en avion classe éco (1 AR);
-Voyages;trajet en avion business;;2;0.6;;1;;;1;;;ConseilAvionBusiness;Avion;🛩️฿;;;trajets en avion business (1 AR);
+Voyages;trajet en train;;2;0.002;;1;;;1;;2;ConseilTrainIndividuel;Train;🚆;TitreRessourceTrain;LienRessourceTrain;trajets en train;
+Voyages;trajet en avion classe éco;;2;0.25;;1;;;1;;2;ConseilAvionEco;Avion;🛩️;TitreRessourceMCEco;LienRessourceMCEco;trajets en avion classe éco;
+Voyages;trajet en avion business;;2;0.6;;1;;;1;;2;ConseilAvionBusiness;Avion;🛩️฿;;;trajets en avion business;
+Déplacements sur place;Transports publics domicile ↔︎ gare ou aéroport;km;100;0.005;;;;;;;;ConseilTPMaison;;🚎;;;;
 Déplacements sur place;Taxi domicile ↔︎ gare ou aéroport;km;100;0.2;;;;;;;;ConseilTaxiMaison;;🚕;;;;
+Déplacements sur place;Transports publics sur place;km/jour;50;0.005;;;1;;;;;ConseilTPLocalIndividuel;;🚇;;;;
 Déplacements sur place;Taxi sur place;km/jour;50;0.2;;;1;;;;;ConseilTaxiLocalIndividuel;;🚖;;;;
 Hébergement & bâtiments;Auberge de jeunesse / AirBNB / Hotel économique;nuit;100;7;;;;;1;;1;ConseilHotel;Hotel eco;🛏️;;;nuits;
 Hébergement & bâtiments;Hotel ⭐️ ⭐️;nuit;100;12;;;;;1;;1;ConseilHotel;Hotel ⭐️ ⭐️;🏠;;;nuits;

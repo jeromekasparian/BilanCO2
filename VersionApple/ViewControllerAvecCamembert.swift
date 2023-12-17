@@ -343,8 +343,8 @@ class ViewControllerAvecCamembert: UIViewController {
                 }
                 //                let textePicto = afficherPictos && !emission.picto.isEmpty ? emission.picto + " " : ""
                 //                if emission.emission > 0 {
-                let texteLigneEmission = emission.emission < 2000.0 ? NSLocalizedString(", %.0f kg CO₂ (%.0f%%)\n", comment: "") : NSLocalizedString(", %.2f t CO₂ (%.0f%%)\n", comment: "")
-                let facteurValeurEmission = emission.emission < 2000.0 ? 1.0 : 1000.0
+                let texteLigneEmission = emission.emission < 2.0 ? NSLocalizedString(", %.0f g CO₂ (%.0f%%)\n", comment: "") : emission.emission < 2000.0 ? NSLocalizedString(", %.0f kg CO₂ (%.0f%%)\n", comment: "") : NSLocalizedString(", %.2f t CO₂ (%.0f%%)\n", comment: "")
+                let facteurValeurEmission = emission.emission < 2.0 ? 0.001 : emission.emission < 2000.0 ? 1.0 : 1000.0
                 texte.append(NSAttributedString(string: texteNomValeurUnite(emission: emission), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
                 if emission.facteurEmission > 0 {
                     texte.append(NSAttributedString(string: String(format: texteLigneEmission, emission.emission / facteurValeurEmission, emission.emission / emissionsCalculees * 100.0), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
