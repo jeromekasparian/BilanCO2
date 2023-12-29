@@ -501,6 +501,10 @@
                     <connections>
                         <outlet property="boutonFermer" destination="09i-zM-WkB" id="nVp-iz-5BW"/>
                         <outlet property="boutonOK" destination="Tp9-Xh-sbh" id="2Wm-BV-4GO"/>
+                        <outlet property="imageRondVertNE" destination="hJH-nI-7dN" id="ycf-lU-1fk"/>
+                        <outlet property="imageRondVertNO" destination="tla-1D-oJk" id="wyj-zc-ECT"/>
+                        <outlet property="imageRondVertSE" destination="LEE-o0-NxY" id="9oZ-55-eeA"/>
+                        <outlet property="imageRondVertSO" destination="006-S2-364" id="gPJ-hH-1ft"/>
                         <outlet property="tableView" destination="wBa-bQ-WhU" id="iua-PN-p7U"/>
                     </connections>
                 </viewController>

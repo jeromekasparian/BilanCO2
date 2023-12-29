@@ -23,6 +23,11 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet var tableView: UITableView!
     @IBOutlet var boutonFermer: UIButton!
     @IBOutlet var boutonOK: UIButton!
+    @IBOutlet var imageRondVertNO: UIImageView!
+    @IBOutlet var imageRondVertNE: UIImageView!
+    @IBOutlet var imageRondVertSO: UIImageView!
+    @IBOutlet var imageRondVertSE: UIImageView!
+    
 //    @IBOutlet var texteTest: UITextView!
     
     override func viewDidLoad(){
@@ -35,6 +40,11 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
         if ligneExplicationsSelectionnee >= 0 && lesParagraphes.count > ligneExplicationsSelectionnee {
             tableView.scrollToRow(at: IndexPath(row: ligneExplicationsSelectionnee, section: 0), at: .top, animated: true)
         }
+        imageRondVertNE.isHidden = lEvenement.evenement != .camp
+        imageRondVertNO.isHidden = lEvenement.evenement != .camp
+        imageRondVertSE.isHidden = lEvenement.evenement != .camp
+        imageRondVertSO.isHidden = lEvenement.evenement != .camp
+        
         super.viewDidLoad()
     }
     

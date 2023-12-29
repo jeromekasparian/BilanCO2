@@ -114,7 +114,6 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
         if #available(iOS 15.0, *) {
             tableViewEmissions.sectionHeaderTopPadding = 0
         }
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sectionTapped))
         tableViewEmissions.addGestureRecognizer(tapGesture)
         tapGesture.delegate = self as? UIGestureRecognizerDelegate

@@ -381,7 +381,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "Repas végétarien" = "Vegetarian meal";
 "Repas végétariens" = "Vegetarian meals";
 "repas avec bœuf, veau ou agneau" = "meals with beef, veal, or lamb";
-"repas avec porc, volaille, poisson" = "ùeals with porc, poultry, or Fish";
+"repas avec porc, volaille, poisson" = "meals with porc, poultry, or Fish";
 "repas végétarien" = "vegetarian meals";
 "repas végétariens" = "vegetarian meal";
 
@@ -423,6 +423,8 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 "pages / participant" = "pages / participant";
 "page" = "page";
 "pages" = "pages";
+"nuit" = "night";
+"nuits" = "nights";
 
 "ConseilDureeCongres" = "If the congress lasts longer, travels will be amortised over more days";
 "ConseilBoeufCongres" = "Meals with beef, veal, or lamb meat emit much greenhouse gases: almost 5 times more than other meats, and 12 times more than a vegetarian meal. \nIf you organize the catering, you can offer attractive vegetarian options. If participants eat on their own, you may put forward vegetarian offers in the neighborhood.";

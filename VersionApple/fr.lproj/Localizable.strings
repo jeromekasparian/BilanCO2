@@ -424,6 +424,8 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "pages / participant" = "pages / participant";
 "page" = "page";
 "pages" = "pages";
+"nuit" = "nuit";
+"nuits" = "nuits";
 
 "ConseilDureeCongres" = "Si le congrès est plus long, les transports sont amortis sur plus de jours";
 "ConseilBoeufCongres" = "La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.";
