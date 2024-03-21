@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B5154AF62B0423D30075D50A"
                BuildableName = "Bilan CO2 Congres.app"
                BlueprintName = "Bilan CO2 Congres"
-               ReferencedContainer = "container:Bilan CO2 camp scout.xcodeproj">
+               ReferencedContainer = "container:Bilan_CO2_camp_scout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,7 +33,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "en"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +46,7 @@
             BlueprintIdentifier = "B5154AF62B0423D30075D50A"
             BuildableName = "Bilan CO2 Congres.app"
             BlueprintName = "Bilan CO2 Congres"
-            ReferencedContainer = "container:Bilan CO2 camp scout.xcodeproj">
+            ReferencedContainer = "container:Bilan_CO2_camp_scout.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +63,7 @@
             BlueprintIdentifier = "B5154AF62B0423D30075D50A"
             BuildableName = "Bilan CO2 Congres.app"
             BlueprintName = "Bilan CO2 Congres"
-            ReferencedContainer = "container:Bilan CO2 camp scout.xcodeproj">
+            ReferencedContainer = "container:Bilan_CO2_camp_scout.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B54DCF8F28C5134E00FBBAE3"
                BuildableName = "Bilan CO2 camp scout.app"
                BlueprintName = "Bilan CO2 camp scout"
-               ReferencedContainer = "container:Bilan CO2 camp scout.xcodeproj">
+               ReferencedContainer = "container:Bilan_CO2_camp_scout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "B54DCF8F28C5134E00FBBAE3"
             BuildableName = "Bilan CO2 camp scout.app"
             BlueprintName = "Bilan CO2 camp scout"
-            ReferencedContainer = "container:Bilan CO2 camp scout.xcodeproj">
+            ReferencedContainer = "container:Bilan_CO2_camp_scout.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "B54DCF8F28C5134E00FBBAE3"
             BuildableName = "Bilan CO2 camp scout.app"
             BlueprintName = "Bilan CO2 camp scout"
-            ReferencedContainer = "container:Bilan CO2 camp scout.xcodeproj">
+            ReferencedContainer = "container:Bilan_CO2_camp_scout.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

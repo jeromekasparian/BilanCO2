@@ -121,7 +121,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B5154AF82B0423D30075D50A /* Bilan CO2 Congres */ = {
+		B5154AF82B0423D30075D50A /* Bilan_CO2_Congres */ = {
 			isa = PBXGroup;
 			children = (
 				B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */,
@@ -133,10 +133,10 @@
 				B5154B022B0423D50075D50A /* Assets.xcassets */,
 				B5154B072B0423D50075D50A /* Info.plist */,
 			);
-			path = "Bilan CO2 Congres";
+			path = Bilan_CO2_Congres;
 			sourceTree = "<group>";
 		};
-		B5154B202B0427C60075D50A /* Bilan CO2 Camps */ = {
+		B5154B202B0427C60075D50A /* Bilan_CO2_Camps */ = {
 			isa = PBXGroup;
 			children = (
 				B51FD8F02B18CD6C00F54E55 /* LaunchScreen.storyboard */,
@@ -145,7 +145,7 @@
 				B5154B212B0427DB0075D50A /* Assets.xcassets */,
 				B5154B262B0428C10075D50A /* ParametresCamps.swift */,
 			);
-			path = "Bilan CO2 Camps";
+			path = Bilan_CO2_Camps;
 			sourceTree = "<group>";
 		};
 		B5215E2B290D3C24008DA009 /* PasUtilise */ = {
@@ -179,8 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				B56E3203296AB72300276CE8 /* ToDoList.txt */,
-				B5154AF82B0423D30075D50A /* Bilan CO2 Congres */,
-				B5154B202B0427C60075D50A /* Bilan CO2 Camps */,
+				B5154AF82B0423D30075D50A /* Bilan_CO2_Congres */,
+				B5154B202B0427C60075D50A /* Bilan_CO2_Camps */,
 				B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */,
 				B5215E2B290D3C24008DA009 /* PasUtilise */,
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
@@ -260,7 +260,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan CO2 camp scout" */;
+			buildConfigurationList = B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan_CO2_camp_scout" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -700,7 +700,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan CO2 camp scout" */ = {
+		B54DCF8B28C5134E00FBBAE3 /* Build configuration list for PBXProject "Bilan_CO2_camp_scout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B54DCFA228C5134E00FBBAE3 /* Debug */,
