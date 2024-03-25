@@ -1,6 +1,7 @@
 
  AFFICHAGE / mise en page
 - la page d'aide déborde parfois sur toute la largeur de l'écran.
+- Emoji sur la ligne du slider plutôt que sur la ligne de titre
 
  Fonctionnalités
  - renvoyer vers des ressources

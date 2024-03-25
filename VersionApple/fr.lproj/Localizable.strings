@@ -88,9 +88,9 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre" = "Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre";
 "Les émissions de CO₂ de mon camp" = "Impact climatique de mon camp";
 "Impact climat de mon camp" = "Impact climatique de mon camp";
-", %.0f g CO₂ (%.0f%%)\n" = ", %.0f g éq. CO₂ (%.0f%%)\n";
-", %.0f kg CO₂ (%.0f%%)\n" = ", %.0f kg éq. CO₂ (%.0f%%)\n";
-", %.2f t CO₂ (%.0f%%)\n" = ", %.2f t éq. CO₂ (%.0f%%)\n";
+", %.0f g CO₂ " = ", %.0f g éq. CO₂ ";
+", %.0f kg CO₂ " = ", %.0f kg éq. CO₂ ";
+", %.2f t CO₂ " = ", %.2f t éq. CO₂ ";
 "\nTotal : %.0f kg CO₂" = "\nTotal : %.0f kg d'équivalent CO₂";
 "\nTotal : %.2f t CO₂" = "\nTotal : %.2f t d'équivalent CO₂";
 "\n\nAnalysez et réduisez l'impact climatique de votre camp avec l'app Camp" = "\n\nEstimez et réduisez l'impact climatique de votre camp avec l'app Bilan CO₂ camp scout";
@@ -103,10 +103,15 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 "lienAppStoreCamp" = "https://itunes.apple.com/app/id1645719853";
 
 // CelluleEmission
-"%.0f g eq. CO₂ (%.0f%%)" = "%.0f g eq. CO₂ (%.0f%%)";
-"%.0f kg eq. CO₂ (%.0f%%)" = "%.0f kg eq. CO₂ (%.0f%%)";
-"%.1f t eq. CO₂ (%.0f%%)" = "%.1f t eq. CO₂ (%.0f%%)";
-"%.0f t eq. CO₂ (%.0f%%)" = "%.0f t eq. CO₂ (%.0f%%)";
+"%.0f g eq. CO₂ " = "%.0f g eq. CO₂ ";
+"%.0f kg eq. CO₂ " = "%.0f kg eq. CO₂ ";
+"%.1f t eq. CO₂ " = "%.1f t eq. CO₂ ";
+"%.0f t eq. CO₂ " = "%.0f t eq. CO₂ ";
+" (< 1%)" = " (< 1%)";
+"(< 1%%)" = "(< 1%%)";
+"(%.0f%%)" = "(%.0f%%)";
+" (< 1%)" = " (< 1%)";
+" (%.0f%%)" = " (%.0f%%)";
 
 " : %.0f " = " : %.0f ";
 " : " = " : ";
@@ -369,7 +374,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
    • developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/
    • www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/";
 
-"texteRemerciementsCongres" = "Remerciements à Omar Belkacem, Emeline Bolmont, Jacques Erard, Hervé Kasparian, Gregory Rohrer, Patrick Roth et Marlyne Sahakian pour leur soutien et leurs conseils";
+"texteRemerciementsCongres" = "Remerciements à Omar Belkacem, Emeline Bolmont, Imad Bouibed, Liam Burke, Jacques Erard, Hervé Kasparian, Gregory Rohrer, Patrick Roth et Marlyne Sahakian pour leur soutien et leurs conseils";
 
 
 // Données

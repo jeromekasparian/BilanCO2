@@ -82,14 +82,16 @@ class CelluleEmission: UITableViewCell {
             let pourcentage = typeEmission.emission / emissionsCalculees * 100.0
             var texte = ""
             if typeEmission.emission < 2.0 {
-                texte = String(format: NSLocalizedString("%.0f g eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission * 1000.0 , pourcentage)
+                texte = String(format: NSLocalizedString("%.0f g eq. CO₂ ", comment: ""), typeEmission.emission * 1000.0)
             } else if typeEmission.emission < 1000.0 {
-                texte = String(format: NSLocalizedString("%.0f kg eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission, pourcentage)
+                texte = String(format: NSLocalizedString("%.0f kg eq. CO₂ ", comment: ""), typeEmission.emission)
             } else if typeEmission.emission < 20000.0 {
-                texte = String(format: NSLocalizedString("%.1f t eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission / 1000.0, pourcentage)
+                texte = String(format: NSLocalizedString("%.1f t eq. CO₂ ", comment: ""), typeEmission.emission / 1000.0)
             } else {
-                texte = String(format: NSLocalizedString("%.0f t eq. CO₂ (%.0f%%)", comment: ""), typeEmission.emission / 1000, pourcentage)
+                texte = String(format: NSLocalizedString("%.0f t eq. CO₂ ", comment: ""), typeEmission.emission / 1000)
             }
+            let textePourcentage = pourcentage < 0.5 ? NSLocalizedString("(< 1%%)", comment: "") : NSLocalizedString("(%.0f%%)", comment: "")
+            texte = texte + String(format: textePourcentage, pourcentage)
             var couleur: UIColor = .gray
             if pourcentage > 10.0 {couleur = .black}
             if pourcentage > 20.0 {couleur = rougeVif}

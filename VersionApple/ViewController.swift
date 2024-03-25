@@ -293,7 +293,10 @@ class ViewController: ViewControllerAvecCamembert, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var titreSection = lEvenement.sections[section].nom
         if lEvenement.sections[section].emissionsSection > 0 {
-            titreSection = titreSection + String(format: " (%.0f %%)", lEvenement.sections[section].emissionsSection / emissionsCalculees * 100.0)
+            let pourcentage = lEvenement.sections[section].emissionsSection / emissionsCalculees * 100.0
+            let textePourcentage = pourcentage < 0.5 ? NSLocalizedString(" (< 1%)", comment: "") : String(format: NSLocalizedString(" (%.0f%%)", comment: ""), pourcentage)
+
+            titreSection = titreSection + textePourcentage
         }
         let margeVerticale = CGFloat(12.0)
         let margeHorizontale = CGFloat(20.0)
