@@ -12,7 +12,7 @@
 "OK" = "OK";
 "https://www.eeudf.org" = "https://www.eeudf.org";
 "www.eeudf.org" = "www.eeudf.org";
-"© 2023 Jérôme Kasparian, EEUdF" = "© 2023 Jérôme Kasparian, EEUdF";
+"© 2023 Jérôme Kasparian, EEUdF" = "© 2023-2024 Jérôme Kasparian, EEUdF";
 "Initialisation" = "Reset";
 "Effacer les données ?" = "Reset all data?";
 "Annuler" = "Cancel";
@@ -474,7 +474,7 @@ For optimal accuracy, an assessment by a qualified expert is required.";
 // interface
 "https://www.unige.ch" = "https://www.unige.ch";
 "www.unige.ch" = "www.unige.ch";
-"© 2023 Jérôme Kasparian, Université de Genève" = "© 2023 Jérôme Kasparian, University of Geneva";
+"© 2023 Jérôme Kasparian, Université de Genève" = "© 2023-2024 Jérôme Kasparian, University of Geneva";
 
 // affichage des résultats
 //"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "In %.0f days, this congress emits as much as %.0f days of climate-compatible emissions";

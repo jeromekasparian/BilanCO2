@@ -12,7 +12,7 @@
 "OK" = "OK";
 "https://www.eeudf.org" = "https://www.eeudf.org";
 "www.eeudf.org" = "www.eeudf.org";
-"© 2023 Jérôme Kasparian, EEUdF" = "© 2023 Jérôme Kasparian, EEUdF";
+"© 2023 Jérôme Kasparian, EEUdF" = "© 2023-2024 Jérôme Kasparian, EEUdF";
 "Initialisation" = "Réinitialisation";
 "Effacer les données ?" = "Effacer les données ?";
 "Annuler" = "Annuler";
@@ -475,7 +475,7 @@ Pour une précision optimale, un bilan carbone complet par un organisme qualifi�
 // interface
 "https://www.unige.ch" = "https://www.unige.ch";
 "www.unige.ch" = "www.unige.ch";
-"© 2023 Jérôme Kasparian, Université de Genève" = "© 2023 Jérôme Kasparian, Université de Genève";
+"© 2023 Jérôme Kasparian, Université de Genève" = "© 2023-2024 Jérôme Kasparian, Université de Genève";
 
 // affichage des résultats
 //"En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat" = "En %.0f jours, ce congrès produit autant que %.0f jours d'émissions acceptables pour préserver le climat";
