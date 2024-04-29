@@ -29,6 +29,8 @@ fun CategoryCard(
                 val first: Field = fields.first()
                 CategoryCardField(
                     text = first.toString(),
+                    icon = first.icon,
+                    info = first.info,
                     min = first.min,
                     max = first.max,
                     sliderPosition = first.value,
@@ -43,6 +45,8 @@ fun CategoryCard(
                     )
                     CategoryCardField(
                         text = field.toString(),
+                        icon = field.icon,
+                        info = field.info,
                         min = field.min,
                         max = field.max,
                         sliderPosition = field.value,

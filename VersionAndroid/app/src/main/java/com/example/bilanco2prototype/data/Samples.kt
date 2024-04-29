@@ -7,12 +7,15 @@ import com.example.bilanco2prototype.ui.theme.Indigo
 import com.example.bilanco2prototype.ui.theme.Pink
 import com.example.bilanco2prototype.ui.theme.Purple
 
+/*
 val sampleCategories = listOf(
     Category(id = 0, name = "Informations générales"),
     Category(id = 1, name = "Alimentation"),
     Category(id = 2, name = "Voyages")
 )
+ */
 
+/*
 val sampleFields = listOf(
     Field( fieldId = 0, categoryId = 0,
         name = "Durée", unit = MeasurementUnit.DAY, max = 20f),
@@ -41,6 +44,7 @@ val sampleFields = listOf(
     Field( fieldId = 11, categoryId = 2,
         name = "Avion long-courrier business")
 )
+ */
 
 val sampleColors = listOf(
     Indigo,

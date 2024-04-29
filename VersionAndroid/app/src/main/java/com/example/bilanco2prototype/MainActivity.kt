@@ -2,45 +2,21 @@ package com.example.bilanco2prototype
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.bilanco2prototype.data.Category
-import com.example.bilanco2prototype.data.Field
 import com.example.bilanco2prototype.data.MeasurementUnit
-import com.example.bilanco2prototype.data.sampleCategories
-import com.example.bilanco2prototype.data.sampleColors
-import com.example.bilanco2prototype.data.sampleFields
+import com.example.bilanco2prototype.data.Field
+//import com.example.bilanco2prototype.data.sampleCategories
+//import com.example.bilanco2prototype.data.sampleColors
+//import com.example.bilanco2prototype.data.sampleFields
 import com.example.bilanco2prototype.ui.MainScreen
 import com.example.bilanco2prototype.ui.theme.BilanCO2PrototypeTheme
 import java.io.BufferedReader
 import java.io.InputStreamReader
-
-@SuppressLint("DiscouragedApi")
-fun Context.stringIdByName(resIdName: String?): Int {
-    resIdName?.let {
-        return resources.getIdentifier(it, "string", packageName)
-    }
-    throw Resources.NotFoundException()
-}
-
-fun String.slug(): String {
-    return this
-        .lowercase()
-        .replace(" ", "_")
-        .replace("à", "a")
-        .replace("é", "e")
-        .replace("è", "e")
-}
-
-fun Context.stringByName(string: String): String {
-    return resources.getString(this.stringIdByName(string.slug()))
-}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +35,7 @@ class MainActivity : ComponentActivity() {
             .drop(1) // Ignore the header line
             .filter { it.isNotBlank() } // Ignore empty lines
             .forEach {
-                val line = it.split(';', limit = 7)
+                val line = it.split(';', limit = 7) // TODO Check limit? -> 7
                 val categoryName = line[0]
                 if(categoryName != previousCategoryName) {
                     currentCategoryId++
@@ -75,6 +51,10 @@ class MainActivity : ComponentActivity() {
                     "personnes" -> MeasurementUnit.ITEM
                     "assiettes" -> MeasurementUnit.ITEM
                     "jours" -> MeasurementUnit.DAY
+
+                    "Day" -> MeasurementUnit.ITEM
+                    "Item" -> MeasurementUnit.ITEM
+                    "ItemPerDay" -> MeasurementUnit.ITEM_PER_DAY
                     else -> MeasurementUnit.PERCENT
                 }
                 fieldDataList.add(
@@ -82,6 +62,8 @@ class MainActivity : ComponentActivity() {
                         fieldId = currentFieldId,
                         categoryId = currentCategoryId,
                         name = line[1],
+                        icon = line[4],
+                        info = line[5],
                         unit = measurementUnit,
                         max = line[3].toFloat()
                     )
@@ -93,7 +75,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BilanCO2PrototypeTheme {
                 val colors = resources.getIntArray(R.array.categoryColors).map{
-                    colorInt -> Color(colorInt)
+                        colorInt -> Color(colorInt)
                 }
                 MainScreen(categoryDataList, fieldDataList, colors)
             }
@@ -101,6 +83,15 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@SuppressLint("DiscouragedApi")
+fun Context.getMyString(label: String?): String {
+    label?.let {
+        return getString(resources.getIdentifier(it, "string", packageName))
+    }
+    throw Resources.NotFoundException()
+}
+
+/*
 @Preview(
     name = "Light Mode",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
@@ -121,3 +112,25 @@ fun CategoryPreview() {
         )
     }
 }
+ */
+
+/*  TODO A voir si besoin
+fun String.slug(): String {
+    return this
+        .lowercase()
+        .replace(" ", "_")
+        .replace("à", "a")
+        .replace("é", "e")
+        .replace("è", "e")
+}
+
+fun Context.stringByName(string: String): String {
+    return resources.getString(this.stringIdByName(string.slug()))
+}
+
+fun getMyString(label: String): String {
+    val myId = resources.getIdentifier(label, "string", packageName)
+    val myString = getString(myId)
+    return getString(resources.getIdentifier(label, "string", packageName))
+}
+ */

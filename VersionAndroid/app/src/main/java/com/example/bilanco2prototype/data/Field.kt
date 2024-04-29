@@ -8,6 +8,8 @@ class Field(
     val fieldId: Int = 0,
     val categoryId: Int = 0,
     val name: String,
+    val icon: String,
+    val info: String,
     val unit: MeasurementUnit = MeasurementUnit.PERCENT,
     val min: Float = 0f,
     val max: Float = 100f
