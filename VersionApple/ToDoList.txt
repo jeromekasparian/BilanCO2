@@ -47,3 +47,4 @@ Ce qui aide à la substitution, c’est le tableau lui même, en particulier :
 Tu pourrais aller plus loin, et proposer des suggestions, tant que le bilan dépasse le 100%, genre une alerte
 - Les repas représente xx tonnes donc yy% de votre bilan carbonne, et si vous remplaciez 3 repas avec viande rouge par des repas végé ? [ok faisons ça] [as-tu une autre suggestion?]
 - les transports représente xx tonnes donc yy% de votre bilan carbonne, e et si vous y alliez en train plutôt qu’en car ? [ok faisons ça] [pas maintenant je vais déjà chercher un lieu moins loin de mon local][as-tu une autre suggestion ?]
+
