@@ -8,6 +8,15 @@
  Exported at: Mon, 08 Apr 2024 13:42:30 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!--    Our Own sample -->
+
+
+
+
+
+    <!--    End our sample -->
+
     <string name="app_name">Bilan CO2 (Prototype)</string>
     <!-- ViewController -->
     <string name="un_conseil">Un conseil</string>
@@ -69,6 +78,7 @@
     <string name="_0f_330cf4416db694774481bd74ca3fe0e4">(%.0f%%)</string>
     <string name="_0f_5ed8476d30ec34b227d8587857dcd700">: %.0f </string>
     <string name="f910c9ffb69f6a8aefbb7f235f178f46">:</string>
+
     <!-- les textes de la base de données -->
     <string name="categorieinformations_generalesduree">Informations générales</string>
     <string name="nominformations_generalesduree">Durée</string>
@@ -273,56 +283,57 @@
     <string name="texteLimitesCongres">L\'app permet d\'estimer l\'ordre de grandeur des principales émissions de gaz à effet de serre d\'un congrès : transports, alimentation, hébergement.\n\nEn particulier, elle ne prend pas en compte :\n\u0020\u0020\u0020• les déchets\n\u0020\u0020\u0020• les activités spécifiques\n\u0020\u0020\u0020• les émissions liées au matériel individuel des participants\n\u0020\u0020\u0020• les émissions des participants qui ne sont pas liées au congrès mais qui se poursuivent pendant celui-ci : leur domicile notamment.\n\nPour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.</string>
     <string name="texteSourcesCongres">• Ademe, bilans-ges.ademe.fr\n\u0020\u0020\u0020• Ademe, impactco2.fr\n\u0020\u0020\u0020• developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/\n\u0020\u0020\u0020• www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/</string>
     <string name="texteRemerciementsCongres">Remerciements à Omar Belkacem, Emeline Bolmont, Imad Bouibed, Liam Burke, Jacques Erard, Hervé Kasparian, Gregory Rohrer, Patrick Roth et Marlyne Sahakian pour leur soutien et leurs conseils</string>
+
     <!-- Données -->
     <string name="Alimentation">Alimentation</string>
     <string name="Voyages">Voyages</string>
-    <string name="deplacements_sur_place">Déplacements sur place</string>
-    <string name="hebergement_and_batiments">Hébergement &amp; bâtiments</string>
+    <string name="deplacementsSurPlace">Déplacements sur place</string>
+    <string name="hebergementAndBatiments">Hébergement &amp; bâtiments</string>
     <string name="materiel">Objets offerts</string>
-    <string name="materiel_recu">Objets reçus</string>
-    <string name="repas_avec_boeuf_veau_ou_agneau">Repas avec bœuf, veau ou agneau</string>
-    <string name="repas_avec_porc_volaille_poisson">Repas avec porc, volaille, poisson</string>
-    <string name="repas_vegetarien">Repas végétariens</string>
-    <string name="repas_vegetariens">Repas végétariens</string>
-    <string name="repas_avec_boeuf_veau_ou_agneau_cb64a0f4302de9b6944178a15e9edc0c">repas avec bœuf, veau ou agneau</string>
-    <string name="repas_avec_porc_volaille_poisson_318643301f5ade41d29a2711ef7befa9">repas avec porc, volaille, poisson</string>
-    <string name="repas_vegetarien_19b69ba4ceb6f598d6dc858f3548c6dd">repas végétariens</string>
-    <string name="repas_vegetariens_54f3c5f6fb2b3c756aac4d2fe35dfc92">repas végétariens</string>
-    <string name="pause_cafe_jour">pause café / jour</string>
-    <string name="pauses_cafe_jour">pauses café / jour</string>
+    <string name="materielRecu">Objets reçus</string>
+    <string name="repasAvecBoeufVeauOuAgneau">Repas avec bœuf, veau ou agneau</string>
+    <string name="repasAvecPorcVolaillePoisson">Repas avec porc, volaille, poisson</string>
+    <string name="repasVegetarien">Repas végétariens</string>
+    <string name="repasVegetariens">Repas végétariens</string>
+    <string name="repasAvecBoeufVeauOuAgneauCb64a0f4302de9b6944178a15e9edc0c">repas avec bœuf, veau ou agneau</string>
+    <string name="repasAvecPorcVolaillePoisson318643301f5ade41d29a2711ef7befa9">repas avec porc, volaille, poisson</string>
+    <string name="repasVegetarien19b69ba4ceb6f598d6dc858f3548c6dd">repas végétariens</string>
+    <string name="repasVegetariens54f3c5f6fb2b3c756aac4d2fe35dfc92">repas végétariens</string>
+    <string name="pauseCafeJour">pause café / jour</string>
+    <string name="pausesCafeJour">pauses café / jour</string>
     <string name="Train">Train</string>
-    <string name="avion_moyen_courrier_classe_economique">Avion moyen-courrier classe éco</string>
-    <string name="avion_long_courrier_classe_economique">Avion long-courrier classe éco</string>
-    <string name="avion_moyen_courrier_business">Avion moyen-courrier business</string>
-    <string name="avion_long_courrier_business">Avion long-courrier business</string>
-    <string name="trajet_en_train">trajet en train</string>
-    <string name="trajets_en_train_1_ar">trajets en train (1 AR)</string>
-    <string name="trajet_en_avion_classe_eco">trajet en avion classe éco</string>
-    <string name="trajets_en_avion_classe_eco_1_ar">trajets en avion classe éco (1 AR)</string>
-    <string name="trajet_en_avion_business">trajet en avion business</string>
-    <string name="trajets_en_avion_business_1_ar">trajets en avion business (1 AR)</string>
-    <string name="participation_a_distance">Participation à distance</string>
-    <string name="transports_publics_domicile_gare_ou_aeroport">Transports publics domicile ↔︎ gare ou aéroport</string>
-    <string name="taxi_domicile_gare_ou_aeroport">Taxi domicile ↔︎ gare ou aéroport</string>
-    <string name="transports_publics_sur_place">Transports publics sur place</string>
-    <string name="taxi_sur_place">Taxi sur place</string>
-    <string name="auberge_de_jeunesse_airbnb_hotel_economique">Auberge de jeunesse / AirBNB / Hotel économique</string>
+    <string name="avionMoyenCourrierClasseEconomique">Avion moyen-courrier classe éco</string>
+    <string name="avionLongCourrierClasseEconomique">Avion long-courrier classe éco</string>
+    <string name="avionMoyenCourrierBusiness">Avion moyen-courrier business</string>
+    <string name="avionLongCourrierBusiness">Avion long-courrier business</string>
+    <string name="trajetEnTrain">trajet en train</string>
+    <string name="trajetsEnTrain1Ar">trajets en train (1 AR)</string>
+    <string name="trajetEnAvionClasseEco">trajet en avion classe éco</string>
+    <string name="trajetsEnAvionClasseEco1Ar">trajets en avion classe éco (1 AR)</string>
+    <string name="trajetEnAvionBusiness">trajet en avion business</string>
+    <string name="trajetsEnAvionBusiness1Ar">trajets en avion business (1 AR)</string>
+    <string name="participationADistance">Participation à distance</string>
+    <string name="transportsPublicsDomicileGareOuAeroport">Transports publics domicile ↔︎ gare ou aéroport</string>
+    <string name="taxiDomicileGareOuAeroport">Taxi domicile ↔︎ gare ou aéroport</string>
+    <string name="transportsPublicsSurPlace">Transports publics sur place</string>
+    <string name="taxiSurPlace">Taxi sur place</string>
+    <string name="aubergeDeJeunesseAirbnbHotelEconomique">Auberge de jeunesse / AirBNB / Hotel économique</string>
     <string name="hotel">Hotel ⭐️ ⭐️</string>
-    <string name="hotel_bb6f3aa87eedc811aa2f35043f17e127">Hotel ⭐️ ⭐️ ⭐️ ⭐️</string>
-    <string name="centre_de_congres">Centre de congrès</string>
-    <string name="goodie_participant">goodie / participant</string>
-    <string name="goodies_participant">goodies / participant</string>
+    <string name="hotelBb6f3aa87eedc811aa2f35043f17e127">Hotel ⭐️ ⭐️ ⭐️ ⭐️</string>
+    <string name="centreDeCongres">Centre de congrès</string>
+    <string name="goodieParticipant">goodie / participant</string>
+    <string name="goodiesParticipant">goodies / participant</string>
     <string name="goodie">goodie</string>
     <string name="goodies">goodies</string>
-    <string name="cle_usb_participant">clé USB / participant</string>
-    <string name="cles_usb_participant">clés USB / participant</string>
-    <string name="cle_usb">clé USB</string>
-    <string name="cles_usb">clés USB</string>
+    <string name="cleUsbParticipant">clé USB / participant</string>
+    <string name="clesUsbParticipant">clés USB / participant</string>
+    <string name="cleUsb">clé USB</string>
+    <string name="clesUsb">clés USB</string>
     <string name="Documents">Impressions</string>
-    <string name="des_participants">%% des participants</string>
+    <string name="desParticipants">%% des participants</string>
     <string name="m2">m²</string>
-    <string name="page_participant">page / participant</string>
-    <string name="pages_participant">pages / participant</string>
+    <string name="pageParticipant">page / participant</string>
+    <string name="pagesParticipant">pages / participant</string>
     <string name="page">page</string>
     <string name="pages">pages</string>
     <string name="nuit">nuit</string>
@@ -353,6 +364,8 @@
     <string name="ConseilUSB">Une clé USB correspond à autant d\'émissions de CO₂ que l\'impression de 40 pages. La disponibilité en ligne du programme peut constituer une alternative.</string>
     <string name="ConseilImpression">L\'impression de 40 pages produit autant d\'émissions de CO₂ que la fabrication d\'une clé USB. La disponibilité en ligne du programme peut constituer une alternative.</string>
     <!-- Conseils individuels -->
+
+
     <string name="ConseilDureeCongresIndividuel">En couplant des déplacements et en restant plus longtemps sur place vous réduisez les transports : autant de coûts, de temps et de CO₂ en moins</string>
     <string name="ConseilBoeufCongresIndividuel">La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu\'un repas végétarien.</string>
     <string name="ConseilPouletCongresIndividuel">La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l\'impact carbone par rapport à un repas végétarien.</string>

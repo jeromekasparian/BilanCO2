@@ -28,8 +28,10 @@ import com.example.bilanco2prototype.data.Category
 @Composable
 fun CategoryCardField(
     text: String,
+
     icon: String,
     info: String,
+
     min: Float,
     max: Float,
     sliderPosition: Float,
@@ -38,34 +40,44 @@ fun CategoryCardField(
     color: Color = Category.mainColorDefault,
 ) {
     Surface(color = Color.Transparent) {
-        Column(modifier = modifier.padding(start = 24.dp)) {
+        Column(
+            modifier = modifier.padding(start = 24.dp)
+        ) {
+
             Row {
                 Text(
                     text = text,
                     fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    modifier = Modifier
-                        .weight(1f)
+                    modifier = Modifier.weight(1f)
                         .padding(top = 8.dp)
                 )
 
                 var showDialog by remember { mutableStateOf(false) }
-                // val context = LocalContext.current
+//                val context = LocalContext.current
 
                 Image(
                     painter = painterResource(id = R.drawable.baseline_info_outline_24),
                     contentDescription = "info_icon",
-                    modifier = Modifier
-                        .padding(top = 8.dp, end = 8.dp)
-                        .clickable { showDialog = true }
+                    modifier = Modifier.padding(top = 8.dp, end = 8.dp)
+                        .clickable {
+                            showDialog = true
+                        }
                 )
 
                 if (showDialog) {
                     AlertDialog(
-                        onDismissRequest = { showDialog = false },
-                        title = { Text(text = info) },
-                        confirmButton = { }
+                        onDismissRequest = {
+                            showDialog = false
+                        },
+                        title = {
+                            Text(text = info)
+                        },
+                        confirmButton = {
+                        }
                     )
                 }
+
+
             }
 
             Row {
@@ -89,7 +101,8 @@ fun CategoryCardField(
                         disabledActiveTickColor = Color.Transparent,
                         disabledInactiveTickColor = Color.Transparent
                     ),
-                    modifier = modifier.padding(end = 48.dp, start = 6.dp)
+                    modifier = modifier
+                        .padding(end = 48.dp, start = 6.dp)
                 )
             }
         }
