@@ -56,9 +56,7 @@ fun CategoryCardField(
                     contentDescription = "info_icon",
                     modifier = Modifier
                         .padding(top = 8.dp, end = 8.dp)
-                        .clickable {
-                            showDialog = true
-                        }
+                        .clickable { showDialog = true }
                 )
 
                 if (showDialog) {
