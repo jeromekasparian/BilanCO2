@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 
 class FieldViewModel: ViewModel() {
-    private val _fields = mutableStateListOf<Field>() // empty: mutableStateListOf<Field>()
+    private val _fields = mutableStateListOf<Field>()
     val fields: List<Field> get() = _fields
 
     fun populate(fieldList: List<Field>) {
