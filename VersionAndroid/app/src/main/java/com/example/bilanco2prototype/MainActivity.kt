@@ -8,8 +8,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.graphics.Color
 import com.example.bilanco2prototype.data.Category
-import com.example.bilanco2prototype.data.MeasurementUnit
 import com.example.bilanco2prototype.data.Field
+import com.example.bilanco2prototype.data.MeasurementUnit
 //import com.example.bilanco2prototype.data.sampleCategories
 //import com.example.bilanco2prototype.data.sampleColors
 //import com.example.bilanco2prototype.data.sampleFields
@@ -75,7 +75,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BilanCO2PrototypeTheme {
                 val colors = resources.getIntArray(R.array.categoryColors).map{
-                        colorInt -> Color(colorInt)
+                    colorInt -> Color(colorInt)
                 }
                 MainScreen(categoryDataList, fieldDataList, colors)
             }
@@ -91,46 +91,47 @@ fun Context.getMyString(label: String?): String {
     throw Resources.NotFoundException()
 }
 
-/*
-@Preview(
-    name = "Light Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    showBackground = true
-)
-@Preview(
-    name = "Dark Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true
-)
-@Composable
-fun CategoryPreview() {
-    BilanCO2PrototypeTheme {
-        MainScreen(
-            categories = sampleCategories,
-            fields = sampleFields,
-            colors = sampleColors
-        )
-    }
-}
- */
+//fun getMyString(label: String): String {
+//    val myId = resources.getIdentifier(label, "string", packageName)
+//    val myString = getString(myId)
+//    return getString(resources.getIdentifier(label, "string", packageName))
+//}
 
-/*  TODO A voir si besoin
-fun String.slug(): String {
-    return this
-        .lowercase()
-        .replace(" ", "_")
-        .replace("à", "a")
-        .replace("é", "e")
-        .replace("è", "e")
-}
+//
+//@Preview(
+//    name = "Light Mode",
+//    uiMode = Configuration.UI_MODE_NIGHT_NO,
+//    showBackground = true
+//)
+//@Preview(
+//    name = "Dark Mode",
+//    uiMode = Configuration.UI_MODE_NIGHT_YES,
+//    showBackground = true
+//)
+//@Composable
+//fun CategoryPreview() {
+//    BilanCO2PrototypeTheme {
+//        MainScreen(
+//            categories = sampleCategories,
+//            fields = sampleFields,
+//            colors = sampleColors
+//        )
+//    }
+//}
 
-fun Context.stringByName(string: String): String {
-    return resources.getString(this.stringIdByName(string.slug()))
-}
 
-fun getMyString(label: String): String {
-    val myId = resources.getIdentifier(label, "string", packageName)
-    val myString = getString(myId)
-    return getString(resources.getIdentifier(label, "string", packageName))
-}
- */
+//  TODO A voir si besoin
+//
+//fun String.slug(): String {
+//    return this
+//        .lowercase()
+//        .replace(" ", "_")
+//        .replace("à", "a")
+//        .replace("é", "e")
+//        .replace("è", "e")
+//}
+//
+//fun Context.stringByName(string: String): String {
+//    return resources.getString(this.stringIdByName(string.slug()))
+//}
+/////////////////////////////
