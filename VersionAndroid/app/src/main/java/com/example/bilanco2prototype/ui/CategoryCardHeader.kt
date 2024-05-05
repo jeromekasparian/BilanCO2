@@ -22,7 +22,7 @@ fun CategoryCardHeader(
     textColor: Color = Category.headerTextColorDefault
 ) {
     Surface(color = mainColor) {
-        val sum = values.sumOf { it.toDouble() }.toFloat()
+        val sum = values.sumOf { it.toDouble() }.toFloat() // TODO: remplacer par vrai calcul
         Text(
             text = "$name: ${sum.roundToInt()}",
             fontSize = MaterialTheme.typography.titleLarge.fontSize,

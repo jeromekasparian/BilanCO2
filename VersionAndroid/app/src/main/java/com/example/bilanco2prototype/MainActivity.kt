@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
             .drop(1) // Ignore the header line
             .filter { it.isNotBlank() } // Ignore empty lines
             .forEach {
-                val line = it.split(';', limit = 7) // TODO Check limit? -> 7
+                val line = it.split(';', limit = 7) // TODO: check limit? -> 7
                 val categoryName = line[0]
                 if(categoryName != previousCategoryName) {
                     currentCategoryId++
@@ -121,7 +121,7 @@ fun CategoryPreview() {
 }
  */
 
-/* TODO A voir si besoin
+/* TODO: à voir si besoin
 fun String.slug(): String {
     return this
         .lowercase()

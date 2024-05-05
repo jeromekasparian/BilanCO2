@@ -1,5 +1,6 @@
 package com.example.bilanco2prototype.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,6 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bilanco2prototype.data.Category
 import com.example.bilanco2prototype.data.Field
 import com.example.bilanco2prototype.data.FieldViewModel
+import kotlin.math.roundToInt
 
 @Composable
 fun MainScreen(
@@ -23,13 +25,20 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        CategoryCardList(
-            categories = categories,
-            fields = fieldViewModel.fields,
-            onSliderPositionChanged = { field, value ->
-                fieldViewModel.sliderPositionChanged(field, value)
-            },
-            colors = colors
-        )
+        Column {
+            val total = fieldViewModel.fields
+                .map { field -> field.value }
+                .sumOf { it.toDouble() }
+                .roundToInt()
+            TotalCard(total)
+            CategoryCardList(
+                categories = categories,
+                fields = fieldViewModel.fields,
+                onSliderPositionChanged = { field, value ->
+                    fieldViewModel.sliderPositionChanged(field, value)
+                },
+                colors = colors
+            )
+        }
     }
 }

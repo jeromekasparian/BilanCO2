@@ -3,6 +3,7 @@ package com.example.bilanco2prototype.data
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.setValue
+import kotlin.math.roundToInt
 
 class Field(
     val fieldId: Int = 0,
@@ -18,18 +19,19 @@ class Field(
 ) {
     var value by mutableFloatStateOf(min)
 
-    override fun toString(): String {
+    override fun toString(): String { // TODO: voir si on peut/doit mieux gérer la localisation
+        val intValue = value.roundToInt()
         return when(unit) {
-            MeasurementUnit.PERCENT -> String.format("%s: %.0f%%", name, value)
-            MeasurementUnit.PERCENT_CONTINUOUS -> {
-                if (value < 1 && value > 0) String.format("%s: <1%%", name)
-                else String.format("%s: %.0f%%", name, value)
+            MeasurementUnit.PERCENT             ->  "$name: $intValue%"
+            MeasurementUnit.PERCENT_CONTINUOUS  -> {
+                if (0 < value && value < 1)         "$name: <1%"
+                else                                "$name: $intValue%"
             }
-            MeasurementUnit.ITEM -> String.format("%.0f %s", value, name)
-            MeasurementUnit.ITEM_PER_DAY -> String.format("%.0f %s / jour", value, name)
-            MeasurementUnit.HOUR -> String.format("%s: %.0f h", name, value)
-            MeasurementUnit.DAY -> String.format("%s: %.0f jours", name, value)
-            MeasurementUnit.KM -> String.format("%s: %.0f km", name, value)
+            MeasurementUnit.ITEM                ->  "$intValue $name"
+            MeasurementUnit.ITEM_PER_DAY        ->  "$intValue $name / jour"
+            MeasurementUnit.HOUR                ->  "$name: $intValue h"
+            MeasurementUnit.DAY                 ->  "$name: $intValue jours"
+            MeasurementUnit.KM                  ->  "$name: $intValue km"
         }
     }
 }

@@ -14,12 +14,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.bilanco2prototype.R
@@ -48,7 +47,7 @@ fun CategoryCardField(
                         .padding(top = 8.dp)
                 )
 
-                var showDialog by remember { mutableStateOf(false) }
+                var showDialog by rememberSaveable { mutableStateOf(false) }
                 // val context = LocalContext.current
 
                 Image(
@@ -62,7 +61,11 @@ fun CategoryCardField(
                 if (showDialog) {
                     AlertDialog(
                         onDismissRequest = { showDialog = false },
-                        title = { Text(text = info) },
+                        title = { Text(text = "Information") }, // TODO: à localiser
+                        text = { Text(
+                            text = info,
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize)
+                        },
                         confirmButton = { }
                     )
                 }
