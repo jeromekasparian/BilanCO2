@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.graphics.Color
@@ -26,7 +27,8 @@ class MainActivity : ComponentActivity() {
         val categoryDataList = mutableListOf<Category>()
 
         // Read CSV file to populate data lists
-        val fileCSV = InputStreamReader(assets.open("sample_data.csv"))
+//        val fileCSV = InputStreamReader(assets.open("sample_data.csv"))
+        val fileCSV = InputStreamReader(assets.open("DataInternationalCongres.csv"))
         val reader = BufferedReader(fileCSV)
         var previousCategoryName = ""
         var currentCategoryId = -1 // First category is always new, so it will increment
@@ -35,8 +37,10 @@ class MainActivity : ComponentActivity() {
             .drop(1) // Ignore the header line
             .filter { it.isNotBlank() } // Ignore empty lines
             .forEach {
-                val line = it.split(';', limit = 7) // TODO Check limit? -> 7
-                val categoryName = line[0]
+                val row = it.split(';', limit = 20) // TODO Check limit? -> 7
+//                val categoryName = row[0]
+                val categoryName = getMyString(row[0])
+                Log.d("TAG", "onCreate: ${row[0]} - $categoryName")
                 if(categoryName != previousCategoryName) {
                     currentCategoryId++
                     previousCategoryName = categoryName
@@ -47,7 +51,7 @@ class MainActivity : ComponentActivity() {
                         )
                     )
                 }
-                val measurementUnit = when(line[2]) {
+                val measurementUnit = when(row[2]) {
                     "personnes" -> MeasurementUnit.ITEM
                     "assiettes" -> MeasurementUnit.ITEM
                     "jours" -> MeasurementUnit.DAY
@@ -58,15 +62,26 @@ class MainActivity : ComponentActivity() {
                     else -> MeasurementUnit.PERCENT
                 }
                 fieldDataList.add(
+//                    Field(
+//                        fieldId = currentFieldId,
+//                        categoryId = currentCategoryId,
+//                        name = row[1],
+//                        icon = row[4],
+//                        info = row[5],
+//                        unit = measurementUnit,
+//                        max = row[3].toFloat()
+//                    )
+
                     Field(
                         fieldId = currentFieldId,
                         categoryId = currentCategoryId,
-                        name = line[1],
-                        icon = line[4],
-                        info = line[5],
+                        name = getMyString(row[1]),
+                        icon = row[15],
+                        info = getMyString(row[13]),
                         unit = measurementUnit,
-                        max = line[3].toFloat()
+                        max = row[4].toFloat()
                     )
+
                 )
                 currentFieldId++
             }
@@ -83,12 +98,28 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@SuppressLint("DiscouragedApi")
-fun Context.getMyString(label: String?): String {
-    label?.let {
-        return getString(resources.getIdentifier(it, "string", packageName))
+//@SuppressLint("DiscouragedApi")
+//fun Context.getMyString(label: String?): String {
+//    label?.let {
+//        if (label.isEmpty()) {
+//            return ""
+//        }
+//        return getString(resources.getIdentifier(it, "string", packageName))
+//    }
+//    throw Resources.NotFoundException()
+//}
+
+fun Context.getMyString(label: String): String {
+    if (label.isEmpty()) {
+        return ""
     }
-    throw Resources.NotFoundException()
+
+    val resourceId = resources.getIdentifier(label, "string", packageName)
+    return if (resourceId != 0) {
+        getString(resourceId)
+    } else {
+        "Error : Resource not found !"
+    }
 }
 
 //fun getMyString(label: String): String {
