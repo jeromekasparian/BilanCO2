@@ -5,7 +5,6 @@ package com.example.bilanco2prototype
 // import com.example.bilanco2prototype.data.sampleFields
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -112,17 +111,12 @@ fun Context.getMyString(label: String?): String {
 }
  */
 
+@SuppressLint("DiscouragedApi")
 fun Context.getMyString(label: String): String {
-    if (label.isEmpty()) {
-        return ""
-    }
-
+    if (label.isEmpty()) return ""
     val resourceId = resources.getIdentifier(label, "string", packageName)
-    return if (resourceId != 0) {
-        getString(resourceId)
-    } else {
-        "Error : Resource not found !"
-    }
+    return if (resourceId != 0) getString(resourceId)
+    else "Error : Resource not found !"
 }
 
 /*
