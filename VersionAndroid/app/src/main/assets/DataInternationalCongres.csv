@@ -1,0 +1,24 @@
+00-Categorie;01-Nom;02-Unite;03-UnitePluriel;04-ValeurMaxi;05-FacteurD'emission;06-ParPersonne;07-ParKmDistance;08-ParJour;09-EchelleLog;10-Entier;11-valeurMaxiEffectif;12-valeurMaxiDuree;13-Conseils;14-NomCourt;15-Picto;16-TitreRessource;17-LienRessource;18-CategorieOptionnelle
+CategorieInformationsGenerales;Duree;unitDuree;unitPluralDuree;21;0;1;;;;1;;;ConseilDureeCongres;;🕒;;;
+CategorieInformationsGenerales;Effectif;unitEffectif;unitPluralEffectif;10000;0;1;;;1;1;;;;;👤;;;
+CategorieInformationsGenerales;ParticipationADistance;unitPourcentage;;100;1;0.01;;1;;;;;ConseilVisio;Visio;🎥;;;
+CategorieAlimentation;RepasAvecBoeufVeauOuAgneau;unitPourcentage;;100;6.29;0.01;;2;;;;;ConseilBoeufCongres;ViandeRouge;🥩;;;
+CategorieAlimentation;RepasAvecPorcVolaillePoisson;unitPourcentage;;100;1.35;0.01;;2;;;;;ConseilPouletCongres;ViandeBlanche;🍗;;;
+CategorieAlimentation;RepasVegetarien;unitPourcentage;;100;0.51;0.01;;2;;;;;ConseilVegeCongres;Vege;🌽;;;
+CategorieAlimentation;pauseCafeParJour;unitPauseCafe;unitPluralPauseCafe;4;0.11;1;;1;;1;;;ConseilCafeCongres;Cafe;☕️;;;
+CategorieVoyages;Train;unitPourcentage;;100;2;0.01;;;;;;;ConseilTrain;Train;🚆;TitreRessourceTrain;LienRessourceTrain;
+CategorieVoyages;AvionMoyenCourrierClasseEconomique;unitPourcentage;;100;580;0.01;;;;;;;ConseilAvionMCEco;Avion;🛩️;TitreRessourceMCEco;LienRessourceMCEco;
+CategorieVoyages;AvionLongCourrierClasseEconomique;unitPourcentage;;100;2860;0.01;;;;;;;ConseilAvionLCEco;Avion;✈️;;;
+CategorieVoyages;AvionMoyenCourrierBusiness;unitPourcentage;;100;1320;0.01;;;;;;;ConseilAvionMCBusiness;Avion;🛩️฿;;;
+CategorieVoyages;AvionLongCourrierBusiness;unitPourcentage;;100;6630;0.01;;;;;;;ConseilAvionLCBusiness;Avion;✈️฿;;;
+CategorieDeplacementsSurPlace;TransportsPublicsDomicileVersGareOuAeroport;unitPourcentageParticipants;;100;3;0.01;;;;;;;ConseilTPMaison;;🚎;;;
+CategorieDeplacementsSurPlace;TaxiDomicileVersGareOuAeroport;unitPourcentageParticipants;;100;12;0.01;;;;;;;ConseilTaxiMaison;;🚕;;;
+CategorieDeplacementsSurPlace;TransportsPublicsSurPlace;unitPourcentageParticipants;;100;4;0.01;;1;;;;;ConseilTPLocal;;🚇;;;
+CategorieDeplacementsSurPlace;TaxiSurPlace;unitPourcentageParticipants;;100;4;0.01;;1;;;;;ConseilTaxiLocal;;🚖;;;
+CategorieHebergementEtBatiments;AubergeDeJeunesseOuAirBNBOuHotelEconomique;unitPourcentage;;100;7;0.01;;1;;;;;ConseilHotel;HotelEco;🛏️;;;
+CategorieHebergementEtBatiments;HotelDeuxEtoiles;unitPourcentage;;100;12;0.01;;1;;;;;ConseilHotel;HotelDeuxEtoiles;🏠;;;
+CategorieHebergementEtBatiments;HotelTroisEtoiles;unitPourcentage;;100;50;0.01;;1;;;;;ConseilHotel;HotelTroisEtoiles;🏨;;;
+CategorieHebergementEtBatiments;CentreDeCongres;unitSurfaceM2;;10000;0.1125;0;;1;1;;;;ConseilCentreCongres;CentreDeCongres;🏢;;;
+CategorieMateriel;GoodieParParticipant;unitGoodie;unitPluralGoodie;10;6;1;;;;1;;;ConseilGoodies;Goodies;🧸;;;
+CategorieMateriel;CleUsbParParticipant;unitCleUSB;unitPluralCleUSB;10;0.9;1;;;;1;;;ConseilUSB;ClesUSB;💾;;;
+CategorieMateriel;Documents;unitPage;unitPluralPage;1000;0.025;1;;;1;1;;;ConseilImpression;Impression;📖;;;

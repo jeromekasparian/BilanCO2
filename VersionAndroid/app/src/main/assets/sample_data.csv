@@ -1,0 +1,17 @@
+0-Catégorie;1-Nom;2-Unité;3-ValMaxi;4-Icon;5-Info
+
+Informations Générales;Durée;jours;20;🕒;Si le camp est plus long, les transports sont amortis sur plus de jours
+Informations Générales;participants;personnes;300;👤;Le plus de fous on est le plus fort on rit !
+Informations Générales;Participants à distance;pourcentage;100;🎥;Le plus de fous on est le plus fort on rit !
+
+Alimentation;Repas avec boeuf, veau ou agneau;pourcentage;100;🥩;La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu'un repas végétarien. C'est sans doute le poste d'émission le plus facile à réduire sans affecter le projet du camp. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental
+Alimentation;Repas avec porc, volaille ou poisson;pourcentage;100;🍗;La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l'impact carbone par rapport à un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre végétarienne à proximité.
+Alimentation;Repas végétariens;pourcentage;100;🌽;Privilégier les produits frais, locaux, de saison et peu emballés limite l'impact carbone des repas. \nSi vous organisez les repas, vous pouvez en tenir compte dans la conception des menus. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l'offre locale et de saison à proximité.
+Alimentation;pauses café;item;4;☕;"Le café, comme les autres produits exotiques notamment ceux cultivés sur des zones forestières défrichées, est fortement émetteur de gaz à effet de serre";ItemPerDay;4
+
+Voyages;Train;pourcentage;100;🚆;"Le train est (avec le bateau) de loin le mode de transport le moins polluant. \nEn tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d'excellentes informations horaires."
+Voyages;Avion moyen-courrier classe éco;pourcentage;100;🛩️;"Sur un même trajet, l'avion émet au moins 100 fois plus de CO₂ que le train. \nEn tant qu'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train."
+Voyages;Avion long-courrier classe éco;pourcentage;100;✈️;"Les voyages en avion sont particulièrement émetteurs de CO₂. Pour de courtes interventinos, la visioconférence peut constituer une alternative."
+Voyages;Avion moyen-courrier business;pourcentage;100;🛩️฿;"Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique."
+Voyages;Avion long-courrier business;pourcentage;100;✈️฿;"Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique."
+
