@@ -1,8 +1,5 @@
 package com.example.bilanco2
 
-// import com.example.bilanco2.data.sampleCategories
-// import com.example.bilanco2.data.sampleColors
-// import com.example.bilanco2.data.sampleFields
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -11,12 +8,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.graphics.Color
 import com.example.bilanco2.data.Category
-import com.example.bilanco2.data.Field
-import com.example.bilanco2.data.MeasurementUnit
 import com.example.bilanco2.ui.MainScreen
 import com.example.bilanco2.ui.theme.BilanCO2Theme
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import com.example.bilanco2.data.Field
+import com.example.bilanco2.data.MeasurementUnit
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,38 +49,41 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 val measurementUnit = when(row[2]) {
-                    "personnes" -> MeasurementUnit.ITEM
-                    "assiettes" -> MeasurementUnit.ITEM
-                    "jours" -> MeasurementUnit.DAY
+//                    "personnes" -> MeasurementUnit.ITEM
+//                    "assiettes" -> MeasurementUnit.ITEM
+//                    "jours" -> MeasurementUnit.DAY
+//
+//                    "Day" -> MeasurementUnit.ITEM
+//                    "Item" -> MeasurementUnit.ITEM
+//                    "ItemPerDay" -> MeasurementUnit.ITEM_PER_DAY
 
-                    "Day" -> MeasurementUnit.ITEM
-                    "Item" -> MeasurementUnit.ITEM
-                    "ItemPerDay" -> MeasurementUnit.ITEM_PER_DAY
+                    // TODO Add measurement units
+                    "unitDuree" -> MeasurementUnit.unitDuree
+                    "unitEffectif" -> MeasurementUnit.unitEffectif
+
+                    "unitPauseCafe" -> MeasurementUnit.unitPauseCafe
+                    "unitSurfaceM2" -> MeasurementUnit.unitSurfaceM2
+                    "unitGoodie" -> MeasurementUnit.unitGoodie
+                    "unitCleUSB" -> MeasurementUnit.unitCleUSB
+                    "unitPage" -> MeasurementUnit.unitPage
+
+                    "unitPourcentage" -> MeasurementUnit.PERCENT
+                    "unitPourcentageParticipants" -> MeasurementUnit.PERCENT
+
                     else -> MeasurementUnit.PERCENT
                 }
                 fieldDataList.add(
-                    /*
-                    Field(
-                        fieldId = currentFieldId,
-                        categoryId = currentCategoryId,
-                        name = row[1],
-                        icon = row[4],
-                        info = row[5],
-                        unit = measurementUnit,
-                        max = row[3].toFloat()
-                    )
-                     */
-
                     Field(
                         fieldId = currentFieldId,
                         categoryId = currentCategoryId,
                         name = getMyString(row[1]),
                         icon = row[15],
                         info = getMyString(row[13]),
-                        unit = measurementUnit,
-                        max = row[4].toFloat()
+                        unitId = measurementUnit,
+                        max = row[4].toFloat(),
+                        unit = getMyString(row[2]),
+                        unitP = getMyString(row[3])
                     )
-
                 )
                 currentFieldId++
             }

@@ -9,10 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bilanco2.data.Category
-import com.example.bilanco2.data.Field
 import com.example.bilanco2.data.FieldViewModel
-import com.example.bilanco2.ui.CategoryCardList
-import com.example.bilanco2.ui.TotalCard
+import com.example.bilanco2.data.Field
 import kotlin.math.roundToInt
 
 @Composable
