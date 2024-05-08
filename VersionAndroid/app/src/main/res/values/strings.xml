@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ReadDataCSV2</string>
+
+    <!-- Categorie -->
+    <string name="CategorieInformationsGenerales">Informations générales</string>
+    <string name="CategorieAlimentation">Alimentation</string>
+    <string name="CategorieVoyages">Voyages</string>
+    <string name="CategorieDeplacementsSurPlace">Déplacements sur place</string>
+    <string name="CategorieHebergementEtBatiments">Hébergement &amp; bâtiments</string>
+    <string name="CategorieMateriel">Objets offerts</string>
+    <string name="CategorieCredits">Credits</string>
+
+
+    <!--    Nom   -->
+    <string name="Duree">Durée</string>
+    <string name="Effectif">participant</string>
+    <string name="ParticipationADistance">Participation à distance</string>
+    <string name="RepasAvecBoeufVeauOuAgneau">Repas avec bœuf, veau ou agneau</string>
+    <string name="RepasAvecPorcVolaillePoisson">Repas avec porc, volaille, poisson</string>
+    <string name="RepasVegetarien">Repas végétariens</string>
+    <string name="PauseCafeParJour"></string>
+    <string name="Train">Train</string>
+    <string name="AvionMoyenCourrierClasseEconomique">Avion moyen-courrier classe éco</string>
+    <string name="AvionLongCourrierClasseEconomique">Avion long-courrier classe éco</string>
+    <string name="AvionMoyenCourrierBusiness">Avion moyen-courrier business</string>
+    <string name="AvionLongCourrierBusiness">Avion long-courrier business</string>
+    <string name="TransportsPublicsDomicileVersGareOuAeroport">Transports publics domicile ↔︎ gare ou aéroport</string>
+    <string name="TaxiDomicileVersGareOuAeroport">Taxi domicile ↔︎ gare ou aéroport</string>
+    <string name="TransportsPublicsSurPlace">Transports publics sur place</string>
+    <string name="TaxiSurPlace">Taxi sur place</string>
+    <string name="AubergeDeJeunesseOuAirBNBOuHotelEconomique">Auberge de jeunesse / AirBNB / Hotel économique</string>
+    <string name="HotelDeuxEtoiles">Hotel ⭐️ ⭐️</string>
+    <string name="HotelTroisEtoiles">Hotel ⭐️ ⭐️ ⭐️ ⭐️</string>
+    <string name="CentreDeCongres">Centre de congrès</string>
+    <string name="GoodieParParticipant"></string>
+    <string name="CleUsbParParticipant"></string>
+    <string name="Documents">Impressions</string>
+
+    <!--    Units   -->
+    <string name="unitDuree">jour</string>
+    <string name="unitPluralDuree">jours</string>
+    <string name="unitEffectif">participant</string>
+    <string name="unitPluralEffectif">participants</string>
+    <string name="unitPourcentage">%</string>
+    <string name="unitPauseCafe">pause café / jour</string>
+    <string name="unitPluralPauseCafe">pauses café / jour</string>
+    <string name="unitPourcentageParticipants">% des participants</string>
+    <string name="unitSurfaceM2">m²</string>
+    <string name="unitGoodie">goodie / participant</string>
+    <string name="unitPluralGoodie">goodies / participant</string>
+    <string name="unitCleUSB">clé USB / participant</string>
+    <string name="unitPluralCleUSB">clés USB / participant</string>
+    <string name="unitPage">page / participant</string>
+    <string name="unitPluralPage">pages / participant</string>
+
+    <!--    Conseils -->
+    <string name="ConseilDureeCongres">Si le congrès est plus long, les transports sont amortis sur plus de jours</string>
+    <string name="ConseilVisio">Pour les participants dont la présence physique n\'est pas indispensable, la diffusion en direct peut constituer une alternative pour réduire l\'impact des transports, mais aussi de l\'hébergement</string>
+
+    <string name="ConseilBoeufCongres">La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu\'un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l\'offre végétarienne à proximité.</string>
+    <string name="ConseilPouletCongres">La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l\'impact carbone par rapport à un repas végétarien. \nSi vous organisez les repas, vous pouvez veiller à avoir une offre végétarienne attractive. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l\'offre végétarienne à proximité.</string>
+    <string name="ConseilVegeCongres">Privilégier les produits frais, locaux, de saison et peu emballés limite l\'impact carbone des repas. \nSi vous organisez les repas, vous pouvez en tenir compte dans la conception des menus. Si les participants prennent leurs repas de manière autonome, vous pouvez mettre en valeur l\'offre locale et de saison à proximité.</string>
+    <string name="ConseilCafeCongres">Le café, comme les autres produits exotiques notament ceux cultivés sur des zones forestières défrichées, est fortement émetteur de gaz à effet de serre</string>
+
+    <string name="ConseilTrain">Le train est (avec le bateau) de loin le mode de transport le moins polluant. \nEn tant qu\'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d\'excellentes informations horaires.</string>
+    <string name="ConseilAvionMCEco">Sur un même trajet, l\'avion émet au moins 100 fois plus de CO₂ que le train. \nEn tant qu\'organisateur, vous pouvez favoriser le report sur le train par un lieu et des horaires adaptés, et en fournissant aux participants des informations pour venir en train.</string>
+    <string name="ConseilAvionLCEco">Les voyages en avion sont particulièrement émetteurs de CO₂. Pour de courtes interventinos, la visioconférence peut constituer une alternative.</string>
+    <string name="ConseilAvionMCBusiness">Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique</string>
+    <string name="ConseilAvionLCBusiness">Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique</string>
+
+    <string name="ConseilTPMaison">Les tranports publics émettent beaucoup moins de CO₂ que la voiture ou le taxi</string>
+    <string name="ConseilTaxiMaison">Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu\'en métro ou en train</string>
+    <string name="ConseilTPLocalIndividuel">Les tranports publics émettent beaucoup moins de CO₂ que la voiture ou le taxi</string>
+    <string name="ConseilTPLocal">Les tranports publics émettent beaucoup moins de CO₂ que la voiture ou le taxi.\nEn tant qu\'organisateur vous pouvez informer les participants sur l\'accès à la conférence en transports publics, voire fournir une carte de transports avec l\'inscription.</string>
+    <string name="ConseilTaxiLocal">Le taxi émet au moins 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu\'en métro ou en train. \nEn tant qu\'organisateur vous pouvez informer les participants sur l\'accès à la conférence en transports publics, voire fournir une carte de transports avec l\'inscription.</string>
+
+    <string name="ConseilHotel">Les émissions de CO₂ d\'une chambre d\'hôtel sont essentiellement liées à sa surface</string>
+    <string name="ConseilCentreCongres">Les émissions de CO₂ des locaux utilisés sont essentiellement liées à leur surface : vous pouvez maîtriser ces émissions en adaptant les locaux aux besoins</string>
+    <string name="ConseilGoodies">Le textile et l\'électronique sont particulièrement émetteurs de CO₂, sans parler des autres impacts environnementaux. Vous pouvez interroger leur utilité et inciter les exposants à faire de même</string>
+    <string name="ConseilUSB">Une clé USB correspond à autant d\'émissions de CO₂ que l\'impression de 40 pages. La disponibilité en ligne du programme peut constituer une alternative.</string>
+    <string name="ConseilImpression">L\'impression de 40 pages produit autant d\'émissions de CO₂ que la fabrication d\'une clé USB. La disponibilité en ligne du programme peut constituer une alternative.</string>
+
+    <!--    Titres resources liens conseils-->
+    <string name="TitreRessourceTrain">Horaires en Europe</string>
+    <string name="TitreRessourceMCEco">Horaires en Europe</string>
+
+    <!--    Liens conseils  -->
+    <string name="LienRessourceTrain">https://reiseauskunft.bahn.de/bin/query.exe/f</string>
+    <string name="LienRessourceMCEco">https://reiseauskunft.bahn.de/bin/query.exe/f</string>
+
+    <!-- Conseils individuels -->
+    <string name="ConseilDureeCongresIndividuel">En couplant des déplacements et en restant plus longtemps sur place vous réduisez les transports : autant de coûts, de temps et de CO₂ en moins</string>
+    <string name="ConseilBoeufCongresIndividuel">La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu\'un repas végétarien.</string>
+    <string name="ConseilPouletCongresIndividuel">La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l\'impact carbone par rapport à un repas végétarien.</string>
+    <string name="ConseilVegeCongresIndividuel">Privilégier les produits frais, locaux, de saison et peu emballés limite l\'impact carbone des repas.</string>
+    <string name="ConseilVisioIndividuel">Si votre présence physique n\'est pas indispensable, participer à distance peut constituer une alternative pour réduire l\'impact des transports, mais aussi de l\'hébergement</string>
+    <string name="ConseilTrainIndividuel">Le train est (avec le bateau) de loin le mode de transport le moins polluant. \nPour des trajets complets en Europe, les chemins de fer allemands fournissent d\'excellentes informations horaires.</string>
+    <string name="ConseilAvionEco">Sur un même trajet, l\'avion émet au moins 100 fois plus de CO₂ que le train. \nPour des trajets complets en Europe, les chemins de fer allemands fournissent d\'excellentes informations horaires. Une participation à distance est parfois une alternative pertinente</string>
+    <string name="ConseilAvionBusiness">Voyager en classe affaires fait plus que doubler les émissions de CO₂ par rapport à la classe économique</string>
+    <string name="ConseilTaxiLocalIndividuel">Le taxi émet 2 fois plus de CO₂ que le même trajet en bus et 100 fois plus qu\'en métro ou en train.</string>
+    <string name="ConseilGoodiesIndividuel">Le textile et l\'électronique sont particulièrement émetteurs de CO₂, sans parler des autres impacts environnementaux. En avez-vous vraiment besoin ?</string>
+    <string name="ConseilUSBIndividuel">Une clé USB correspond à autant d\'émissions de CO₂ que l\'impression de 40 pages. La consultation en ligne du programme peut constituer une alternative.</string>
+    <string name="ConseilImpressionIndividuel">L\'impression de 40 pages produit autant d\'émissions de CO₂ que la fabrication d\'une clé USB. La consultation en ligne du programme peut constituer une alternative.</string>
+
+
+
+
+
+
+
+    <!--&lt;!&ndash;    NOT USED &ndash;&gt;-->
+
+
+
+
+    <!--    &lt;!&ndash; les textes de la base de données &ndash;&gt;-->
+    <!--    <string name="conseilinformations_generalesduree">Si le camp est plus long, les transports sont amortis sur plus de jours</string>-->
+    <!--    <string name="titreressourceinformations_generalesduree"></string>-->
+    <!--    <string name="lienressourceinformations_generalesduree"></string>-->
+    <!--    <string name="nomplurielinformations_generalesduree">jours</string>-->
+
+    <!--    <string name="conseilinformations_generaleseffectif"></string>-->
+    <!--    <string name="titreressourceinformations_generaleseffectif"></string>-->
+    <!--    <string name="lienressourceinformations_generaleseffectif"></string>-->
+    <!--    <string name="nomplurielinformations_generaleseffectif">participants</string>-->
+
+    <!--    <string name="categorierepasrepas_avec_boeuf_veau_ou_agneau">Repas</string>-->
+    <!--    <string name="nomrepasrepas_avec_boeuf_veau_ou_agneau">repas avec bœuf, veau ou agneau</string>-->
+    <!--    <string name="uniterepasrepas_avec_boeuf_veau_ou_agneau"></string>-->
+    <!--    <string name="conseilrepasrepas_avec_boeuf_veau_ou_agneau">La viande rouge (bœuf, veau, agneau) est très émettrice de gaz à effet de serre : presque 5 fois plus que la viande blanche et 12 fois plus qu\'un repas végétarien. C\'est sans doute le poste d\'émission le plus facile à réduire sans affecter le projet du camp. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental</string>-->
+    <!--    <string name="titreressourcerepasrepas_avec_boeuf_veau_ou_agneau">La Marmite Éclairée</string>-->
+    <!--    <string name="lienressourcerepasrepas_avec_boeuf_veau_ou_agneau">https://lamarmite.edln.org</string>-->
+    <!--    <string name="nomplurielrepasrepas_avec_boeuf_veau_ou_agneau">repas avec bœuf, veau ou agneau</string>-->
+
+    <!--    <string name="categorierepasrepas_avec_porc_volaille_poisson">Repas</string>-->
+    <!--    <string name="nomrepasrepas_avec_porc_volaille_poisson">repas avec porc, volaille, poisson</string>-->
+    <!--    <string name="uniterepasrepas_avec_porc_volaille_poisson"></string>-->
+    <!--    <string name="conseilrepasrepas_avec_porc_volaille_poisson">La viande blanche (porc, volaille, lapin) ou le poisson font plus que doubler l\'impact carbone par rapport à un repas végétarien. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental</string>-->
+    <!--    <string name="titreressourcerepasrepas_avec_porc_volaille_poisso">La Marmite Éclairée</string>-->
+    <!--    <string name="lienressourcerepasrepas_avec_porc_volaille_poisson">https://lamarmite.edln.org</string>-->
+    <!--    <string name="nomplurielrepasrepas_avec_porc_volaille_poisson">repas avec porc, volaille, poisson</string>-->
+
+    <!--    <string name="categorierepasrepas_vegetarien">Repas</string>-->
+    <!--    <string name="nomrepasrepas_vegetarien">repas végétarien</string>-->
+    <!--    <string name="uniterepasrepas_vegetarien"></string>-->
+    <!--    <string name="conseilrepasrepas_vegetarien">Privilégier les produits frais, locaux, de saison et peu emballés limite l\'impact carbone des repas. La Marmite Éclairée vous aide à créer des menus à faible impact environnemental</string>-->
+    <!--    <string name="titreressourcerepasrepas_vegetarien">La Marmite Éclairée</string>-->
+    <!--    <string name="lienressourcerepasrepas_vegetarien">https://lamarmite.edln.org</string>-->
+    <!--    <string name="nomplurielrepasrepas_vegetarien">repas végétariens</string>-->
+    <!--    <string name="categorierepasrepas_cuisine_au_gaz">Repas</string>-->
+    <!--    <string name="nomrepasrepas_cuisine_au_gaz">repas cuisiné au gaz</string>-->
+    <!--    <string name="uniterepasrepas_cuisine_au_gaz"></string>-->
+    <!--    <string name="conseilrepasrepas_cuisine_au_gaz">Quelques idées pour réduire votre consommation de gaz : couvrir les casseroles, protéger les tripattes du vent, adapter les quantités chauffées aux besoins et couper le gaz un peu avant la fin de la cuisson, qui va se terminer sur la chaleur accumulée</string>-->
+    <!--    <string name="titreressourcerepasrepas_cuisine_au_gaz"></string>-->
+    <!--    <string name="lienressourcerepasrepas_cuisine_au_gaz"></string>-->
+    <!--    <string name="nomplurielrepasrepas_cuisine_au_gaz">repas cuisinés au gaz</string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campkm_jusquau_camp">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campkm_jusquau_camp">km jusqu\'au camp</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campkm_jusquau_camp"></string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campkm_jusquau_camp">Un camp plus proche nécessite moins de déplacements, et permet de choisir des modes de transport moins polluants. Sauf si un camp tout proche se traduit par de nombreux allers-retours en voiture. \n\nAstuce\nSi vous utilisez plusieurs moyens de transport, entrez ici celui qui est utilisé sur la plus grande distance. Le déplacement complémentaire pourra entrer dans la section suivante : \"Déplacements sur place\".</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campkm_jusquau_"></string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campkm_jusquau_c"></string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campkm_jusquau_camp">km jusqu\'au camp</string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campar_en_train_ou_b">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campar_en_train_ou_bateau">AR en train ou bateau</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campar_en_train_ou_batea">pers.</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campar_en_train_ou_bat">Le train et le bateau sont de loin les modes de transport les moins polluants. Pour des trajets complets en Europe, les chemins de fer allemands fournissent d\'excellentes informations horaires. Par ailleurs, Interrail est souvent avantageux pour de longs trajets en Europe.</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campar_en_train">Horaires en Europe,Interrail</string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campar_en_train_">https://reiseauskunft.bahn.de/bin/query.exe/f,https://www.interrail.eu/fr</string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campar_en_train_ou_"></string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campcar">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campcar">Car</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campcar">AR</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campcar">Un car est intéressant s\'il est bien rempli. Pour 10 personnes à bord, il pollue autant qu\'une voiture individuelle. Attention également à prendre en compte les éventuels retours à vide</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campcar"></string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campcar"></string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campcar"></string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campvoiture">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campvoiture">Voiture</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campvoiture">AR</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campvoiture">On peut réduire les trajets en louant sur place plutôt qu\'au départ. Si les enfants sont déposés en voiture sur le camp, organisez le covoiturage pour réduire le nombre de trajets</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campvoiture">Covoiturage</string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campvoiture">https://www.covoitribu.fr</string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campvoiture"></string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campvoiture_electriq">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campvoiture_electrique">Voiture électrique</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campvoiture_electrique">AR</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campvoiture_electrique">La voiture électrique réduit les émissions de moitié par rapport à une voiture thermique. Ça reste beaucoup par rapport à un train ou un car bien rempli. Si les enfants sont déposés en voiture sur le camp, organisez le covoiturage pour réduire le nombre de trajets</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campvoiture_ele">Covoiturage</string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campvoiture_elec">https://www.covoitribu.fr</string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campvoiture_electri"></string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campar_en_avion">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campar_en_avion">AR en avion</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campar_en_avion">pers.</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campar_en_avion">L\'avion est doublement polluant : parce qu\'il émet beaucoup de CO₂ par kilomètre, et parce qu\'il rend possible des voyages lointains, avec des distances impossibles à réaliser avec un mode de transport moins polluant</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campar_en_avion"></string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campar_en_avion"></string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campar_en_avion"></string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campcamion">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campcamion">Camion</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campcamion">AR</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campcamion">Expédier le matériel et le faire livrer sur le camp est en général moins polluant que le transporter soi-même, surtout si le camion n\'est pas plein</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campcamion"></string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campcamion"></string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campcamion"></string>-->
+
+    <!--    <string name="categoriealler_retour_vers_le_campmateriel_expedie">Aller-retour vers le camp</string>-->
+    <!--    <string name="nomaller_retour_vers_le_campmateriel_expedie">Matériel expédié</string>-->
+    <!--    <string name="unitealler_retour_vers_le_campmateriel_expedie">kg</string>-->
+    <!--    <string name="conseilaller_retour_vers_le_campmateriel_expedie">Expédier le matériel à l\'avance permet d\'accepter des délais plus longs : moins cher et moins polluant</string>-->
+    <!--    <string name="titreressourcealler_retour_vers_le_campmateriel_ex"></string>-->
+    <!--    <string name="lienressourcealler_retour_vers_le_campmateriel_exp"></string>-->
+    <!--    <string name="nomplurielaller_retour_vers_le_campmateriel_expedi"></string>-->
+
+    <!--    <string name="categoriedeplacements_sur_placekm_en_car">Déplacements sur place</string>-->
+    <!--    <string name="nomdeplacements_sur_placekm_en_car">km en car</string>-->
+    <!--    <string name="unitedeplacements_sur_placekm_en_car"></string>-->
+    <!--    <string name="conseildeplacements_sur_placekm_en_car">Le car est efficace s\'il est raisonnablement plein</string>-->
+    <!--    <string name="titreressourcedeplacements_sur_placekm_en_car"></string>-->
+    <!--    <string name="lienressourcedeplacements_sur_placekm_en_car"></string>-->
+    <!--    <string name="nomplurieldeplacements_sur_placekm_en_car">km en car</string>-->
+
+    <!--    <string name="categoriedeplacements_sur_placekm_en_voiture">Déplacements sur place</string>-->
+    <!--    <string name="nomdeplacements_sur_placekm_en_voiture">km en voiture</string>-->
+    <!--    <string name="unitedeplacements_sur_placekm_en_voiture"></string>-->
+    <!--    <string name="conseildeplacements_sur_placekm_en_voiture">Faire les courses près du lieu de camp économise de l\'essence, du temps et réduit la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute</string>-->
+    <!--    <string name="titreressourcedeplacements_sur_placekm_en_voiture"></string>-->
+    <!--    <string name="lienressourcedeplacements_sur_placekm_en_voiture"></string>-->
+    <!--    <string name="nomplurieldeplacements_sur_placekm_en_voiture">km en voiture</string>-->
+
+    <!--    <string name="categoriedeplacements_sur_placekm_en_voiture_elect">Déplacements sur place</string>-->
+    <!--    <string name="nomdeplacements_sur_placekm_en_voiture_electrique">km en voiture électrique</string>-->
+    <!--    <string name="unitedeplacements_sur_placekm_en_voiture_electriqu"></string>-->
+    <!--    <string name="conseildeplacements_sur_placekm_en_voiture_electri">Faire les courses près du lieu de camp économise de l\'essence, du temps et réduit la fatigue des conducteurs. Anticiper les besoins et faire des listes de courses claires permet de grouper les trajets et évite les allers-retours de dernière minute</string>-->
+    <!--    <string name="titreressourcedeplacements_sur_placekm_en_voiture_"></string>-->
+    <!--    <string name="lienressourcedeplacements_sur_placekm_en_voiture_e"></string>-->
+    <!--    <string name="nomplurieldeplacements_sur_placekm_en_voiture_elec">km en voiture électrique</string>-->
+
+    <!--    <string name="categoriemateriel_and_hebergementachats_de_materie">Matériel &amp; hébergement</string>-->
+    <!--    <string name="nommateriel_and_hebergementachats_de_materiel">Achats de matériel</string>-->
+    <!--    <string name="unitemateriel_and_hebergementachats_de_materiel">€</string>-->
+    <!--    <string name="conseilmateriel_and_hebergementachats_de_materiel">Du matériel entretenu dure plus longtemps, donc pollue moins</string>-->
+    <!--    <string name="titreressourcemateriel_and_hebergementachats_de_ma"></string>-->
+    <!--    <string name="lienressourcemateriel_and_hebergementachats_de_mat"></string>-->
+    <!--    <string name="nomplurielmateriel_and_hebergementachats_de_materi"></string>-->
+
+    <!--    <string name="categoriemateriel_and_hebergementtente_utilisee">Matériel &amp; hébergement</string>-->
+    <!--    <string name="nommateriel_and_hebergementtente_utilisee">tente utilisée</string>-->
+    <!--    <string name="unitemateriel_and_hebergementtente_utilisee"></string>-->
+    <!--    <string name="conseilmateriel_and_hebergementtente_utilisee">Des tentes entretenues durent plus longtemps, donc polluent moins</string>-->
+    <!--    <string name="titreressourcemateriel_and_hebergementtente_utilis"></string>-->
+    <!--    <string name="lienressourcemateriel_and_hebergementtente_utilise"></string>-->
+    <!--    <string name="nomplurielmateriel_and_hebergementtente_utilisee">tentes utilisées</string>-->
+
+    <!--    <string name="categoriemateriel_and_hebergementmarabout_utilise">Matériel &amp; hébergement</string>-->
+    <!--    <string name="nommateriel_and_hebergementmarabout_utilise">marabout utilisé</string>-->
+    <!--    <string name="unitemateriel_and_hebergementmarabout_utilise"></string>-->
+    <!--    <string name="conseilmateriel_and_hebergementmarabout_utilise">Du matériel entretenu dure plus longtemps, donc pollue moins</string>-->
+    <!--    <string name="titreressourcemateriel_and_hebergementmarabout_uti"></string>-->
+    <!--    <string name="lienressourcemateriel_and_hebergementmarabout_util"></string>-->
+    <!--    <string name="nomplurielmateriel_and_hebergementmarabout_utilise">marabouts utilisés</string>-->
+
+    <!--    <string name="categoriemateriel_and_hebergementpersonne_logee_en">Matériel &amp; hébergement</string>-->
+    <!--    <string name="nommateriel_and_hebergementpersonne_logee_en_dur">personne logée en dur</string>-->
+    <!--    <string name="unitemateriel_and_hebergementpersonne_logee_en_dur"></string>-->
+    <!--    <string name="conseilmateriel_and_hebergementpersonne_logee_en_d">L\'hébergement sous tente n\'est pas seulement sympa, il est aussi nettement moins polluant que dans un bâtiment</string>-->
+    <!--    <string name="titreressourcemateriel_and_hebergementpersonne_log"></string>-->
+    <!--    <string name="lienressourcemateriel_and_hebergementpersonne_loge"></string>-->
+    <!--    <string name="nomplurielmateriel_and_hebergementpersonne_logee_e">personnes logées en dur</string>-->
+
+    <!--    <string name="categoriecamp_marinoptimist">Camp marin</string>-->
+    <!--    <string name="nomcamp_marinoptimist">Optimist</string>-->
+    <!--    <string name="unitecamp_marinoptimist"></string>-->
+    <!--    <string name="conseilcamp_marinoptimist">L\'impact d\'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel</string>-->
+    <!--    <string name="titreressourcecamp_marinoptimist"></string>-->
+    <!--    <string name="lienressourcecamp_marinoptimist"></string>-->
+    <!--    <string name="nomplurielcamp_marinoptimist">Optimists</string>-->
+
+    <!--    <string name="categoriecamp_marincaravelle_deriveur_leger">Camp marin</string>-->
+    <!--    <string name="nomcamp_marincaravelle_deriveur_leger">Caravelle (dériveur léger)</string>-->
+    <!--    <string name="unitecamp_marincaravelle_deriveur_leger"></string>-->
+    <!--    <string name="conseilcamp_marincaravelle_deriveur_leger">L\'impact d\'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel</string>-->
+    <!--    <string name="titreressourcecamp_marincaravelle_deriveur_leger"></string>-->
+    <!--    <string name="lienressourcecamp_marincaravelle_deriveur_leger"></string>-->
+    <!--    <string name="nomplurielcamp_marincaravelle_deriveur_leger">Caravelles (dériveurs légers)</string>-->
+
+    <!--    <string name="categoriecamp_marinderiveur">Camp marin</string>-->
+    <!--    <string name="nomcamp_marinderiveur">dériveur</string>-->
+    <!--    <string name="unitecamp_marinderiveur"></string>-->
+    <!--    <string name="conseilcamp_marinderiveur">L\'impact d\'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel</string>-->
+    <!--    <string name="titreressourcecamp_marinderiveur"></string>-->
+    <!--    <string name="lienressourcecamp_marinderiveur"></string>-->
+    <!--    <string name="nomplurielcamp_marinderiveur">dériveurs</string>-->
+
+    <!--    <string name="categoriecamp_marincanot_ou_kelt">Camp marin</string>-->
+    <!--    <string name="nomcamp_marincanot_ou_kelt">canot ou Kelt</string>-->
+    <!--    <string name="unitecamp_marincanot_ou_kelt"></string>-->
+    <!--    <string name="conseilcamp_marincanot_ou_kelt">L\'impact d\'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel</string>-->
+    <!--    <string name="titreressourcecamp_marincanot_ou_kelt"></string>-->
+    <!--    <string name="lienressourcecamp_marincanot_ou_kelt"></string>-->
+    <!--    <string name="nomplurielcamp_marincanot_ou_kelt">canots ou Kelts</string>-->
+
+    <!--    <string name="categoriecamp_marinzodiac">Camp marin</string>-->
+    <!--    <string name="nomcamp_marinzodiac">Zodiac</string>-->
+    <!--    <string name="unitecamp_marinzodiac"></string>-->
+    <!--    <string name="conseilcamp_marinzodiac">L\'impact d\'un bateau vient surtout de sa fabrication. Un bon entretien est essentiel, notamment pour le moteur</string>-->
+    <!--    <string name="titreressourcecamp_marinzodiac"></string>-->
+    <!--    <string name="lienressourcecamp_marinzodiac"></string>-->
+    <!--    <string name="nomplurielcamp_marinzodiac">Zodiacs</string>-->
+
+    <!--    <string name="categoriecamp_marin_dessence_pour_les_bateaux">Camp marin</string>-->
+    <!--    <string name="nomcamp_marin_dessence_pour_les_bateaux">𝓁 d\'essence pour les bateaux</string>-->
+    <!--    <string name="unitecamp_marin_dessence_pour_les_bateaux"></string>-->
+    <!--    <string name="conseilcamp_marin_dessence_pour_les_bateaux">Pour limiter la consommation d’essence, évitez les grosses accélérations et coupez le moteur quand les conditions de sécurité le permettent.</string>-->
+    <!--    <string name="titreressourcecamp_marin_dessence_pour_les_bateaux"></string>-->
+    <!--    <string name="lienressourcecamp_marin_dessence_pour_les_bateaux"></string>-->
+    <!--    <string name="nomplurielcamp_marin_dessence_pour_les_bateaux">𝓁 d\'essence pour les bateaux</string>-->
+    <!--    <string name="unitecredits"></string>-->
+    <!--    <string name="conseilcredits"></string>-->
+    <!--    <string name="titreressourcecredits"></string>-->
+    <!--    <string name="lienressourcecredits"></string>-->
+    <!--    <string name="nomplurielcredits">Crédits</string>-->
+
+
+
+    <!--    &lt;!&ndash; methodo &ndash;&gt;-->
+    <!--    <string name="texteMethodoCongres">L\'app estime les émissions de gaz à effet de serre, converties en équivalent CO₂. Elle se base sur des facteurs d\'émission moyens pour chaque catégorie, en fonction des pratiques les plus courantes sur un congrès.\n\n\u0020\u0020\u0020• ***Repas*** : l\'estimation se concentre sur le déjeuner et le dîner, avec des facteurs d\'émission moyens par type de repas. Il ne prend en compte ni les saisons, ni la distance des producteurs, ni le nombre d\'intermédiaires, etc.\n\n\u0020\u0020\u0020• ***Transports et déplacements*** : les estimations considèrent des valeurs moyennes pour chaque mode de transport.\n\n\u0020\u0020\u0020• ***Objets reçus et offerts*** : les émissions sont estimées sur la base d\'objets typiques dans leur catégorie.</string>-->
+    <!--    <string name="texteGraphiqueCongres">Le graphique représente la répartition des émisssions de gaz à effet de serre dues au congrès.\nLe cercle vert permet de les comparer avec les émissions acceptables pour préserver le climat : elles correspondent à 5,5 kg équivalent CO₂ par personne et par jour.</string>-->
+    <!--    <string name="texteEmissionsAcceptablesCongres">On estime que préserver le climat nécessite de limiter les émissions de gaz à effet de serre à 2 tonnes équivalent CO₂ par personne et par an, soit 5,5 kg équivalent CO₂ par personne et par jour. \n\nLes émissions du congrès sont ramenées au nombre de participants et à la durée du congrès, puis comparées avec cette référence.</string>-->
+    <!--    <string name="texteLimitesCongres">L\'app permet d\'estimer l\'ordre de grandeur des principales émissions de gaz à effet de serre d\'un congrès : transports, alimentation, hébergement.\n\nEn particulier, elle ne prend pas en compte :\n\u0020\u0020\u0020• les déchets\n\u0020\u0020\u0020• les activités spécifiques\n\u0020\u0020\u0020• les émissions liées au matériel individuel des participants\n\u0020\u0020\u0020• les émissions des participants qui ne sont pas liées au congrès mais qui se poursuivent pendant celui-ci : leur domicile notamment.\n\nPour une précision optimale, un bilan carbone complet par un organisme qualifié est indispensable.</string>-->
+    <!--    <string name="texteSourcesCongres">• Ademe, bilans-ges.ademe.fr\n\u0020\u0020\u0020• Ademe, impactco2.fr\n\u0020\u0020\u0020• developpementdurabletl1.wordpress.com/bilan-carbone-dun-plan-de-communication/\n\u0020\u0020\u0020• www.hellocarbo.com/blog/calculer/bilan-carbone-hotel/</string>-->
+    <!--    <string name="texteRemerciementsCongres">Remerciements à Omar Belkacem, Emeline Bolmont, Imad Bouibed, Liam Burke, Jacques Erard, Hervé Kasparian, Gregory Rohrer, Patrick Roth et Marlyne Sahakian pour leur soutien et leurs conseils</string>-->
+    <!--    &lt;!&ndash; Données &ndash;&gt;-->
+
+    <!--&lt;!&ndash;    END NOT USED &ndash;&gt;-->
+
+
+
+</resources>
