@@ -14,3 +14,7 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# Ne pas mettre dans le .gitignore sur la branche android!
+/.idea/
+/app/
