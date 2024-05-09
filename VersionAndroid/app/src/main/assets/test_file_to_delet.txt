@@ -1,0 +1,1 @@
+Pour tester si apres un commit Liam peut lancer l'appli sans avoir a effectuer des changements manuels ?
