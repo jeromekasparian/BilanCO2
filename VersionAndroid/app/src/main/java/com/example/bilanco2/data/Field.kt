@@ -9,26 +9,23 @@ class Field(
     val fieldId: Int = 0,
     val categoryId: Int = 0,
     val name: String,
-
     val icon: String,
     val info: String,
-
     val unitId: MeasurementUnit = MeasurementUnit.PERCENT,
-    var unit: String,
-    val unitP: String,
+    var unitName: String,
+    val unitNamePlural: String,
     val min: Float = 0f,
     val max: Float = 100f
 ) {
     var value by mutableFloatStateOf(min)
 
     private fun unitUpdate(): String {
-        return if (value == 1f) unit
-        else unitP
+        return if (value == 1f) unitName
+        else unitNamePlural
     }
 
     @SuppressLint("DefaultLocale")
     override fun toString(): String {
-
         return when(unitId) {
             MeasurementUnit.PERCENT -> String.format("%s: %.0f%%", name, value)
 //            MeasurementUnit.PERCENT_CONTINUOUS -> {
@@ -45,7 +42,7 @@ class Field(
             MeasurementUnit.unitDuree -> String.format("%s: %.0f %s", name, value, unitUpdate())
             MeasurementUnit.unitEffectif -> String.format("%.0f %s", value, unitUpdate())
             MeasurementUnit.unitPauseCafe -> String.format("%.0f %s", value, unitUpdate())
-            MeasurementUnit.unitSurfaceM2 -> String.format("%s: %.0f %s", name, value, unit)
+            MeasurementUnit.unitSurfaceM2 -> String.format("%s: %.0f %s", name, value, unitName)
             MeasurementUnit.unitGoodie -> String.format("%.0f %s", value, unitUpdate())
             MeasurementUnit.unitCleUSB -> String.format("%.0f %s", value, unitUpdate())
             MeasurementUnit.unitPage -> String.format("%.0f %s", value, unitUpdate())

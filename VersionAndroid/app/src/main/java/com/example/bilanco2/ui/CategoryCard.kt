@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.Color
 import com.example.bilanco2.data.Category
 import com.example.bilanco2.data.Field
 
-
 @Composable
 fun CategoryCard(
     name: String,

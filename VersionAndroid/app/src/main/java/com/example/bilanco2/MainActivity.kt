@@ -15,7 +15,6 @@ import java.io.InputStreamReader
 import com.example.bilanco2.data.Field
 import com.example.bilanco2.data.MeasurementUnit
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +79,9 @@ class MainActivity : ComponentActivity() {
                         icon = row[15],
                         info = getMyString(row[13]),
                         unitId = measurementUnit,
-                        max = row[4].toFloat(),
-                        unit = getMyString(row[2]),
-                        unitP = getMyString(row[3])
+                        unitName = getMyString(row[2]),
+                        unitNamePlural = getMyString(row[3]),
+                        max = row[4].toFloat()
                     )
                 )
                 currentFieldId++

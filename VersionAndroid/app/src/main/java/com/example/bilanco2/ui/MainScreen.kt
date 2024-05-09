@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bilanco2.data.Category
-import com.example.bilanco2.data.FieldViewModel
 import com.example.bilanco2.data.Field
-import kotlin.math.roundToInt
+import com.example.bilanco2.data.FieldViewModel
+import com.example.bilanco2.data.totalEmissions
 
 @Composable
 fun MainScreen(
@@ -26,10 +26,7 @@ fun MainScreen(
         color = MaterialTheme.colorScheme.background
     ) {
         Column {
-            val total = fieldViewModel.fields
-                .map { field -> field.value }
-                .sumOf { it.toDouble() }
-                .roundToInt()
+            val total = totalEmissions(fieldViewModel.fields)
             TotalCard(total)
             CategoryCardList(
                 categories = categories,
