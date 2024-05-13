@@ -12,6 +12,7 @@ import com.example.bilanco2.data.Category
 import com.example.bilanco2.data.Field
 import com.example.bilanco2.data.FieldViewModel
 import com.example.bilanco2.data.totalEmissions
+import kotlin.math.roundToInt
 
 @Composable
 fun MainScreen(
@@ -27,7 +28,7 @@ fun MainScreen(
     ) {
         Column {
             val total = totalEmissions(fieldViewModel.fields)
-            TotalCard(total)
+            TotalCard(total.roundToInt())
             CategoryCardList(
                 categories = categories,
                 fields = fieldViewModel.fields,
