@@ -81,7 +81,11 @@ class MainActivity : ComponentActivity() {
                         unitId = measurementUnit,
                         unitName = getMyString(row[2]),
                         unitNamePlural = getMyString(row[3]),
-                        max = row[4].toFloat()
+                        max = row[4].toFloat(),
+                        factor = row[5].toDouble(),
+                        perPerson = row[6].toDouble(),
+                        perKmDistance = if(row[7].isEmpty()) 0.0 else row[7].toDouble(),
+                        perDay = if(row[8].isEmpty()) 0.0 else row[8].toDouble()
                     )
                 )
                 currentFieldId++

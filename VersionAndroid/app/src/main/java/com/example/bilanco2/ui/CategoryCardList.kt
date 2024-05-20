@@ -13,14 +13,22 @@ import com.example.bilanco2.data.Field
 fun CategoryCardList(
     categories: List<Category>,
     fields: List<Field>,
+    scaledEmissions: Map<Int, Double>,
+    totalEmissions: Double,
     onSliderPositionChanged: (Field, Float) -> Unit,
     colors: List<Color> = listOf(Category.mainColorDefault)
 ) {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+        var categoryFields: List<Field>
         for (category in categories) {
+            categoryFields = fields.filter { field -> field.categoryId == category.id }
             CategoryCard(
                 name = category.name,
-                fields = fields.filter { field -> field.categoryId == category.id },
+                fields = categoryFields,
+                scaledEmissions = scaledEmissions.filter {
+                    categoryFields.map { field -> field.fieldId }.contains(it.key)
+                },
+                totalEmissions = totalEmissions,
                 onSliderPositionChanged = onSliderPositionChanged,
                 mainColor = colors[category.id % colors.size]
             )

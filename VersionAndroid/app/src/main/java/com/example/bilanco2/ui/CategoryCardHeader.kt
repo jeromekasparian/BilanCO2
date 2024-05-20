@@ -1,5 +1,6 @@
 package com.example.bilanco2.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -13,18 +14,23 @@ import androidx.compose.ui.unit.dp
 import com.example.bilanco2.data.Category
 import kotlin.math.roundToInt
 
+@SuppressLint("DefaultLocale")
 @Composable
 fun CategoryCardHeader(
     name: String,
-    values: List<Float>,
+    scaledEmissions: List<Double>,
+    totalEmissions: Double,
     modifier: Modifier = Modifier,
     mainColor: Color = Category.mainColorDefault,
     textColor: Color = Category.headerTextColorDefault
 ) {
     Surface(color = mainColor) {
-        val sum = values.sumOf { it.toDouble() }.toFloat() // TODO: remplacer par vrai calcul
+        val percentage = 100 * scaledEmissions.sumOf { it } / totalEmissions
         Text(
-            text = "$name: ${sum.roundToInt()}",
+            text = "$name " +
+                if (totalEmissions == 0.0) ""
+                else if (percentage < 1.0) "(<1 %)"
+                else String.format("(%d %%)", percentage.roundToInt()),
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
             fontWeight = FontWeight.Bold,
             color = textColor,

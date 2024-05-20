@@ -10,7 +10,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Good Données -->
-    <string name="app_name">Bilan CO2 (Prototype)</string>
+    <string name="app_name">Bilan CO2</string>
 
     <!-- Categorie -->
     <string name="CategorieInformationsGenerales">General information</string>

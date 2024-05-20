@@ -13,6 +13,8 @@ import com.example.bilanco2.data.Field
 fun CategoryCard(
     name: String,
     fields: List<Field>,
+    totalEmissions: Double,
+    scaledEmissions: Map<Int, Double>,
     onSliderPositionChanged : (Field, Float) -> Unit,
     mainColor: Color = Category.mainColorDefault,
     headerTextColor: Color = Category.headerTextColorDefault
@@ -21,18 +23,22 @@ fun CategoryCard(
         Column {
             CategoryCardHeader(
                 name = name,
-                values = fields.map { field -> field.value },
+                scaledEmissions = scaledEmissions.values.toList(),
+                totalEmissions = totalEmissions,
                 mainColor = mainColor,
                 textColor = headerTextColor
             )
             Column {
                 val first: Field = fields.first()
                 CategoryCardField(
+                    fieldId = first.fieldId,
                     text = first.toString(),
                     icon = first.icon,
                     info = first.info,
                     min = first.min,
                     max = first.max,
+                    scaled = scaledEmissions,
+                    total = totalEmissions,
                     sliderPosition = first.value,
                     onSliderPositionChanged = { value ->
                         onSliderPositionChanged(first, value)
@@ -44,11 +50,14 @@ fun CategoryCard(
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
                     )
                     CategoryCardField(
+                        fieldId = field.fieldId,
                         text = field.toString(),
                         icon = field.icon,
                         info = field.info,
                         min = field.min,
                         max = field.max,
+                        scaled = scaledEmissions,
+                        total = totalEmissions,
                         sliderPosition = field.value,
                         onSliderPositionChanged = { value ->
                             onSliderPositionChanged(field, value)

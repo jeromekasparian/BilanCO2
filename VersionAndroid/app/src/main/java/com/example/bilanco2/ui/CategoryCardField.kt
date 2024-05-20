@@ -1,5 +1,6 @@
 package com.example.bilanco2.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -23,14 +24,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.bilanco2.R
 import com.example.bilanco2.data.Category
+import com.example.bilanco2.ui.theme.BilanCO2Theme
+import java.util.Locale
 
+@SuppressLint("DefaultLocale")
 @Composable
 fun CategoryCardField(
+    fieldId: Int,
     text: String,
     icon: String,
     info: String,
     min: Float,
     max: Float,
+    scaled: Map<Int, Double>,
+    total: Double,
     sliderPosition: Float,
     onSliderPositionChanged: (Float) -> Unit,
     modifier: Modifier = Modifier,
@@ -95,6 +102,19 @@ fun CategoryCardField(
                     modifier = modifier
                         .padding(end = 48.dp, start = 6.dp)
                 )
+            }
+            val scaledValue = scaled.getValue(fieldId)
+            if((total != 0.0) and (scaledValue != 0.0)) {
+                val percentage = 100 * scaledValue / total
+                Row {
+                    Text( // TODO: translate "eq. CO2" properly and handle units (kg, ton etc.)
+                        text = String.format("%.0f kg eq. CO2 ", scaledValue) + String.format(
+                            if(percentage < 1.0) "(<1 %%)" else "(%.0f %%)", percentage
+                        ),
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+                        modifier = modifier.padding(bottom = 6.dp)
+                    )
+                }
             }
         }
     }

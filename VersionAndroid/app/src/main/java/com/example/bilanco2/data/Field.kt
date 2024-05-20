@@ -15,7 +15,11 @@ class Field(
     var unitName: String,
     val unitNamePlural: String,
     val min: Float = 0f,
-    val max: Float = 100f
+    val max: Float = 100f,
+    val factor: Double,
+    val perPerson: Double,
+    val perKmDistance: Double,
+    val perDay: Double
 ) {
     var value by mutableFloatStateOf(min)
 

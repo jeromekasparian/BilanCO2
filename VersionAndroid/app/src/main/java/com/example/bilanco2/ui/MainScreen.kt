@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bilanco2.data.Category
 import com.example.bilanco2.data.Field
 import com.example.bilanco2.data.FieldViewModel
+import com.example.bilanco2.data.scaledEmissions
 import com.example.bilanco2.data.totalEmissions
 import kotlin.math.roundToInt
 
@@ -27,11 +28,18 @@ fun MainScreen(
         color = MaterialTheme.colorScheme.background
     ) {
         Column {
-            val total = totalEmissions(fieldViewModel.fields)
-            TotalCard(total.roundToInt())
+            val scaledEmissions = scaledEmissions(
+                fieldViewModel.fields,
+                durationId = 0,
+                participationId = 1
+            )
+            val totalEmissions = totalEmissions(scaledEmissions)
+            TotalCard(totalEmissions)
             CategoryCardList(
                 categories = categories,
                 fields = fieldViewModel.fields,
+                scaledEmissions = scaledEmissions,
+                totalEmissions = totalEmissions,
                 onSliderPositionChanged = { field, value ->
                     fieldViewModel.sliderPositionChanged(field, value)
                 },

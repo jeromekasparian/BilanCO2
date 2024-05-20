@@ -6,15 +6,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import kotlin.math.roundToInt
 
 @Composable
 fun TotalCard(
-    total: Int
+    total: Double
 ) {
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        Text("Total: $total")
+        Text("Total: ${total.roundToInt()} kg CO2")
     }
 }
