@@ -12,6 +12,8 @@
     <!-- Good Données -->
     <string name="app_name">Bilan CO2</string>
 
+    <string name="emptyChart">Adjust parameters</string>
+
     <!-- Categorie -->
     <string name="CategorieInformationsGenerales">General information</string>
     <string name="CategorieAlimentation">Catering</string>
