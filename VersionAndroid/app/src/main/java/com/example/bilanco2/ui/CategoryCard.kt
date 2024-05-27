@@ -49,6 +49,7 @@ fun CategoryCard(
                     Divider(
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
                     )
+
                     CategoryCardField(
                         fieldId = field.fieldId,
                         text = field.toString(),

@@ -25,10 +25,13 @@ fun CategoryCardHeader(
     textColor: Color = Category.headerTextColorDefault
 ) {
     Surface(color = mainColor) {
-        val percentage = 100 * scaledEmissions.sumOf { it } / totalEmissions
+        val percentage =
+            if (totalEmissions != 0.0) 100 * scaledEmissions.sumOf { it } / totalEmissions
+            else 0.0
+
         Text(
             text = "$name " +
-                if (totalEmissions == 0.0) ""
+                if (percentage == 0.0) ""
                 else if (percentage < 1.0) "(<1 %)"
                 else String.format("(%d %%)", percentage.roundToInt()),
             fontSize = MaterialTheme.typography.titleLarge.fontSize,

@@ -4,18 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import com.example.bilanco2.data.Category
+import com.example.bilanco2.data.Field
+import com.example.bilanco2.data.MeasurementUnit
 import com.example.bilanco2.ui.MainScreen
 import com.example.bilanco2.ui.theme.BilanCO2Theme
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import com.example.bilanco2.data.Field
-import com.example.bilanco2.data.MeasurementUnit
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -26,11 +25,10 @@ class MainActivity : ComponentActivity() {
         val categoryDataList = mutableListOf<Category>()
 
         //  Chart Attributes
-        var colorsFieldList = listOf<Color>()
-        var iconsFieldList = listOf<String>()
+        val colorsFieldList = mutableListOf<Color>()
+        val iconsFieldList = mutableListOf<String>()
 
         // Read CSV file to populate data lists
-        // val fileCSV = InputStreamReader(assets.open("sample_data.csv"))
         val fileCSV = InputStreamReader(assets.open("DataInternationalCongres.csv"))
         val reader = BufferedReader(fileCSV)
         var previousCategoryName = ""
@@ -55,15 +53,15 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 val measurementUnit = when(row[2]) {
+                    // TODO Add measurement units
+                    "unitDuree" -> MeasurementUnit.DURATION
+                    "unitEffectif" -> MeasurementUnit.PARTICIPATION
 
-                    "unitDuree" -> MeasurementUnit.unitDuree
-                    "unitEffectif" -> MeasurementUnit.unitEffectif
-
-                    "unitPauseCafe" -> MeasurementUnit.unitPauseCafe
-                    "unitSurfaceM2" -> MeasurementUnit.unitSurfaceM2
-                    "unitGoodie" -> MeasurementUnit.unitGoodie
-                    "unitCleUSB" -> MeasurementUnit.unitCleUSB
-                    "unitPage" -> MeasurementUnit.unitPage
+                    "unitPauseCafe" -> MeasurementUnit.COFFEE_BREAK
+                    "unitSurfaceM2" -> MeasurementUnit.SURFACE_AREA
+                    "unitGoodie" -> MeasurementUnit.GOODIE
+                    "unitCleUSB" -> MeasurementUnit.USB_KEY
+                    "unitPage" -> MeasurementUnit.PAGE
 
                     "unitPourcentage" -> MeasurementUnit.PERCENT
                     "unitPourcentageParticipants" -> MeasurementUnit.PERCENT
@@ -103,12 +101,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    // Function to get color for a category
+
     private fun getColorForCategory(categoryId: Int): Color {
         val categoryColors = resources.getIntArray(R.array.categoryColors)
-        // Ensure the index is within bounds
-        val colorIndex = categoryId % categoryColors.size
-        return Color(categoryColors[colorIndex])
+        // Modulo to ensure the index is within bounds
+        return Color(categoryColors[categoryId % categoryColors.size])
     }
 }
 
@@ -119,6 +116,3 @@ fun Context.getMyString(label: String): String {
     return if (resourceId != 0) getString(resourceId)
     else "Error : Resource not found !"
 }
-
-
-

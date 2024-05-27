@@ -45,13 +45,13 @@ class Field(
 //            MeasurementUnit.KM -> String.format("%s: %.0f km", name, value)
 
 //  TODO Add correspondant format
-            MeasurementUnit.unitDuree -> String.format("%s: %.0f %s", name, value, unitUpdate())
-            MeasurementUnit.unitEffectif -> String.format("%.0f %s", value, unitUpdate())
-            MeasurementUnit.unitPauseCafe -> String.format("%.0f %s", value, unitUpdate())
-            MeasurementUnit.unitSurfaceM2 -> String.format("%s: %.0f %s", name, value, unitName)
-            MeasurementUnit.unitGoodie -> String.format("%.0f %s", value, unitUpdate())
-            MeasurementUnit.unitCleUSB -> String.format("%.0f %s", value, unitUpdate())
-            MeasurementUnit.unitPage -> String.format("%.0f %s", value, unitUpdate())
+            MeasurementUnit.DURATION -> String.format("%s: %.0f %s", name, value, unitUpdate())
+            MeasurementUnit.PARTICIPATION -> String.format("%.0f %s", value, unitUpdate())
+            MeasurementUnit.COFFEE_BREAK -> String.format("%.0f %s", value, unitUpdate())
+            MeasurementUnit.SURFACE_AREA -> String.format("%s: %.0f %s", name, value, unitName)
+            MeasurementUnit.GOODIE -> String.format("%.0f %s", value, unitUpdate())
+            MeasurementUnit.USB_KEY -> String.format("%.0f %s", value, unitUpdate())
+            MeasurementUnit.PAGE -> String.format("%.0f %s", value, unitUpdate())
         }
     }
 }

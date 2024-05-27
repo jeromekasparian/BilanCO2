@@ -24,8 +24,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.bilanco2.R
 import com.example.bilanco2.data.Category
-import com.example.bilanco2.ui.theme.BilanCO2Theme
-import java.util.Locale
 
 @SuppressLint("DefaultLocale")
 @Composable

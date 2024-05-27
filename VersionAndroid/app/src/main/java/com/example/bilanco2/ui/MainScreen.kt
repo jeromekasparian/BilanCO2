@@ -23,30 +23,38 @@ fun MainScreen(
     categories: List<Category>,
     fields: List<Field>,
     colors: List<Color> = listOf(Category.mainColorDefault),
-
-    // ADDED
     colorsFields: List<Color>,
     iconsField: List<String>,
-
     fieldViewModel: FieldViewModel = viewModel(),) {
     fieldViewModel.populate(fields)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
+        val durationId = 0
+        val participationId = 1
         Column {
             val scaledEmissions = scaledEmissions(
-                fieldViewModel.fields,
-                durationId = 0,
-                participationId = 1
+                fields = fieldViewModel.fields,
+                durationId = durationId,
+                participationId = participationId
             )
             val totalEmissions = totalEmissions(scaledEmissions)
 
-            // Print Chart here
-            val valuesChart = scaledEmissions.values.map { it.toFloat() }
-            PieChart(values = valuesChart, colors = colorsFields, icons = iconsField)
+            PieChart(
+                values = scaledEmissions.values.map { it.toFloat() },
+                colors = colorsFields,
+                icons = iconsField
+            )
 
-            TotalCard(totalEmissions)
+            TotalCard(
+                total = totalEmissions,
+                participation = fieldViewModel.fields.find
+                    { it.fieldId == participationId }?.value?.toDouble() ?: 0.0,
+                duration = fieldViewModel.fields.find
+                    { it.fieldId == durationId }?.value?.toDouble() ?: 0.0
+            )
+
             CategoryCardList(
                 categories = categories,
                 fields = fieldViewModel.fields,

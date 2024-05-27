@@ -2,6 +2,8 @@ package com.example.bilanco2.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val Red = Color(0xFFAC1419)
+
 val Indigo = Color(0xFF5C469C)
 val Purple = Color(0xFF9E0574)
 val Pink = Color(0xFFD28A8E)
