@@ -2,10 +2,12 @@ package com.example.bilanco2
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import com.example.bilanco2.data.Category
 import com.example.bilanco2.ui.MainScreen
@@ -16,11 +18,16 @@ import com.example.bilanco2.data.Field
 import com.example.bilanco2.data.MeasurementUnit
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val fieldDataList = mutableListOf<Field>()
         val categoryDataList = mutableListOf<Category>()
+
+        //  Chart Attributes
+        var colorsFieldList = listOf<Color>()
+        var iconsFieldList = listOf<String>()
 
         // Read CSV file to populate data lists
         // val fileCSV = InputStreamReader(assets.open("sample_data.csv"))
@@ -29,16 +36,16 @@ class MainActivity : ComponentActivity() {
         var previousCategoryName = ""
         var currentCategoryId = -1 // First category is always new, so it will increment
         var currentFieldId = 0
+        var currentColor = Color.Black
         reader.useLines { lines -> lines
             .drop(1) // Ignore the header line
             .filter { it.isNotBlank() } // Ignore empty lines
             .forEach {
                 val row = it.split(';', limit = 20) // TODO Check limit? -> 7
-                // val categoryName = row[0]
                 val categoryName = getMyString(row[0])
-                Log.d("TAG", "onCreate: ${row[0]} - $categoryName")
                 if(categoryName != previousCategoryName) {
                     currentCategoryId++
+                    currentColor = getColorForCategory(currentCategoryId)
                     previousCategoryName = categoryName
                     categoryDataList.add(
                         Category(
@@ -48,15 +55,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 val measurementUnit = when(row[2]) {
-//                    "personnes" -> MeasurementUnit.ITEM
-//                    "assiettes" -> MeasurementUnit.ITEM
-//                    "jours" -> MeasurementUnit.DAY
-//
-//                    "Day" -> MeasurementUnit.ITEM
-//                    "Item" -> MeasurementUnit.ITEM
-//                    "ItemPerDay" -> MeasurementUnit.ITEM_PER_DAY
 
-                    // TODO Add measurement units
                     "unitDuree" -> MeasurementUnit.unitDuree
                     "unitEffectif" -> MeasurementUnit.unitEffectif
 
@@ -89,6 +88,10 @@ class MainActivity : ComponentActivity() {
                     )
                 )
                 currentFieldId++
+
+                // Populate attributes lists for PieChart
+                iconsFieldList += row[15]
+                colorsFieldList += currentColor
             }
         }
 
@@ -96,24 +99,18 @@ class MainActivity : ComponentActivity() {
             BilanCO2Theme {
                 val colors = resources.getIntArray(R.array.categoryColors)
                     .map{ colorInt -> Color(colorInt) }
-                MainScreen(categoryDataList, fieldDataList, colors)
+                MainScreen(categoryDataList, fieldDataList, colors, colorsFieldList, iconsFieldList)
             }
         }
     }
-}
-
-/*
-@SuppressLint("DiscouragedApi")
-fun Context.getMyString(label: String?): String {
-    label?.let {
-        if (label.isEmpty()) {
-            return ""
-        }
-        return getString(resources.getIdentifier(it, "string", packageName))
+    // Function to get color for a category
+    private fun getColorForCategory(categoryId: Int): Color {
+        val categoryColors = resources.getIntArray(R.array.categoryColors)
+        // Ensure the index is within bounds
+        val colorIndex = categoryId % categoryColors.size
+        return Color(categoryColors[colorIndex])
     }
-    throw Resources.NotFoundException()
 }
- */
 
 @SuppressLint("DiscouragedApi")
 fun Context.getMyString(label: String): String {
@@ -123,48 +120,5 @@ fun Context.getMyString(label: String): String {
     else "Error : Resource not found !"
 }
 
-/*
-fun getMyString(label: String): String {
-    val myId = resources.getIdentifier(label, "string", packageName)
-    val myString = getString(myId)
-    return getString(resources.getIdentifier(label, "string", packageName))
-}
- */
 
-/*
-@Preview(
-    name = "Light Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    showBackground = true
-)
-@Preview(
-    name = "Dark Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true
-)
-@Composable
-fun CategoryPreview() {
-    BilanCO2Theme {
-        MainScreen(
-            categories = sampleCategories,
-            fields = sampleFields,
-            colors = sampleColors
-        )
-    }
-}
- */
 
-/* TODO: à voir si besoin
-fun String.slug(): String {
-    return this
-        .lowercase()
-        .replace(" ", "_")
-        .replace("à", "a")
-        .replace("é", "e")
-        .replace("è", "e")
-}
-
-fun Context.stringByName(string: String): String {
-    return resources.getString(this.stringIdByName(string.slug()))
-}
- */

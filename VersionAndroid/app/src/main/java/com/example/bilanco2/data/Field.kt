@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.setValue
 
 class Field(
+//    val color: androidx.compose.ui.graphics.Color,
+
     val fieldId: Int = 0,
     val categoryId: Int = 0,
     val name: String,
