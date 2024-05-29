@@ -1,16 +1,24 @@
 package com.example.bilanco2.ui
 
+import android.content.res.Configuration
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-//import com.example.bilanco2.ColorManager
 import com.example.bilanco2.data.Category
 import com.example.bilanco2.data.Field
 import com.example.bilanco2.data.FieldViewModel
@@ -27,44 +35,98 @@ fun MainScreen(
     iconsField: List<String>,
     fieldViewModel: FieldViewModel = viewModel(),) {
     fieldViewModel.populate(fields)
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         val durationId = 0
         val participationId = 1
-        Column {
-            val scaledEmissions = scaledEmissions(
-                fields = fieldViewModel.fields,
-                durationId = durationId,
-                participationId = participationId
-            )
-            val totalEmissions = totalEmissions(scaledEmissions)
+        val dayCount = fields.get(0).value.toInt()
 
-            PieChart(
-                values = scaledEmissions.values.map { it.toFloat() },
-                colors = colorsFields,
-                icons = iconsField
-            )
+        val scaledEmissions = scaledEmissions(
+            fields = fieldViewModel.fields,
+            durationId = durationId,
+            participationId = participationId
+        )
+        val totalEmissions = totalEmissions(scaledEmissions)
+        val daysOfAcceptableEmissions = totalEmissions/5.4795 // total / (2 tonnes per year in kg/day)
 
-            TotalCard(
-                total = totalEmissions,
-                participation = fieldViewModel.fields.find
-                    { it.fieldId == participationId }?.value?.toDouble() ?: 0.0,
-                duration = fieldViewModel.fields.find
-                    { it.fieldId == durationId }?.value?.toDouble() ?: 0.0
-            )
+        val orientation = LocalConfiguration.current.orientation
 
-            CategoryCardList(
-                categories = categories,
-                fields = fieldViewModel.fields,
-                scaledEmissions = scaledEmissions,
-                totalEmissions = totalEmissions,
-                onSliderPositionChanged = { field, value ->
-                    fieldViewModel.sliderPositionChanged(field, value)
-                },
-                colors = colors
-            )
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Row(modifier = Modifier.fillMaxSize()) {
+                Column(modifier = Modifier.weight(3f)) {
+                    PieChart(
+                        values = scaledEmissions.values.map { it.toFloat() },
+                        colors = colorsFields,
+                        icons = iconsField,
+                        daysOfAcceptableEmission = daysOfAcceptableEmissions,
+                        daysActual = dayCount,
+                        modifier = Modifier
+                            .padding(top = 4.dp)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                    TotalCard(
+                        total = totalEmissions,
+                        daysOfAcceptableEmissions = daysOfAcceptableEmissions,
+                        participation = fieldViewModel.fields.find { it.fieldId == participationId }?.value?.toDouble() ?: 0.0,
+                        duration = fieldViewModel.fields.find { it.fieldId == durationId }?.value?.toDouble() ?: 0.0,
+                    )
+                }
+                Column(modifier = Modifier.weight(5f)) {
+                    CategoryCardList(
+                        categories = categories,
+                        fields = fieldViewModel.fields,
+                        scaledEmissions = scaledEmissions,
+                        totalEmissions = totalEmissions,
+                        onSliderPositionChanged = { field, value ->
+                            fieldViewModel.sliderPositionChanged(field, value)
+                        },
+                        colors = colors
+                    )
+                }
+            }
+        }
+
+        else {      // Orientation is Portrait
+            Column {
+                Row(
+                    modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(IntrinsicSize.Min)
+
+                ) {
+                    PieChart(
+                        values = scaledEmissions.values.map { it.toFloat() },
+                        colors = colorsFields,
+                        icons = iconsField,
+                        daysOfAcceptableEmission = daysOfAcceptableEmissions,
+                        daysActual = dayCount,
+                        modifier =
+                        Modifier.padding(horizontal = 4.dp, vertical = 4.dp)
+                    )
+
+                    TotalCard(
+                        total = totalEmissions,
+                        daysOfAcceptableEmissions = daysOfAcceptableEmissions,
+                        participation = fieldViewModel.fields.find { it.fieldId == participationId }?.value?.toDouble() ?: 0.0,
+                        duration = fieldViewModel.fields.find { it.fieldId == durationId }?.value?.toDouble() ?: 0.0
+                    )
+                }
+
+                CategoryCardList(
+                    categories = categories,
+                    fields = fieldViewModel.fields,
+                    scaledEmissions = scaledEmissions,
+                    totalEmissions = totalEmissions,
+                    onSliderPositionChanged = { field, value ->
+                        fieldViewModel.sliderPositionChanged(field, value)
+                    },
+                    colors = colors
+                )
+            }
         }
     }
 }

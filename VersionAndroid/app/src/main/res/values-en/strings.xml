@@ -14,6 +14,13 @@
 
     <string name="emptyChart">Adjust parameters</string>
 
+    <string name="kgPerson">kg/person</string>
+
+    <string name="equivalence1">In</string>
+    <string name="equivalence2">days, this conference produces as much as</string>
+    <string name="equivalence3">days of acceptable emissions to preserve the climate.</string>
+
+
     <!-- Categorie -->
     <string name="CategorieInformationsGenerales">General information</string>
     <string name="CategorieAlimentation">Catering</string>
