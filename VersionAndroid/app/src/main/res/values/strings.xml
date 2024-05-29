@@ -4,6 +4,13 @@
 
     <string name="emptyChart">Ajustez les paramêtres</string>
 
+    <string name="kgPerson"> kg/personne</string>
+
+    <string name="equivalence1">En</string>
+    <string name="equivalence2">jours, ce congrès produit autant que</string>
+    <string name="equivalence3">jours d\'émissions acceptables pour préserver le climat.</string>
+
+
     <!-- Categorie -->
     <string name="CategorieInformationsGenerales">Informations générales</string>
     <string name="CategorieAlimentation">Alimentation</string>
