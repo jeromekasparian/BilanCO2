@@ -1,0 +1,6 @@
+00-Categorie;01-Nom;02-Unite;03-UnitePluriel;04-ValeurMaxi;05-FacteurD'emission;06-ParPersonne;07-ParKmDistance;08-ParJour;09-EchelleLog;10-Entier;11-valeurMaxiEffectif;12-valeurMaxiDuree;13-Conseils;14-NomCourt;15-Picto;16-TitreRessource;17-LienRessource;18-CategorieOptionnelle
+CategorieHebergementEtBatiments;HotelDeuxEtoiles;unitPourcentage;;100;12;0.01;;1;;;;;ConseilHotel;HotelDeuxEtoiles;🏠;;;
+CategorieAlimentation;RepasAvecBoeufVeauOuAgneau;unitPourcentage;;100;6.29;0.01;;2;;;;;ConseilBoeufCongres;ViandeRouge;🥩;;;
+CategorieAlimentation;RepasVegetarien;unitPourcentage;;100;0.51;0.01;;2;;;;;ConseilVegeCongres;Vege;🌽;;;
+CategorieDeplacementsSurPlace;TaxiSurPlace;unitPourcentageParticipants;;100;4;0.01;;1;;;;;ConseilTaxiLocal;;🚖;;;
+CategorieMateriel;GoodieParParticipant;unitGoodie;unitPluralGoodie;10;6;1;;;;1;;;ConseilGoodies;Goodies;🧸;;;
