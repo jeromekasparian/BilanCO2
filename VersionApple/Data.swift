@@ -13,20 +13,6 @@ import UIKit
 
 let separateur = ";" // le séparateur dans les fichiers de données
 
-//class CaracteristiquesCamp {
-//    var effectif: Int = 25
-//    var distance: Double = 150 // distance entre le lieu de camp et le local
-//    var duree: Int = 15 // en jours
-//
-//    init() {}
-//
-//    init(effectif: Int, distance: Double, duree: Int) {
-//        self.effectif = effectif
-//        self.distance = distance
-//        self.duree = duree
-//    }
-//}
-
 enum Evenement: Int {
     case camp
     case congresCollectif
@@ -240,19 +226,13 @@ class DescriptionEvenement {
                 if typeEmission.parPersonne != 0 && numeroItemEffectif >= 0 {
                     multiplicateur = multiplicateur * typeEmission.parPersonne * lesEmissions[numeroItemEffectif].valeur
                 }
-//                print(typeEmission.nom, "par personne", multiplicateur)
-                //            print("personne", multiplicateur)
                 if typeEmission.parKmDistance != 0 && distance >= 0 {
                     multiplicateur = multiplicateur * typeEmission.parKmDistance * distance
                 }
-//                print(typeEmission.nom, "par km", multiplicateur)
-                //            print("km", multiplicateur)
                 if typeEmission.parJour != 0 {
-                    multiplicateur = multiplicateur * typeEmission.parJour * nombreJours   //            print("jour", multiplicateur)
+                    multiplicateur = multiplicateur * typeEmission.parJour * nombreJours
                 }
-//                print(typeEmission.nom, "par jour", multiplicateur)
                     typeEmission.emission = typeEmission.valeur * typeEmission.facteurEmission * multiplicateur
-                    //            print(typeEmission.nom, typeEmission.emission)
                     total = total + typeEmission.emission
             }
             for i in 0...sections.count - 1 {
@@ -358,7 +338,6 @@ func texteNomValeurUnite(emission: TypeEmission) -> String { //, afficherPictos:
         let unite = emission.valeur > 1 && !emission.nomPluriel.isEmpty ? emission.nomPluriel : emission.unite
         texteNomValeur = emission.nom + String(format: NSLocalizedString(" : %.0f ", comment: "") + unite, emission.valeur)
     }
-    //    if afficherPictos && !emission.picto.isEmpty {
     if emission.picto.isEmpty {
         return texteNomValeur
     } else {

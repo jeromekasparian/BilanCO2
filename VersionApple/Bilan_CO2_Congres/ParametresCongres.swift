@@ -69,7 +69,6 @@ class Congres: DescriptionEvenement, DescriptionEvenementDelegate {
     }
         
     func ajusterQuantitesLiees(ligne: Int) {
-        //    typealias SorteEmission = SorteEmission
         
         let ligneVisio = SorteEmission.participationZoom.rawValue
         let valeurVisio = ligneVisio > 0 ? lesEmissions[ligneVisio].valeur : 0

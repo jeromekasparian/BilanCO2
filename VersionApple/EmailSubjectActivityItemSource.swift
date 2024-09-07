@@ -6,17 +6,14 @@
 //
 
 // USAGE : A CHOISIR
-// Si on veut avoir juste une pièce jointe et un subject, dans ce cas il faut que tu changes la déclaration
+// Si on veut avoir juste une pièce jointe et un subject, dans ce cas il faut changer la déclaration
 // var emailBody: String
-//pour mettre  Any à la place de String (et éventuellement changer le nom de la variable aussi)
-//puis lors de l’appel
-//mettre ça :
+//pour mettre  Any à la place de String (et éventuellement changer le nom de la variable aussi) puis lors de l’appel mettre ça :
 //if let urlPDFAExporter = generePDF() {
 //            print("pdf ok")
 //let emailTextAndSubject = EmailSubjectActivityItemSource(subject: leSujet, emailBody: urlPDFAExporter)
 //items.append(emailTextAndSubject)
 //            let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-
 // source : Hervé via ChatGPT
 
 import Foundation

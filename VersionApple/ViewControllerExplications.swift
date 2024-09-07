@@ -14,8 +14,6 @@ var ligneExplicationsSelectionnee: Int = -1
 
 
 class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource, CelluleExplicationsDelegate {
-//    let lesParagraphes = [NSLocalizedString("Méthodologie & hypothèses", comment: ""), NSLocalizedString("Graphique", comment: ""), NSLocalizedString("Émissions acceptables pour préserver le climat", comment: ""), NSLocalizedString("Limites", comment: ""), NSLocalizedString("Sources", comment: ""), NSLocalizedString("Remerciements", comment: "")]
-//    let lesTextes = [texteMethodo, texteGraphique, texteEmissionsAcceptables, texteLimites, texteSources, texteRemerciements]
 
     let cellReuseIdentifier = "celluleExplications"
     var lesTextesFormattes: [NSAttributedString] = []
@@ -27,13 +25,10 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet var imageRondVertNE: UIImageView!
     @IBOutlet var imageRondVertSO: UIImageView!
     @IBOutlet var imageRondVertSE: UIImageView!
-    
-//    @IBOutlet var texteTest: UITextView!
-    
+        
     override func viewDidLoad(){
         boutonFermer.setTitle("", for: .normal)
         lesTextesFormattes = lesTextes.map({formateTexte(texte: $0)})
-//        texteTest.text = lesTextes[3]
         tableView.delegate = self
         tableView.dataSource = self
 //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)  // you don't need to register your UITableViewCell subclass if you're using prototype cells. -- https://stackoverflow.com/questions/37623281/swift-customizing-tableview-to-hold-multiple-columns-of-data
@@ -76,7 +71,6 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
             return texteFormatte
         } else {
 //        https://stackoverflow.com/questions/21629784/how-can-i-make-a-clickable-link-in-an-nsattributedstring
-//            return formateTexte(texte: texte, marqueur: "@@", format: [NSAttributedString.Key.link: "https://www.eeudf.org"]) ??
             return NSAttributedString(string: texte, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
         }
     }
@@ -85,17 +79,6 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
         return lesParagraphes.count
     }
     
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: cellReuseIdentifier)
-//        let ligne = indexPath.row
-//        cell.textLabel?.text = lesParagraphes[ligne]
-//        cell.textLabel?.numberOfLines = 0
-//        cell.textLabel?.font = .boldSystemFont(ofSize: 24)
-//        cell.detailTextLabel?.numberOfLines = 0
-//        cell.detailTextLabel?.attributedText = (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne ? lesTextesFormattes[ligne] : NSAttributedString(string: "")
-//        cell.accessoryType = .none
-//        return cell
-//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CelluleExplications
@@ -111,7 +94,6 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.texte.text = ""
             cell.contrainteEcraserTexte.isActive = true
         }
-//        cell.texte.attributedText = (ligneExplicationsSelectionnee == ligne) && lesTextesFormattes.count > ligne ? lesTextesFormattes[ligne] : NSAttributedString(string: "")
         cell.accessoryType = .none
         return cell
     }
@@ -141,56 +123,7 @@ class Explications: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        ligneExplicationsSelectionnee = -1
-//        print("disappear")
         super.viewWillDisappear(animated)
     }
 
-}
-
-
-extension String {
-    func indicesOf(string: String) -> [Int] {
-        var indices = [Int]()
-        var searchStartIndex = self.startIndex
-
-        while searchStartIndex < self.endIndex,
-            let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
-            !range.isEmpty
-        {
-            let index = distance(from: self.startIndex, to: range.lowerBound)
-            indices.append(index)
-            searchStartIndex = range.upperBound
-        }
-
-        return indices
-    }
-}
-
-// https://stackoverflow.com/questions/34499735/how-to-apply-bold-and-italics-to-an-nsmutableattributedstring-range
-extension UIFont {
-
-    func withTraits(_ traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
-
-        // create a new font descriptor with the given traits
-        guard let fd = fontDescriptor.withSymbolicTraits(traits) else {
-            // the given traits couldn't be applied, return self
-            return self
-        }
-            
-        // return a new font with the created font descriptor
-        return UIFont(descriptor: fd, size: pointSize)
-    }
-
-    func italics() -> UIFont {
-        return withTraits(.traitItalic)
-    }
-
-    func bold() -> UIFont {
-        return withTraits(.traitBold)
-    }
-
-    func boldItalics() -> UIFont {
-        return withTraits([ .traitBold, .traitItalic ])
-    }
 }

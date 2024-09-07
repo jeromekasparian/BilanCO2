@@ -13,7 +13,6 @@ class Graphique: UIView {
     
     var startPoint: CGFloat = 0
     var color: UIColor = UIColor.yellow
-//    var trackColor: UIColor = UIColor.gray
     var trackWidth: CGFloat = 1
     var fillPercentage: CGFloat = 1
     var radius: CGFloat = 50
@@ -23,8 +22,8 @@ class Graphique: UIView {
         if #available(iOS 13.0, *) {
             self.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.0)
         } else {
-            self.backgroundColor = .clear
             // Fallback on earlier versions
+            self.backgroundColor = .clear
         }
     } // init
     
@@ -51,12 +50,8 @@ class Graphique: UIView {
         percentagePath.lineWidth = trackWidth
         percentagePath.lineCapStyle = .butt
         
-//        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         self.color.setStroke()
         percentagePath.stroke()
-        
-//        UIGraphicsEndImageContext()
-        
     } // func
     
     

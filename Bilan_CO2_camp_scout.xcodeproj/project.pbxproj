@@ -32,15 +32,15 @@
 		B5154B252B04289C0075D50A /* ParametresCongres.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5154B242B04289C0075D50A /* ParametresCongres.swift */; };
 		B5154B272B0428C10075D50A /* ParametresCamps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5154B262B0428C10075D50A /* ParametresCamps.swift */; };
 		B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */; };
-		B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */; };
 		B51AD1C228CA439700888CDD /* Graphique.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51AD1C128CA439700888CDD /* Graphique.swift */; };
 		B51FD8EC2B17935000F54E55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B51FD8EE2B17935000F54E55 /* InfoPlist.strings */; };
 		B51FD8F32B18CDE200F54E55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */; };
 		B5215E28290C7493008DA009 /* ViewControllerExplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E27290C7493008DA009 /* ViewControllerExplications.swift */; };
-		B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5215E29290D3BD5008DA009 /* CreationPDF.swift */; };
 		B527429A2BB2C7E60077E643 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B52742992BB2C7E60077E643 /* PrivacyInfo.xcprivacy */; };
 		B527429B2BB2C7E60077E643 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B52742992BB2C7E60077E643 /* PrivacyInfo.xcprivacy */; };
 		B52DCA1B28DFA03F00DAA900 /* Couleurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DCA1A28DFA03F00DAA900 /* Couleurs.swift */; };
+		B540D7EA2C8CE1DD005D94EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B540D7E92C8CE1DD005D94EB /* Extensions.swift */; };
+		B540D7EB2C8CE26D005D94EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B540D7E92C8CE1DD005D94EB /* Extensions.swift */; };
 		B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */; };
 		B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */; };
 		B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCF9728C5134E00FBBAE3 /* ViewController.swift */; };
@@ -56,7 +56,6 @@
 		B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D81F1A28F2126300188489 /* CelluleCredits.swift */; };
 		B5E0FE87292A5044001D0790 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5E0FE89292A5044001D0790 /* Localizable.strings */; };
 		B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB6498297335D600F50436 /* CelluleVide.swift */; };
-		B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,16 +71,15 @@
 		B5154B242B04289C0075D50A /* ParametresCongres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametresCongres.swift; sourceTree = "<group>"; };
 		B5154B262B0428C10075D50A /* ParametresCamps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametresCamps.swift; sourceTree = "<group>"; };
 		B517AB8628D908A8005FF834 /* ViewControllerAvecCamembert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAvecCamembert.swift; sourceTree = "<group>"; };
-		B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension-UIColor-MorgenStemning.swift"; sourceTree = "<group>"; };
 		B51AD1C128CA439700888CDD /* Graphique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphique.swift; sourceTree = "<group>"; };
 		B51FD8ED2B17935000F54E55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B51FD8EF2B17935100F54E55 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B51FD8F12B18CD6C00F54E55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B51FD8F22B18CD8700F54E55 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5215E27290C7493008DA009 /* ViewControllerExplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExplications.swift; sourceTree = "<group>"; };
-		B5215E29290D3BD5008DA009 /* CreationPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationPDF.swift; sourceTree = "<group>"; };
 		B52742992BB2C7E60077E643 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B52DCA1A28DFA03F00DAA900 /* Couleurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couleurs.swift; sourceTree = "<group>"; };
+		B540D7E92C8CE1DD005D94EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B54DCF9028C5134E00FBBAE3 /* Bilan CO2 camp scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilan CO2 camp scout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54DCF9528C5134E00FBBAE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 		B5E0FE8C292A507B001D0790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B5E2D3312919BCE1001FEC93 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		B5FB6498297335D600F50436 /* CelluleVide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelluleVide.swift; sourceTree = "<group>"; };
-		B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,16 +148,6 @@
 			path = Bilan_CO2_Camps;
 			sourceTree = "<group>";
 		};
-		B5215E2B290D3C24008DA009 /* PasUtilise */ = {
-			isa = PBXGroup;
-			children = (
-				B5FCF9F72961AB7C00C7192E /* UILabelSize.swift */,
-				B5215E29290D3BD5008DA009 /* CreationPDF.swift */,
-				B51AD1BF28CA382600888CDD /* extension-UIColor-MorgenStemning.swift */,
-			);
-			path = PasUtilise;
-			sourceTree = "<group>";
-		};
 		B54DCF8728C5134E00FBBAE3 = {
 			isa = PBXGroup;
 			children = (
@@ -186,7 +173,6 @@
 				B5154AF82B0423D30075D50A /* Bilan_CO2_Congres */,
 				B5154B202B0427C60075D50A /* Bilan_CO2_Camps */,
 				B56DBCE52974A0BB00AC1DA5 /* PageBlanche.pdf */,
-				B5215E2B290D3C24008DA009 /* PasUtilise */,
 				B5ACCDEA28D7075B00565528 /* BilanCO2.entitlements */,
 				B5E0FE89292A5044001D0790 /* Localizable.strings */,
 				B54DCF9328C5134E00FBBAE3 /* AppDelegate.swift */,
@@ -194,6 +180,7 @@
 				B54DCFA728C5172500FBBAE3 /* Data.swift */,
 				B52DCA1A28DFA03F00DAA900 /* Couleurs.swift */,
 				B510EB9E29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift */,
+				B540D7E92C8CE1DD005D94EB /* Extensions.swift */,
 				B54DCFAB28C51E4E00FBBAE3 /* CelluleEmission.swift */,
 				B5716E12296C8CC7008EE908 /* CelluleExplications.swift */,
 				B5FB6498297335D600F50436 /* CelluleVide.swift */,
@@ -335,6 +322,7 @@
 				B5154B0F2B0425050075D50A /* SceneDelegate.swift in Sources */,
 				B5154B1A2B0425050075D50A /* CelluleCredits.swift in Sources */,
 				B5154B152B0425050075D50A /* ViewController.swift in Sources */,
+				B540D7EB2C8CE26D005D94EB /* Extensions.swift in Sources */,
 				B5154B182B0425050075D50A /* CelluleExplications.swift in Sources */,
 				B5154B252B04289C0075D50A /* ParametresCongres.swift in Sources */,
 				B5154B132B0425050075D50A /* ViewControllerExplications.swift in Sources */,
@@ -348,17 +336,15 @@
 			files = (
 				B51AD1C228CA439700888CDD /* Graphique.swift in Sources */,
 				B54DCF9828C5134E00FBBAE3 /* ViewController.swift in Sources */,
-				B5FCF9F82961AB7C00C7192E /* UILabelSize.swift in Sources */,
 				B5D81F1B28F2126300188489 /* CelluleCredits.swift in Sources */,
 				B510EB9F29A033AE00C116D6 /* EmailSubjectActivityItemSource.swift in Sources */,
 				B54DCF9428C5134E00FBBAE3 /* AppDelegate.swift in Sources */,
-				B51AD1C028CA382600888CDD /* extension-UIColor-MorgenStemning.swift in Sources */,
 				B54DCF9628C5134E00FBBAE3 /* SceneDelegate.swift in Sources */,
 				B5215E28290C7493008DA009 /* ViewControllerExplications.swift in Sources */,
 				B54DCFAC28C51E4E00FBBAE3 /* CelluleEmission.swift in Sources */,
 				B517AB8728D908A8005FF834 /* ViewControllerAvecCamembert.swift in Sources */,
-				B5215E2A290D3BD5008DA009 /* CreationPDF.swift in Sources */,
 				B5716E13296C8CC7008EE908 /* CelluleExplications.swift in Sources */,
+				B540D7EA2C8CE1DD005D94EB /* Extensions.swift in Sources */,
 				B5FB6499297335D600F50436 /* CelluleVide.swift in Sources */,
 				B5154B272B0428C10075D50A /* ParametresCamps.swift in Sources */,
 				B54DCFA828C5172500FBBAE3 /* Data.swift in Sources */,
@@ -426,7 +412,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = 6WS674AGSY;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -446,7 +432,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.unige.bilan-co-congres";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -467,7 +453,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = VersionApple/BilanCO2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_TEAM = 6WS674AGSY;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -487,7 +473,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.unige.bilan-co-congres";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

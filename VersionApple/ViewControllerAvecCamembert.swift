@@ -13,30 +13,11 @@ let facteurDonnut: CGFloat = 0.6
 
 class ViewControllerAvecCamembert: UIViewController {
     @IBOutlet var affichageEmissions: UILabel!
-    //    @IBOutlet var affichageEmissionsParPersonne: UILabel!
-    //    @IBOutlet var affichageEmissionsSoutenables: UILabel!
     @IBOutlet var camembert: UIView!
-    //    @IBOutlet var boutonAideGraphique: UIButton!
-//    @IBOutlet var stackViewResultats: UIStackView!
     @IBOutlet var vueResultats: UIStackView!
-
-//    @IBOutlet var contrainteAffichageEmissionsDroitePortrait: NSLayoutConstraint!
-//    @IBOutlet var contrainteAffichageEmissionsDroitePaysage: NSLayoutConstraint!
-//    @IBOutlet var contrainteAffichageEmissionsBasPortrait: NSLayoutConstraint!
-//    @IBOutlet var contrainteAffichageEmissionsBasPaysage: NSLayoutConstraint!
-//    @IBOutlet var contrainteAffichageEmissionHauteurPortrait: NSLayoutConstraint!
-//    @IBOutlet var contrainteCamembertDroitePaysage: NSLayoutConstraint!
-    //    @IBOutlet var contrainteCamembertGauchePortrait: NSLayoutConstraint!
-    //    @IBOutlet var contrainteCamembertHautPaysage: NSLayoutConstraint!
-//    @IBOutlet var contrainteCamembertCentreHPortrait: NSLayoutConstraint!
-//    @IBOutlet var contrainteCamembertCentreVPaysage: NSLayoutConstraint!
-    
-    //    var orientationResultats: Orientation = .inconnu
-//    let soutenabiliteDansDonnut:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        boutonAideGraphique.setTitle("", for: .normal)
     }
     
     // désactiver les contraintes inutiles avant d'activer les nouvelles
@@ -84,8 +65,6 @@ class ViewControllerAvecCamembert: UIViewController {
         
         // now we can draw the progress arc
         let percentagePath = UIBezierPath(arcCenter: center, radius: rayon - (epaisseurTrait / 2), startAngle: angleDebutRadians, endAngle: angleFinRadians, clockwise: true)
-        //        percentagePath.lineWidth = epaisseurTrait
-        //        percentagePath.lineCapStyle = .butt
         let shape = CAShapeLayer()
         vueDeDestination.layer.addSublayer(shape)
         shape.strokeColor = couleurSecteur.cgColor
@@ -99,7 +78,6 @@ class ViewControllerAvecCamembert: UIViewController {
     func dessinePicto(vueDeDestination: UIView, frame: CGRect, picto: String, x: CGFloat, y: CGFloat, facteurTaille: CGFloat, alpha: CGFloat){
         if !picto.isEmpty {
             let largeurLabel = min(frame.width, frame.height) * facteurTaille / (picto.count == 1 ? 5 : 3)
-            //                let largeurLabel = rayon / 1.8
             let hauteurLabel = picto.count == 1 ? largeurLabel * 0.5 : largeurLabel / 4
             let texte = UILabel(frame: CGRect(x: x - (largeurLabel / 2.0), y: y - (hauteurLabel / 2.0), width: largeurLabel, height: hauteurLabel))
             texte.numberOfLines = 1
@@ -155,14 +133,12 @@ class ViewControllerAvecCamembert: UIViewController {
         
         var ligne: Int = 0
             let (lesEmissionsCompact, ligneEnCoursCorrigee) = dedoublonnePictosDansEmissions(lesEmissions: lesEmissions, ligneActive: ligneActive)
-//        print("lignes : ", ligneEnCoursCorrigee, ligneActive)
-//        print(lesEmissions.map({$0.emission}))
         for emission in lesEmissionsCompact {
             if emission.emission > 0 {
                 camembertVide = false
                 let intervalle = emission.emission / emissionsCalculees
                 let numeroSection = lEvenement.sections.firstIndex(where: {$0.nom == emission.categorie}) ?? 0
-                let agrandirSecteur = ligne == ligneEnCoursCorrigee || (ligneEnCoursCorrigee == lEvenement.numeroItemDistance && emission.parKmDistance > 0.0) // || (ligneEnCoursCorrigee == SorteEmission.duree.rawValue && emission.parJour > 0.0) || (ligneEnCoursCorrigee == SorteEmission.effectif.rawValue && emission.parPersonne > 0.0)
+                let agrandirSecteur = ligne == ligneEnCoursCorrigee || (ligneEnCoursCorrigee == lEvenement.numeroItemDistance && emission.parKmDistance > 0.0) 
                 let rayonPourPartDeCamembert = agrandirSecteur ? rayon * 1.1 : rayon
                 dessineSecteur(vueDeDestination: camembert,rect: frame, rayon: rayonPourPartDeCamembert, debut: debut, etendue: intervalle, epaisseurTrait: rayon * facteurDonnut, couleurSecteur: lEvenement.couleurs5[numeroSection])
                 debut = debut + intervalle
@@ -172,9 +148,7 @@ class ViewControllerAvecCamembert: UIViewController {
         } // for
         
         if !camembertVide {
-//            if lesEmissions[lEvenement.numeroItemEffectif].valeur > 0 {
-                    afficheSmileyDuCentre(vueDeDestination: camembert, curseurActif: curseurActif)
-//                }
+            afficheSmileyDuCentre(vueDeDestination: camembert, curseurActif: curseurActif)
             let emissionsClassees = lesEmissionsCompact.count <= 1 ? lesEmissionsCompact : lesEmissionsCompact.sorted(by: {$0.emission > $1.emission}).filter({$0.emission > 0})
             let nombreMaxiLabels = 8 //grandFormat ? 12 : 8
             let limite = emissionsClassees.isEmpty ? 0.0 : emissionsClassees.count >= nombreMaxiLabels ? emissionsClassees[nombreMaxiLabels - 1].emission : emissionsClassees.last?.emission ?? 0.0 // on affiche les 4 postes d'émission les plus importants, à condition qu'ils soient non-nuls
@@ -295,29 +269,22 @@ class ViewControllerAvecCamembert: UIViewController {
                 if #available(iOS 13.0, *) {
                     couleur = .label
                 } else {
-                    couleur = .black
                     // Fallback on earlier versions
+                    couleur = .black
                 }
                 texte.addAttributes([NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize * tailleTextePrincipal, weight: .regular)], range: NSRange(location: 0, length: texte.length))
             }
             texte.addAttributes([NSAttributedString.Key.foregroundColor : couleur], range: NSRange(location: 0, length: texte.length))
             return NSAttributedString(attributedString: texte) //
         } else {
-            //            if boutonExport.isEnabled {boutonExport.isEnabled = false}
             if #available(iOS 13.0, *) {
                 couleur = .label
             } else {
-                couleur = .black
                 // Fallback on earlier versions
+                couleur = .black
             }
             return NSAttributedString(string: lEvenement.texteIndiquezCaracteristiques, attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
 
-            switch lEvenement.evenement {
-            case .camp:
-                return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre camp pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
-            case .congresIndividuel, .congresCollectif:
-                return NSAttributedString(string: NSLocalizedString("Indiquez les caractéristiques de votre congrès pour évaluer ses émissions de gaz à effet de serre", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: couleur, NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * tailleTexteSoutenabilite)])
-            }
         }
     }
     
@@ -330,8 +297,7 @@ class ViewControllerAvecCamembert: UIViewController {
         paragraphStyleCentre.alignment = NSTextAlignment.center
         paragraphStyleCentre.lineBreakMode = NSLineBreakMode.byWordWrapping
         let contenu = pourTexteBrut ? "" : (lEvenement.texteEmissionsDeMonEvenement) + "\n"
-        let texte = NSMutableAttributedString(string: contenu, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTitre), NSAttributedString.Key.paragraphStyle: paragraphStyleCentre]) //NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
-//        texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
+        let texte = NSMutableAttributedString(string: contenu, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTitre), NSAttributedString.Key.paragraphStyle: paragraphStyleCentre])
 
         var categorie = ""
         for emission in lesEmissions {
@@ -341,8 +307,6 @@ class ViewControllerAvecCamembert: UIViewController {
                     texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
                     texte.append(NSAttributedString(string: categorie + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre)]))
                 }
-                //                let textePicto = afficherPictos && !emission.picto.isEmpty ? emission.picto + " " : ""
-                //                if emission.emission > 0 {
                 var texteLigneEmission = emission.emission < 2.0 ? NSLocalizedString(", %.0f g CO₂ ", comment: "") : emission.emission < 2000.0 ? NSLocalizedString(", %.0f kg CO₂ ", comment: "") : NSLocalizedString(", %.2f t CO₂ ", comment: "")
 
                 let facteurValeurEmission = emission.emission < 2.0 ? 0.001 : emission.emission < 2000.0 ? 1.0 : 1000.0
@@ -356,12 +320,6 @@ class ViewControllerAvecCamembert: UIViewController {
                 } else {
                     texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
                 }
-                
-
-                
-//                } else {
-//                    texte.append(NSAttributedString(string: "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
-//                }
             }
         }
         let texteTotalEmissions = emissionsCalculees < 2000.0 ? NSLocalizedString("\nTotal : %.0f kg CO₂", comment: "") : NSLocalizedString("\nTotal : %.2f t CO₂", comment: "")
@@ -397,11 +355,9 @@ class ViewControllerAvecCamembert: UIViewController {
             
             texte.append(NSAttributedString(string: String(format: NSLocalizedString("En %.0f jours, ", comment: "") + nomEvenement + NSLocalizedString(" produit autant de gaz à effet de serre que %.0f ", comment: "") + uniteDuree + NSLocalizedString(" d'émissions acceptables pour préserver le climat", comment: ""), lesEmissions[lEvenement.numeroItemDuree].valeur, dureeEquivalenteSoutenable), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceSousTitre, weight: .regular), NSAttributedString.Key.foregroundColor : couleur]))
             texte.append(NSAttributedString(string: lEvenement.texteAnalysezReduisez, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)]))
-        //        texte.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize * facteurPoliceTexte)], range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
             let nomApp = lEvenement.texteNomApp
             let lienAppSotre = lEvenement.texteLienAppStore
                 texte.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: (texte.string as NSString).range(of: nomApp))
-        //        texte.addAttribute(.underlineStyle, value: NSUnderlineStyle.single, range: (texte.string as NSString).range(of: NSLocalizedString("Bilan CO2 camp scout", comment: "")))
                 texte.addAttribute(.link, value: lienAppSotre, range: (texte.string as NSString).range(of: nomApp))
                 if pourTexteBrut {
                     texte.append(NSAttributedString(string: NSLocalizedString(" : ", comment: "") + lienAppSotre))
