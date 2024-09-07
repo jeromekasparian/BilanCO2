@@ -1,0 +1,1 @@
+This is the source code for the Bilan CO2 Camp scout and Bilan CO2 Congress iOS and MacOS apps, available in the app store at https://apps.apple.com/fr/app/id1645719853 and https://apps.apple.com/fr/app/id6450590075, respectively
