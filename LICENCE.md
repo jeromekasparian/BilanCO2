@@ -1,6 +1,6 @@
 #  Licence
 
-Copyright (c) 2021-2023, Jérôme Kasparian
+Copyright (c) 2023-2024, Jérôme Kasparian
 
 Licenced under the Creative Commons Attribution ShareAlike 4.0, https://creativecommons.org/licenses/by-sa/4.0/
 
